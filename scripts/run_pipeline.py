@@ -16,7 +16,7 @@ RUN_LOG_DIR = os.path.join(LOGS, "runs", RUN_ID)
 os.makedirs(RUN_LOG_DIR, exist_ok=True)
 
 STEPS = [
-    ("env_check", "work/env_check.py"),
+    ("env_check", "scripts/env_check.py"),
     ("build_corpus", "scripts/build_corpus.py"),
     ("build_locators", "scripts/build_locators.py"),
     ("build_relations", "scripts/build_relations.py"),

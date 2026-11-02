@@ -49,11 +49,12 @@ for rel in [
     "README.md",
     "reports/task_b_dev_report.md",
     "reports/task_b_dev_results.json",
-    "reports/task_b_freeze_protocol.md",
+    "reports/task_b_rewrite_protocol.md",
     "reports/task_b_test_result.json",
     "reports/RESULTS_taskB_filled.md",
     "reports/task_b_evidence_index.md",
-    "work/models/bge-small-zh-v1.5/MODEL_MANIFEST.json",
+    "reports/task_b_question_family_overlap.md",
+    "docs/bge-small-zh-v1.5-MODEL_MANIFEST.json",
     "logs/task_b/run_manifest.json",
 ]:
     if copy(rel):
@@ -65,24 +66,24 @@ for name in sorted(os.listdir(run_log_dir)):
     if copy(rel):
         included.append(rel)
 
-model = json.load(open(os.path.join(ROOT, "work", "models", "bge-small-zh-v1.5",
-                                    "MODEL_MANIFEST.json"), encoding="utf-8"))
+model = json.load(open(os.path.join(ROOT, "docs",
+                                    "bge-small-zh-v1.5-MODEL_MANIFEST.json"), encoding="utf-8"))
 onnx = next(f for f in model["files"] if f["file"] == "onnx/model.onnx")
 notes = """# HCS 任务B 复验包说明（开发集探索）
 
 - 打包时间：%s
 - run_id：`%s`
-- 闸门状态：任务A人工核验 H01-H08 **尚未签字**；任务B冻结测试 **未标注、未运行**。本包不声明任务B独立测试成绩。
+- 闸门状态：任务A人工核验 H01-H08 **尚未签字**；任务B同语料改写测试 **未标注、未运行**。本包不声明任务B独立测试或产品准确率。
 
 ## 包含
 
 - `scripts/`：检索、评估、模型校验、任务B流水线、打包脚本
 - `tests/`：任务A与任务B回归测试
 - `config/`：任务B配置与任务A版本锁定
-- `data/`：18 道开发题（含 gold 草案）、20 道冻结候选（unlabeled）
-- `reports/`：开发集报告、逐题结果、冻结协议、任务B测试结果、RESULTS、证据索引
-- `logs/task_b/runs/%s/`：check_model、eval_dev、run_tests、check_freeze 四步独立日志与 run_manifest
-- `work/models/bge-small-zh-v1.5/MODEL_MANIFEST.json`：模型文件 hash、来源、许可
+- `data/`：15 道开发题（dev_gold_v2）、3 道模块题、20 道同语料改写候选（unlabeled，非独立冻结）
+- `reports/`：开发集报告、逐题结果、同语料改写协议、题目家族重叠检查、任务B测试结果、RESULTS、证据索引
+- `logs/task_b/runs/%s/`：check_model、eval_dev、run_tests、check_rewrite 四步独立日志与 run_manifest
+- `docs/bge-small-zh-v1.5-MODEL_MANIFEST.json`：模型文件 hash、来源、许可
 
 ## 未包含
 
@@ -94,15 +95,15 @@ notes = """# HCS 任务B 复验包说明（开发集探索）
 1. 从 `https://www.modelscope.cn/models/Xenova/bge-small-zh-v1.5` 下载以下文件到 `work/models/bge-small-zh-v1.5/`：
    - `onnx/model.onnx`（SHA-256 `%s`）
    - `tokenizer.json`、`config.json`、`tokenizer_config.json`、`special_tokens_map.json`、`vocab.txt`
-2. 运行 `python scripts/check_model.py`，确认文件 hash 与 `MODEL_MANIFEST.json` 一致。
+2. 运行 `python scripts/check_model.py`，确认文件 hash 与 `docs/bge-small-zh-v1.5-MODEL_MANIFEST.json` 一致。
 3. 运行 `python scripts/task_b_pipeline.py`；确认四步退出码与 `logs/task_b/runs/<run_id>/` 日志。
 4. 运行 `python scripts/run_task_b_tests.py`，对照 `reports/task_b_test_result.json`。
-5. 冻结测试前，按 `reports/task_b_freeze_protocol.md` 人工标注 20 道候选；未标注前不得报告独立测试成绩。
+5. 同语料改写候选按 `reports/task_b_rewrite_protocol.md` 人工标注；未标注前不得报告改写测试或跨主题成绩。F05/F07/F08/F10 与开发题高度重叠，只能标为同语料改写。
 
 ## 边界
 
 - 开发集 gold 由本次会话构造，尚未双人独立标注；报告仅作探索。
-- 补证组与 Top7 开发集 Hit 相同，未观察到额外收益；样本小。
+- 补证组与混合Top7 开发集 Hit 相同，未观察到额外收益；样本小。
 - 未做端侧转换、手机性能、真实用户试用、显著性检验。
 """ % (datetime.now().astimezone().isoformat(), run_id, run_id, onnx["sha256"])
 with open(os.path.join(out_dir, "PACKAGE_NOTES.md"), "w", encoding="utf-8") as f:

@@ -92,7 +92,7 @@ lines = [
     "- 语料manifest hash：`%s`" % artifacts["corpus/docs_manifest.json"],
     "- 条款表 hash：`%s`；关系表 hash：`%s`" % (
         artifacts["corpus/articles.jsonl"], artifacts["corpus/relations.jsonl"]),
-    "- 问题集/gold hash：任务A不适用（任务B待建）",
+    "- 问题集/gold hash：任务A不适用；任务B见 `config/task_b_config.json` 与 `data/task_b_dev_questions.jsonl`",
     "- 前置commit / 结果commit / diff位置：本项目未初始化 Git，无 commit；改动即 `scripts/`、`tests/`、`corpus/`、`locators/`、`reports/`",
     "- 实际命令、退出码、原日志位置：见下方命令表；汇总 `logs/run_manifest.json`",
     "- 会话历史位置、截图编号：会话历史在本平台；E01/E03/E04 截图待采集",
@@ -181,7 +181,7 @@ lines += [
     "- 回归测试：独立 %d/%d；流水线内 %d/%d（%d 个测试类按设计跳过）" % (
         full_tests["passed"], full_tests["total"],
         tests["passed"], tests["total"], len(tests.get("skipped_classes", []))),
-    "- 未运行：0（任务B未申请，不计入任务A）",
+    "- 未运行：0（任务A）；任务B开发集已运行，需区分",
     "- 关键缺陷是否为0：待人工确认后填写",
     "- 闸门结论：%s（自动用例、回跳与回归测试不等同人工复核）" % result["gate"],
     "",
@@ -205,7 +205,7 @@ lines += [
     "",
     "**实际完成：** 取得 A/B/C 三份官方材料与两份真实版本反例；完成 A 75 条、B 82 条切分、偏移、HTML 锚点、PDF 页文本层锚点与 SHA-256；完成四类关系表（库内文件级 1、库外书名 7、显式条款级 14、主题相关 2、修改/重新公布 3）；完成 158 个本地锚点回跳验证、16 项自动校验、6 项真实版本反例、%d 项独立回归测试与故意失败负控；所有正式流水线步骤退出码 0。" % full_tests["total"],
     "",
-    "**仍未完成：** H01-H08 人工视觉与语义复核、平台截图采集（E01/E03/E04）、Git commit、任务B中文检索与同预算消融。",
+    "**仍未完成：** H01-H08 人工视觉与语义复核、平台截图采集（E01/E03/E04）、Git commit、任务B同语料改写测试与人工冻结。",
     "",
     "**适用范围：** 本批最小公开语料（A/B/C）与工程链路；不代表中文检索效果、法律结论、领域泛化或手机端性能。自动用例通过不等于任务A闸门通过。",
 ]
@@ -222,7 +222,7 @@ evidence = [
     ("E05", "条款回跳", "locators/index.json + verify_locators：158/158，A30/A66/B31 关键项通过", "视觉确认待人工"),
     ("E06", "版本反例", "version_counterexample_result.json：A2015 已被修订、B2017 首页仅载2017、条号位移、版本待核验", "B2017 仅作反例对照，不进入主索引"),
     ("E07", "任务A人工复核", "human_review_checklist.md H01-H08 含 file:// 回跳链接", "全部待人工填写，闸门未通过"),
-    ("E08", "任务B", "未执行", "未获批，不准备虚假 E08"),
+    ("E08", "任务B", "开发集端到端已运行；同语料改写未标注未运行", "不把开发集写成产品准确率或独立测试"),
     ("E09", "回归/失败", "tests 19/19；故意失败负控通过；O01-O03 已记录", "未人为制造真实失败；合成故障单列"),
     ("E10", "最终关联", "run_id、产物 hash、独立日志、测试输出可互相对照", "无 commit 可关联"),
     ("E11", "复验包", "dist/taskA_<run_id>.zip + SHA256SUMS", "包内含报告/日志/测试输出，不含法规全文"),
@@ -306,6 +306,16 @@ python -m unittest discover -s tests -v
 - B31：按实际 PDF 文本层更正为第 7 页；旧记录“续至第 8 页”保留在 `legacy_records`，附修正原因。
 - B 官方 HTML 无页码，不编造页码；PDF 页仅用于批准的副本回跳。
 - 未调用外部 LLM/API，未安装模型，未上传私有材料，未生成虚构日志、成绩或截图。
+
+## 任务B（开发集端到端，dev_gold_v2）
+
+- 模型：`BAAI/bge-small-zh-v1.5`，ONNX 分发仓库 `Xenova/bge-small-zh-v1.5`（ModelScope），`onnx/model.onnx` 已锁定 SHA-256；许可 MIT。
+- 统一入口：`TaskBSystem.answer(question, method)` 只接收自然语言问题与方法名；题型、标准答案、预标条款对只在评分器中读取。
+- 对照：纯 BM25、纯语义、混合、混合+≤2 补证，同一输出预算（最多 7 单元、每单元 400 字符、总 2800 字符）。
+- 开发集 13 道检索题：纯BM25 13/13 Hit、12/13 全证据；纯语义 12/13；混合 13/13；混合+补证 13/13。补证没有展示出额外收益。
+- 无答案 2/2 正确拒绝；版本/引用歧义作为模块测试 3/3，单列不计端到端。
+- **不是产品准确率，也不是独立冻结测试。** 20 道同语料改写候选未标注、未运行；F05/F07/F08/F10 与开发题高度重叠，只能作为同语料改写测试。
+- 结果：`reports/task_b_dev_report.md`、`reports/RESULTS_taskB_filled.md`；复现入口见上一节。
 """
 with open(os.path.join(ROOT, "README.md"), "w", encoding="utf-8") as f:
     f.write(readme)

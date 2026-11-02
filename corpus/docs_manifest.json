@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-02T19:38:03.612781+08:00",
+  "generated_at": "2026-11-02T22:28:30.810404+08:00",
   "normalization_rule": "正文块按DOM顺序取p/h2/h3/h4；块内连续Unicode空白折叠为单个半角空格并去首尾；块间以单个换行符连接；不做繁简、大小写或标点转换。偏移单位为Python字符串Unicode码点，区间左闭右开，基于各文档独立full_text。",
   "documents": [
     {
@@ -60,7 +60,7 @@
           "status": "superseded",
           "observed": "CAS副本PDF文本层第7页完整包含B31句尾‘进行检测。’；第8页首条为B32",
           "evidence": "work/raw/B_copy_cas.pdf 第7/8页；logs/pdf_page_detail.log",
-          "corrected_at": "2026-11-02T19:38:03.614943+08:00",
+          "corrected_at": "2026-11-02T22:28:30.813094+08:00",
           "correction_reason": "按实际PDF文本层逐页核对，B31未跨页；保留旧记录与修正原因供复验追溯，旧记录不再作为事实使用"
         }
       ]

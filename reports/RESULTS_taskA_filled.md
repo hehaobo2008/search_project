@@ -5,20 +5,20 @@
 
 ## 一次运行身份
 
-- 流水线 run_id：pipeline-20261102T190529
-- 任务A 校验 run_id：taskA-20261102T190532
-- 运行日志目录：`logs/runs/pipeline-20261102T190529/`（每步独立日志与 run_manifest.json）
+- 流水线 run_id：pipeline-20261102T222829
+- 任务A 校验 run_id：taskA-20261102T222831
+- 运行日志目录：`logs/runs/pipeline-20261102T222829/`（每步独立日志与 run_manifest.json）
 - 任务与状态：任务A / 自动链路、回跳验证、回归测试已运行；人工闸门待核验
 - CodeArts 平台与项目：当前 CodeArts Agent 会话，项目 `search_project`（截图 E01 待采集）
-- 实际开始/结束时间及UTC偏移：2026-11-02T19:05:29.570649+08:00 至 2026-11-02T19:05:36.773244+08:00（UTC+08:00）
+- 实际开始/结束时间及UTC偏移：2026-11-02T22:28:29.271540+08:00 至 2026-11-02T22:28:37.903248+08:00（UTC+08:00）
 - 操作者与人工复核者：操作者为本次会话用户；人工复核者待填
 - 授权记录：会话内用户指令“完成第一阶段”“先完成任务A的验收整改”及交接包 `FIRST_SESSION_PROMPT.txt`
 - 运行时/操作系统/可见CPU及内存：Python 3.13.2；Windows-11-10.0.26200-SP0；AMD64；32 逻辑CPU；内存未测
 - 依赖版本、许可证、锁文件hash：pypdf 6.21.1、lxml 6.1.3；许可证与锁文件未建立（待补）
 - 模型仓库/revision/文件hash/许可：任务A不适用
-- 语料manifest hash：`9c6578527a447bf59412dbe6f5854c6c2aa9b8d9234bde1363e3b42e8137fed6`
+- 语料manifest hash：`28d704ebef95fede1feb0f57a35dc4033cc43d280f79b8383494c56ef9c30a04`
 - 条款表 hash：`55b600c53a33d2e7b4398d9094ebdc2f40bbc33c628921e6c102a57d55b04a3d`；关系表 hash：`3c66869a25e1217e1e426d55d2c9492ee39fb16d4324a7d36dca5d52f15b6619`
-- 问题集/gold hash：任务A不适用（任务B待建）
+- 问题集/gold hash：任务A不适用；任务B见 `config/task_b_config.json` 与 `data/task_b_dev_questions.jsonl`
 - 前置commit / 结果commit / diff位置：本项目未初始化 Git，无 commit；改动即 `scripts/`、`tests/`、`corpus/`、`locators/`、`reports/`
 - 实际命令、退出码、原日志位置：见下方命令表；汇总 `logs/run_manifest.json`
 - 会话历史位置、截图编号：会话历史在本平台；E01/E03/E04 截图待采集
@@ -26,22 +26,22 @@
 
 ## 实际命令与退出码
 
-1. `python work/env_check.py` → exit=0，0.566s，日志 `logs/runs/pipeline-20261102T190529/env_check.log`（616 bytes）
-2. `python scripts/build_corpus.py` → exit=0，0.955s，日志 `logs/runs/pipeline-20261102T190529/build_corpus.log`（287 bytes）
-3. `python scripts/build_locators.py` → exit=0，0.487s，日志 `logs/runs/pipeline-20261102T190529/build_locators.log`（42 bytes）
-4. `python scripts/build_relations.py` → exit=0，0.465s，日志 `logs/runs/pipeline-20261102T190529/build_relations.log`（2148 bytes）
-5. `python scripts/verify_task_a.py` → exit=0，0.177s，日志 `logs/runs/pipeline-20261102T190529/verify_task_a.log`（1725 bytes）
-6. `python scripts/verify_counterexamples.py` → exit=0，0.780s，日志 `logs/runs/pipeline-20261102T190529/verify_counterexamples.log`（1532 bytes）
-7. `python scripts/verify_locators.py` → exit=0，0.208s，日志 `logs/runs/pipeline-20261102T190529/verify_locators.log`（549 bytes）
-8. `python scripts/run_tests.py` → exit=0，3.417s，日志 `logs/runs/pipeline-20261102T190529/run_tests.log`（2555 bytes）
-9. `python scripts/generate_review_checklist.py` → exit=0，0.139s，日志 `logs/runs/pipeline-20261102T190529/generate_review_checklist.log`（43 bytes）
+1. `python scripts/env_check.py` → exit=0，0.679s，日志 `logs/runs/pipeline-20261102T222829/env_check.log`（590 bytes）
+2. `python scripts/build_corpus.py` → exit=0，0.902s，日志 `logs/runs/pipeline-20261102T222829/build_corpus.log`（287 bytes）
+3. `python scripts/build_locators.py` → exit=0，0.404s，日志 `logs/runs/pipeline-20261102T222829/build_locators.log`（42 bytes）
+4. `python scripts/build_relations.py` → exit=0，0.402s，日志 `logs/runs/pipeline-20261102T222829/build_relations.log`（2148 bytes）
+5. `python scripts/verify_task_a.py` → exit=0，0.156s，日志 `logs/runs/pipeline-20261102T222829/verify_task_a.log`（1725 bytes）
+6. `python scripts/verify_counterexamples.py` → exit=0，0.750s，日志 `logs/runs/pipeline-20261102T222829/verify_counterexamples.log`（1532 bytes）
+7. `python scripts/verify_locators.py` → exit=0，0.164s，日志 `logs/runs/pipeline-20261102T222829/verify_locators.log`（549 bytes）
+8. `python scripts/run_tests.py` → exit=0，5.039s，日志 `logs/runs/pipeline-20261102T222829/run_tests.log`（3905 bytes）
+9. `python scripts/generate_review_checklist.py` → exit=0，0.124s，日志 `logs/runs/pipeline-20261102T222829/generate_review_checklist.log`（43 bytes）
 
 ## 退出码与失败传播（本轮整改）
 
 - `verify_task_a.py`、`verify_counterexamples.py`、`verify_locators.py`、`run_tests.py` 在存在 FAIL/失败用例时返回退出码 `2`，不再“记录 FAIL 但返回 0”。
 - `run_pipeline.py` 按每一步真实退出码汇总；任一非零即 `all_passed=false`、`failed_steps` 非空，并以退出码 `1` 结束。
 - 故意失败负控：`HCS_EXTRA_FAILING_STEP=1` 时追加一个 `sys.exit(7)` 步骤。`tests/test_pipeline_logs.py::test_intentional_failure_makes_pipeline_fail` 已实际运行通过，验证流水线返回非零且 `failed_steps=['negative_control']`。
-- 完整测试输出见 `logs/tests_full.log`；流水线内测试输出见 `logs/runs/pipeline-20261102T190529/run_tests.log`。
+- 完整测试输出见 `logs/tests_full.log`；流水线内测试输出见 `logs/runs/pipeline-20261102T222829/run_tests.log`。
 
 ## 任务A 自动用例
 
@@ -107,7 +107,7 @@
 ## 回归测试（本轮整改）
 
 - 独立完整运行：19 项，通过 19，失败/错误 0（`logs/tests_full.log`、`reports/test_result_full.json`）。
-- 流水线内运行：17 项，通过 17，跳过测试类 1 个、跳过测试用例 0 个，失败/错误 0（跳过的是嵌套流水线测试类，避免递归；`logs/runs/pipeline-20261102T190529/run_tests.log`）。
+- 流水线内运行：26 项，通过 26，跳过测试类 1 个、跳过测试用例 0 个，失败/错误 0（跳过的是嵌套流水线测试类，避免递归；`logs/runs/pipeline-20261102T222829/run_tests.log`）。
 - 覆盖：独立日志落盘、失败退出码与流水线失败传播、故意失败负控、本地锚点回跳、版本多版本歧义、B31 更正、语料完整性、关系负例。
 
 ## 汇总
@@ -118,8 +118,8 @@
 - 失败：0（自动 0 + 版本反例 0）
 - 已更正记录：1（B31 页位）
 - 待人工核验：8
-- 回归测试：独立 19/19；流水线内 17/17（1 个测试类按设计跳过）
-- 未运行：0（任务B未申请，不计入任务A）
+- 回归测试：独立 19/19；流水线内 26/26（1 个测试类按设计跳过）
+- 未运行：0（任务A）；任务B开发集已运行，需区分
 - 关键缺陷是否为0：待人工确认后填写
 - 闸门结论：NOT_PASSED_PENDING_HUMAN_REVIEW（自动用例、回跳与回归测试不等同人工复核）
 
@@ -138,14 +138,14 @@
 
 | failure_id | 用例 | 首次现象 | 原日志 | 原因是否确认 | 修复 | 重跑run_id | 仍未解决 |
 |---|---|---|---|---|---|---|---|
-| O01 | B31页位 | 旧记录称B31续至第8页 | `logs/pdf_page_detail.log` | 是（PDF文本层第7页含条尾，第8页首条B32） | 更正为第7页并保留旧记录 | pipeline-20261102T190529 | 否（待人工视觉确认） |
+| O01 | B31页位 | 旧记录称B31续至第8页 | `logs/pdf_page_detail.log` | 是（PDF文本层第7页含条尾，第8页首条B32） | 更正为第7页并保留旧记录 | pipeline-20261102T222829 | 否（待人工视觉确认） |
 | O02 | V04 | 2017版PDF第65条文本层混入页码`- 17 -` | `logs/b2017_65.txt` | 是（PDF页码噪声） | 比较时去页码 | 已重跑 | 仅作反例，不用于主索引 |
-| O03 | 日志路径 | 报告指向独立目录但日志缺失 | 旧日志目录 | 是（只写公共目录） | 每步双写独立目录与公共目录，并纳入回归测试 | pipeline-20261102T190529 | 否 |
+| O03 | 日志路径 | 报告指向独立目录但日志缺失 | 旧日志目录 | 是（只写公共目录） | 每步双写独立目录与公共目录，并纳入回归测试 | pipeline-20261102T222829 | 否 |
 
 ## 本次实际完成与可主张范围
 
 **实际完成：** 取得 A/B/C 三份官方材料与两份真实版本反例；完成 A 75 条、B 82 条切分、偏移、HTML 锚点、PDF 页文本层锚点与 SHA-256；完成四类关系表（库内文件级 1、库外书名 7、显式条款级 14、主题相关 2、修改/重新公布 3）；完成 158 个本地锚点回跳验证、16 项自动校验、6 项真实版本反例、19 项独立回归测试与故意失败负控；所有正式流水线步骤退出码 0。
 
-**仍未完成：** H01-H08 人工视觉与语义复核、平台截图采集（E01/E03/E04）、Git commit、任务B中文检索与同预算消融。
+**仍未完成：** H01-H08 人工视觉与语义复核、平台截图采集（E01/E03/E04）、Git commit、任务B同语料改写测试与人工冻结。
 
 **适用范围：** 本批最小公开语料（A/B/C）与工程链路；不代表中文检索效果、法律结论、领域泛化或手机端性能。自动用例通过不等于任务A闸门通过。

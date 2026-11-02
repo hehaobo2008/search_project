@@ -13,12 +13,27 @@ test_a1_to_b_is_document_level_only (tests.test_relations.RelationTest.test_a1_t
 test_a30_has_no_explicit_edge_to_b29_b31 (tests.test_relations.RelationTest.test_a30_has_no_explicit_edge_to_b29_b31) ... ok
 test_a66_to_b65_is_article_level_2019 (tests.test_relations.RelationTest.test_a66_to_b65_is_article_level_2019) ... ok
 test_no_ambiguous_target_versions (tests.test_relations.RelationTest.test_no_ambiguous_target_versions) ... ok
+test_answerability_refuses_out_of_scope_but_not_paraphrase (tests.test_task_b.TaskBTest.test_answerability_refuses_out_of_scope_but_not_paraphrase) ... ok
+test_entry_only_accepts_question_and_method (tests.test_task_b.TaskBTest.test_entry_only_accepts_question_and_method) ... ok
+test_methods_share_budget (tests.test_task_b.TaskBTest.test_methods_share_budget) ... ok
+test_model_hash_matches_manifest (tests.test_task_b.TaskBTest.test_model_hash_matches_manifest) ... ok
+test_pure_bm25_dense_hybrid_and_supplement_differ_on_d03 (tests.test_task_b.TaskBTest.test_pure_bm25_dense_hybrid_and_supplement_differ_on_d03) ... ok
+test_requirements_allow_alternative_sufficient_sets (tests.test_task_b.TaskBTest.test_requirements_allow_alternative_sufficient_sets) ... ok
+test_rewrite_candidates_are_not_independent_freeze (tests.test_task_b.TaskBTest.test_rewrite_candidates_are_not_independent_freeze) ... ok
+test_supplement_keeps_base5 (tests.test_task_b.TaskBTest.test_supplement_keeps_base5) ... ok
+test_version_and_citation_are_module_tests_only (tests.test_task_b.TaskBTest.test_version_and_citation_are_module_tests_only) ... ok
 test_pinned_missing_version_pends_not_guesses (tests.test_version_selection.VersionSelectionTest.test_pinned_missing_version_pends_not_guesses) ... ok
 test_pinned_version_selects_2019_only (tests.test_version_selection.VersionSelectionTest.test_pinned_version_selects_2019_only) ... ok
 test_unpinned_multi_version_is_ambiguous_and_blocks_edge (tests.test_version_selection.VersionSelectionTest.test_unpinned_multi_version_is_ambiguous_and_blocks_edge) ... ok
 
 ----------------------------------------------------------------------
-Ran 17 tests in 2.891s
+Ran 26 tests in 3.997s
 
 OK (skipped=1)
-tests total=17 passed=17 failures=0 errors=0 skipped_classes=1 skipped_tests=0 success=True
+tests total=26 passed=26 failures=0 errors=0 skipped_classes=1 skipped_tests=0 success=True
+
+[stderr]
+Building prefix dict from the default dictionary ...
+Loading model from cache <USER_HOME>\AppData\Local\Temp\jieba.cache
+Loading model cost 0.466 seconds.
+Prefix dict has been built successfully.

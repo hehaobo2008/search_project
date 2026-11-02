@@ -1,0 +1,3 @@
+{"qid": "D13", "scope": "module", "group": "version_conflict", "question": "2015年版铁路建设工程质量监督管理规定第70条规定了什么？", "expected_version_state": "version_pending", "label_status": "module_test"}
+{"qid": "D14", "scope": "module", "group": "citation_ambiguity", "question": "铁路规定第30条和条例第31条是不是直接引用关系？", "pair": ["rail_quality:art-30", "construction_quality:art-31"], "expected_relation": "topic_related", "label_status": "module_test"}
+{"qid": "D15", "scope": "module", "group": "citation_ambiguity", "question": "铁路规定第1条是不是直接引用了条例第29条？", "pair": ["rail_quality:art-1", "construction_quality:art-29"], "expected_relation": "explicit_document", "label_status": "module_test"}

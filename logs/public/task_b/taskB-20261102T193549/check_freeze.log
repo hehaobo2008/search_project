@@ -1,3 +1,0 @@
-freeze_candidates=20 groups={'retrieval': 13, 'no_answer': 3, 'version_conflict': 2, 'citation_ambiguity': 2}
-unlabeled=20
-freeze_check failures=0

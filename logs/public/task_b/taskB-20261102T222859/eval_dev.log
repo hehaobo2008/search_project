@@ -1,0 +1,15 @@
+N=13
+bm25_top7                hit=13/13 full=12/13 aspects=15/16 macro=0.9615 units=7.00 chars=969.54 refused=0 wrong_supp=0
+dense_top7               hit=12/13 full=12/13 aspects=15/16 macro=0.9231 units=7.00 chars=890.31 refused=0 wrong_supp=0
+hybrid_top7              hit=13/13 full=13/13 aspects=16/16 macro=1.0000 units=7.00 chars=961.38 refused=0 wrong_supp=0
+hybrid_top5_supplement   hit=13/13 full=13/13 aspects=16/16 macro=1.0000 units=5.08 chars=724.77 refused=0 wrong_supp=0
+hybrid_top5              hit=12/13 full=12/13 aspects=15/16 macro=0.9231 units=5.00 chars=714.23 refused=0 wrong_supp=0
+no_answer {'bm25_top7': {'n': 2, 'correct_refuse': 2, 'wrong_evidence': 0}, 'dense_top7': {'n': 2, 'correct_refuse': 2, 'wrong_evidence': 0}, 'hybrid_top7': {'n': 2, 'correct_refuse': 2, 'wrong_evidence': 0}, 'hybrid_top5_supplement': {'n': 2, 'correct_refuse': 2, 'wrong_evidence': 0}}
+module 3 / 3
+failures 3
+
+[stderr]
+Building prefix dict from the default dictionary ...
+Loading model from cache <USER_HOME>\AppData\Local\Temp\jieba.cache
+Loading model cost 0.495 seconds.
+Prefix dict has been built successfully.

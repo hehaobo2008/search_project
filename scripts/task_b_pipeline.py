@@ -19,7 +19,7 @@ STEPS = [
     ("check_model", "scripts/check_model.py"),
     ("eval_dev", "scripts/task_b_eval.py"),
     ("run_tests", "scripts/run_task_b_tests.py"),
-    ("check_freeze", "scripts/check_freeze.py"),
+    ("check_rewrite", "scripts/check_rewrite.py"),
 ]
 
 records = []

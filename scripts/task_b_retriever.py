@@ -29,6 +29,7 @@ STOPWORDS = {
     "依据", "原文", "内容", "具体", "时候", "情况", "单位", "提到", "上位", "条款",
     "能否", "提前", "直接", "引用", "关系", "是不是", "送检",
 }
+METHODS = ("bm25_top7", "dense_top7", "hybrid_top7", "hybrid_top5_supplement", "hybrid_top5")
 
 
 def tokenize(text):
@@ -94,11 +95,11 @@ class TaskBRetriever:
         self.embedder = BgeEmbedder()
         self.doc_vectors = self._load_or_build_vectors()
         self.embed_ms = 0.0
+        self.last_supplement_ms = 0.0
 
     def _cache_key(self):
-        model_hash = hashlib.sha256(
-            open(os.path.join(ROOT, "work", "models", "bge-small-zh-v1.5", "onnx", "model.onnx"),
-                 "rb").read()).hexdigest()
+        model_path = os.path.join(ROOT, "work", "models", "bge-small-zh-v1.5", "onnx", "model.onnx")
+        model_hash = hashlib.sha256(open(model_path, "rb").read()).hexdigest()
         corpus_hash = sha256_text("".join(a["sha256"] for a in self.articles))
         return "%s_%s" % (model_hash[:16], corpus_hash[:16])
 
@@ -117,88 +118,101 @@ class TaskBRetriever:
         self.vector_cache_hit = False
         return vectors
 
-    def embed_query(self, query):
-        started = time.time()
-        vector = self.embedder.encode([query], is_query=True)[0]
-        self.query_embed_ms = round((time.time() - started) * 1000, 1)
-        return vector
+    def _item(self, idx, rank, score, lex_scores, sem_scores, lex_order, sem_order, rrf):
+        art = self.articles[idx]
+        return {
+            "rank": rank,
+            "article_id": art["article_id"],
+            "doc_id": art["doc_id"],
+            "version_id": art["version_id"],
+            "article_no": art["article_no"],
+            "chapter": art["chapter"],
+            "text": art["text"],
+            "score": round(float(score), 6),
+            "lex_score": round(float(lex_scores[idx]), 4),
+            "sem_score": round(float(sem_scores[idx]), 4),
+            "rrf_score": round(float(rrf.get(idx, 0.0)), 6),
+            "lex_rank": lex_order[idx] + 1,
+            "sem_rank": sem_order[idx] + 1,
+            "anchor": art["anchor"],
+            "source_url": art["source_url"],
+            "sha256": art["sha256"],
+        }
 
-    def search(self, query):
+    def retrieve(self, question):
+        """只接收自然语言问题，返回四路排序与共享耗时分解。"""
         started = time.time()
-        normalized = normalize_query(query)
-        self.last_normalized_query = normalized
+        t = {}
+        normalized = normalize_query(question)
+        t0 = time.time()
         q_tokens = tokenize(normalized)
+        t["tokenize_ms"] = round((time.time() - t0) * 1000, 3)
+
+        t0 = time.time()
         lex_scores = self.bm25.get_scores(q_tokens)
-        lex_order = sorted(range(len(self.articles)), key=lambda i: (-lex_scores[i],
-                                                                    self.articles[i]["article_id"]))
-        qv = self.embed_query(query)
+        t["bm25_ms"] = round((time.time() - t0) * 1000, 3)
+        lex_order = sorted(range(len(self.articles)),
+                           key=lambda i: (-lex_scores[i], self.articles[i]["article_id"]))
+        lex_rank_map = {idx: rank for rank, idx in enumerate(lex_order)}
+
+        t0 = time.time()
+        qv = self.embedder.encode([normalized], is_query=True)[0]
+        t["embed_ms"] = round((time.time() - t0) * 1000, 3)
+
+        t0 = time.time()
         sem_scores = self.doc_vectors @ qv
-        sem_order = sorted(range(len(self.articles)), key=lambda i: (-sem_scores[i],
-                                                                    self.articles[i]["article_id"]))
+        t["dense_ms"] = round((time.time() - t0) * 1000, 3)
+        sem_order = sorted(range(len(self.articles)),
+                           key=lambda i: (-sem_scores[i], self.articles[i]["article_id"]))
+        sem_rank_map = {idx: rank for rank, idx in enumerate(sem_order)}
+
+        t0 = time.time()
         rrf = {}
         for rank, idx in enumerate(lex_order[:self.top_candidates], start=1):
             rrf[idx] = rrf.get(idx, 0.0) + 1.0 / (self.rrf_k + rank)
         for rank, idx in enumerate(sem_order[:self.top_candidates], start=1):
             rrf[idx] = rrf.get(idx, 0.0) + 1.0 / (self.rrf_k + rank)
-        ranked = sorted(rrf, key=lambda i: (-rrf[i], self.articles[i]["article_id"]))
-        lex_rank_map = {idx: i + 1 for i, idx in enumerate(lex_order)}
-        sem_rank_map = {idx: i + 1 for i, idx in enumerate(sem_order)}
-        items = []
-        for rank, idx in enumerate(ranked, start=1):
-            art = self.articles[idx]
-            items.append({
-                "rank": rank,
-                "article_id": art["article_id"],
-                "doc_id": art["doc_id"],
-                "version_id": art["version_id"],
-                "article_no": art["article_no"],
-                "chapter": art["chapter"],
-                "text": art["text"],
-                "score": round(rrf[idx], 6),
-                "lex_score": round(float(lex_scores[idx]), 4),
-                "sem_score": round(float(sem_scores[idx]), 4),
-                "lex_rank": (lex_rank_map[idx] if idx in lex_order[:self.top_candidates] else None),
-                "sem_rank": (sem_rank_map[idx] if idx in sem_order[:self.top_candidates] else None),
-                "anchor": art["anchor"],
-                "source_url": art["source_url"],
-                "sha256": art["sha256"],
-            })
-        self.last_search_ms = round((time.time() - started) * 1000, 1)
-        self.last_max_sem = float(sem_scores.max())
-        return items
+        hybrid_order = sorted(rrf, key=lambda i: (-rrf[i], self.articles[i]["article_id"]))
+        t["fusion_ms"] = round((time.time() - t0) * 1000, 3)
 
-    def _display(self, text):
-        clipped = text[:self.unit_char_budget]
-        return clipped, len(clipped)
+        def build(order, score_getter):
+            return [self._item(idx, rank, score_getter(idx), lex_scores, sem_scores,
+                               lex_rank_map, sem_rank_map, rrf)
+                    for rank, idx in enumerate(order, start=1)]
 
-    def _unit(self, item, relation=None):
-        display, chars = self._display(item["text"])
-        return {
-            "article_id": item["article_id"],
-            "doc_id": item["doc_id"],
-            "version_id": item["version_id"],
-            "article_no": item["article_no"],
-            "rank": item["rank"],
-            "score": item["score"],
-            "text": display,
-            "chars": chars,
-            "full_chars": len(item["text"]),
-            "truncated": chars < len(item["text"]),
-            "anchor": item["anchor"],
-            "source_url": item["source_url"],
-            "sha256": item["sha256"],
-            "relation": relation,
+        retrieval = {
+            "question": question,
+            "normalized_question": normalized,
+            "bm25": build(lex_order, lambda i: lex_scores[i]),
+            "dense": build(sem_order, lambda i: sem_scores[i]),
+            "hybrid": build(hybrid_order, lambda i: rrf.get(i, 0.0)),
+            "timings": t,
+            "max_sem": float(sem_scores.max()),
         }
+        t["total_search_ms"] = round((time.time() - started) * 1000, 3)
+        self.last_max_sem = retrieval["max_sem"]
+        self.last_search_ms = t["total_search_ms"]
+        self.last_normalized_query = normalized
+        self.last_timings = t
+        return retrieval
 
-    def normal_top(self, ranked, k):
-        return [self._unit(item) for item in ranked[:k]]
+    def _display(self, item):
+        text = item["text"][:self.unit_char_budget]
+        unit = dict(item)
+        unit["full_chars"] = len(item["text"])
+        unit["text"] = text
+        unit["chars"] = len(text)
+        unit["truncated"] = len(text) < len(item["text"])
+        unit["relation"] = None
+        return unit
 
-    def supplemented(self, ranked, max_extra=2):
-        base5 = ranked[:5]
+    def _supplements(self, retrieval, max_extra=2):
+        started = time.time()
+        hybrid = retrieval["hybrid"]
+        base5 = hybrid[:5]
         base_ids = {item["article_id"] for item in base5}
-        units = [self._unit(item) for item in base5]
-        seed_ids = {item["article_id"] for item in ranked[:2]}
-        ranked_ids = [item["article_id"] for item in ranked]
+        seed_ids = {item["article_id"] for item in hybrid[:2]}
+        ranked_ids = [item["article_id"] for item in hybrid]
         candidate_limit = set(ranked_ids[:10])
         candidates = []
         for rel in self.relations:
@@ -210,77 +224,81 @@ class TaskBRetriever:
                 continue
             if rel["target_version_status"] != "resolved":
                 continue
-            if target in base_ids or target not in ranked_ids:
+            if target in base_ids or target not in ranked_ids or target not in candidate_limit:
                 continue
-            if target not in candidate_limit:
-                continue
-            idx = ranked_ids.index(target)
-            candidates.append((idx, rel))
+            candidates.append((ranked_ids.index(target), rel))
         candidates.sort(key=lambda x: (x[0], x[1]["relation_id"]))
+        extras = []
         seen = set()
         for idx, rel in candidates:
-            if len(units) >= 5 + max_extra:
+            if len(extras) >= max_extra:
                 break
-            item = ranked[idx]
+            item = hybrid[idx]
             if item["article_id"] in seen:
                 continue
             seen.add(item["article_id"])
-            units.append(self._unit(item, {
+            unit = self._display(item)
+            unit["relation"] = {
                 "relation_type": rel["relation_type"],
                 "source_article_id": rel["source"]["article_id"],
                 "relation_id": rel["relation_id"],
                 "evidence_text": rel["evidence_text"],
-            }))
-        return units
+            }
+            extras.append(unit)
+        self.last_supplement_ms = round((time.time() - started) * 1000, 3)
+        retrieval["timings"]["supplement_ms"] = self.last_supplement_ms
+        return extras
 
-    def methods(self, ranked):
-        return {
-            "top5": self.normal_top(ranked, 5),
-            "top7": self.normal_top(ranked, 7),
-            "top5_supplement": self.supplemented(ranked),
-        }
+    def method_units(self, retrieval, method):
+        if method not in METHODS:
+            raise ValueError("unknown method: %s" % method)
+        if method == "bm25_top7":
+            return [self._display(x) for x in retrieval["bm25"][:7]]
+        if method == "dense_top7":
+            return [self._display(x) for x in retrieval["dense"][:7]]
+        if method == "hybrid_top7":
+            return [self._display(x) for x in retrieval["hybrid"][:7]]
+        if method == "hybrid_top5":
+            return [self._display(x) for x in retrieval["hybrid"][:5]]
+        if method == "hybrid_top5_supplement":
+            base = [self._display(x) for x in retrieval["hybrid"][:5]]
+            return base + self._supplements(retrieval)
 
-    def unknown_terms(self, query):
+    def assess_answerability(self, question):
         import jieba.posseg as pseg
-        normalized = normalize_query(query)
+        normalized = normalize_query(question)
         corpus_text = "".join(self.doc_texts)
-        words = []
+        unknown = []
         for word, flag in pseg.cut(normalized):
             if len(word) < 2 or word in STOPWORDS:
                 continue
             if not flag or flag[0] not in "nvg":
                 continue
             if word not in corpus_text:
-                words.append(word)
-        return sorted(set(words))
-
-    def assess_answerability(self, query, min_unknown=2):
-        unknown = self.unknown_terms(query)
-        q_tokens = set(tokenize(query))
-        doc_token_set = set()
-        for tokens in self.tokens:
-            doc_token_set.update(tokens)
-        covered = len(q_tokens & doc_token_set) / max(1, len(q_tokens))
+                unknown.append(word)
+        unknown = sorted(set(unknown))
         max_sem = getattr(self, "last_max_sem", 0.0)
         decision = "refuse" if (len(unknown) >= 3 or (len(unknown) >= 1 and max_sem < 0.62)) else "answer"
-        return {"unknown_terms": unknown, "unknown_count": len(unknown),
-                "min_unknown": min_unknown, "semantic_floor": 0.62,
-                "term_coverage": round(covered, 4),
-                "max_sem": round(getattr(self, "last_max_sem", 0.0), 4),
-                "decision": decision}
+        return {
+            "unknown_terms": unknown,
+            "unknown_count": len(unknown),
+            "max_sem": round(max_sem, 4),
+            "semantic_floor": 0.62,
+            "decision": decision,
+        }
 
-    def version_check(self, query):
-        years = re.findall(r"(20\d{2})\s*年?", query)
+    def version_check(self, question):
+        years = re.findall(r"(20\d{2})\s*年?", question)
         if not years:
             return {"state": "not_applicable"}
-        if "2015" in years and "铁路" in query:
+        if "2015" in years and "铁路" in question:
             return {
                 "state": "version_pending",
                 "message": "当前索引锁定2021修正版；2015版第70条与2021版第70条内容不同，须人工核对旧版",
                 "locked_versions": ["amended_2021_12_23"],
                 "requested": "published_2015_03_12",
             }
-        if "2017" in years and "条例" in query:
+        if "2017" in years and "条例" in question:
             return {
                 "state": "version_pending",
                 "message": "当前索引锁定2019第二次修订版；2017版未入索引，须人工核对旧版",
@@ -291,8 +309,6 @@ class TaskBRetriever:
 
     def inspect_relation(self, pair):
         src, tgt = pair
-        src_doc = src.split(":")[0]
-        tgt_doc = tgt.split(":")[0]
         explicit = [r for r in self.relations
                     if r["source"]["article_id"] == src and r.get("target")
                     and r["target"]["article_id"] == tgt
@@ -311,9 +327,23 @@ class TaskBRetriever:
                      if r["source"]["article_id"] == src
                      and r["relation_type"] == "explicit_document"
                      and r.get("target") is None and r.get("target_version_id")]
-        if doc_level and src_doc == "rail_quality":
+        if doc_level:
             return {"state": "explicit_document",
                     "message": "文件级依据引用，不自动指向目标文件的具体条款",
                     "relation_ids": [r["relation_id"] for r in doc_level]}
         return {"state": "no_relation", "message": "未找到已登记关系，不得硬连",
-                "relation_ids": []}
+                "relation_ids": []}
+
+    # 兼容旧调用
+    def search(self, question):
+        return self.retrieve(question)["hybrid"]
+
+    def methods(self, question_or_retrieval):
+        retrieval = question_or_retrieval if isinstance(question_or_retrieval, dict) \
+            else self.retrieve(question_or_retrieval)
+        return {method: self.method_units(retrieval, method) for method in METHODS}
+
+    def supplemented(self, retrieval):
+        if not isinstance(retrieval, dict):
+            retrieval = self.retrieve(retrieval)
+        return self.method_units(retrieval, "hybrid_top5_supplement")

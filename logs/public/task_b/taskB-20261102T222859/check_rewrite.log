@@ -1,0 +1,4 @@
+rewrite_candidates=20 unlabeled=20
+independent_test=False
+overlap_families={'F05': ['D01', 'D02', 'D16'], 'F07': ['D06'], 'F08': ['D17'], 'F10': ['D09'], 'F11': ['F06', 'F12'], 'F12': ['F06', 'F11'], 'F17': ['D13'], 'F18': ['D13'], 'F20': ['D14']}
+rewrite_check failures=0

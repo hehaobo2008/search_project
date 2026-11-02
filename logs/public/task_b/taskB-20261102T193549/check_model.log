@@ -1,3 +1,0 @@
-model_dir=<PROJECT_ROOT>\work\models\bge-small-zh-v1.5 files=7 license=MIT per BAAI model card and Xenova README; repository has no separate LICENSE file (needs human confirmation)
-runtime=onnxruntime 1.31.0 CPUExecutionProvider max_length=512 pooling=CLS token of last_hidden_state + L2 normalization
-model_check failures=0

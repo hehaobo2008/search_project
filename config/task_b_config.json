@@ -1,10 +1,13 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "split": "dev",
   "frozen": false,
-  "frozen_note": "开发集调试配置，尚未冻结；冻结测试题须人工标注后另存，不得用本开发集结果充当独立测试成绩。",
+  "frozen_note": "dev_gold_v2 与配置在本次运行前固定；开发集结果不是产品准确率或独立测试成绩。",
   "corpus": {
-    "documents": ["rail_quality", "construction_quality"],
+    "documents": [
+      "rail_quality",
+      "construction_quality"
+    ],
     "evidence_unit": "article",
     "long_article_policy": "整条作为一个证据单元；展示时按 unit_char_budget 截断并保留原文锚点"
   },
@@ -19,7 +22,13 @@
   },
   "lexical": {
     "tokenizer": "jieba 0.42.1 cut_for_search",
-    "protected_patterns": ["第X条", "第X章", "《文件名》", "数字/百分比", "英文"],
+    "protected_patterns": [
+      "第X条",
+      "第X章",
+      "《文件名》",
+      "数字/百分比",
+      "英文"
+    ],
     "bm25": "rank_bm25 0.2.2 BM25Okapi default"
   },
   "fusion": {
@@ -29,14 +38,28 @@
     "tie_break": "融合分降序，再按 article_id 升序"
   },
   "methods": {
-    "top5": {"units": 5, "unit_char_budget": 400},
-    "top7": {"units": 7, "unit_char_budget": 400, "total_char_budget": 2800},
-    "top5_supplement": {"base_units": 5, "max_extra": 2, "unit_char_budget": 400, "total_char_budget": 2800}
+    "primary": [
+      "bm25_top7",
+      "dense_top7",
+      "hybrid_top7",
+      "hybrid_top5_supplement"
+    ],
+    "auxiliary": [
+      "hybrid_top5"
+    ],
+    "budget": {
+      "units_max": 7,
+      "unit_char_budget": 400,
+      "total_char_budget": 2800
+    }
   },
   "supplement": {
     "seed_top_n": 2,
     "candidate_pool_top_n": 10,
-    "relation_types": ["explicit_article", "amendment"],
+    "relation_types": [
+      "explicit_article",
+      "amendment"
+    ],
     "require_target_version_resolved": true,
     "exclude_duplicates": true,
     "topic_related_allowed": false,
@@ -50,5 +73,14 @@
   "shutdown_rules": {
     "version_conflict": "default pending when requested year/version not in pinned index",
     "citation_ambiguity": "report relation state; never hard-link topic_related"
+  },
+  "label_version": "dev_gold_v2",
+  "frozen_for_dev_v2": true,
+  "frozen_at": "2026-11-02T22:13:26.649242+08:00",
+  "rewrite_candidates": {
+    "file": "data/task_b_rewrite_candidates.jsonl",
+    "status": "same_corpus_rewrite_unlabeled",
+    "is_independent_test": false,
+    "note": "与开发题存在题目家族重叠；不得称独立冻结测试，不得宣称跨主题泛化"
   }
 }

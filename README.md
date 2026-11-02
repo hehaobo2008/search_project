@@ -60,11 +60,12 @@ python -m unittest discover -s tests -v
 - B 官方 HTML 无页码，不编造页码；PDF 页仅用于批准的副本回跳。
 - 未调用外部 LLM/API，未安装模型，未上传私有材料，未生成虚构日志、成绩或截图。
 
-
-## 任务B（开发集探索）
+## 任务B（开发集端到端，dev_gold_v2）
 
 - 模型：`BAAI/bge-small-zh-v1.5`，ONNX 分发仓库 `Xenova/bge-small-zh-v1.5`（ModelScope），`onnx/model.onnx` 已锁定 SHA-256；许可 MIT。
-- 检索：jieba + BM25，BGE 语义，RRF k=60；Top5、Top7、Top5+≤2补证在相同输出预算下比较。
-- 运行：`python scripts/task_b_pipeline.py`；结果见 `reports/task_b_dev_report.md` 与 `reports/RESULTS_taskB_filled.md`。
-- 开发集 13 道检索题：Top5 12/13，Top7 13/13，Top5+补证 13/13；补证组无 Top7 之外的独有成功，样本小，不作泛化结论。
-- 冻结候选 20 题仍为 `unlabeled`，未运行；任务A人工闸门 H01-H08 尚未签字，任务B不是独立测试成绩。
+- 统一入口：`TaskBSystem.answer(question, method)` 只接收自然语言问题与方法名；题型、标准答案、预标条款对只在评分器中读取。
+- 对照：纯 BM25、纯语义、混合、混合+≤2 补证，同一输出预算（最多 7 单元、每单元 400 字符、总 2800 字符）。
+- 开发集 13 道检索题：纯BM25 13/13 Hit、12/13 全证据；纯语义 12/13；混合 13/13；混合+补证 13/13。补证没有展示出额外收益。
+- 无答案 2/2 正确拒绝；版本/引用歧义作为模块测试 3/3，单列不计端到端。
+- **不是产品准确率，也不是独立冻结测试。** 20 道同语料改写候选未标注、未运行；F05/F07/F08/F10 与开发题高度重叠，只能作为同语料改写测试。
+- 结果：`reports/task_b_dev_report.md`、`reports/RESULTS_taskB_filled.md`；复现入口见上一节。
