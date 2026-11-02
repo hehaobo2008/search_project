@@ -1,16 +1,16 @@
-{
-  "generated_at": "2026-11-02T22:28:37.621231+08:00",
-  "total": 26,
-  "passed": 26,
-  "failures": [],
-  "errors": [],
-  "skipped_classes": [
-    {
-      "test": "setUpClass (tests.test_pipeline_logs.PipelineLogTest)",
-      "reason": "nested pipeline disabled during run_tests step"
-    }
-  ],
-  "skipped_tests": [],
-  "success": true,
-  "duration_sec": 3.997
+{
+  "generated_at": "2026-11-02T22:28:37.621231+08:00",
+  "total": 26,
+  "passed": 26,
+  "failures": [],
+  "errors": [],
+  "skipped_classes": [
+    {
+      "test": "setUpClass (tests.test_pipeline_logs.PipelineLogTest)",
+      "reason": "nested pipeline disabled during run_tests step"
+    }
+  ],
+  "skipped_tests": [],
+  "success": true,
+  "duration_sec": 3.997
 }

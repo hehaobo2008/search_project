@@ -1,3362 +1,3362 @@
-{
-  "generated_at": "2026-11-02T22:29:02.311446+08:00",
-  "scope": "dev_end_to_end",
-  "disclaimer": "开发集13道检索题不是产品准确率，也不是独立冻结测试；gold为dev_gold_v2，待人工复核。",
-  "config": {
-    "schema_version": 2,
-    "split": "dev",
-    "frozen": false,
-    "frozen_note": "dev_gold_v2 与配置在本次运行前固定；开发集结果不是产品准确率或独立测试成绩。",
-    "corpus": {
-      "documents": [
-        "rail_quality",
-        "construction_quality"
-      ],
-      "evidence_unit": "article",
-      "long_article_policy": "整条作为一个证据单元；展示时按 unit_char_budget 截断并保留原文锚点"
-    },
-    "model": {
-      "model_id": "BAAI/bge-small-zh-v1.5",
-      "distribution": "Xenova/bge-small-zh-v1.5 ONNX via ModelScope",
-      "revision": "master branch; model.onnx sha256 pinned in MODEL_MANIFEST.json",
-      "runtime": "onnxruntime CPUExecutionProvider",
-      "max_length": 512,
-      "pooling": "CLS + L2",
-      "query_instruction": "为这个句子生成表示以用于检索相关文章："
-    },
-    "lexical": {
-      "tokenizer": "jieba 0.42.1 cut_for_search",
-      "protected_patterns": [
-        "第X条",
-        "第X章",
-        "《文件名》",
-        "数字/百分比",
-        "英文"
-      ],
-      "bm25": "rank_bm25 0.2.2 BM25Okapi default"
-    },
-    "fusion": {
-      "method": "RRF",
-      "k": 60,
-      "candidate_limit_per_route": 50,
-      "tie_break": "融合分降序，再按 article_id 升序"
-    },
-    "methods": {
-      "primary": [
-        "bm25_top7",
-        "dense_top7",
-        "hybrid_top7",
-        "hybrid_top5_supplement"
-      ],
-      "auxiliary": [
-        "hybrid_top5"
-      ],
-      "budget": {
-        "units_max": 7,
-        "unit_char_budget": 400,
-        "total_char_budget": 2800
-      }
-    },
-    "supplement": {
-      "seed_top_n": 2,
-      "candidate_pool_top_n": 10,
-      "relation_types": [
-        "explicit_article",
-        "amendment"
-      ],
-      "require_target_version_resolved": true,
-      "exclude_duplicates": true,
-      "topic_related_allowed": false,
-      "no_backfill": true
-    },
-    "answerability": {
-      "unknown_terms_rule": "unknown>=3, or unknown>=1 and max_sem<0.62",
-      "semantic_floor": 0.62,
-      "min_unknown_hard": 3
-    },
-    "shutdown_rules": {
-      "version_conflict": "default pending when requested year/version not in pinned index",
-      "citation_ambiguity": "report relation state; never hard-link topic_related"
-    },
-    "label_version": "dev_gold_v2",
-    "frozen_for_dev_v2": true,
-    "frozen_at": "2026-11-02T22:13:26.649242+08:00",
-    "rewrite_candidates": {
-      "file": "data/task_b_rewrite_candidates.jsonl",
-      "status": "same_corpus_rewrite_unlabeled",
-      "is_independent_test": false,
-      "note": "与开发题存在题目家族重叠；不得称独立冻结测试，不得宣称跨主题泛化"
-    }
-  },
-  "N": 13,
-  "summary": {
-    "bm25_top7": {
-      "n": 13,
-      "hit": 13,
-      "full": 12,
-      "aspects_hit": 15,
-      "aspects_total": 16,
-      "macro_recall": 0.9615,
-      "micro_recall": 0.9375,
-      "units_mean": 7.0,
-      "chars_mean": 969.54,
-      "answer_ms_p50": 9.72,
-      "answer_ms_p95": 12.14,
-      "answerable_refused": 0,
-      "hit_fail": 0,
-      "full_fail": 1,
-      "supplements_total": 0,
-      "wrong_supplements": 0
-    },
-    "dense_top7": {
-      "n": 13,
-      "hit": 12,
-      "full": 12,
-      "aspects_hit": 15,
-      "aspects_total": 16,
-      "macro_recall": 0.9231,
-      "micro_recall": 0.9375,
-      "units_mean": 7.0,
-      "chars_mean": 890.31,
-      "answer_ms_p50": 9.43,
-      "answer_ms_p95": 11.69,
-      "answerable_refused": 0,
-      "hit_fail": 1,
-      "full_fail": 1,
-      "supplements_total": 0,
-      "wrong_supplements": 0
-    },
-    "hybrid_top7": {
-      "n": 13,
-      "hit": 13,
-      "full": 13,
-      "aspects_hit": 16,
-      "aspects_total": 16,
-      "macro_recall": 1.0,
-      "micro_recall": 1.0,
-      "units_mean": 7.0,
-      "chars_mean": 961.38,
-      "answer_ms_p50": 9.51,
-      "answer_ms_p95": 12.15,
-      "answerable_refused": 0,
-      "hit_fail": 0,
-      "full_fail": 0,
-      "supplements_total": 0,
-      "wrong_supplements": 0
-    },
-    "hybrid_top5_supplement": {
-      "n": 13,
-      "hit": 13,
-      "full": 13,
-      "aspects_hit": 16,
-      "aspects_total": 16,
-      "macro_recall": 1.0,
-      "micro_recall": 1.0,
-      "units_mean": 5.08,
-      "chars_mean": 724.77,
-      "answer_ms_p50": 9.53,
-      "answer_ms_p95": 11.05,
-      "answerable_refused": 0,
-      "hit_fail": 0,
-      "full_fail": 0,
-      "supplements_total": 1,
-      "wrong_supplements": 0
-    },
-    "hybrid_top5": {
-      "n": 13,
-      "hit": 12,
-      "full": 12,
-      "aspects_hit": 15,
-      "aspects_total": 16,
-      "macro_recall": 0.9231,
-      "micro_recall": 0.9375,
-      "units_mean": 5.0,
-      "chars_mean": 714.23,
-      "answer_ms_p50": 9.79,
-      "answer_ms_p95": 10.68,
-      "answerable_refused": 0,
-      "hit_fail": 1,
-      "full_fail": 1,
-      "supplements_total": 0,
-      "wrong_supplements": 0
-    }
-  },
-  "comparisons": {
-    "hybrid_top7_vs_supplement": {
-      "a_only": 0,
-      "b_only": 0,
-      "both": 13,
-      "neither": 0
-    },
-    "bm25_vs_hybrid": {
-      "a_only": 0,
-      "b_only": 0,
-      "both": 13,
-      "neither": 0
-    },
-    "dense_vs_hybrid": {
-      "a_only": 0,
-      "b_only": 1,
-      "both": 12,
-      "neither": 0
-    }
-  },
-  "no_answer": {
-    "bm25_top7": {
-      "n": 2,
-      "correct_refuse": 2,
-      "wrong_evidence": 0
-    },
-    "dense_top7": {
-      "n": 2,
-      "correct_refuse": 2,
-      "wrong_evidence": 0
-    },
-    "hybrid_top7": {
-      "n": 2,
-      "correct_refuse": 2,
-      "wrong_evidence": 0
-    },
-    "hybrid_top5_supplement": {
-      "n": 2,
-      "correct_refuse": 2,
-      "wrong_evidence": 0
-    },
-    "hybrid_top5": {
-      "n": 2,
-      "correct_refuse": 2,
-      "wrong_evidence": 0
-    }
-  },
-  "module_tests": {
-    "n": 3,
-    "correct": 3,
-    "wrong": 0,
-    "rows": [
-      {
-        "qid": "D13",
-        "group": "version_conflict",
-        "question": "2015年版铁路建设工程质量监督管理规定第70条规定了什么？",
-        "state": "version_pending",
-        "expected": "version_pending",
-        "correct": true
-      },
-      {
-        "qid": "D14",
-        "group": "citation_ambiguity",
-        "question": "铁路规定第30条和条例第31条是不是直接引用关系？",
-        "pair": [
-          "rail_quality:art-30",
-          "construction_quality:art-31"
-        ],
-        "state": "topic_related",
-        "expected": "topic_related",
-        "correct": true
-      },
-      {
-        "qid": "D15",
-        "group": "citation_ambiguity",
-        "question": "铁路规定第1条是不是直接引用了条例第29条？",
-        "pair": [
-          "rail_quality:art-1",
-          "construction_quality:art-29"
-        ],
-        "state": "explicit_document",
-        "expected": "explicit_document",
-        "correct": true
-      }
-    ]
-  },
-  "failures": [
-    {
-      "qid": "D03",
-      "method": "dense_top7",
-      "failure": "all_aspects_missed",
-      "detail": [
-        "条例第65条原文"
-      ]
-    },
-    {
-      "qid": "D03",
-      "method": "hybrid_top5",
-      "failure": "all_aspects_missed",
-      "detail": [
-        "条例第65条原文"
-      ]
-    },
-    {
-      "qid": "D17",
-      "method": "bm25_top7",
-      "failure": "missing_required_aspect",
-      "detail": [
-        "偷工减料/不合格材料处罚"
-      ]
-    }
-  ],
-  "retrieval_rows": [
-    {
-      "qid": "D01",
-      "question": "铁路工地试块送检要谁在场？检测记录签字的规定在哪？",
-      "requirements": [
-        {
-          "aspect": "监督取样主体",
-          "acceptable": [
-            "rail_quality:art-30",
-            "construction_quality:art-31"
-          ]
-        },
-        {
-          "aspect": "记录签字依据",
-          "acceptable": [
-            "rail_quality:art-30",
-            "construction_quality:art-29"
-          ]
-        }
-      ],
-      "methods": {
-        "bm25_top7": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 2,
-          "aspects_total": 2,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "监督取样主体",
-              "hit": true,
-              "acceptable": [
-                "rail_quality:art-30",
-                "construction_quality:art-31"
-              ]
-            },
-            {
-              "aspect": "记录签字依据",
-              "hit": true,
-              "acceptable": [
-                "rail_quality:art-30",
-                "construction_quality:art-29"
-              ]
-            }
-          ],
-          "ids": [
-            "rail_quality:art-30",
-            "construction_quality:art-31",
-            "construction_quality:art-29",
-            "construction_quality:art-65",
-            "rail_quality:art-66",
-            "rail_quality:art-55",
-            "construction_quality:art-37"
-          ],
-          "units": 7,
-          "chars": 900,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 437.27,
-          "timings": {
-            "tokenize_ms": 0.244,
-            "bm25_ms": 0.428,
-            "embed_ms": 8.404,
-            "dense_ms": 0.093,
-            "fusion_ms": 0.051,
-            "total_search_ms": 11.358
-          }
-        },
-        "dense_top7": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 2,
-          "aspects_total": 2,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "监督取样主体",
-              "hit": true,
-              "acceptable": [
-                "rail_quality:art-30",
-                "construction_quality:art-31"
-              ]
-            },
-            {
-              "aspect": "记录签字依据",
-              "hit": true,
-              "acceptable": [
-                "rail_quality:art-30",
-                "construction_quality:art-29"
-              ]
-            }
-          ],
-          "ids": [
-            "rail_quality:art-30",
-            "rail_quality:art-36",
-            "rail_quality:art-50",
-            "rail_quality:art-39",
-            "construction_quality:art-31",
-            "rail_quality:art-40",
-            "rail_quality:art-51"
-          ],
-          "units": 7,
-          "chars": 785,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 9.43,
-          "timings": {
-            "tokenize_ms": 0.143,
-            "bm25_ms": 0.355,
-            "embed_ms": 6.072,
-            "dense_ms": 0.047,
-            "fusion_ms": 0.046,
-            "total_search_ms": 8.392
-          }
-        },
-        "hybrid_top7": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 2,
-          "aspects_total": 2,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "监督取样主体",
-              "hit": true,
-              "acceptable": [
-                "rail_quality:art-30",
-                "construction_quality:art-31"
-              ]
-            },
-            {
-              "aspect": "记录签字依据",
-              "hit": true,
-              "acceptable": [
-                "rail_quality:art-30",
-                "construction_quality:art-29"
-              ]
-            }
-          ],
-          "ids": [
-            "rail_quality:art-30",
-            "construction_quality:art-31",
-            "rail_quality:art-36",
-            "rail_quality:art-22",
-            "rail_quality:art-66",
-            "rail_quality:art-55",
-            "rail_quality:art-14"
-          ],
-          "units": 7,
-          "chars": 918,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 10.88,
-          "timings": {
-            "tokenize_ms": 0.153,
-            "bm25_ms": 0.362,
-            "embed_ms": 6.998,
-            "dense_ms": 0.101,
-            "fusion_ms": 0.065,
-            "total_search_ms": 9.702
-          }
-        },
-        "hybrid_top5_supplement": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 2,
-          "aspects_total": 2,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "监督取样主体",
-              "hit": true,
-              "acceptable": [
-                "rail_quality:art-30",
-                "construction_quality:art-31"
-              ]
-            },
-            {
-              "aspect": "记录签字依据",
-              "hit": true,
-              "acceptable": [
-                "rail_quality:art-30",
-                "construction_quality:art-29"
-              ]
-            }
-          ],
-          "ids": [
-            "rail_quality:art-30",
-            "construction_quality:art-31",
-            "rail_quality:art-36",
-            "rail_quality:art-22",
-            "rail_quality:art-66"
-          ],
-          "units": 5,
-          "chars": 721,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 8.89,
-          "timings": {
-            "tokenize_ms": 0.161,
-            "bm25_ms": 0.392,
-            "embed_ms": 5.319,
-            "dense_ms": 0.051,
-            "fusion_ms": 0.048,
-            "total_search_ms": 7.76,
-            "supplement_ms": 0.028
-          }
-        },
-        "hybrid_top5": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 2,
-          "aspects_total": 2,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "监督取样主体",
-              "hit": true,
-              "acceptable": [
-                "rail_quality:art-30",
-                "construction_quality:art-31"
-              ]
-            },
-            {
-              "aspect": "记录签字依据",
-              "hit": true,
-              "acceptable": [
-                "rail_quality:art-30",
-                "construction_quality:art-29"
-              ]
-            }
-          ],
-          "ids": [
-            "rail_quality:art-30",
-            "construction_quality:art-31",
-            "rail_quality:art-36",
-            "rail_quality:art-22",
-            "rail_quality:art-66"
-          ],
-          "units": 5,
-          "chars": 721,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 8.9,
-          "timings": {
-            "tokenize_ms": 0.159,
-            "bm25_ms": 0.36,
-            "embed_ms": 5.402,
-            "dense_ms": 0.042,
-            "fusion_ms": 0.047,
-            "total_search_ms": 7.793
-          }
-        }
-      }
-    },
-    {
-      "qid": "D02",
-      "question": "施工单位设立的工地试验室出具检测结果后，资料如何签认和保存？",
-      "requirements": [
-        {
-          "aspect": "工地试验室资料签认与保存",
-          "acceptable": [
-            "rail_quality:art-30"
-          ]
-        }
-      ],
-      "methods": {
-        "bm25_top7": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 1,
-          "aspects_total": 1,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "工地试验室资料签认与保存",
-              "hit": true,
-              "acceptable": [
-                "rail_quality:art-30"
-              ]
-            }
-          ],
-          "ids": [
-            "rail_quality:art-30",
-            "rail_quality:art-69",
-            "rail_quality:art-22",
-            "rail_quality:art-39",
-            "rail_quality:art-14",
-            "rail_quality:art-36",
-            "construction_quality:art-16"
-          ],
-          "units": 7,
-          "chars": 1025,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 9.25,
-          "timings": {
-            "tokenize_ms": 0.155,
-            "bm25_ms": 0.531,
-            "embed_ms": 5.384,
-            "dense_ms": 0.109,
-            "fusion_ms": 0.062,
-            "total_search_ms": 8.402
-          }
-        },
-        "dense_top7": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 1,
-          "aspects_total": 1,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "工地试验室资料签认与保存",
-              "hit": true,
-              "acceptable": [
-                "rail_quality:art-30"
-              ]
-            }
-          ],
-          "ids": [
-            "rail_quality:art-30",
-            "construction_quality:art-31",
-            "rail_quality:art-39",
-            "construction_quality:art-16",
-            "construction_quality:art-29",
-            "rail_quality:art-16",
-            "construction_quality:art-49"
-          ],
-          "units": 7,
-          "chars": 1056,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 10.75,
-          "timings": {
-            "tokenize_ms": 0.153,
-            "bm25_ms": 0.616,
-            "embed_ms": 6.159,
-            "dense_ms": 0.053,
-            "fusion_ms": 0.063,
-            "total_search_ms": 9.54
-          }
-        },
-        "hybrid_top7": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 1,
-          "aspects_total": 1,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "工地试验室资料签认与保存",
-              "hit": true,
-              "acceptable": [
-                "rail_quality:art-30"
-              ]
-            }
-          ],
-          "ids": [
-            "rail_quality:art-30",
-            "rail_quality:art-39",
-            "construction_quality:art-31",
-            "construction_quality:art-16",
-            "rail_quality:art-22",
-            "rail_quality:art-33",
-            "construction_quality:art-42"
-          ],
-          "units": 7,
-          "chars": 995,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 11.8,
-          "timings": {
-            "tokenize_ms": 0.188,
-            "bm25_ms": 0.881,
-            "embed_ms": 7.687,
-            "dense_ms": 0.085,
-            "fusion_ms": 0.054,
-            "total_search_ms": 10.833
-          }
-        },
-        "hybrid_top5_supplement": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 1,
-          "aspects_total": 1,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "工地试验室资料签认与保存",
-              "hit": true,
-              "acceptable": [
-                "rail_quality:art-30"
-              ]
-            }
-          ],
-          "ids": [
-            "rail_quality:art-30",
-            "rail_quality:art-39",
-            "construction_quality:art-31",
-            "construction_quality:art-16",
-            "rail_quality:art-22"
-          ],
-          "units": 5,
-          "chars": 784,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 11.5,
-          "timings": {
-            "tokenize_ms": 0.21,
-            "bm25_ms": 0.975,
-            "embed_ms": 5.212,
-            "dense_ms": 0.056,
-            "fusion_ms": 0.073,
-            "total_search_ms": 10.05,
-            "supplement_ms": 0.071
-          }
-        },
-        "hybrid_top5": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 1,
-          "aspects_total": 1,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "工地试验室资料签认与保存",
-              "hit": true,
-              "acceptable": [
-                "rail_quality:art-30"
-              ]
-            }
-          ],
-          "ids": [
-            "rail_quality:art-30",
-            "rail_quality:art-39",
-            "construction_quality:art-31",
-            "construction_quality:art-16",
-            "rail_quality:art-22"
-          ],
-          "units": 5,
-          "chars": 784,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 10.68,
-          "timings": {
-            "tokenize_ms": 0.245,
-            "bm25_ms": 1.106,
-            "embed_ms": 5.735,
-            "dense_ms": 0.11,
-            "fusion_ms": 0.084,
-            "total_search_ms": 9.692
-          }
-        }
-      }
-    },
-    {
-      "qid": "D03",
-      "question": "铁路规定第66条提到的条例第65条原文在哪？",
-      "requirements": [
-        {
-          "aspect": "条例第65条原文",
-          "acceptable": [
-            "construction_quality:art-65"
-          ]
-        }
-      ],
-      "methods": {
-        "bm25_top7": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 1,
-          "aspects_total": 1,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "条例第65条原文",
-              "hit": true,
-              "acceptable": [
-                "construction_quality:art-65"
-              ]
-            }
-          ],
-          "ids": [
-            "construction_quality:art-66",
-            "rail_quality:art-66",
-            "construction_quality:art-65",
-            "rail_quality:art-65",
-            "construction_quality:art-82",
-            "construction_quality:art-79",
-            "construction_quality:art-80"
-          ],
-          "units": 7,
-          "chars": 780,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 9.5,
-          "timings": {
-            "tokenize_ms": 0.159,
-            "bm25_ms": 0.404,
-            "embed_ms": 5.626,
-            "dense_ms": 0.163,
-            "fusion_ms": 0.078,
-            "total_search_ms": 8.855
-          }
-        },
-        "dense_top7": {
-          "decision": "answer",
-          "hit": false,
-          "full": false,
-          "aspects_hit": 0,
-          "aspects_total": 1,
-          "recall": 0.0,
-          "aspect_detail": [
-            {
-              "aspect": "条例第65条原文",
-              "hit": false,
-              "acceptable": [
-                "construction_quality:art-65"
-              ]
-            }
-          ],
-          "ids": [
-            "rail_quality:art-6",
-            "rail_quality:art-53",
-            "rail_quality:art-51",
-            "rail_quality:art-55",
-            "rail_quality:art-54",
-            "rail_quality:art-36",
-            "rail_quality:art-75"
-          ],
-          "units": 7,
-          "chars": 416,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 8.83,
-          "timings": {
-            "tokenize_ms": 0.11,
-            "bm25_ms": 0.266,
-            "embed_ms": 5.582,
-            "dense_ms": 0.042,
-            "fusion_ms": 0.077,
-            "total_search_ms": 8.244
-          }
-        },
-        "hybrid_top7": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 1,
-          "aspects_total": 1,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "条例第65条原文",
-              "hit": true,
-              "acceptable": [
-                "construction_quality:art-65"
-              ]
-            }
-          ],
-          "ids": [
-            "rail_quality:art-66",
-            "rail_quality:art-65",
-            "construction_quality:art-6",
-            "construction_quality:art-66",
-            "rail_quality:art-6",
-            "rail_quality:art-53",
-            "construction_quality:art-65"
-          ],
-          "units": 7,
-          "chars": 837,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 8.38,
-          "timings": {
-            "tokenize_ms": 0.114,
-            "bm25_ms": 0.291,
-            "embed_ms": 5.415,
-            "dense_ms": 0.036,
-            "fusion_ms": 0.059,
-            "total_search_ms": 7.813
-          }
-        },
-        "hybrid_top5_supplement": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 1,
-          "aspects_total": 1,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "条例第65条原文",
-              "hit": true,
-              "acceptable": [
-                "construction_quality:art-65"
-              ]
-            }
-          ],
-          "ids": [
-            "rail_quality:art-66",
-            "rail_quality:art-65",
-            "construction_quality:art-6",
-            "construction_quality:art-66",
-            "rail_quality:art-6",
-            "construction_quality:art-65"
-          ],
-          "units": 6,
-          "chars": 788,
-          "supplements": 1,
-          "supplement_ids": [
-            "construction_quality:art-65"
-          ],
-          "wrong_supplement_ids": [],
-          "answer_ms": 9.53,
-          "timings": {
-            "tokenize_ms": 0.107,
-            "bm25_ms": 0.234,
-            "embed_ms": 5.823,
-            "dense_ms": 0.041,
-            "fusion_ms": 0.059,
-            "total_search_ms": 8.422,
-            "supplement_ms": 0.074
-          }
-        },
-        "hybrid_top5": {
-          "decision": "answer",
-          "hit": false,
-          "full": false,
-          "aspects_hit": 0,
-          "aspects_total": 1,
-          "recall": 0.0,
-          "aspect_detail": [
-            {
-              "aspect": "条例第65条原文",
-              "hit": false,
-              "acceptable": [
-                "construction_quality:art-65"
-              ]
-            }
-          ],
-          "ids": [
-            "rail_quality:art-66",
-            "rail_quality:art-65",
-            "construction_quality:art-6",
-            "construction_quality:art-66",
-            "rail_quality:art-6"
-          ],
-          "units": 5,
-          "chars": 651,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 9.67,
-          "timings": {
-            "tokenize_ms": 0.164,
-            "bm25_ms": 0.474,
-            "embed_ms": 5.888,
-            "dense_ms": 0.041,
-            "fusion_ms": 0.057,
-            "total_search_ms": 8.717
-          }
-        }
-      }
-    },
-    {
-      "qid": "D04",
-      "question": "监理单位与施工单位串通降低工程质量，铁路规定第67条依照的上位条例怎么处罚？",
-      "requirements": [
-        {
-          "aspect": "条例第67条处罚",
-          "acceptable": [
-            "construction_quality:art-67"
-          ]
-        }
-      ],
-      "methods": {
-        "bm25_top7": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 1,
-          "aspects_total": 1,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "条例第67条处罚",
-              "hit": true,
-              "acceptable": [
-                "construction_quality:art-67"
-              ]
-            }
-          ],
-          "ids": [
-            "construction_quality:art-67",
-            "rail_quality:art-67",
-            "construction_quality:art-75",
-            "construction_quality:art-73",
-            "construction_quality:art-74",
-            "rail_quality:art-73",
-            "rail_quality:art-72"
-          ],
-          "units": 7,
-          "chars": 821,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 9.72,
-          "timings": {
-            "tokenize_ms": 0.232,
-            "bm25_ms": 0.629,
-            "embed_ms": 6.698,
-            "dense_ms": 0.062,
-            "fusion_ms": 0.066,
-            "total_search_ms": 9.383
-          }
-        },
-        "dense_top7": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 1,
-          "aspects_total": 1,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "条例第67条处罚",
-              "hit": true,
-              "acceptable": [
-                "construction_quality:art-67"
-              ]
-            }
-          ],
-          "ids": [
-            "rail_quality:art-67",
-            "rail_quality:art-68",
-            "construction_quality:art-67",
-            "rail_quality:art-63",
-            "construction_quality:art-68",
-            "rail_quality:art-73",
-            "rail_quality:art-36"
-          ],
-          "units": 7,
-          "chars": 1314,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 9.2,
-          "timings": {
-            "tokenize_ms": 0.118,
-            "bm25_ms": 0.668,
-            "embed_ms": 6.004,
-            "dense_ms": 0.039,
-            "fusion_ms": 0.067,
-            "total_search_ms": 8.621
-          }
-        },
-        "hybrid_top7": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 1,
-          "aspects_total": 1,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "条例第67条处罚",
-              "hit": true,
-              "acceptable": [
-                "construction_quality:art-67"
-              ]
-            }
-          ],
-          "ids": [
-            "rail_quality:art-67",
-            "construction_quality:art-67",
-            "rail_quality:art-73",
-            "rail_quality:art-63",
-            "rail_quality:art-68",
-            "rail_quality:art-71",
-            "construction_quality:art-61"
-          ],
-          "units": 7,
-          "chars": 1349,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 9.5,
-          "timings": {
-            "tokenize_ms": 0.198,
-            "bm25_ms": 0.906,
-            "embed_ms": 6.038,
-            "dense_ms": 0.038,
-            "fusion_ms": 0.054,
-            "total_search_ms": 9.104
-          }
-        },
-        "hybrid_top5_supplement": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 1,
-          "aspects_total": 1,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "条例第67条处罚",
-              "hit": true,
-              "acceptable": [
-                "construction_quality:art-67"
-              ]
-            }
-          ],
-          "ids": [
-            "rail_quality:art-67",
-            "construction_quality:art-67",
-            "rail_quality:art-73",
-            "rail_quality:art-63",
-            "rail_quality:art-68"
-          ],
-          "units": 5,
-          "chars": 1109,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 9.17,
-          "timings": {
-            "tokenize_ms": 0.131,
-            "bm25_ms": 0.608,
-            "embed_ms": 6.088,
-            "dense_ms": 0.065,
-            "fusion_ms": 0.055,
-            "total_search_ms": 8.815,
-            "supplement_ms": 0.023
-          }
-        },
-        "hybrid_top5": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 1,
-          "aspects_total": 1,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "条例第67条处罚",
-              "hit": true,
-              "acceptable": [
-                "construction_quality:art-67"
-              ]
-            }
-          ],
-          "ids": [
-            "rail_quality:art-67",
-            "construction_quality:art-67",
-            "rail_quality:art-73",
-            "rail_quality:art-63",
-            "rail_quality:art-68"
-          ],
-          "units": 5,
-          "chars": 1109,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 10.53,
-          "timings": {
-            "tokenize_ms": 0.131,
-            "bm25_ms": 0.624,
-            "embed_ms": 6.551,
-            "dense_ms": 0.043,
-            "fusion_ms": 0.055,
-            "total_search_ms": 9.553
-          }
-        }
-      }
-    },
-    {
-      "qid": "D05",
-      "question": "铁路建设项目开工前在哪里办理工程质量监督手续？",
-      "requirements": [
-        {
-          "aspect": "质量监督手续办理",
-          "acceptable": [
-            "rail_quality:art-12"
-          ]
-        }
-      ],
-      "methods": {
-        "bm25_top7": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 1,
-          "aspects_total": 1,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "质量监督手续办理",
-              "hit": true,
-              "acceptable": [
-                "rail_quality:art-12"
-              ]
-            }
-          ],
-          "ids": [
-            "rail_quality:art-12",
-            "construction_quality:art-13",
-            "construction_quality:art-56",
-            "rail_quality:art-8",
-            "rail_quality:art-58",
-            "construction_quality:art-17",
-            "construction_quality:art-8"
-          ],
-          "units": 7,
-          "chars": 1062,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 12.14,
-          "timings": {
-            "tokenize_ms": 0.261,
-            "bm25_ms": 0.949,
-            "embed_ms": 6.536,
-            "dense_ms": 0.051,
-            "fusion_ms": 0.065,
-            "total_search_ms": 10.66
-          }
-        },
-        "dense_top7": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 1,
-          "aspects_total": 1,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "质量监督手续办理",
-              "hit": true,
-              "acceptable": [
-                "rail_quality:art-12"
-              ]
-            }
-          ],
-          "ids": [
-            "rail_quality:art-12",
-            "rail_quality:art-8",
-            "rail_quality:art-50",
-            "construction_quality:art-13",
-            "rail_quality:art-11",
-            "rail_quality:art-40",
-            "rail_quality:art-37"
-          ],
-          "units": 7,
-          "chars": 632,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 11.69,
-          "timings": {
-            "tokenize_ms": 0.182,
-            "bm25_ms": 0.822,
-            "embed_ms": 5.811,
-            "dense_ms": 0.073,
-            "fusion_ms": 0.081,
-            "total_search_ms": 10.311
-          }
-        },
-        "hybrid_top7": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 1,
-          "aspects_total": 1,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "质量监督手续办理",
-              "hit": true,
-              "acceptable": [
-                "rail_quality:art-12"
-              ]
-            }
-          ],
-          "ids": [
-            "rail_quality:art-12",
-            "construction_quality:art-13",
-            "rail_quality:art-8",
-            "rail_quality:art-50",
-            "rail_quality:art-18",
-            "rail_quality:art-17",
-            "rail_quality:art-28"
-          ],
-          "units": 7,
-          "chars": 800,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 10.93,
-          "timings": {
-            "tokenize_ms": 0.187,
-            "bm25_ms": 1.001,
-            "embed_ms": 5.616,
-            "dense_ms": 0.054,
-            "fusion_ms": 0.065,
-            "total_search_ms": 9.605
-          }
-        },
-        "hybrid_top5_supplement": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 1,
-          "aspects_total": 1,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "质量监督手续办理",
-              "hit": true,
-              "acceptable": [
-                "rail_quality:art-12"
-              ]
-            }
-          ],
-          "ids": [
-            "rail_quality:art-12",
-            "construction_quality:art-13",
-            "rail_quality:art-8",
-            "rail_quality:art-50",
-            "rail_quality:art-18"
-          ],
-          "units": 5,
-          "chars": 480,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 9.73,
-          "timings": {
-            "tokenize_ms": 0.165,
-            "bm25_ms": 0.786,
-            "embed_ms": 5.346,
-            "dense_ms": 0.109,
-            "fusion_ms": 0.074,
-            "total_search_ms": 8.545,
-            "supplement_ms": 0.053
-          }
-        },
-        "hybrid_top5": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 1,
-          "aspects_total": 1,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "质量监督手续办理",
-              "hit": true,
-              "acceptable": [
-                "rail_quality:art-12"
-              ]
-            }
-          ],
-          "ids": [
-            "rail_quality:art-12",
-            "construction_quality:art-13",
-            "rail_quality:art-8",
-            "rail_quality:art-50",
-            "rail_quality:art-18"
-          ],
-          "units": 5,
-          "chars": 480,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 10.44,
-          "timings": {
-            "tokenize_ms": 0.167,
-            "bm25_ms": 1.094,
-            "embed_ms": 6.114,
-            "dense_ms": 0.044,
-            "fusion_ms": 0.048,
-            "total_search_ms": 9.22
-          }
-        }
-      }
-    },
-    {
-      "qid": "D06",
-      "question": "铁路工程竣工验收由谁组织，提前几天通知监管部门，验收后多久备案？",
-      "requirements": [
-        {
-          "aspect": "竣工验收组织、通知与备案",
-          "acceptable": [
-            "rail_quality:art-16"
-          ]
-        }
-      ],
-      "methods": {
-        "bm25_top7": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 1,
-          "aspects_total": 1,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "竣工验收组织、通知与备案",
-              "hit": true,
-              "acceptable": [
-                "rail_quality:art-16"
-              ]
-            }
-          ],
-          "ids": [
-            "rail_quality:art-16",
-            "rail_quality:art-52",
-            "construction_quality:art-49",
-            "rail_quality:art-5",
-            "rail_quality:art-12",
-            "construction_quality:art-58",
-            "rail_quality:art-61"
-          ],
-          "units": 7,
-          "chars": 879,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 11.9,
-          "timings": {
-            "tokenize_ms": 0.278,
-            "bm25_ms": 0.996,
-            "embed_ms": 6.842,
-            "dense_ms": 0.057,
-            "fusion_ms": 0.058,
-            "total_search_ms": 10.58
-          }
-        },
-        "dense_top7": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 1,
-          "aspects_total": 1,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "竣工验收组织、通知与备案",
-              "hit": true,
-              "acceptable": [
-                "rail_quality:art-16"
-              ]
-            }
-          ],
-          "ids": [
-            "rail_quality:art-16",
-            "rail_quality:art-61",
-            "rail_quality:art-17",
-            "construction_quality:art-49",
-            "rail_quality:art-52",
-            "rail_quality:art-39",
-            "rail_quality:art-31"
-          ],
-          "units": 7,
-          "chars": 1064,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 9.67,
-          "timings": {
-            "tokenize_ms": 0.24,
-            "bm25_ms": 0.863,
-            "embed_ms": 5.862,
-            "dense_ms": 0.061,
-            "fusion_ms": 0.069,
-            "total_search_ms": 9.059
-          }
-        },
-        "hybrid_top7": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 1,
-          "aspects_total": 1,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "竣工验收组织、通知与备案",
-              "hit": true,
-              "acceptable": [
-                "rail_quality:art-16"
-              ]
-            }
-          ],
-          "ids": [
-            "rail_quality:art-16",
-            "rail_quality:art-52",
-            "construction_quality:art-49",
-            "rail_quality:art-61",
-            "rail_quality:art-53",
-            "rail_quality:art-17",
-            "rail_quality:art-12"
-          ],
-          "units": 7,
-          "chars": 949,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 8.95,
-          "timings": {
-            "tokenize_ms": 0.151,
-            "bm25_ms": 0.645,
-            "embed_ms": 5.26,
-            "dense_ms": 0.065,
-            "fusion_ms": 0.069,
-            "total_search_ms": 8.307
-          }
-        },
-        "hybrid_top5_supplement": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 1,
-          "aspects_total": 1,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "竣工验收组织、通知与备案",
-              "hit": true,
-              "acceptable": [
-                "rail_quality:art-16"
-              ]
-            }
-          ],
-          "ids": [
-            "rail_quality:art-16",
-            "rail_quality:art-52",
-            "construction_quality:art-49",
-            "rail_quality:art-61",
-            "rail_quality:art-53"
-          ],
-          "units": 5,
-          "chars": 612,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 9.45,
-          "timings": {
-            "tokenize_ms": 0.146,
-            "bm25_ms": 0.659,
-            "embed_ms": 5.996,
-            "dense_ms": 0.044,
-            "fusion_ms": 0.06,
-            "total_search_ms": 8.628,
-            "supplement_ms": 0.056
-          }
-        },
-        "hybrid_top5": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 1,
-          "aspects_total": 1,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "竣工验收组织、通知与备案",
-              "hit": true,
-              "acceptable": [
-                "rail_quality:art-16"
-              ]
-            }
-          ],
-          "ids": [
-            "rail_quality:art-16",
-            "rail_quality:art-52",
-            "construction_quality:art-49",
-            "rail_quality:art-61",
-            "rail_quality:art-53"
-          ],
-          "units": 5,
-          "chars": 612,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 9.61,
-          "timings": {
-            "tokenize_ms": 0.2,
-            "bm25_ms": 1.043,
-            "embed_ms": 5.704,
-            "dense_ms": 0.054,
-            "fusion_ms": 0.065,
-            "total_search_ms": 8.984
-          }
-        }
-      }
-    },
-    {
-      "qid": "D07",
-      "question": "隐蔽工程在隐蔽前，施工单位应当通知哪些单位？",
-      "requirements": [
-        {
-          "aspect": "隐蔽前通知对象",
-          "acceptable": [
-            "construction_quality:art-30"
-          ]
-        }
-      ],
-      "methods": {
-        "bm25_top7": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 1,
-          "aspects_total": 1,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "隐蔽前通知对象",
-              "hit": true,
-              "acceptable": [
-                "construction_quality:art-30"
-              ]
-            }
-          ],
-          "ids": [
-            "construction_quality:art-30",
-            "rail_quality:art-31",
-            "rail_quality:art-38",
-            "rail_quality:art-40",
-            "rail_quality:art-16",
-            "construction_quality:art-25",
-            "rail_quality:art-26"
-          ],
-          "units": 7,
-          "chars": 801,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 8.33,
-          "timings": {
-            "tokenize_ms": 0.108,
-            "bm25_ms": 0.358,
-            "embed_ms": 5.648,
-            "dense_ms": 0.049,
-            "fusion_ms": 0.056,
-            "total_search_ms": 8.071
-          }
-        },
-        "dense_top7": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 1,
-          "aspects_total": 1,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "隐蔽前通知对象",
-              "hit": true,
-              "acceptable": [
-                "construction_quality:art-30"
-              ]
-            }
-          ],
-          "ids": [
-            "construction_quality:art-30",
-            "rail_quality:art-31",
-            "construction_quality:art-70",
-            "rail_quality:art-38",
-            "construction_quality:art-49",
-            "construction_quality:art-53",
-            "rail_quality:art-23"
-          ],
-          "units": 7,
-          "chars": 685,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 8.55,
-          "timings": {
-            "tokenize_ms": 0.089,
-            "bm25_ms": 0.342,
-            "embed_ms": 5.446,
-            "dense_ms": 0.041,
-            "fusion_ms": 0.054,
-            "total_search_ms": 8.231
-          }
-        },
-        "hybrid_top7": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 1,
-          "aspects_total": 1,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "隐蔽前通知对象",
-              "hit": true,
-              "acceptable": [
-                "construction_quality:art-30"
-              ]
-            }
-          ],
-          "ids": [
-            "construction_quality:art-30",
-            "rail_quality:art-31",
-            "rail_quality:art-38",
-            "rail_quality:art-40",
-            "rail_quality:art-29",
-            "construction_quality:art-28",
-            "construction_quality:art-61"
-          ],
-          "units": 7,
-          "chars": 728,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 8.13,
-          "timings": {
-            "tokenize_ms": 0.11,
-            "bm25_ms": 0.538,
-            "embed_ms": 5.333,
-            "dense_ms": 0.036,
-            "fusion_ms": 0.055,
-            "total_search_ms": 7.882
-          }
-        },
-        "hybrid_top5_supplement": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 1,
-          "aspects_total": 1,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "隐蔽前通知对象",
-              "hit": true,
-              "acceptable": [
-                "construction_quality:art-30"
-              ]
-            }
-          ],
-          "ids": [
-            "construction_quality:art-30",
-            "rail_quality:art-31",
-            "rail_quality:art-38",
-            "rail_quality:art-40",
-            "rail_quality:art-29"
-          ],
-          "units": 5,
-          "chars": 482,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 8.22,
-          "timings": {
-            "tokenize_ms": 0.09,
-            "bm25_ms": 0.33,
-            "embed_ms": 5.396,
-            "dense_ms": 0.062,
-            "fusion_ms": 0.056,
-            "total_search_ms": 7.856,
-            "supplement_ms": 0.036
-          }
-        },
-        "hybrid_top5": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 1,
-          "aspects_total": 1,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "隐蔽前通知对象",
-              "hit": true,
-              "acceptable": [
-                "construction_quality:art-30"
-              ]
-            }
-          ],
-          "ids": [
-            "construction_quality:art-30",
-            "rail_quality:art-31",
-            "rail_quality:art-38",
-            "rail_quality:art-40",
-            "rail_quality:art-29"
-          ],
-          "units": 5,
-          "chars": 482,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 8.02,
-          "timings": {
-            "tokenize_ms": 0.096,
-            "bm25_ms": 0.395,
-            "embed_ms": 5.177,
-            "dense_ms": 0.106,
-            "fusion_ms": 0.051,
-            "total_search_ms": 7.764
-          }
-        }
-      }
-    },
-    {
-      "qid": "D08",
-      "question": "施工中出现质量问题或者竣工验收不合格，施工单位应当承担什么责任？",
-      "requirements": [
-        {
-          "aspect": "返修责任",
-          "acceptable": [
-            "construction_quality:art-32"
-          ]
-        }
-      ],
-      "methods": {
-        "bm25_top7": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 1,
-          "aspects_total": 1,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "返修责任",
-              "hit": true,
-              "acceptable": [
-                "construction_quality:art-32"
-              ]
-            }
-          ],
-          "ids": [
-            "construction_quality:art-32",
-            "construction_quality:art-58",
-            "rail_quality:art-16",
-            "rail_quality:art-33",
-            "construction_quality:art-16",
-            "construction_quality:art-49",
-            "rail_quality:art-17"
-          ],
-          "units": 7,
-          "chars": 1090,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 8.89,
-          "timings": {
-            "tokenize_ms": 0.155,
-            "bm25_ms": 0.592,
-            "embed_ms": 5.822,
-            "dense_ms": 0.046,
-            "fusion_ms": 0.058,
-            "total_search_ms": 8.571
-          }
-        },
-        "dense_top7": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 1,
-          "aspects_total": 1,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "返修责任",
-              "hit": true,
-              "acceptable": [
-                "construction_quality:art-32"
-              ]
-            }
-          ],
-          "ids": [
-            "construction_quality:art-32",
-            "construction_quality:art-29",
-            "construction_quality:art-31",
-            "rail_quality:art-15",
-            "construction_quality:art-16",
-            "construction_quality:art-10",
-            "construction_quality:art-14"
-          ],
-          "units": 7,
-          "chars": 713,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 8.65,
-          "timings": {
-            "tokenize_ms": 0.119,
-            "bm25_ms": 0.554,
-            "embed_ms": 5.637,
-            "dense_ms": 0.04,
-            "fusion_ms": 0.056,
-            "total_search_ms": 8.294
-          }
-        },
-        "hybrid_top7": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 1,
-          "aspects_total": 1,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "返修责任",
-              "hit": true,
-              "acceptable": [
-                "construction_quality:art-32"
-              ]
-            }
-          ],
-          "ids": [
-            "construction_quality:art-32",
-            "construction_quality:art-16",
-            "construction_quality:art-58",
-            "rail_quality:art-15",
-            "rail_quality:art-52",
-            "construction_quality:art-37",
-            "construction_quality:art-29"
-          ],
-          "units": 7,
-          "chars": 769,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 9.06,
-          "timings": {
-            "tokenize_ms": 0.118,
-            "bm25_ms": 0.551,
-            "embed_ms": 5.725,
-            "dense_ms": 0.103,
-            "fusion_ms": 0.067,
-            "total_search_ms": 8.731
-          }
-        },
-        "hybrid_top5_supplement": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 1,
-          "aspects_total": 1,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "返修责任",
-              "hit": true,
-              "acceptable": [
-                "construction_quality:art-32"
-              ]
-            }
-          ],
-          "ids": [
-            "construction_quality:art-32",
-            "construction_quality:art-16",
-            "construction_quality:art-58",
-            "rail_quality:art-15",
-            "rail_quality:art-52"
-          ],
-          "units": 5,
-          "chars": 552,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 8.08,
-          "timings": {
-            "tokenize_ms": 0.115,
-            "bm25_ms": 0.576,
-            "embed_ms": 5.348,
-            "dense_ms": 0.04,
-            "fusion_ms": 0.058,
-            "total_search_ms": 7.741,
-            "supplement_ms": 0.02
-          }
-        },
-        "hybrid_top5": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 1,
-          "aspects_total": 1,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "返修责任",
-              "hit": true,
-              "acceptable": [
-                "construction_quality:art-32"
-              ]
-            }
-          ],
-          "ids": [
-            "construction_quality:art-32",
-            "construction_quality:art-16",
-            "construction_quality:art-58",
-            "rail_quality:art-15",
-            "rail_quality:art-52"
-          ],
-          "units": 5,
-          "chars": 552,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 8.88,
-          "timings": {
-            "tokenize_ms": 0.093,
-            "bm25_ms": 0.482,
-            "embed_ms": 6.383,
-            "dense_ms": 0.08,
-            "fusion_ms": 0.052,
-            "total_search_ms": 8.595
-          }
-        }
-      }
-    },
-    {
-      "qid": "D09",
-      "question": "施工图设计文件未经审查批准可以使用吗？审查办法由谁制定？",
-      "requirements": [
-        {
-          "aspect": "施工图审查与办法制定",
-          "acceptable": [
-            "construction_quality:art-11"
-          ]
-        }
-      ],
-      "methods": {
-        "bm25_top7": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 1,
-          "aspects_total": 1,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "施工图审查与办法制定",
-              "hit": true,
-              "acceptable": [
-                "construction_quality:art-11"
-              ]
-            }
-          ],
-          "ids": [
-            "construction_quality:art-11",
-            "construction_quality:art-56",
-            "rail_quality:art-58",
-            "construction_quality:art-23",
-            "rail_quality:art-23",
-            "rail_quality:art-29",
-            "rail_quality:art-10"
-          ],
-          "units": 7,
-          "chars": 1096,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 9.33,
-          "timings": {
-            "tokenize_ms": 0.167,
-            "bm25_ms": 0.814,
-            "embed_ms": 6.203,
-            "dense_ms": 0.042,
-            "fusion_ms": 0.064,
-            "total_search_ms": 8.826
-          }
-        },
-        "dense_top7": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 1,
-          "aspects_total": 1,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "施工图审查与办法制定",
-              "hit": true,
-              "acceptable": [
-                "construction_quality:art-11"
-              ]
-            }
-          ],
-          "ids": [
-            "construction_quality:art-11",
-            "construction_quality:art-23",
-            "construction_quality:art-28",
-            "rail_quality:art-21",
-            "rail_quality:art-23",
-            "rail_quality:art-29",
-            "rail_quality:art-11"
-          ],
-          "units": 7,
-          "chars": 639,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 9.04,
-          "timings": {
-            "tokenize_ms": 0.132,
-            "bm25_ms": 0.947,
-            "embed_ms": 5.172,
-            "dense_ms": 0.055,
-            "fusion_ms": 0.054,
-            "total_search_ms": 8.197
-          }
-        },
-        "hybrid_top7": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 1,
-          "aspects_total": 1,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "施工图审查与办法制定",
-              "hit": true,
-              "acceptable": [
-                "construction_quality:art-11"
-              ]
-            }
-          ],
-          "ids": [
-            "construction_quality:art-11",
-            "construction_quality:art-23",
-            "rail_quality:art-23",
-            "rail_quality:art-29",
-            "construction_quality:art-56",
-            "rail_quality:art-11",
-            "rail_quality:art-38"
-          ],
-          "units": 7,
-          "chars": 773,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 8.94,
-          "timings": {
-            "tokenize_ms": 0.139,
-            "bm25_ms": 0.598,
-            "embed_ms": 5.171,
-            "dense_ms": 0.036,
-            "fusion_ms": 0.049,
-            "total_search_ms": 7.978
-          }
-        },
-        "hybrid_top5_supplement": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 1,
-          "aspects_total": 1,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "施工图审查与办法制定",
-              "hit": true,
-              "acceptable": [
-                "construction_quality:art-11"
-              ]
-            }
-          ],
-          "ids": [
-            "construction_quality:art-11",
-            "construction_quality:art-23",
-            "rail_quality:art-23",
-            "rail_quality:art-29",
-            "construction_quality:art-56"
-          ],
-          "units": 5,
-          "chars": 660,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 10.11,
-          "timings": {
-            "tokenize_ms": 0.171,
-            "bm25_ms": 1.278,
-            "embed_ms": 6.051,
-            "dense_ms": 0.045,
-            "fusion_ms": 0.051,
-            "total_search_ms": 9.529,
-            "supplement_ms": 0.019
-          }
-        },
-        "hybrid_top5": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 1,
-          "aspects_total": 1,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "施工图审查与办法制定",
-              "hit": true,
-              "acceptable": [
-                "construction_quality:art-11"
-              ]
-            }
-          ],
-          "ids": [
-            "construction_quality:art-11",
-            "construction_quality:art-23",
-            "rail_quality:art-23",
-            "rail_quality:art-29",
-            "construction_quality:art-56"
-          ],
-          "units": 5,
-          "chars": 660,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 9.79,
-          "timings": {
-            "tokenize_ms": 0.157,
-            "bm25_ms": 0.674,
-            "embed_ms": 6.423,
-            "dense_ms": 0.042,
-            "fusion_ms": 0.052,
-            "total_search_ms": 9.162
-          }
-        }
-      }
-    },
-    {
-      "qid": "D10",
-      "question": "建设单位能否明示或者暗示施工单位使用不合格的建筑材料？进场材料由谁组织检查？",
-      "requirements": [
-        {
-          "aspect": "材料检查与不得暗示不合格",
-          "acceptable": [
-            "rail_quality:art-13"
-          ]
-        }
-      ],
-      "methods": {
-        "bm25_top7": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 1,
-          "aspects_total": 1,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "材料检查与不得暗示不合格",
-              "hit": true,
-              "acceptable": [
-                "rail_quality:art-13"
-              ]
-            }
-          ],
-          "ids": [
-            "rail_quality:art-13",
-            "construction_quality:art-14",
-            "construction_quality:art-56",
-            "construction_quality:art-51",
-            "construction_quality:art-71",
-            "construction_quality:art-16",
-            "rail_quality:art-58"
-          ],
-          "units": 7,
-          "chars": 1253,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 9.88,
-          "timings": {
-            "tokenize_ms": 0.221,
-            "bm25_ms": 0.747,
-            "embed_ms": 6.057,
-            "dense_ms": 0.043,
-            "fusion_ms": 0.05,
-            "total_search_ms": 9.136
-          }
-        },
-        "dense_top7": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 1,
-          "aspects_total": 1,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "材料检查与不得暗示不合格",
-              "hit": true,
-              "acceptable": [
-                "rail_quality:art-13"
-              ]
-            }
-          ],
-          "ids": [
-            "construction_quality:art-14",
-            "rail_quality:art-13",
-            "construction_quality:art-29",
-            "construction_quality:art-11",
-            "rail_quality:art-21",
-            "construction_quality:art-37",
-            "rail_quality:art-30"
-          ],
-          "units": 7,
-          "chars": 857,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 11.23,
-          "timings": {
-            "tokenize_ms": 0.165,
-            "bm25_ms": 0.735,
-            "embed_ms": 6.242,
-            "dense_ms": 0.036,
-            "fusion_ms": 0.059,
-            "total_search_ms": 9.994
-          }
-        },
-        "hybrid_top7": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 1,
-          "aspects_total": 1,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "材料检查与不得暗示不合格",
-              "hit": true,
-              "acceptable": [
-                "rail_quality:art-13"
-              ]
-            }
-          ],
-          "ids": [
-            "construction_quality:art-14",
-            "rail_quality:art-13",
-            "construction_quality:art-29",
-            "construction_quality:art-51",
-            "rail_quality:art-30",
-            "construction_quality:art-37",
-            "construction_quality:art-56"
-          ],
-          "units": 7,
-          "chars": 1028,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 10.9,
-          "timings": {
-            "tokenize_ms": 0.196,
-            "bm25_ms": 0.708,
-            "embed_ms": 6.968,
-            "dense_ms": 0.089,
-            "fusion_ms": 0.096,
-            "total_search_ms": 10.202
-          }
-        },
-        "hybrid_top5_supplement": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 1,
-          "aspects_total": 1,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "材料检查与不得暗示不合格",
-              "hit": true,
-              "acceptable": [
-                "rail_quality:art-13"
-              ]
-            }
-          ],
-          "ids": [
-            "construction_quality:art-14",
-            "rail_quality:art-13",
-            "construction_quality:art-29",
-            "construction_quality:art-51",
-            "rail_quality:art-30"
-          ],
-          "units": 5,
-          "chars": 626,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 11.05,
-          "timings": {
-            "tokenize_ms": 0.167,
-            "bm25_ms": 0.775,
-            "embed_ms": 7.202,
-            "dense_ms": 0.054,
-            "fusion_ms": 0.075,
-            "total_search_ms": 10.189,
-            "supplement_ms": 0.03
-          }
-        },
-        "hybrid_top5": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 1,
-          "aspects_total": 1,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "材料检查与不得暗示不合格",
-              "hit": true,
-              "acceptable": [
-                "rail_quality:art-13"
-              ]
-            }
-          ],
-          "ids": [
-            "construction_quality:art-14",
-            "rail_quality:art-13",
-            "construction_quality:art-29",
-            "construction_quality:art-51",
-            "rail_quality:art-30"
-          ],
-          "units": 5,
-          "chars": 626,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 10.38,
-          "timings": {
-            "tokenize_ms": 0.18,
-            "bm25_ms": 0.785,
-            "embed_ms": 6.819,
-            "dense_ms": 0.067,
-            "fusion_ms": 0.061,
-            "total_search_ms": 9.776
-          }
-        }
-      }
-    },
-    {
-      "qid": "D16",
-      "question": "试块取样送检由谁监督？检验记录由谁签字？",
-      "requirements": [
-        {
-          "aspect": "监督取样主体",
-          "acceptable": [
-            "rail_quality:art-30",
-            "construction_quality:art-31"
-          ]
-        },
-        {
-          "aspect": "记录签字依据",
-          "acceptable": [
-            "rail_quality:art-30",
-            "construction_quality:art-29"
-          ]
-        }
-      ],
-      "methods": {
-        "bm25_top7": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 2,
-          "aspects_total": 2,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "监督取样主体",
-              "hit": true,
-              "acceptable": [
-                "rail_quality:art-30",
-                "construction_quality:art-31"
-              ]
-            },
-            {
-              "aspect": "记录签字依据",
-              "hit": true,
-              "acceptable": [
-                "rail_quality:art-30",
-                "construction_quality:art-29"
-              ]
-            }
-          ],
-          "ids": [
-            "construction_quality:art-29",
-            "rail_quality:art-30",
-            "construction_quality:art-65",
-            "construction_quality:art-31",
-            "rail_quality:art-66",
-            "construction_quality:art-30",
-            "rail_quality:art-55"
-          ],
-          "units": 7,
-          "chars": 855,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 9.07,
-          "timings": {
-            "tokenize_ms": 0.246,
-            "bm25_ms": 0.563,
-            "embed_ms": 5.197,
-            "dense_ms": 0.037,
-            "fusion_ms": 0.055,
-            "total_search_ms": 7.948
-          }
-        },
-        "dense_top7": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 2,
-          "aspects_total": 2,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "监督取样主体",
-              "hit": true,
-              "acceptable": [
-                "rail_quality:art-30",
-                "construction_quality:art-31"
-              ]
-            },
-            {
-              "aspect": "记录签字依据",
-              "hit": true,
-              "acceptable": [
-                "rail_quality:art-30",
-                "construction_quality:art-29"
-              ]
-            }
-          ],
-          "ids": [
-            "construction_quality:art-31",
-            "rail_quality:art-30",
-            "rail_quality:art-36",
-            "rail_quality:art-50",
-            "rail_quality:art-39",
-            "construction_quality:art-45",
-            "construction_quality:art-53"
-          ],
-          "units": 7,
-          "chars": 744,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 8.82,
-          "timings": {
-            "tokenize_ms": 0.148,
-            "bm25_ms": 0.34,
-            "embed_ms": 5.105,
-            "dense_ms": 0.042,
-            "fusion_ms": 0.057,
-            "total_search_ms": 7.436
-          }
-        },
-        "hybrid_top7": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 2,
-          "aspects_total": 2,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "监督取样主体",
-              "hit": true,
-              "acceptable": [
-                "rail_quality:art-30",
-                "construction_quality:art-31"
-              ]
-            },
-            {
-              "aspect": "记录签字依据",
-              "hit": true,
-              "acceptable": [
-                "rail_quality:art-30",
-                "construction_quality:art-29"
-              ]
-            }
-          ],
-          "ids": [
-            "rail_quality:art-30",
-            "construction_quality:art-31",
-            "construction_quality:art-29",
-            "rail_quality:art-39",
-            "construction_quality:art-37",
-            "rail_quality:art-55",
-            "rail_quality:art-50"
-          ],
-          "units": 7,
-          "chars": 808,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 12.15,
-          "timings": {
-            "tokenize_ms": 0.201,
-            "bm25_ms": 0.619,
-            "embed_ms": 6.616,
-            "dense_ms": 0.146,
-            "fusion_ms": 0.127,
-            "total_search_ms": 10.642
-          }
-        },
-        "hybrid_top5_supplement": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 2,
-          "aspects_total": 2,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "监督取样主体",
-              "hit": true,
-              "acceptable": [
-                "rail_quality:art-30",
-                "construction_quality:art-31"
-              ]
-            },
-            {
-              "aspect": "记录签字依据",
-              "hit": true,
-              "acceptable": [
-                "rail_quality:art-30",
-                "construction_quality:art-29"
-              ]
-            }
-          ],
-          "ids": [
-            "rail_quality:art-30",
-            "construction_quality:art-31",
-            "construction_quality:art-29",
-            "rail_quality:art-39",
-            "construction_quality:art-37"
-          ],
-          "units": 5,
-          "chars": 634,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 10.62,
-          "timings": {
-            "tokenize_ms": 0.207,
-            "bm25_ms": 0.504,
-            "embed_ms": 5.734,
-            "dense_ms": 0.115,
-            "fusion_ms": 0.083,
-            "total_search_ms": 9.484,
-            "supplement_ms": 0.03
-          }
-        },
-        "hybrid_top5": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 2,
-          "aspects_total": 2,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "监督取样主体",
-              "hit": true,
-              "acceptable": [
-                "rail_quality:art-30",
-                "construction_quality:art-31"
-              ]
-            },
-            {
-              "aspect": "记录签字依据",
-              "hit": true,
-              "acceptable": [
-                "rail_quality:art-30",
-                "construction_quality:art-29"
-              ]
-            }
-          ],
-          "ids": [
-            "rail_quality:art-30",
-            "construction_quality:art-31",
-            "construction_quality:art-29",
-            "rail_quality:art-39",
-            "construction_quality:art-37"
-          ],
-          "units": 5,
-          "chars": 634,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 9.37,
-          "timings": {
-            "tokenize_ms": 0.184,
-            "bm25_ms": 0.488,
-            "embed_ms": 4.842,
-            "dense_ms": 0.104,
-            "fusion_ms": 0.059,
-            "total_search_ms": 7.975
-          }
-        }
-      }
-    },
-    {
-      "qid": "D17",
-      "question": "施工单位偷工减料、使用不合格材料怎么处罚？未对涉及结构安全的试块取样检测又怎么处罚？",
-      "requirements": [
-        {
-          "aspect": "偷工减料/不合格材料处罚",
-          "acceptable": [
-            "rail_quality:art-65"
-          ]
-        },
-        {
-          "aspect": "未取样检测处罚",
-          "acceptable": [
-            "rail_quality:art-66"
-          ]
-        }
-      ],
-      "methods": {
-        "bm25_top7": {
-          "decision": "answer",
-          "hit": true,
-          "full": false,
-          "aspects_hit": 1,
-          "aspects_total": 2,
-          "recall": 0.5,
-          "aspect_detail": [
-            {
-              "aspect": "偷工减料/不合格材料处罚",
-              "hit": false,
-              "acceptable": [
-                "rail_quality:art-65"
-              ]
-            },
-            {
-              "aspect": "未取样检测处罚",
-              "hit": true,
-              "acceptable": [
-                "rail_quality:art-66"
-              ]
-            }
-          ],
-          "ids": [
-            "construction_quality:art-31",
-            "rail_quality:art-30",
-            "construction_quality:art-65",
-            "rail_quality:art-66",
-            "rail_quality:art-22",
-            "construction_quality:art-64",
-            "rail_quality:art-73"
-          ],
-          "units": 7,
-          "chars": 1012,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 11.52,
-          "timings": {
-            "tokenize_ms": 0.334,
-            "bm25_ms": 0.745,
-            "embed_ms": 6.932,
-            "dense_ms": 0.061,
-            "fusion_ms": 0.063,
-            "total_search_ms": 10.097
-          }
-        },
-        "dense_top7": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 2,
-          "aspects_total": 2,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "偷工减料/不合格材料处罚",
-              "hit": true,
-              "acceptable": [
-                "rail_quality:art-65"
-              ]
-            },
-            {
-              "aspect": "未取样检测处罚",
-              "hit": true,
-              "acceptable": [
-                "rail_quality:art-66"
-              ]
-            }
-          ],
-          "ids": [
-            "construction_quality:art-65",
-            "construction_quality:art-64",
-            "construction_quality:art-31",
-            "rail_quality:art-65",
-            "rail_quality:art-66",
-            "construction_quality:art-61",
-            "construction_quality:art-56"
-          ],
-          "units": 7,
-          "chars": 1287,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 13.9,
-          "timings": {
-            "tokenize_ms": 0.258,
-            "bm25_ms": 1.194,
-            "embed_ms": 7.787,
-            "dense_ms": 0.138,
-            "fusion_ms": 0.092,
-            "total_search_ms": 12.156
-          }
-        },
-        "hybrid_top7": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 2,
-          "aspects_total": 2,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "偷工减料/不合格材料处罚",
-              "hit": true,
-              "acceptable": [
-                "rail_quality:art-65"
-              ]
-            },
-            {
-              "aspect": "未取样检测处罚",
-              "hit": true,
-              "acceptable": [
-                "rail_quality:art-66"
-              ]
-            }
-          ],
-          "ids": [
-            "construction_quality:art-31",
-            "construction_quality:art-65",
-            "construction_quality:art-64",
-            "rail_quality:art-66",
-            "rail_quality:art-65",
-            "rail_quality:art-30",
-            "rail_quality:art-29"
-          ],
-          "units": 7,
-          "chars": 1162,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 13.08,
-          "timings": {
-            "tokenize_ms": 0.342,
-            "bm25_ms": 0.825,
-            "embed_ms": 6.551,
-            "dense_ms": 0.075,
-            "fusion_ms": 0.082,
-            "total_search_ms": 10.936
-          }
-        },
-        "hybrid_top5_supplement": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 2,
-          "aspects_total": 2,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "偷工减料/不合格材料处罚",
-              "hit": true,
-              "acceptable": [
-                "rail_quality:art-65"
-              ]
-            },
-            {
-              "aspect": "未取样检测处罚",
-              "hit": true,
-              "acceptable": [
-                "rail_quality:art-66"
-              ]
-            }
-          ],
-          "ids": [
-            "construction_quality:art-31",
-            "construction_quality:art-65",
-            "construction_quality:art-64",
-            "rail_quality:art-66",
-            "rail_quality:art-65"
-          ],
-          "units": 5,
-          "chars": 850,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 10.75,
-          "timings": {
-            "tokenize_ms": 0.241,
-            "bm25_ms": 0.836,
-            "embed_ms": 6.28,
-            "dense_ms": 0.124,
-            "fusion_ms": 0.084,
-            "total_search_ms": 9.494,
-            "supplement_ms": 0.034
-          }
-        },
-        "hybrid_top5": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 2,
-          "aspects_total": 2,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "偷工减料/不合格材料处罚",
-              "hit": true,
-              "acceptable": [
-                "rail_quality:art-65"
-              ]
-            },
-            {
-              "aspect": "未取样检测处罚",
-              "hit": true,
-              "acceptable": [
-                "rail_quality:art-66"
-              ]
-            }
-          ],
-          "ids": [
-            "construction_quality:art-31",
-            "construction_quality:art-65",
-            "construction_quality:art-64",
-            "rail_quality:art-66",
-            "rail_quality:art-65"
-          ],
-          "units": 5,
-          "chars": 850,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 11.75,
-          "timings": {
-            "tokenize_ms": 0.223,
-            "bm25_ms": 0.971,
-            "embed_ms": 7.082,
-            "dense_ms": 0.057,
-            "fusion_ms": 0.06,
-            "total_search_ms": 10.331
-          }
-        }
-      }
-    },
-    {
-      "qid": "D18",
-      "question": "铁路规定第66条对未取样检测的罚款，依照的上位条例条款原文是什么？",
-      "requirements": [
-        {
-          "aspect": "上位条例第65条原文",
-          "acceptable": [
-            "construction_quality:art-65"
-          ]
-        }
-      ],
-      "methods": {
-        "bm25_top7": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 1,
-          "aspects_total": 1,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "上位条例第65条原文",
-              "hit": true,
-              "acceptable": [
-                "construction_quality:art-65"
-              ]
-            }
-          ],
-          "ids": [
-            "rail_quality:art-66",
-            "construction_quality:art-31",
-            "construction_quality:art-66",
-            "construction_quality:art-65",
-            "rail_quality:art-30",
-            "construction_quality:art-73",
-            "construction_quality:art-60"
-          ],
-          "units": 7,
-          "chars": 1030,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 11.14,
-          "timings": {
-            "tokenize_ms": 0.236,
-            "bm25_ms": 0.615,
-            "embed_ms": 6.348,
-            "dense_ms": 0.034,
-            "fusion_ms": 0.056,
-            "total_search_ms": 9.24
-          }
-        },
-        "dense_top7": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 1,
-          "aspects_total": 1,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "上位条例第65条原文",
-              "hit": true,
-              "acceptable": [
-                "construction_quality:art-65"
-              ]
-            }
-          ],
-          "ids": [
-            "rail_quality:art-66",
-            "rail_quality:art-60",
-            "rail_quality:art-62",
-            "rail_quality:art-59",
-            "construction_quality:art-65",
-            "rail_quality:art-69",
-            "rail_quality:art-61"
-          ],
-          "units": 7,
-          "chars": 1382,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 10.66,
-          "timings": {
-            "tokenize_ms": 0.15,
-            "bm25_ms": 0.41,
-            "embed_ms": 6.075,
-            "dense_ms": 0.115,
-            "fusion_ms": 0.07,
-            "total_search_ms": 8.992
-          }
-        },
-        "hybrid_top7": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 1,
-          "aspects_total": 1,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "上位条例第65条原文",
-              "hit": true,
-              "acceptable": [
-                "construction_quality:art-65"
-              ]
-            }
-          ],
-          "ids": [
-            "rail_quality:art-66",
-            "construction_quality:art-65",
-            "rail_quality:art-62",
-            "rail_quality:art-59",
-            "rail_quality:art-60",
-            "rail_quality:art-69",
-            "rail_quality:art-61"
-          ],
-          "units": 7,
-          "chars": 1382,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 9.51,
-          "timings": {
-            "tokenize_ms": 0.143,
-            "bm25_ms": 0.366,
-            "embed_ms": 5.492,
-            "dense_ms": 0.04,
-            "fusion_ms": 0.05,
-            "total_search_ms": 7.914
-          }
-        },
-        "hybrid_top5_supplement": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 1,
-          "aspects_total": 1,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "上位条例第65条原文",
-              "hit": true,
-              "acceptable": [
-                "construction_quality:art-65"
-              ]
-            }
-          ],
-          "ids": [
-            "rail_quality:art-66",
-            "construction_quality:art-65",
-            "rail_quality:art-62",
-            "rail_quality:art-59",
-            "rail_quality:art-60"
-          ],
-          "units": 5,
-          "chars": 1124,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 9.53,
-          "timings": {
-            "tokenize_ms": 0.142,
-            "bm25_ms": 0.371,
-            "embed_ms": 5.801,
-            "dense_ms": 0.046,
-            "fusion_ms": 0.046,
-            "total_search_ms": 7.829,
-            "supplement_ms": 0.024
-          }
-        },
-        "hybrid_top5": {
-          "decision": "answer",
-          "hit": true,
-          "full": true,
-          "aspects_hit": 1,
-          "aspects_total": 1,
-          "recall": 1.0,
-          "aspect_detail": [
-            {
-              "aspect": "上位条例第65条原文",
-              "hit": true,
-              "acceptable": [
-                "construction_quality:art-65"
-              ]
-            }
-          ],
-          "ids": [
-            "rail_quality:art-66",
-            "construction_quality:art-65",
-            "rail_quality:art-62",
-            "rail_quality:art-59",
-            "rail_quality:art-60"
-          ],
-          "units": 5,
-          "chars": 1124,
-          "supplements": 0,
-          "supplement_ids": [],
-          "wrong_supplement_ids": [],
-          "answer_ms": 10.04,
-          "timings": {
-            "tokenize_ms": 0.157,
-            "bm25_ms": 0.42,
-            "embed_ms": 5.687,
-            "dense_ms": 0.058,
-            "fusion_ms": 0.058,
-            "total_search_ms": 8.339
-          }
-        }
-      }
-    }
-  ],
-  "no_answer_rows": [
-    {
-      "qid": "D11",
-      "question": "铁路工程混凝土配合比设计的具体计算方法是什么？",
-      "expected": "refuse",
-      "methods": {
-        "bm25_top7": {
-          "decision": "refuse",
-          "evidence_ids": [],
-          "answer_ms": 9.57,
-          "diagnostics": {
-            "unknown_terms": [
-              "计算方法"
-            ],
-            "unknown_count": 1,
-            "max_sem": 0.5819,
-            "semantic_floor": 0.62,
-            "decision": "refuse"
-          }
-        },
-        "dense_top7": {
-          "decision": "refuse",
-          "evidence_ids": [],
-          "answer_ms": 12.41,
-          "diagnostics": {
-            "unknown_terms": [
-              "计算方法"
-            ],
-            "unknown_count": 1,
-            "max_sem": 0.5819,
-            "semantic_floor": 0.62,
-            "decision": "refuse"
-          }
-        },
-        "hybrid_top7": {
-          "decision": "refuse",
-          "evidence_ids": [],
-          "answer_ms": 9.27,
-          "diagnostics": {
-            "unknown_terms": [
-              "计算方法"
-            ],
-            "unknown_count": 1,
-            "max_sem": 0.5819,
-            "semantic_floor": 0.62,
-            "decision": "refuse"
-          }
-        },
-        "hybrid_top5_supplement": {
-          "decision": "refuse",
-          "evidence_ids": [],
-          "answer_ms": 9.61,
-          "diagnostics": {
-            "unknown_terms": [
-              "计算方法"
-            ],
-            "unknown_count": 1,
-            "max_sem": 0.5819,
-            "semantic_floor": 0.62,
-            "decision": "refuse"
-          }
-        },
-        "hybrid_top5": {
-          "decision": "refuse",
-          "evidence_ids": [],
-          "answer_ms": 9.61,
-          "diagnostics": {
-            "unknown_terms": [
-              "计算方法"
-            ],
-            "unknown_count": 1,
-            "max_sem": 0.5819,
-            "semantic_floor": 0.62,
-            "decision": "refuse"
-          }
-        }
-      }
-    },
-    {
-      "qid": "D12",
-      "question": "铁路建设工程施工招标评标的评分细则和分值表在哪里？",
-      "expected": "refuse",
-      "methods": {
-        "bm25_top7": {
-          "decision": "refuse",
-          "evidence_ids": [],
-          "answer_ms": 11.13,
-          "diagnostics": {
-            "unknown_terms": [
-              "分值",
-              "细则",
-              "表在",
-              "评分"
-            ],
-            "unknown_count": 4,
-            "max_sem": 0.6722,
-            "semantic_floor": 0.62,
-            "decision": "refuse"
-          }
-        },
-        "dense_top7": {
-          "decision": "refuse",
-          "evidence_ids": [],
-          "answer_ms": 10.04,
-          "diagnostics": {
-            "unknown_terms": [
-              "分值",
-              "细则",
-              "表在",
-              "评分"
-            ],
-            "unknown_count": 4,
-            "max_sem": 0.6722,
-            "semantic_floor": 0.62,
-            "decision": "refuse"
-          }
-        },
-        "hybrid_top7": {
-          "decision": "refuse",
-          "evidence_ids": [],
-          "answer_ms": 9.93,
-          "diagnostics": {
-            "unknown_terms": [
-              "分值",
-              "细则",
-              "表在",
-              "评分"
-            ],
-            "unknown_count": 4,
-            "max_sem": 0.6722,
-            "semantic_floor": 0.62,
-            "decision": "refuse"
-          }
-        },
-        "hybrid_top5_supplement": {
-          "decision": "refuse",
-          "evidence_ids": [],
-          "answer_ms": 12.38,
-          "diagnostics": {
-            "unknown_terms": [
-              "分值",
-              "细则",
-              "表在",
-              "评分"
-            ],
-            "unknown_count": 4,
-            "max_sem": 0.6722,
-            "semantic_floor": 0.62,
-            "decision": "refuse"
-          }
-        },
-        "hybrid_top5": {
-          "decision": "refuse",
-          "evidence_ids": [],
-          "answer_ms": 10.7,
-          "diagnostics": {
-            "unknown_terms": [
-              "分值",
-              "细则",
-              "表在",
-              "评分"
-            ],
-            "unknown_count": 4,
-            "max_sem": 0.6722,
-            "semantic_floor": 0.62,
-            "decision": "refuse"
-          }
-        }
-      }
-    }
-  ]
+{
+  "generated_at": "2026-11-02T22:29:02.311446+08:00",
+  "scope": "dev_end_to_end",
+  "disclaimer": "开发集13道检索题不是产品准确率，也不是独立冻结测试；gold为dev_gold_v2，待人工复核。",
+  "config": {
+    "schema_version": 2,
+    "split": "dev",
+    "frozen": false,
+    "frozen_note": "dev_gold_v2 与配置在本次运行前固定；开发集结果不是产品准确率或独立测试成绩。",
+    "corpus": {
+      "documents": [
+        "rail_quality",
+        "construction_quality"
+      ],
+      "evidence_unit": "article",
+      "long_article_policy": "整条作为一个证据单元；展示时按 unit_char_budget 截断并保留原文锚点"
+    },
+    "model": {
+      "model_id": "BAAI/bge-small-zh-v1.5",
+      "distribution": "Xenova/bge-small-zh-v1.5 ONNX via ModelScope",
+      "revision": "master branch; model.onnx sha256 pinned in MODEL_MANIFEST.json",
+      "runtime": "onnxruntime CPUExecutionProvider",
+      "max_length": 512,
+      "pooling": "CLS + L2",
+      "query_instruction": "为这个句子生成表示以用于检索相关文章："
+    },
+    "lexical": {
+      "tokenizer": "jieba 0.42.1 cut_for_search",
+      "protected_patterns": [
+        "第X条",
+        "第X章",
+        "《文件名》",
+        "数字/百分比",
+        "英文"
+      ],
+      "bm25": "rank_bm25 0.2.2 BM25Okapi default"
+    },
+    "fusion": {
+      "method": "RRF",
+      "k": 60,
+      "candidate_limit_per_route": 50,
+      "tie_break": "融合分降序，再按 article_id 升序"
+    },
+    "methods": {
+      "primary": [
+        "bm25_top7",
+        "dense_top7",
+        "hybrid_top7",
+        "hybrid_top5_supplement"
+      ],
+      "auxiliary": [
+        "hybrid_top5"
+      ],
+      "budget": {
+        "units_max": 7,
+        "unit_char_budget": 400,
+        "total_char_budget": 2800
+      }
+    },
+    "supplement": {
+      "seed_top_n": 2,
+      "candidate_pool_top_n": 10,
+      "relation_types": [
+        "explicit_article",
+        "amendment"
+      ],
+      "require_target_version_resolved": true,
+      "exclude_duplicates": true,
+      "topic_related_allowed": false,
+      "no_backfill": true
+    },
+    "answerability": {
+      "unknown_terms_rule": "unknown>=3, or unknown>=1 and max_sem<0.62",
+      "semantic_floor": 0.62,
+      "min_unknown_hard": 3
+    },
+    "shutdown_rules": {
+      "version_conflict": "default pending when requested year/version not in pinned index",
+      "citation_ambiguity": "report relation state; never hard-link topic_related"
+    },
+    "label_version": "dev_gold_v2",
+    "frozen_for_dev_v2": true,
+    "frozen_at": "2026-11-02T22:13:26.649242+08:00",
+    "rewrite_candidates": {
+      "file": "data/task_b_rewrite_candidates.jsonl",
+      "status": "same_corpus_rewrite_unlabeled",
+      "is_independent_test": false,
+      "note": "与开发题存在题目家族重叠；不得称独立冻结测试，不得宣称跨主题泛化"
+    }
+  },
+  "N": 13,
+  "summary": {
+    "bm25_top7": {
+      "n": 13,
+      "hit": 13,
+      "full": 12,
+      "aspects_hit": 15,
+      "aspects_total": 16,
+      "macro_recall": 0.9615,
+      "micro_recall": 0.9375,
+      "units_mean": 7.0,
+      "chars_mean": 969.54,
+      "answer_ms_p50": 9.72,
+      "answer_ms_p95": 12.14,
+      "answerable_refused": 0,
+      "hit_fail": 0,
+      "full_fail": 1,
+      "supplements_total": 0,
+      "wrong_supplements": 0
+    },
+    "dense_top7": {
+      "n": 13,
+      "hit": 12,
+      "full": 12,
+      "aspects_hit": 15,
+      "aspects_total": 16,
+      "macro_recall": 0.9231,
+      "micro_recall": 0.9375,
+      "units_mean": 7.0,
+      "chars_mean": 890.31,
+      "answer_ms_p50": 9.43,
+      "answer_ms_p95": 11.69,
+      "answerable_refused": 0,
+      "hit_fail": 1,
+      "full_fail": 1,
+      "supplements_total": 0,
+      "wrong_supplements": 0
+    },
+    "hybrid_top7": {
+      "n": 13,
+      "hit": 13,
+      "full": 13,
+      "aspects_hit": 16,
+      "aspects_total": 16,
+      "macro_recall": 1.0,
+      "micro_recall": 1.0,
+      "units_mean": 7.0,
+      "chars_mean": 961.38,
+      "answer_ms_p50": 9.51,
+      "answer_ms_p95": 12.15,
+      "answerable_refused": 0,
+      "hit_fail": 0,
+      "full_fail": 0,
+      "supplements_total": 0,
+      "wrong_supplements": 0
+    },
+    "hybrid_top5_supplement": {
+      "n": 13,
+      "hit": 13,
+      "full": 13,
+      "aspects_hit": 16,
+      "aspects_total": 16,
+      "macro_recall": 1.0,
+      "micro_recall": 1.0,
+      "units_mean": 5.08,
+      "chars_mean": 724.77,
+      "answer_ms_p50": 9.53,
+      "answer_ms_p95": 11.05,
+      "answerable_refused": 0,
+      "hit_fail": 0,
+      "full_fail": 0,
+      "supplements_total": 1,
+      "wrong_supplements": 0
+    },
+    "hybrid_top5": {
+      "n": 13,
+      "hit": 12,
+      "full": 12,
+      "aspects_hit": 15,
+      "aspects_total": 16,
+      "macro_recall": 0.9231,
+      "micro_recall": 0.9375,
+      "units_mean": 5.0,
+      "chars_mean": 714.23,
+      "answer_ms_p50": 9.79,
+      "answer_ms_p95": 10.68,
+      "answerable_refused": 0,
+      "hit_fail": 1,
+      "full_fail": 1,
+      "supplements_total": 0,
+      "wrong_supplements": 0
+    }
+  },
+  "comparisons": {
+    "hybrid_top7_vs_supplement": {
+      "a_only": 0,
+      "b_only": 0,
+      "both": 13,
+      "neither": 0
+    },
+    "bm25_vs_hybrid": {
+      "a_only": 0,
+      "b_only": 0,
+      "both": 13,
+      "neither": 0
+    },
+    "dense_vs_hybrid": {
+      "a_only": 0,
+      "b_only": 1,
+      "both": 12,
+      "neither": 0
+    }
+  },
+  "no_answer": {
+    "bm25_top7": {
+      "n": 2,
+      "correct_refuse": 2,
+      "wrong_evidence": 0
+    },
+    "dense_top7": {
+      "n": 2,
+      "correct_refuse": 2,
+      "wrong_evidence": 0
+    },
+    "hybrid_top7": {
+      "n": 2,
+      "correct_refuse": 2,
+      "wrong_evidence": 0
+    },
+    "hybrid_top5_supplement": {
+      "n": 2,
+      "correct_refuse": 2,
+      "wrong_evidence": 0
+    },
+    "hybrid_top5": {
+      "n": 2,
+      "correct_refuse": 2,
+      "wrong_evidence": 0
+    }
+  },
+  "module_tests": {
+    "n": 3,
+    "correct": 3,
+    "wrong": 0,
+    "rows": [
+      {
+        "qid": "D13",
+        "group": "version_conflict",
+        "question": "2015年版铁路建设工程质量监督管理规定第70条规定了什么？",
+        "state": "version_pending",
+        "expected": "version_pending",
+        "correct": true
+      },
+      {
+        "qid": "D14",
+        "group": "citation_ambiguity",
+        "question": "铁路规定第30条和条例第31条是不是直接引用关系？",
+        "pair": [
+          "rail_quality:art-30",
+          "construction_quality:art-31"
+        ],
+        "state": "topic_related",
+        "expected": "topic_related",
+        "correct": true
+      },
+      {
+        "qid": "D15",
+        "group": "citation_ambiguity",
+        "question": "铁路规定第1条是不是直接引用了条例第29条？",
+        "pair": [
+          "rail_quality:art-1",
+          "construction_quality:art-29"
+        ],
+        "state": "explicit_document",
+        "expected": "explicit_document",
+        "correct": true
+      }
+    ]
+  },
+  "failures": [
+    {
+      "qid": "D03",
+      "method": "dense_top7",
+      "failure": "all_aspects_missed",
+      "detail": [
+        "条例第65条原文"
+      ]
+    },
+    {
+      "qid": "D03",
+      "method": "hybrid_top5",
+      "failure": "all_aspects_missed",
+      "detail": [
+        "条例第65条原文"
+      ]
+    },
+    {
+      "qid": "D17",
+      "method": "bm25_top7",
+      "failure": "missing_required_aspect",
+      "detail": [
+        "偷工减料/不合格材料处罚"
+      ]
+    }
+  ],
+  "retrieval_rows": [
+    {
+      "qid": "D01",
+      "question": "铁路工地试块送检要谁在场？检测记录签字的规定在哪？",
+      "requirements": [
+        {
+          "aspect": "监督取样主体",
+          "acceptable": [
+            "rail_quality:art-30",
+            "construction_quality:art-31"
+          ]
+        },
+        {
+          "aspect": "记录签字依据",
+          "acceptable": [
+            "rail_quality:art-30",
+            "construction_quality:art-29"
+          ]
+        }
+      ],
+      "methods": {
+        "bm25_top7": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 2,
+          "aspects_total": 2,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "监督取样主体",
+              "hit": true,
+              "acceptable": [
+                "rail_quality:art-30",
+                "construction_quality:art-31"
+              ]
+            },
+            {
+              "aspect": "记录签字依据",
+              "hit": true,
+              "acceptable": [
+                "rail_quality:art-30",
+                "construction_quality:art-29"
+              ]
+            }
+          ],
+          "ids": [
+            "rail_quality:art-30",
+            "construction_quality:art-31",
+            "construction_quality:art-29",
+            "construction_quality:art-65",
+            "rail_quality:art-66",
+            "rail_quality:art-55",
+            "construction_quality:art-37"
+          ],
+          "units": 7,
+          "chars": 900,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 437.27,
+          "timings": {
+            "tokenize_ms": 0.244,
+            "bm25_ms": 0.428,
+            "embed_ms": 8.404,
+            "dense_ms": 0.093,
+            "fusion_ms": 0.051,
+            "total_search_ms": 11.358
+          }
+        },
+        "dense_top7": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 2,
+          "aspects_total": 2,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "监督取样主体",
+              "hit": true,
+              "acceptable": [
+                "rail_quality:art-30",
+                "construction_quality:art-31"
+              ]
+            },
+            {
+              "aspect": "记录签字依据",
+              "hit": true,
+              "acceptable": [
+                "rail_quality:art-30",
+                "construction_quality:art-29"
+              ]
+            }
+          ],
+          "ids": [
+            "rail_quality:art-30",
+            "rail_quality:art-36",
+            "rail_quality:art-50",
+            "rail_quality:art-39",
+            "construction_quality:art-31",
+            "rail_quality:art-40",
+            "rail_quality:art-51"
+          ],
+          "units": 7,
+          "chars": 785,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 9.43,
+          "timings": {
+            "tokenize_ms": 0.143,
+            "bm25_ms": 0.355,
+            "embed_ms": 6.072,
+            "dense_ms": 0.047,
+            "fusion_ms": 0.046,
+            "total_search_ms": 8.392
+          }
+        },
+        "hybrid_top7": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 2,
+          "aspects_total": 2,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "监督取样主体",
+              "hit": true,
+              "acceptable": [
+                "rail_quality:art-30",
+                "construction_quality:art-31"
+              ]
+            },
+            {
+              "aspect": "记录签字依据",
+              "hit": true,
+              "acceptable": [
+                "rail_quality:art-30",
+                "construction_quality:art-29"
+              ]
+            }
+          ],
+          "ids": [
+            "rail_quality:art-30",
+            "construction_quality:art-31",
+            "rail_quality:art-36",
+            "rail_quality:art-22",
+            "rail_quality:art-66",
+            "rail_quality:art-55",
+            "rail_quality:art-14"
+          ],
+          "units": 7,
+          "chars": 918,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 10.88,
+          "timings": {
+            "tokenize_ms": 0.153,
+            "bm25_ms": 0.362,
+            "embed_ms": 6.998,
+            "dense_ms": 0.101,
+            "fusion_ms": 0.065,
+            "total_search_ms": 9.702
+          }
+        },
+        "hybrid_top5_supplement": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 2,
+          "aspects_total": 2,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "监督取样主体",
+              "hit": true,
+              "acceptable": [
+                "rail_quality:art-30",
+                "construction_quality:art-31"
+              ]
+            },
+            {
+              "aspect": "记录签字依据",
+              "hit": true,
+              "acceptable": [
+                "rail_quality:art-30",
+                "construction_quality:art-29"
+              ]
+            }
+          ],
+          "ids": [
+            "rail_quality:art-30",
+            "construction_quality:art-31",
+            "rail_quality:art-36",
+            "rail_quality:art-22",
+            "rail_quality:art-66"
+          ],
+          "units": 5,
+          "chars": 721,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 8.89,
+          "timings": {
+            "tokenize_ms": 0.161,
+            "bm25_ms": 0.392,
+            "embed_ms": 5.319,
+            "dense_ms": 0.051,
+            "fusion_ms": 0.048,
+            "total_search_ms": 7.76,
+            "supplement_ms": 0.028
+          }
+        },
+        "hybrid_top5": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 2,
+          "aspects_total": 2,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "监督取样主体",
+              "hit": true,
+              "acceptable": [
+                "rail_quality:art-30",
+                "construction_quality:art-31"
+              ]
+            },
+            {
+              "aspect": "记录签字依据",
+              "hit": true,
+              "acceptable": [
+                "rail_quality:art-30",
+                "construction_quality:art-29"
+              ]
+            }
+          ],
+          "ids": [
+            "rail_quality:art-30",
+            "construction_quality:art-31",
+            "rail_quality:art-36",
+            "rail_quality:art-22",
+            "rail_quality:art-66"
+          ],
+          "units": 5,
+          "chars": 721,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 8.9,
+          "timings": {
+            "tokenize_ms": 0.159,
+            "bm25_ms": 0.36,
+            "embed_ms": 5.402,
+            "dense_ms": 0.042,
+            "fusion_ms": 0.047,
+            "total_search_ms": 7.793
+          }
+        }
+      }
+    },
+    {
+      "qid": "D02",
+      "question": "施工单位设立的工地试验室出具检测结果后，资料如何签认和保存？",
+      "requirements": [
+        {
+          "aspect": "工地试验室资料签认与保存",
+          "acceptable": [
+            "rail_quality:art-30"
+          ]
+        }
+      ],
+      "methods": {
+        "bm25_top7": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 1,
+          "aspects_total": 1,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "工地试验室资料签认与保存",
+              "hit": true,
+              "acceptable": [
+                "rail_quality:art-30"
+              ]
+            }
+          ],
+          "ids": [
+            "rail_quality:art-30",
+            "rail_quality:art-69",
+            "rail_quality:art-22",
+            "rail_quality:art-39",
+            "rail_quality:art-14",
+            "rail_quality:art-36",
+            "construction_quality:art-16"
+          ],
+          "units": 7,
+          "chars": 1025,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 9.25,
+          "timings": {
+            "tokenize_ms": 0.155,
+            "bm25_ms": 0.531,
+            "embed_ms": 5.384,
+            "dense_ms": 0.109,
+            "fusion_ms": 0.062,
+            "total_search_ms": 8.402
+          }
+        },
+        "dense_top7": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 1,
+          "aspects_total": 1,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "工地试验室资料签认与保存",
+              "hit": true,
+              "acceptable": [
+                "rail_quality:art-30"
+              ]
+            }
+          ],
+          "ids": [
+            "rail_quality:art-30",
+            "construction_quality:art-31",
+            "rail_quality:art-39",
+            "construction_quality:art-16",
+            "construction_quality:art-29",
+            "rail_quality:art-16",
+            "construction_quality:art-49"
+          ],
+          "units": 7,
+          "chars": 1056,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 10.75,
+          "timings": {
+            "tokenize_ms": 0.153,
+            "bm25_ms": 0.616,
+            "embed_ms": 6.159,
+            "dense_ms": 0.053,
+            "fusion_ms": 0.063,
+            "total_search_ms": 9.54
+          }
+        },
+        "hybrid_top7": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 1,
+          "aspects_total": 1,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "工地试验室资料签认与保存",
+              "hit": true,
+              "acceptable": [
+                "rail_quality:art-30"
+              ]
+            }
+          ],
+          "ids": [
+            "rail_quality:art-30",
+            "rail_quality:art-39",
+            "construction_quality:art-31",
+            "construction_quality:art-16",
+            "rail_quality:art-22",
+            "rail_quality:art-33",
+            "construction_quality:art-42"
+          ],
+          "units": 7,
+          "chars": 995,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 11.8,
+          "timings": {
+            "tokenize_ms": 0.188,
+            "bm25_ms": 0.881,
+            "embed_ms": 7.687,
+            "dense_ms": 0.085,
+            "fusion_ms": 0.054,
+            "total_search_ms": 10.833
+          }
+        },
+        "hybrid_top5_supplement": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 1,
+          "aspects_total": 1,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "工地试验室资料签认与保存",
+              "hit": true,
+              "acceptable": [
+                "rail_quality:art-30"
+              ]
+            }
+          ],
+          "ids": [
+            "rail_quality:art-30",
+            "rail_quality:art-39",
+            "construction_quality:art-31",
+            "construction_quality:art-16",
+            "rail_quality:art-22"
+          ],
+          "units": 5,
+          "chars": 784,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 11.5,
+          "timings": {
+            "tokenize_ms": 0.21,
+            "bm25_ms": 0.975,
+            "embed_ms": 5.212,
+            "dense_ms": 0.056,
+            "fusion_ms": 0.073,
+            "total_search_ms": 10.05,
+            "supplement_ms": 0.071
+          }
+        },
+        "hybrid_top5": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 1,
+          "aspects_total": 1,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "工地试验室资料签认与保存",
+              "hit": true,
+              "acceptable": [
+                "rail_quality:art-30"
+              ]
+            }
+          ],
+          "ids": [
+            "rail_quality:art-30",
+            "rail_quality:art-39",
+            "construction_quality:art-31",
+            "construction_quality:art-16",
+            "rail_quality:art-22"
+          ],
+          "units": 5,
+          "chars": 784,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 10.68,
+          "timings": {
+            "tokenize_ms": 0.245,
+            "bm25_ms": 1.106,
+            "embed_ms": 5.735,
+            "dense_ms": 0.11,
+            "fusion_ms": 0.084,
+            "total_search_ms": 9.692
+          }
+        }
+      }
+    },
+    {
+      "qid": "D03",
+      "question": "铁路规定第66条提到的条例第65条原文在哪？",
+      "requirements": [
+        {
+          "aspect": "条例第65条原文",
+          "acceptable": [
+            "construction_quality:art-65"
+          ]
+        }
+      ],
+      "methods": {
+        "bm25_top7": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 1,
+          "aspects_total": 1,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "条例第65条原文",
+              "hit": true,
+              "acceptable": [
+                "construction_quality:art-65"
+              ]
+            }
+          ],
+          "ids": [
+            "construction_quality:art-66",
+            "rail_quality:art-66",
+            "construction_quality:art-65",
+            "rail_quality:art-65",
+            "construction_quality:art-82",
+            "construction_quality:art-79",
+            "construction_quality:art-80"
+          ],
+          "units": 7,
+          "chars": 780,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 9.5,
+          "timings": {
+            "tokenize_ms": 0.159,
+            "bm25_ms": 0.404,
+            "embed_ms": 5.626,
+            "dense_ms": 0.163,
+            "fusion_ms": 0.078,
+            "total_search_ms": 8.855
+          }
+        },
+        "dense_top7": {
+          "decision": "answer",
+          "hit": false,
+          "full": false,
+          "aspects_hit": 0,
+          "aspects_total": 1,
+          "recall": 0.0,
+          "aspect_detail": [
+            {
+              "aspect": "条例第65条原文",
+              "hit": false,
+              "acceptable": [
+                "construction_quality:art-65"
+              ]
+            }
+          ],
+          "ids": [
+            "rail_quality:art-6",
+            "rail_quality:art-53",
+            "rail_quality:art-51",
+            "rail_quality:art-55",
+            "rail_quality:art-54",
+            "rail_quality:art-36",
+            "rail_quality:art-75"
+          ],
+          "units": 7,
+          "chars": 416,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 8.83,
+          "timings": {
+            "tokenize_ms": 0.11,
+            "bm25_ms": 0.266,
+            "embed_ms": 5.582,
+            "dense_ms": 0.042,
+            "fusion_ms": 0.077,
+            "total_search_ms": 8.244
+          }
+        },
+        "hybrid_top7": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 1,
+          "aspects_total": 1,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "条例第65条原文",
+              "hit": true,
+              "acceptable": [
+                "construction_quality:art-65"
+              ]
+            }
+          ],
+          "ids": [
+            "rail_quality:art-66",
+            "rail_quality:art-65",
+            "construction_quality:art-6",
+            "construction_quality:art-66",
+            "rail_quality:art-6",
+            "rail_quality:art-53",
+            "construction_quality:art-65"
+          ],
+          "units": 7,
+          "chars": 837,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 8.38,
+          "timings": {
+            "tokenize_ms": 0.114,
+            "bm25_ms": 0.291,
+            "embed_ms": 5.415,
+            "dense_ms": 0.036,
+            "fusion_ms": 0.059,
+            "total_search_ms": 7.813
+          }
+        },
+        "hybrid_top5_supplement": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 1,
+          "aspects_total": 1,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "条例第65条原文",
+              "hit": true,
+              "acceptable": [
+                "construction_quality:art-65"
+              ]
+            }
+          ],
+          "ids": [
+            "rail_quality:art-66",
+            "rail_quality:art-65",
+            "construction_quality:art-6",
+            "construction_quality:art-66",
+            "rail_quality:art-6",
+            "construction_quality:art-65"
+          ],
+          "units": 6,
+          "chars": 788,
+          "supplements": 1,
+          "supplement_ids": [
+            "construction_quality:art-65"
+          ],
+          "wrong_supplement_ids": [],
+          "answer_ms": 9.53,
+          "timings": {
+            "tokenize_ms": 0.107,
+            "bm25_ms": 0.234,
+            "embed_ms": 5.823,
+            "dense_ms": 0.041,
+            "fusion_ms": 0.059,
+            "total_search_ms": 8.422,
+            "supplement_ms": 0.074
+          }
+        },
+        "hybrid_top5": {
+          "decision": "answer",
+          "hit": false,
+          "full": false,
+          "aspects_hit": 0,
+          "aspects_total": 1,
+          "recall": 0.0,
+          "aspect_detail": [
+            {
+              "aspect": "条例第65条原文",
+              "hit": false,
+              "acceptable": [
+                "construction_quality:art-65"
+              ]
+            }
+          ],
+          "ids": [
+            "rail_quality:art-66",
+            "rail_quality:art-65",
+            "construction_quality:art-6",
+            "construction_quality:art-66",
+            "rail_quality:art-6"
+          ],
+          "units": 5,
+          "chars": 651,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 9.67,
+          "timings": {
+            "tokenize_ms": 0.164,
+            "bm25_ms": 0.474,
+            "embed_ms": 5.888,
+            "dense_ms": 0.041,
+            "fusion_ms": 0.057,
+            "total_search_ms": 8.717
+          }
+        }
+      }
+    },
+    {
+      "qid": "D04",
+      "question": "监理单位与施工单位串通降低工程质量，铁路规定第67条依照的上位条例怎么处罚？",
+      "requirements": [
+        {
+          "aspect": "条例第67条处罚",
+          "acceptable": [
+            "construction_quality:art-67"
+          ]
+        }
+      ],
+      "methods": {
+        "bm25_top7": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 1,
+          "aspects_total": 1,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "条例第67条处罚",
+              "hit": true,
+              "acceptable": [
+                "construction_quality:art-67"
+              ]
+            }
+          ],
+          "ids": [
+            "construction_quality:art-67",
+            "rail_quality:art-67",
+            "construction_quality:art-75",
+            "construction_quality:art-73",
+            "construction_quality:art-74",
+            "rail_quality:art-73",
+            "rail_quality:art-72"
+          ],
+          "units": 7,
+          "chars": 821,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 9.72,
+          "timings": {
+            "tokenize_ms": 0.232,
+            "bm25_ms": 0.629,
+            "embed_ms": 6.698,
+            "dense_ms": 0.062,
+            "fusion_ms": 0.066,
+            "total_search_ms": 9.383
+          }
+        },
+        "dense_top7": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 1,
+          "aspects_total": 1,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "条例第67条处罚",
+              "hit": true,
+              "acceptable": [
+                "construction_quality:art-67"
+              ]
+            }
+          ],
+          "ids": [
+            "rail_quality:art-67",
+            "rail_quality:art-68",
+            "construction_quality:art-67",
+            "rail_quality:art-63",
+            "construction_quality:art-68",
+            "rail_quality:art-73",
+            "rail_quality:art-36"
+          ],
+          "units": 7,
+          "chars": 1314,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 9.2,
+          "timings": {
+            "tokenize_ms": 0.118,
+            "bm25_ms": 0.668,
+            "embed_ms": 6.004,
+            "dense_ms": 0.039,
+            "fusion_ms": 0.067,
+            "total_search_ms": 8.621
+          }
+        },
+        "hybrid_top7": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 1,
+          "aspects_total": 1,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "条例第67条处罚",
+              "hit": true,
+              "acceptable": [
+                "construction_quality:art-67"
+              ]
+            }
+          ],
+          "ids": [
+            "rail_quality:art-67",
+            "construction_quality:art-67",
+            "rail_quality:art-73",
+            "rail_quality:art-63",
+            "rail_quality:art-68",
+            "rail_quality:art-71",
+            "construction_quality:art-61"
+          ],
+          "units": 7,
+          "chars": 1349,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 9.5,
+          "timings": {
+            "tokenize_ms": 0.198,
+            "bm25_ms": 0.906,
+            "embed_ms": 6.038,
+            "dense_ms": 0.038,
+            "fusion_ms": 0.054,
+            "total_search_ms": 9.104
+          }
+        },
+        "hybrid_top5_supplement": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 1,
+          "aspects_total": 1,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "条例第67条处罚",
+              "hit": true,
+              "acceptable": [
+                "construction_quality:art-67"
+              ]
+            }
+          ],
+          "ids": [
+            "rail_quality:art-67",
+            "construction_quality:art-67",
+            "rail_quality:art-73",
+            "rail_quality:art-63",
+            "rail_quality:art-68"
+          ],
+          "units": 5,
+          "chars": 1109,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 9.17,
+          "timings": {
+            "tokenize_ms": 0.131,
+            "bm25_ms": 0.608,
+            "embed_ms": 6.088,
+            "dense_ms": 0.065,
+            "fusion_ms": 0.055,
+            "total_search_ms": 8.815,
+            "supplement_ms": 0.023
+          }
+        },
+        "hybrid_top5": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 1,
+          "aspects_total": 1,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "条例第67条处罚",
+              "hit": true,
+              "acceptable": [
+                "construction_quality:art-67"
+              ]
+            }
+          ],
+          "ids": [
+            "rail_quality:art-67",
+            "construction_quality:art-67",
+            "rail_quality:art-73",
+            "rail_quality:art-63",
+            "rail_quality:art-68"
+          ],
+          "units": 5,
+          "chars": 1109,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 10.53,
+          "timings": {
+            "tokenize_ms": 0.131,
+            "bm25_ms": 0.624,
+            "embed_ms": 6.551,
+            "dense_ms": 0.043,
+            "fusion_ms": 0.055,
+            "total_search_ms": 9.553
+          }
+        }
+      }
+    },
+    {
+      "qid": "D05",
+      "question": "铁路建设项目开工前在哪里办理工程质量监督手续？",
+      "requirements": [
+        {
+          "aspect": "质量监督手续办理",
+          "acceptable": [
+            "rail_quality:art-12"
+          ]
+        }
+      ],
+      "methods": {
+        "bm25_top7": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 1,
+          "aspects_total": 1,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "质量监督手续办理",
+              "hit": true,
+              "acceptable": [
+                "rail_quality:art-12"
+              ]
+            }
+          ],
+          "ids": [
+            "rail_quality:art-12",
+            "construction_quality:art-13",
+            "construction_quality:art-56",
+            "rail_quality:art-8",
+            "rail_quality:art-58",
+            "construction_quality:art-17",
+            "construction_quality:art-8"
+          ],
+          "units": 7,
+          "chars": 1062,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 12.14,
+          "timings": {
+            "tokenize_ms": 0.261,
+            "bm25_ms": 0.949,
+            "embed_ms": 6.536,
+            "dense_ms": 0.051,
+            "fusion_ms": 0.065,
+            "total_search_ms": 10.66
+          }
+        },
+        "dense_top7": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 1,
+          "aspects_total": 1,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "质量监督手续办理",
+              "hit": true,
+              "acceptable": [
+                "rail_quality:art-12"
+              ]
+            }
+          ],
+          "ids": [
+            "rail_quality:art-12",
+            "rail_quality:art-8",
+            "rail_quality:art-50",
+            "construction_quality:art-13",
+            "rail_quality:art-11",
+            "rail_quality:art-40",
+            "rail_quality:art-37"
+          ],
+          "units": 7,
+          "chars": 632,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 11.69,
+          "timings": {
+            "tokenize_ms": 0.182,
+            "bm25_ms": 0.822,
+            "embed_ms": 5.811,
+            "dense_ms": 0.073,
+            "fusion_ms": 0.081,
+            "total_search_ms": 10.311
+          }
+        },
+        "hybrid_top7": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 1,
+          "aspects_total": 1,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "质量监督手续办理",
+              "hit": true,
+              "acceptable": [
+                "rail_quality:art-12"
+              ]
+            }
+          ],
+          "ids": [
+            "rail_quality:art-12",
+            "construction_quality:art-13",
+            "rail_quality:art-8",
+            "rail_quality:art-50",
+            "rail_quality:art-18",
+            "rail_quality:art-17",
+            "rail_quality:art-28"
+          ],
+          "units": 7,
+          "chars": 800,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 10.93,
+          "timings": {
+            "tokenize_ms": 0.187,
+            "bm25_ms": 1.001,
+            "embed_ms": 5.616,
+            "dense_ms": 0.054,
+            "fusion_ms": 0.065,
+            "total_search_ms": 9.605
+          }
+        },
+        "hybrid_top5_supplement": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 1,
+          "aspects_total": 1,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "质量监督手续办理",
+              "hit": true,
+              "acceptable": [
+                "rail_quality:art-12"
+              ]
+            }
+          ],
+          "ids": [
+            "rail_quality:art-12",
+            "construction_quality:art-13",
+            "rail_quality:art-8",
+            "rail_quality:art-50",
+            "rail_quality:art-18"
+          ],
+          "units": 5,
+          "chars": 480,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 9.73,
+          "timings": {
+            "tokenize_ms": 0.165,
+            "bm25_ms": 0.786,
+            "embed_ms": 5.346,
+            "dense_ms": 0.109,
+            "fusion_ms": 0.074,
+            "total_search_ms": 8.545,
+            "supplement_ms": 0.053
+          }
+        },
+        "hybrid_top5": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 1,
+          "aspects_total": 1,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "质量监督手续办理",
+              "hit": true,
+              "acceptable": [
+                "rail_quality:art-12"
+              ]
+            }
+          ],
+          "ids": [
+            "rail_quality:art-12",
+            "construction_quality:art-13",
+            "rail_quality:art-8",
+            "rail_quality:art-50",
+            "rail_quality:art-18"
+          ],
+          "units": 5,
+          "chars": 480,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 10.44,
+          "timings": {
+            "tokenize_ms": 0.167,
+            "bm25_ms": 1.094,
+            "embed_ms": 6.114,
+            "dense_ms": 0.044,
+            "fusion_ms": 0.048,
+            "total_search_ms": 9.22
+          }
+        }
+      }
+    },
+    {
+      "qid": "D06",
+      "question": "铁路工程竣工验收由谁组织，提前几天通知监管部门，验收后多久备案？",
+      "requirements": [
+        {
+          "aspect": "竣工验收组织、通知与备案",
+          "acceptable": [
+            "rail_quality:art-16"
+          ]
+        }
+      ],
+      "methods": {
+        "bm25_top7": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 1,
+          "aspects_total": 1,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "竣工验收组织、通知与备案",
+              "hit": true,
+              "acceptable": [
+                "rail_quality:art-16"
+              ]
+            }
+          ],
+          "ids": [
+            "rail_quality:art-16",
+            "rail_quality:art-52",
+            "construction_quality:art-49",
+            "rail_quality:art-5",
+            "rail_quality:art-12",
+            "construction_quality:art-58",
+            "rail_quality:art-61"
+          ],
+          "units": 7,
+          "chars": 879,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 11.9,
+          "timings": {
+            "tokenize_ms": 0.278,
+            "bm25_ms": 0.996,
+            "embed_ms": 6.842,
+            "dense_ms": 0.057,
+            "fusion_ms": 0.058,
+            "total_search_ms": 10.58
+          }
+        },
+        "dense_top7": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 1,
+          "aspects_total": 1,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "竣工验收组织、通知与备案",
+              "hit": true,
+              "acceptable": [
+                "rail_quality:art-16"
+              ]
+            }
+          ],
+          "ids": [
+            "rail_quality:art-16",
+            "rail_quality:art-61",
+            "rail_quality:art-17",
+            "construction_quality:art-49",
+            "rail_quality:art-52",
+            "rail_quality:art-39",
+            "rail_quality:art-31"
+          ],
+          "units": 7,
+          "chars": 1064,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 9.67,
+          "timings": {
+            "tokenize_ms": 0.24,
+            "bm25_ms": 0.863,
+            "embed_ms": 5.862,
+            "dense_ms": 0.061,
+            "fusion_ms": 0.069,
+            "total_search_ms": 9.059
+          }
+        },
+        "hybrid_top7": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 1,
+          "aspects_total": 1,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "竣工验收组织、通知与备案",
+              "hit": true,
+              "acceptable": [
+                "rail_quality:art-16"
+              ]
+            }
+          ],
+          "ids": [
+            "rail_quality:art-16",
+            "rail_quality:art-52",
+            "construction_quality:art-49",
+            "rail_quality:art-61",
+            "rail_quality:art-53",
+            "rail_quality:art-17",
+            "rail_quality:art-12"
+          ],
+          "units": 7,
+          "chars": 949,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 8.95,
+          "timings": {
+            "tokenize_ms": 0.151,
+            "bm25_ms": 0.645,
+            "embed_ms": 5.26,
+            "dense_ms": 0.065,
+            "fusion_ms": 0.069,
+            "total_search_ms": 8.307
+          }
+        },
+        "hybrid_top5_supplement": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 1,
+          "aspects_total": 1,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "竣工验收组织、通知与备案",
+              "hit": true,
+              "acceptable": [
+                "rail_quality:art-16"
+              ]
+            }
+          ],
+          "ids": [
+            "rail_quality:art-16",
+            "rail_quality:art-52",
+            "construction_quality:art-49",
+            "rail_quality:art-61",
+            "rail_quality:art-53"
+          ],
+          "units": 5,
+          "chars": 612,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 9.45,
+          "timings": {
+            "tokenize_ms": 0.146,
+            "bm25_ms": 0.659,
+            "embed_ms": 5.996,
+            "dense_ms": 0.044,
+            "fusion_ms": 0.06,
+            "total_search_ms": 8.628,
+            "supplement_ms": 0.056
+          }
+        },
+        "hybrid_top5": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 1,
+          "aspects_total": 1,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "竣工验收组织、通知与备案",
+              "hit": true,
+              "acceptable": [
+                "rail_quality:art-16"
+              ]
+            }
+          ],
+          "ids": [
+            "rail_quality:art-16",
+            "rail_quality:art-52",
+            "construction_quality:art-49",
+            "rail_quality:art-61",
+            "rail_quality:art-53"
+          ],
+          "units": 5,
+          "chars": 612,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 9.61,
+          "timings": {
+            "tokenize_ms": 0.2,
+            "bm25_ms": 1.043,
+            "embed_ms": 5.704,
+            "dense_ms": 0.054,
+            "fusion_ms": 0.065,
+            "total_search_ms": 8.984
+          }
+        }
+      }
+    },
+    {
+      "qid": "D07",
+      "question": "隐蔽工程在隐蔽前，施工单位应当通知哪些单位？",
+      "requirements": [
+        {
+          "aspect": "隐蔽前通知对象",
+          "acceptable": [
+            "construction_quality:art-30"
+          ]
+        }
+      ],
+      "methods": {
+        "bm25_top7": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 1,
+          "aspects_total": 1,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "隐蔽前通知对象",
+              "hit": true,
+              "acceptable": [
+                "construction_quality:art-30"
+              ]
+            }
+          ],
+          "ids": [
+            "construction_quality:art-30",
+            "rail_quality:art-31",
+            "rail_quality:art-38",
+            "rail_quality:art-40",
+            "rail_quality:art-16",
+            "construction_quality:art-25",
+            "rail_quality:art-26"
+          ],
+          "units": 7,
+          "chars": 801,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 8.33,
+          "timings": {
+            "tokenize_ms": 0.108,
+            "bm25_ms": 0.358,
+            "embed_ms": 5.648,
+            "dense_ms": 0.049,
+            "fusion_ms": 0.056,
+            "total_search_ms": 8.071
+          }
+        },
+        "dense_top7": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 1,
+          "aspects_total": 1,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "隐蔽前通知对象",
+              "hit": true,
+              "acceptable": [
+                "construction_quality:art-30"
+              ]
+            }
+          ],
+          "ids": [
+            "construction_quality:art-30",
+            "rail_quality:art-31",
+            "construction_quality:art-70",
+            "rail_quality:art-38",
+            "construction_quality:art-49",
+            "construction_quality:art-53",
+            "rail_quality:art-23"
+          ],
+          "units": 7,
+          "chars": 685,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 8.55,
+          "timings": {
+            "tokenize_ms": 0.089,
+            "bm25_ms": 0.342,
+            "embed_ms": 5.446,
+            "dense_ms": 0.041,
+            "fusion_ms": 0.054,
+            "total_search_ms": 8.231
+          }
+        },
+        "hybrid_top7": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 1,
+          "aspects_total": 1,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "隐蔽前通知对象",
+              "hit": true,
+              "acceptable": [
+                "construction_quality:art-30"
+              ]
+            }
+          ],
+          "ids": [
+            "construction_quality:art-30",
+            "rail_quality:art-31",
+            "rail_quality:art-38",
+            "rail_quality:art-40",
+            "rail_quality:art-29",
+            "construction_quality:art-28",
+            "construction_quality:art-61"
+          ],
+          "units": 7,
+          "chars": 728,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 8.13,
+          "timings": {
+            "tokenize_ms": 0.11,
+            "bm25_ms": 0.538,
+            "embed_ms": 5.333,
+            "dense_ms": 0.036,
+            "fusion_ms": 0.055,
+            "total_search_ms": 7.882
+          }
+        },
+        "hybrid_top5_supplement": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 1,
+          "aspects_total": 1,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "隐蔽前通知对象",
+              "hit": true,
+              "acceptable": [
+                "construction_quality:art-30"
+              ]
+            }
+          ],
+          "ids": [
+            "construction_quality:art-30",
+            "rail_quality:art-31",
+            "rail_quality:art-38",
+            "rail_quality:art-40",
+            "rail_quality:art-29"
+          ],
+          "units": 5,
+          "chars": 482,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 8.22,
+          "timings": {
+            "tokenize_ms": 0.09,
+            "bm25_ms": 0.33,
+            "embed_ms": 5.396,
+            "dense_ms": 0.062,
+            "fusion_ms": 0.056,
+            "total_search_ms": 7.856,
+            "supplement_ms": 0.036
+          }
+        },
+        "hybrid_top5": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 1,
+          "aspects_total": 1,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "隐蔽前通知对象",
+              "hit": true,
+              "acceptable": [
+                "construction_quality:art-30"
+              ]
+            }
+          ],
+          "ids": [
+            "construction_quality:art-30",
+            "rail_quality:art-31",
+            "rail_quality:art-38",
+            "rail_quality:art-40",
+            "rail_quality:art-29"
+          ],
+          "units": 5,
+          "chars": 482,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 8.02,
+          "timings": {
+            "tokenize_ms": 0.096,
+            "bm25_ms": 0.395,
+            "embed_ms": 5.177,
+            "dense_ms": 0.106,
+            "fusion_ms": 0.051,
+            "total_search_ms": 7.764
+          }
+        }
+      }
+    },
+    {
+      "qid": "D08",
+      "question": "施工中出现质量问题或者竣工验收不合格，施工单位应当承担什么责任？",
+      "requirements": [
+        {
+          "aspect": "返修责任",
+          "acceptable": [
+            "construction_quality:art-32"
+          ]
+        }
+      ],
+      "methods": {
+        "bm25_top7": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 1,
+          "aspects_total": 1,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "返修责任",
+              "hit": true,
+              "acceptable": [
+                "construction_quality:art-32"
+              ]
+            }
+          ],
+          "ids": [
+            "construction_quality:art-32",
+            "construction_quality:art-58",
+            "rail_quality:art-16",
+            "rail_quality:art-33",
+            "construction_quality:art-16",
+            "construction_quality:art-49",
+            "rail_quality:art-17"
+          ],
+          "units": 7,
+          "chars": 1090,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 8.89,
+          "timings": {
+            "tokenize_ms": 0.155,
+            "bm25_ms": 0.592,
+            "embed_ms": 5.822,
+            "dense_ms": 0.046,
+            "fusion_ms": 0.058,
+            "total_search_ms": 8.571
+          }
+        },
+        "dense_top7": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 1,
+          "aspects_total": 1,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "返修责任",
+              "hit": true,
+              "acceptable": [
+                "construction_quality:art-32"
+              ]
+            }
+          ],
+          "ids": [
+            "construction_quality:art-32",
+            "construction_quality:art-29",
+            "construction_quality:art-31",
+            "rail_quality:art-15",
+            "construction_quality:art-16",
+            "construction_quality:art-10",
+            "construction_quality:art-14"
+          ],
+          "units": 7,
+          "chars": 713,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 8.65,
+          "timings": {
+            "tokenize_ms": 0.119,
+            "bm25_ms": 0.554,
+            "embed_ms": 5.637,
+            "dense_ms": 0.04,
+            "fusion_ms": 0.056,
+            "total_search_ms": 8.294
+          }
+        },
+        "hybrid_top7": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 1,
+          "aspects_total": 1,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "返修责任",
+              "hit": true,
+              "acceptable": [
+                "construction_quality:art-32"
+              ]
+            }
+          ],
+          "ids": [
+            "construction_quality:art-32",
+            "construction_quality:art-16",
+            "construction_quality:art-58",
+            "rail_quality:art-15",
+            "rail_quality:art-52",
+            "construction_quality:art-37",
+            "construction_quality:art-29"
+          ],
+          "units": 7,
+          "chars": 769,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 9.06,
+          "timings": {
+            "tokenize_ms": 0.118,
+            "bm25_ms": 0.551,
+            "embed_ms": 5.725,
+            "dense_ms": 0.103,
+            "fusion_ms": 0.067,
+            "total_search_ms": 8.731
+          }
+        },
+        "hybrid_top5_supplement": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 1,
+          "aspects_total": 1,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "返修责任",
+              "hit": true,
+              "acceptable": [
+                "construction_quality:art-32"
+              ]
+            }
+          ],
+          "ids": [
+            "construction_quality:art-32",
+            "construction_quality:art-16",
+            "construction_quality:art-58",
+            "rail_quality:art-15",
+            "rail_quality:art-52"
+          ],
+          "units": 5,
+          "chars": 552,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 8.08,
+          "timings": {
+            "tokenize_ms": 0.115,
+            "bm25_ms": 0.576,
+            "embed_ms": 5.348,
+            "dense_ms": 0.04,
+            "fusion_ms": 0.058,
+            "total_search_ms": 7.741,
+            "supplement_ms": 0.02
+          }
+        },
+        "hybrid_top5": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 1,
+          "aspects_total": 1,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "返修责任",
+              "hit": true,
+              "acceptable": [
+                "construction_quality:art-32"
+              ]
+            }
+          ],
+          "ids": [
+            "construction_quality:art-32",
+            "construction_quality:art-16",
+            "construction_quality:art-58",
+            "rail_quality:art-15",
+            "rail_quality:art-52"
+          ],
+          "units": 5,
+          "chars": 552,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 8.88,
+          "timings": {
+            "tokenize_ms": 0.093,
+            "bm25_ms": 0.482,
+            "embed_ms": 6.383,
+            "dense_ms": 0.08,
+            "fusion_ms": 0.052,
+            "total_search_ms": 8.595
+          }
+        }
+      }
+    },
+    {
+      "qid": "D09",
+      "question": "施工图设计文件未经审查批准可以使用吗？审查办法由谁制定？",
+      "requirements": [
+        {
+          "aspect": "施工图审查与办法制定",
+          "acceptable": [
+            "construction_quality:art-11"
+          ]
+        }
+      ],
+      "methods": {
+        "bm25_top7": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 1,
+          "aspects_total": 1,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "施工图审查与办法制定",
+              "hit": true,
+              "acceptable": [
+                "construction_quality:art-11"
+              ]
+            }
+          ],
+          "ids": [
+            "construction_quality:art-11",
+            "construction_quality:art-56",
+            "rail_quality:art-58",
+            "construction_quality:art-23",
+            "rail_quality:art-23",
+            "rail_quality:art-29",
+            "rail_quality:art-10"
+          ],
+          "units": 7,
+          "chars": 1096,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 9.33,
+          "timings": {
+            "tokenize_ms": 0.167,
+            "bm25_ms": 0.814,
+            "embed_ms": 6.203,
+            "dense_ms": 0.042,
+            "fusion_ms": 0.064,
+            "total_search_ms": 8.826
+          }
+        },
+        "dense_top7": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 1,
+          "aspects_total": 1,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "施工图审查与办法制定",
+              "hit": true,
+              "acceptable": [
+                "construction_quality:art-11"
+              ]
+            }
+          ],
+          "ids": [
+            "construction_quality:art-11",
+            "construction_quality:art-23",
+            "construction_quality:art-28",
+            "rail_quality:art-21",
+            "rail_quality:art-23",
+            "rail_quality:art-29",
+            "rail_quality:art-11"
+          ],
+          "units": 7,
+          "chars": 639,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 9.04,
+          "timings": {
+            "tokenize_ms": 0.132,
+            "bm25_ms": 0.947,
+            "embed_ms": 5.172,
+            "dense_ms": 0.055,
+            "fusion_ms": 0.054,
+            "total_search_ms": 8.197
+          }
+        },
+        "hybrid_top7": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 1,
+          "aspects_total": 1,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "施工图审查与办法制定",
+              "hit": true,
+              "acceptable": [
+                "construction_quality:art-11"
+              ]
+            }
+          ],
+          "ids": [
+            "construction_quality:art-11",
+            "construction_quality:art-23",
+            "rail_quality:art-23",
+            "rail_quality:art-29",
+            "construction_quality:art-56",
+            "rail_quality:art-11",
+            "rail_quality:art-38"
+          ],
+          "units": 7,
+          "chars": 773,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 8.94,
+          "timings": {
+            "tokenize_ms": 0.139,
+            "bm25_ms": 0.598,
+            "embed_ms": 5.171,
+            "dense_ms": 0.036,
+            "fusion_ms": 0.049,
+            "total_search_ms": 7.978
+          }
+        },
+        "hybrid_top5_supplement": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 1,
+          "aspects_total": 1,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "施工图审查与办法制定",
+              "hit": true,
+              "acceptable": [
+                "construction_quality:art-11"
+              ]
+            }
+          ],
+          "ids": [
+            "construction_quality:art-11",
+            "construction_quality:art-23",
+            "rail_quality:art-23",
+            "rail_quality:art-29",
+            "construction_quality:art-56"
+          ],
+          "units": 5,
+          "chars": 660,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 10.11,
+          "timings": {
+            "tokenize_ms": 0.171,
+            "bm25_ms": 1.278,
+            "embed_ms": 6.051,
+            "dense_ms": 0.045,
+            "fusion_ms": 0.051,
+            "total_search_ms": 9.529,
+            "supplement_ms": 0.019
+          }
+        },
+        "hybrid_top5": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 1,
+          "aspects_total": 1,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "施工图审查与办法制定",
+              "hit": true,
+              "acceptable": [
+                "construction_quality:art-11"
+              ]
+            }
+          ],
+          "ids": [
+            "construction_quality:art-11",
+            "construction_quality:art-23",
+            "rail_quality:art-23",
+            "rail_quality:art-29",
+            "construction_quality:art-56"
+          ],
+          "units": 5,
+          "chars": 660,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 9.79,
+          "timings": {
+            "tokenize_ms": 0.157,
+            "bm25_ms": 0.674,
+            "embed_ms": 6.423,
+            "dense_ms": 0.042,
+            "fusion_ms": 0.052,
+            "total_search_ms": 9.162
+          }
+        }
+      }
+    },
+    {
+      "qid": "D10",
+      "question": "建设单位能否明示或者暗示施工单位使用不合格的建筑材料？进场材料由谁组织检查？",
+      "requirements": [
+        {
+          "aspect": "材料检查与不得暗示不合格",
+          "acceptable": [
+            "rail_quality:art-13"
+          ]
+        }
+      ],
+      "methods": {
+        "bm25_top7": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 1,
+          "aspects_total": 1,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "材料检查与不得暗示不合格",
+              "hit": true,
+              "acceptable": [
+                "rail_quality:art-13"
+              ]
+            }
+          ],
+          "ids": [
+            "rail_quality:art-13",
+            "construction_quality:art-14",
+            "construction_quality:art-56",
+            "construction_quality:art-51",
+            "construction_quality:art-71",
+            "construction_quality:art-16",
+            "rail_quality:art-58"
+          ],
+          "units": 7,
+          "chars": 1253,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 9.88,
+          "timings": {
+            "tokenize_ms": 0.221,
+            "bm25_ms": 0.747,
+            "embed_ms": 6.057,
+            "dense_ms": 0.043,
+            "fusion_ms": 0.05,
+            "total_search_ms": 9.136
+          }
+        },
+        "dense_top7": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 1,
+          "aspects_total": 1,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "材料检查与不得暗示不合格",
+              "hit": true,
+              "acceptable": [
+                "rail_quality:art-13"
+              ]
+            }
+          ],
+          "ids": [
+            "construction_quality:art-14",
+            "rail_quality:art-13",
+            "construction_quality:art-29",
+            "construction_quality:art-11",
+            "rail_quality:art-21",
+            "construction_quality:art-37",
+            "rail_quality:art-30"
+          ],
+          "units": 7,
+          "chars": 857,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 11.23,
+          "timings": {
+            "tokenize_ms": 0.165,
+            "bm25_ms": 0.735,
+            "embed_ms": 6.242,
+            "dense_ms": 0.036,
+            "fusion_ms": 0.059,
+            "total_search_ms": 9.994
+          }
+        },
+        "hybrid_top7": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 1,
+          "aspects_total": 1,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "材料检查与不得暗示不合格",
+              "hit": true,
+              "acceptable": [
+                "rail_quality:art-13"
+              ]
+            }
+          ],
+          "ids": [
+            "construction_quality:art-14",
+            "rail_quality:art-13",
+            "construction_quality:art-29",
+            "construction_quality:art-51",
+            "rail_quality:art-30",
+            "construction_quality:art-37",
+            "construction_quality:art-56"
+          ],
+          "units": 7,
+          "chars": 1028,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 10.9,
+          "timings": {
+            "tokenize_ms": 0.196,
+            "bm25_ms": 0.708,
+            "embed_ms": 6.968,
+            "dense_ms": 0.089,
+            "fusion_ms": 0.096,
+            "total_search_ms": 10.202
+          }
+        },
+        "hybrid_top5_supplement": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 1,
+          "aspects_total": 1,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "材料检查与不得暗示不合格",
+              "hit": true,
+              "acceptable": [
+                "rail_quality:art-13"
+              ]
+            }
+          ],
+          "ids": [
+            "construction_quality:art-14",
+            "rail_quality:art-13",
+            "construction_quality:art-29",
+            "construction_quality:art-51",
+            "rail_quality:art-30"
+          ],
+          "units": 5,
+          "chars": 626,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 11.05,
+          "timings": {
+            "tokenize_ms": 0.167,
+            "bm25_ms": 0.775,
+            "embed_ms": 7.202,
+            "dense_ms": 0.054,
+            "fusion_ms": 0.075,
+            "total_search_ms": 10.189,
+            "supplement_ms": 0.03
+          }
+        },
+        "hybrid_top5": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 1,
+          "aspects_total": 1,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "材料检查与不得暗示不合格",
+              "hit": true,
+              "acceptable": [
+                "rail_quality:art-13"
+              ]
+            }
+          ],
+          "ids": [
+            "construction_quality:art-14",
+            "rail_quality:art-13",
+            "construction_quality:art-29",
+            "construction_quality:art-51",
+            "rail_quality:art-30"
+          ],
+          "units": 5,
+          "chars": 626,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 10.38,
+          "timings": {
+            "tokenize_ms": 0.18,
+            "bm25_ms": 0.785,
+            "embed_ms": 6.819,
+            "dense_ms": 0.067,
+            "fusion_ms": 0.061,
+            "total_search_ms": 9.776
+          }
+        }
+      }
+    },
+    {
+      "qid": "D16",
+      "question": "试块取样送检由谁监督？检验记录由谁签字？",
+      "requirements": [
+        {
+          "aspect": "监督取样主体",
+          "acceptable": [
+            "rail_quality:art-30",
+            "construction_quality:art-31"
+          ]
+        },
+        {
+          "aspect": "记录签字依据",
+          "acceptable": [
+            "rail_quality:art-30",
+            "construction_quality:art-29"
+          ]
+        }
+      ],
+      "methods": {
+        "bm25_top7": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 2,
+          "aspects_total": 2,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "监督取样主体",
+              "hit": true,
+              "acceptable": [
+                "rail_quality:art-30",
+                "construction_quality:art-31"
+              ]
+            },
+            {
+              "aspect": "记录签字依据",
+              "hit": true,
+              "acceptable": [
+                "rail_quality:art-30",
+                "construction_quality:art-29"
+              ]
+            }
+          ],
+          "ids": [
+            "construction_quality:art-29",
+            "rail_quality:art-30",
+            "construction_quality:art-65",
+            "construction_quality:art-31",
+            "rail_quality:art-66",
+            "construction_quality:art-30",
+            "rail_quality:art-55"
+          ],
+          "units": 7,
+          "chars": 855,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 9.07,
+          "timings": {
+            "tokenize_ms": 0.246,
+            "bm25_ms": 0.563,
+            "embed_ms": 5.197,
+            "dense_ms": 0.037,
+            "fusion_ms": 0.055,
+            "total_search_ms": 7.948
+          }
+        },
+        "dense_top7": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 2,
+          "aspects_total": 2,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "监督取样主体",
+              "hit": true,
+              "acceptable": [
+                "rail_quality:art-30",
+                "construction_quality:art-31"
+              ]
+            },
+            {
+              "aspect": "记录签字依据",
+              "hit": true,
+              "acceptable": [
+                "rail_quality:art-30",
+                "construction_quality:art-29"
+              ]
+            }
+          ],
+          "ids": [
+            "construction_quality:art-31",
+            "rail_quality:art-30",
+            "rail_quality:art-36",
+            "rail_quality:art-50",
+            "rail_quality:art-39",
+            "construction_quality:art-45",
+            "construction_quality:art-53"
+          ],
+          "units": 7,
+          "chars": 744,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 8.82,
+          "timings": {
+            "tokenize_ms": 0.148,
+            "bm25_ms": 0.34,
+            "embed_ms": 5.105,
+            "dense_ms": 0.042,
+            "fusion_ms": 0.057,
+            "total_search_ms": 7.436
+          }
+        },
+        "hybrid_top7": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 2,
+          "aspects_total": 2,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "监督取样主体",
+              "hit": true,
+              "acceptable": [
+                "rail_quality:art-30",
+                "construction_quality:art-31"
+              ]
+            },
+            {
+              "aspect": "记录签字依据",
+              "hit": true,
+              "acceptable": [
+                "rail_quality:art-30",
+                "construction_quality:art-29"
+              ]
+            }
+          ],
+          "ids": [
+            "rail_quality:art-30",
+            "construction_quality:art-31",
+            "construction_quality:art-29",
+            "rail_quality:art-39",
+            "construction_quality:art-37",
+            "rail_quality:art-55",
+            "rail_quality:art-50"
+          ],
+          "units": 7,
+          "chars": 808,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 12.15,
+          "timings": {
+            "tokenize_ms": 0.201,
+            "bm25_ms": 0.619,
+            "embed_ms": 6.616,
+            "dense_ms": 0.146,
+            "fusion_ms": 0.127,
+            "total_search_ms": 10.642
+          }
+        },
+        "hybrid_top5_supplement": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 2,
+          "aspects_total": 2,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "监督取样主体",
+              "hit": true,
+              "acceptable": [
+                "rail_quality:art-30",
+                "construction_quality:art-31"
+              ]
+            },
+            {
+              "aspect": "记录签字依据",
+              "hit": true,
+              "acceptable": [
+                "rail_quality:art-30",
+                "construction_quality:art-29"
+              ]
+            }
+          ],
+          "ids": [
+            "rail_quality:art-30",
+            "construction_quality:art-31",
+            "construction_quality:art-29",
+            "rail_quality:art-39",
+            "construction_quality:art-37"
+          ],
+          "units": 5,
+          "chars": 634,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 10.62,
+          "timings": {
+            "tokenize_ms": 0.207,
+            "bm25_ms": 0.504,
+            "embed_ms": 5.734,
+            "dense_ms": 0.115,
+            "fusion_ms": 0.083,
+            "total_search_ms": 9.484,
+            "supplement_ms": 0.03
+          }
+        },
+        "hybrid_top5": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 2,
+          "aspects_total": 2,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "监督取样主体",
+              "hit": true,
+              "acceptable": [
+                "rail_quality:art-30",
+                "construction_quality:art-31"
+              ]
+            },
+            {
+              "aspect": "记录签字依据",
+              "hit": true,
+              "acceptable": [
+                "rail_quality:art-30",
+                "construction_quality:art-29"
+              ]
+            }
+          ],
+          "ids": [
+            "rail_quality:art-30",
+            "construction_quality:art-31",
+            "construction_quality:art-29",
+            "rail_quality:art-39",
+            "construction_quality:art-37"
+          ],
+          "units": 5,
+          "chars": 634,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 9.37,
+          "timings": {
+            "tokenize_ms": 0.184,
+            "bm25_ms": 0.488,
+            "embed_ms": 4.842,
+            "dense_ms": 0.104,
+            "fusion_ms": 0.059,
+            "total_search_ms": 7.975
+          }
+        }
+      }
+    },
+    {
+      "qid": "D17",
+      "question": "施工单位偷工减料、使用不合格材料怎么处罚？未对涉及结构安全的试块取样检测又怎么处罚？",
+      "requirements": [
+        {
+          "aspect": "偷工减料/不合格材料处罚",
+          "acceptable": [
+            "rail_quality:art-65"
+          ]
+        },
+        {
+          "aspect": "未取样检测处罚",
+          "acceptable": [
+            "rail_quality:art-66"
+          ]
+        }
+      ],
+      "methods": {
+        "bm25_top7": {
+          "decision": "answer",
+          "hit": true,
+          "full": false,
+          "aspects_hit": 1,
+          "aspects_total": 2,
+          "recall": 0.5,
+          "aspect_detail": [
+            {
+              "aspect": "偷工减料/不合格材料处罚",
+              "hit": false,
+              "acceptable": [
+                "rail_quality:art-65"
+              ]
+            },
+            {
+              "aspect": "未取样检测处罚",
+              "hit": true,
+              "acceptable": [
+                "rail_quality:art-66"
+              ]
+            }
+          ],
+          "ids": [
+            "construction_quality:art-31",
+            "rail_quality:art-30",
+            "construction_quality:art-65",
+            "rail_quality:art-66",
+            "rail_quality:art-22",
+            "construction_quality:art-64",
+            "rail_quality:art-73"
+          ],
+          "units": 7,
+          "chars": 1012,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 11.52,
+          "timings": {
+            "tokenize_ms": 0.334,
+            "bm25_ms": 0.745,
+            "embed_ms": 6.932,
+            "dense_ms": 0.061,
+            "fusion_ms": 0.063,
+            "total_search_ms": 10.097
+          }
+        },
+        "dense_top7": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 2,
+          "aspects_total": 2,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "偷工减料/不合格材料处罚",
+              "hit": true,
+              "acceptable": [
+                "rail_quality:art-65"
+              ]
+            },
+            {
+              "aspect": "未取样检测处罚",
+              "hit": true,
+              "acceptable": [
+                "rail_quality:art-66"
+              ]
+            }
+          ],
+          "ids": [
+            "construction_quality:art-65",
+            "construction_quality:art-64",
+            "construction_quality:art-31",
+            "rail_quality:art-65",
+            "rail_quality:art-66",
+            "construction_quality:art-61",
+            "construction_quality:art-56"
+          ],
+          "units": 7,
+          "chars": 1287,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 13.9,
+          "timings": {
+            "tokenize_ms": 0.258,
+            "bm25_ms": 1.194,
+            "embed_ms": 7.787,
+            "dense_ms": 0.138,
+            "fusion_ms": 0.092,
+            "total_search_ms": 12.156
+          }
+        },
+        "hybrid_top7": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 2,
+          "aspects_total": 2,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "偷工减料/不合格材料处罚",
+              "hit": true,
+              "acceptable": [
+                "rail_quality:art-65"
+              ]
+            },
+            {
+              "aspect": "未取样检测处罚",
+              "hit": true,
+              "acceptable": [
+                "rail_quality:art-66"
+              ]
+            }
+          ],
+          "ids": [
+            "construction_quality:art-31",
+            "construction_quality:art-65",
+            "construction_quality:art-64",
+            "rail_quality:art-66",
+            "rail_quality:art-65",
+            "rail_quality:art-30",
+            "rail_quality:art-29"
+          ],
+          "units": 7,
+          "chars": 1162,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 13.08,
+          "timings": {
+            "tokenize_ms": 0.342,
+            "bm25_ms": 0.825,
+            "embed_ms": 6.551,
+            "dense_ms": 0.075,
+            "fusion_ms": 0.082,
+            "total_search_ms": 10.936
+          }
+        },
+        "hybrid_top5_supplement": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 2,
+          "aspects_total": 2,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "偷工减料/不合格材料处罚",
+              "hit": true,
+              "acceptable": [
+                "rail_quality:art-65"
+              ]
+            },
+            {
+              "aspect": "未取样检测处罚",
+              "hit": true,
+              "acceptable": [
+                "rail_quality:art-66"
+              ]
+            }
+          ],
+          "ids": [
+            "construction_quality:art-31",
+            "construction_quality:art-65",
+            "construction_quality:art-64",
+            "rail_quality:art-66",
+            "rail_quality:art-65"
+          ],
+          "units": 5,
+          "chars": 850,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 10.75,
+          "timings": {
+            "tokenize_ms": 0.241,
+            "bm25_ms": 0.836,
+            "embed_ms": 6.28,
+            "dense_ms": 0.124,
+            "fusion_ms": 0.084,
+            "total_search_ms": 9.494,
+            "supplement_ms": 0.034
+          }
+        },
+        "hybrid_top5": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 2,
+          "aspects_total": 2,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "偷工减料/不合格材料处罚",
+              "hit": true,
+              "acceptable": [
+                "rail_quality:art-65"
+              ]
+            },
+            {
+              "aspect": "未取样检测处罚",
+              "hit": true,
+              "acceptable": [
+                "rail_quality:art-66"
+              ]
+            }
+          ],
+          "ids": [
+            "construction_quality:art-31",
+            "construction_quality:art-65",
+            "construction_quality:art-64",
+            "rail_quality:art-66",
+            "rail_quality:art-65"
+          ],
+          "units": 5,
+          "chars": 850,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 11.75,
+          "timings": {
+            "tokenize_ms": 0.223,
+            "bm25_ms": 0.971,
+            "embed_ms": 7.082,
+            "dense_ms": 0.057,
+            "fusion_ms": 0.06,
+            "total_search_ms": 10.331
+          }
+        }
+      }
+    },
+    {
+      "qid": "D18",
+      "question": "铁路规定第66条对未取样检测的罚款，依照的上位条例条款原文是什么？",
+      "requirements": [
+        {
+          "aspect": "上位条例第65条原文",
+          "acceptable": [
+            "construction_quality:art-65"
+          ]
+        }
+      ],
+      "methods": {
+        "bm25_top7": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 1,
+          "aspects_total": 1,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "上位条例第65条原文",
+              "hit": true,
+              "acceptable": [
+                "construction_quality:art-65"
+              ]
+            }
+          ],
+          "ids": [
+            "rail_quality:art-66",
+            "construction_quality:art-31",
+            "construction_quality:art-66",
+            "construction_quality:art-65",
+            "rail_quality:art-30",
+            "construction_quality:art-73",
+            "construction_quality:art-60"
+          ],
+          "units": 7,
+          "chars": 1030,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 11.14,
+          "timings": {
+            "tokenize_ms": 0.236,
+            "bm25_ms": 0.615,
+            "embed_ms": 6.348,
+            "dense_ms": 0.034,
+            "fusion_ms": 0.056,
+            "total_search_ms": 9.24
+          }
+        },
+        "dense_top7": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 1,
+          "aspects_total": 1,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "上位条例第65条原文",
+              "hit": true,
+              "acceptable": [
+                "construction_quality:art-65"
+              ]
+            }
+          ],
+          "ids": [
+            "rail_quality:art-66",
+            "rail_quality:art-60",
+            "rail_quality:art-62",
+            "rail_quality:art-59",
+            "construction_quality:art-65",
+            "rail_quality:art-69",
+            "rail_quality:art-61"
+          ],
+          "units": 7,
+          "chars": 1382,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 10.66,
+          "timings": {
+            "tokenize_ms": 0.15,
+            "bm25_ms": 0.41,
+            "embed_ms": 6.075,
+            "dense_ms": 0.115,
+            "fusion_ms": 0.07,
+            "total_search_ms": 8.992
+          }
+        },
+        "hybrid_top7": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 1,
+          "aspects_total": 1,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "上位条例第65条原文",
+              "hit": true,
+              "acceptable": [
+                "construction_quality:art-65"
+              ]
+            }
+          ],
+          "ids": [
+            "rail_quality:art-66",
+            "construction_quality:art-65",
+            "rail_quality:art-62",
+            "rail_quality:art-59",
+            "rail_quality:art-60",
+            "rail_quality:art-69",
+            "rail_quality:art-61"
+          ],
+          "units": 7,
+          "chars": 1382,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 9.51,
+          "timings": {
+            "tokenize_ms": 0.143,
+            "bm25_ms": 0.366,
+            "embed_ms": 5.492,
+            "dense_ms": 0.04,
+            "fusion_ms": 0.05,
+            "total_search_ms": 7.914
+          }
+        },
+        "hybrid_top5_supplement": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 1,
+          "aspects_total": 1,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "上位条例第65条原文",
+              "hit": true,
+              "acceptable": [
+                "construction_quality:art-65"
+              ]
+            }
+          ],
+          "ids": [
+            "rail_quality:art-66",
+            "construction_quality:art-65",
+            "rail_quality:art-62",
+            "rail_quality:art-59",
+            "rail_quality:art-60"
+          ],
+          "units": 5,
+          "chars": 1124,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 9.53,
+          "timings": {
+            "tokenize_ms": 0.142,
+            "bm25_ms": 0.371,
+            "embed_ms": 5.801,
+            "dense_ms": 0.046,
+            "fusion_ms": 0.046,
+            "total_search_ms": 7.829,
+            "supplement_ms": 0.024
+          }
+        },
+        "hybrid_top5": {
+          "decision": "answer",
+          "hit": true,
+          "full": true,
+          "aspects_hit": 1,
+          "aspects_total": 1,
+          "recall": 1.0,
+          "aspect_detail": [
+            {
+              "aspect": "上位条例第65条原文",
+              "hit": true,
+              "acceptable": [
+                "construction_quality:art-65"
+              ]
+            }
+          ],
+          "ids": [
+            "rail_quality:art-66",
+            "construction_quality:art-65",
+            "rail_quality:art-62",
+            "rail_quality:art-59",
+            "rail_quality:art-60"
+          ],
+          "units": 5,
+          "chars": 1124,
+          "supplements": 0,
+          "supplement_ids": [],
+          "wrong_supplement_ids": [],
+          "answer_ms": 10.04,
+          "timings": {
+            "tokenize_ms": 0.157,
+            "bm25_ms": 0.42,
+            "embed_ms": 5.687,
+            "dense_ms": 0.058,
+            "fusion_ms": 0.058,
+            "total_search_ms": 8.339
+          }
+        }
+      }
+    }
+  ],
+  "no_answer_rows": [
+    {
+      "qid": "D11",
+      "question": "铁路工程混凝土配合比设计的具体计算方法是什么？",
+      "expected": "refuse",
+      "methods": {
+        "bm25_top7": {
+          "decision": "refuse",
+          "evidence_ids": [],
+          "answer_ms": 9.57,
+          "diagnostics": {
+            "unknown_terms": [
+              "计算方法"
+            ],
+            "unknown_count": 1,
+            "max_sem": 0.5819,
+            "semantic_floor": 0.62,
+            "decision": "refuse"
+          }
+        },
+        "dense_top7": {
+          "decision": "refuse",
+          "evidence_ids": [],
+          "answer_ms": 12.41,
+          "diagnostics": {
+            "unknown_terms": [
+              "计算方法"
+            ],
+            "unknown_count": 1,
+            "max_sem": 0.5819,
+            "semantic_floor": 0.62,
+            "decision": "refuse"
+          }
+        },
+        "hybrid_top7": {
+          "decision": "refuse",
+          "evidence_ids": [],
+          "answer_ms": 9.27,
+          "diagnostics": {
+            "unknown_terms": [
+              "计算方法"
+            ],
+            "unknown_count": 1,
+            "max_sem": 0.5819,
+            "semantic_floor": 0.62,
+            "decision": "refuse"
+          }
+        },
+        "hybrid_top5_supplement": {
+          "decision": "refuse",
+          "evidence_ids": [],
+          "answer_ms": 9.61,
+          "diagnostics": {
+            "unknown_terms": [
+              "计算方法"
+            ],
+            "unknown_count": 1,
+            "max_sem": 0.5819,
+            "semantic_floor": 0.62,
+            "decision": "refuse"
+          }
+        },
+        "hybrid_top5": {
+          "decision": "refuse",
+          "evidence_ids": [],
+          "answer_ms": 9.61,
+          "diagnostics": {
+            "unknown_terms": [
+              "计算方法"
+            ],
+            "unknown_count": 1,
+            "max_sem": 0.5819,
+            "semantic_floor": 0.62,
+            "decision": "refuse"
+          }
+        }
+      }
+    },
+    {
+      "qid": "D12",
+      "question": "铁路建设工程施工招标评标的评分细则和分值表在哪里？",
+      "expected": "refuse",
+      "methods": {
+        "bm25_top7": {
+          "decision": "refuse",
+          "evidence_ids": [],
+          "answer_ms": 11.13,
+          "diagnostics": {
+            "unknown_terms": [
+              "分值",
+              "细则",
+              "表在",
+              "评分"
+            ],
+            "unknown_count": 4,
+            "max_sem": 0.6722,
+            "semantic_floor": 0.62,
+            "decision": "refuse"
+          }
+        },
+        "dense_top7": {
+          "decision": "refuse",
+          "evidence_ids": [],
+          "answer_ms": 10.04,
+          "diagnostics": {
+            "unknown_terms": [
+              "分值",
+              "细则",
+              "表在",
+              "评分"
+            ],
+            "unknown_count": 4,
+            "max_sem": 0.6722,
+            "semantic_floor": 0.62,
+            "decision": "refuse"
+          }
+        },
+        "hybrid_top7": {
+          "decision": "refuse",
+          "evidence_ids": [],
+          "answer_ms": 9.93,
+          "diagnostics": {
+            "unknown_terms": [
+              "分值",
+              "细则",
+              "表在",
+              "评分"
+            ],
+            "unknown_count": 4,
+            "max_sem": 0.6722,
+            "semantic_floor": 0.62,
+            "decision": "refuse"
+          }
+        },
+        "hybrid_top5_supplement": {
+          "decision": "refuse",
+          "evidence_ids": [],
+          "answer_ms": 12.38,
+          "diagnostics": {
+            "unknown_terms": [
+              "分值",
+              "细则",
+              "表在",
+              "评分"
+            ],
+            "unknown_count": 4,
+            "max_sem": 0.6722,
+            "semantic_floor": 0.62,
+            "decision": "refuse"
+          }
+        },
+        "hybrid_top5": {
+          "decision": "refuse",
+          "evidence_ids": [],
+          "answer_ms": 10.7,
+          "diagnostics": {
+            "unknown_terms": [
+              "分值",
+              "细则",
+              "表在",
+              "评分"
+            ],
+            "unknown_count": 4,
+            "max_sem": 0.6722,
+            "semantic_floor": 0.62,
+            "decision": "refuse"
+          }
+        }
+      }
+    }
+  ]
 }

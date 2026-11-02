@@ -1,7 +1,7 @@
-A blocks=157 articles=75 chars=9916 span_ok=75
-B blocks=172 articles=82 chars=8769 span_ok=82
-C blocks=6 articles=0 chars=399 span_ok=0
-manifest documents=3 articles=157
-A: first=1 last=75 continuous=True
-B: first=1 last=82 continuous=True
-C: first=None last=None continuous=True
+A blocks=157 articles=75 chars=9916 span_ok=75
+B blocks=172 articles=82 chars=8769 span_ok=82
+C blocks=6 articles=0 chars=399 span_ok=0
+manifest documents=3 articles=157
+A: first=1 last=75 continuous=True
+B: first=1 last=82 continuous=True
+C: first=None last=None continuous=True

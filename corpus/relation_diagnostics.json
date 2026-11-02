@@ -1,13 +1,13 @@
-{
-  "version_pins_source": {
-    "path": "<PROJECT_ROOT>\\config\\version_pins.json",
-    "status": "loaded",
-    "schema_version": 1
-  },
-  "pinned_versions": {
-    "rail_quality": "amended_2021_12_23",
-    "construction_quality": "revised_2019_04_23",
-    "rail_quality_amendment": "2021_order_35"
-  },
-  "diagnostics": []
+{
+  "version_pins_source": {
+    "path": "<PROJECT_ROOT>\\config\\version_pins.json",
+    "status": "loaded",
+    "schema_version": 1
+  },
+  "pinned_versions": {
+    "rail_quality": "amended_2021_12_23",
+    "construction_quality": "revised_2019_04_23",
+    "rail_quality_amendment": "2021_order_35"
+  },
+  "diagnostics": []
 }

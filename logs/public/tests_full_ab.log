@@ -1,121 +1,121 @@
-<PROJECT_ROOT>\tests\test_corpus_integrity.py:13: ResourceWarning: unclosed file <_io.TextIOWrapper name='<LOCAL_PATH>' mode='r' encoding='utf-8'>
-  cls.articles = [json.loads(line) for line in open(
-ResourceWarning: Enable tracemalloc to get the object allocation traceback
-<PROJECT_ROOT>\tests\test_corpus_integrity.py:15: ResourceWarning: unclosed file <_io.TextIOWrapper name='<LOCAL_PATH>' mode='r' encoding='utf-8'>
-  cls.manifest = json.load(open(os.path.join(CORPUS, "docs_manifest.json"), encoding="utf-8"))
-ResourceWarning: Enable tracemalloc to get the object allocation traceback
-test_article_numbers_contiguous (test_corpus_integrity.CorpusIntegrityTest.test_article_numbers_contiguous) ... ok
-test_b31_corrected_to_page_7_with_legacy_record (test_corpus_integrity.CorpusIntegrityTest.test_b31_corrected_to_page_7_with_legacy_record) ... ok
-test_span_and_hash (test_corpus_integrity.CorpusIntegrityTest.test_span_and_hash) ... ok
-test_failed_check_returns_nonzero (test_exit_codes.ExitCodeTest.test_failed_check_returns_nonzero) ... <PROJECT_ROOT>\tests\test_exit_codes.py:21: ResourceWarning: unclosed file <_io.TextIOWrapper name='<LOCAL_PATH>' mode='r' encoding='utf-8'>
-  rows = [json.loads(line) for line in open(articles_path, encoding="utf-8")]
-ResourceWarning: Enable tracemalloc to get the object allocation traceback
-<PROJECT_ROOT>\tests\test_exit_codes.py:33: ResourceWarning: unclosed file <_io.TextIOWrapper name='<LOCAL_PATH>' mode='r' encoding='utf-8'>
-  result = json.load(open(os.path.join(reports_dir, "task_a_result.json"), encoding="utf-8"))
-ResourceWarning: Enable tracemalloc to get the object allocation traceback
-ok
-test_healthy_corpus_returns_zero (test_exit_codes.ExitCodeTest.test_healthy_corpus_returns_zero) ... ok
-<PROJECT_ROOT>\tests\test_locators.py:46: ResourceWarning: unclosed file <_io.TextIOWrapper name='<LOCAL_PATH>' mode='r' encoding='utf-8'>
-  cls.index = json.load(open(os.path.join(LOCATORS, "index.json"), encoding="utf-8"))
-ResourceWarning: Enable tracemalloc to get the object allocation traceback
-<PROJECT_ROOT>\tests\test_locators.py:48: ResourceWarning: unclosed file <_io.TextIOWrapper name='<LOCAL_PATH>' mode='r' encoding='utf-8'>
-  for a in [json.loads(line) for line in open(
-ResourceWarning: Enable tracemalloc to get the object allocation traceback
-test_links_are_relative_not_machine_paths (test_locators.LocatorTest.test_links_are_relative_not_machine_paths) ... ok
-test_locator_bundle_still_resolves_after_copy (test_locators.LocatorTest.test_locator_bundle_still_resolves_after_copy) ... <PROJECT_ROOT>\tests\test_locators.py:79: ResourceWarning: unclosed file <_io.TextIOWrapper name='<LOCAL_PATH>' mode='r' encoding='utf-8'>
-  copied_index = json.load(open(os.path.join(tmp, "locators", "index.json"), encoding="utf-8"))
-ResourceWarning: Enable tracemalloc to get the object allocation traceback
-<PROJECT_ROOT>\tests\test_locators.py:90: ResourceWarning: unclosed file <_io.TextIOWrapper name='<LOCAL_PATH>' mode='r' encoding='utf-8'>
-  encoding="utf-8").read().splitlines() if line.strip())
-ResourceWarning: Enable tracemalloc to get the object allocation traceback
-ok
-test_locator_verification_passes (test_locators.LocatorTest.test_locator_verification_passes) ... <PROJECT_ROOT>\tests\test_locators.py:56: ResourceWarning: unclosed file <_io.TextIOWrapper name='<LOCAL_PATH>' mode='r' encoding='utf-8'>
-  result = json.load(open(os.path.join(REPORTS, "locator_result.json"), encoding="utf-8"))
-ResourceWarning: Enable tracemalloc to get the object allocation traceback
-ok
-test_each_run_gets_its_own_nonempty_logs (test_pipeline_logs.PipelineLogTest.test_each_run_gets_its_own_nonempty_logs) ... <PROJECT_ROOT>\tests\test_pipeline_logs.py:35: ResourceWarning: unclosed file <_io.TextIOWrapper name='<LOCAL_PATH>' mode='r' encoding='utf-8'>
-  manifest = json.load(open(os.path.join(logs_dir, "run_manifest.json"), encoding="utf-8"))
-ResourceWarning: Enable tracemalloc to get the object allocation traceback
-ok
-test_intentional_failure_makes_pipeline_fail (test_pipeline_logs.PipelineLogTest.test_intentional_failure_makes_pipeline_fail) ... <PROJECT_ROOT>\tests\test_pipeline_logs.py:53: ResourceWarning: unclosed file <_io.TextIOWrapper name='<LOCAL_PATH>' mode='r' encoding='utf-8'>
-  manifest = json.load(open(os.path.join(logs_dir, "run_manifest.json"), encoding="utf-8"))
-ResourceWarning: Enable tracemalloc to get the object allocation traceback
-<PROJECT_ROOT>\tests\test_pipeline_logs.py:58: ResourceWarning: unclosed file <_io.TextIOWrapper name='<LOCAL_PATH>' mode='r' encoding='utf-8'>
-  self.assertIn("intentional failure", open(negative_log, encoding="utf-8").read())
-ResourceWarning: Enable tracemalloc to get the object allocation traceback
-ok
-test_explicit_pin_selects_2019_regardless_of_order (test_relation_cli.RelationCliTest.test_explicit_pin_selects_2019_regardless_of_order) ... <PROJECT_ROOT>\tests\test_relation_cli.py:62: ResourceWarning: unclosed file <_io.TextIOWrapper name='<LOCAL_PATH>' mode='r' encoding='utf-8'>
-  rels = [json.loads(line) for line in open(rel_path, encoding="utf-8")] if os.path.exists(rel_path) else []
-ResourceWarning: Enable tracemalloc to get the object allocation traceback
-<PROJECT_ROOT>\tests\test_relation_cli.py:64: ResourceWarning: unclosed file <_io.TextIOWrapper name='<LOCAL_PATH>' mode='r' encoding='utf-8'>
-  diag = json.load(open(diag_path, encoding="utf-8")) if os.path.exists(diag_path) else {}
-ResourceWarning: Enable tracemalloc to get the object allocation traceback
-<PROJECT_ROOT>\tests\test_relation_cli.py:62: ResourceWarning: unclosed file <_io.TextIOWrapper name='<LOCAL_PATH>' mode='r' encoding='utf-8'>
-  rels = [json.loads(line) for line in open(rel_path, encoding="utf-8")] if os.path.exists(rel_path) else []
-ResourceWarning: Enable tracemalloc to get the object allocation traceback
-<PROJECT_ROOT>\tests\test_relation_cli.py:64: ResourceWarning: unclosed file <_io.TextIOWrapper name='<LOCAL_PATH>' mode='r' encoding='utf-8'>
-  diag = json.load(open(diag_path, encoding="utf-8")) if os.path.exists(diag_path) else {}
-ResourceWarning: Enable tracemalloc to get the object allocation traceback
-ok
-test_missing_config_with_two_versions_stops_regardless_of_order (test_relation_cli.RelationCliTest.test_missing_config_with_two_versions_stops_regardless_of_order) ... <PROJECT_ROOT>\tests\test_relation_cli.py:62: ResourceWarning: unclosed file <_io.TextIOWrapper name='<LOCAL_PATH>' mode='r' encoding='utf-8'>
-  rels = [json.loads(line) for line in open(rel_path, encoding="utf-8")] if os.path.exists(rel_path) else []
-ResourceWarning: Enable tracemalloc to get the object allocation traceback
-<PROJECT_ROOT>\tests\test_relation_cli.py:64: ResourceWarning: unclosed file <_io.TextIOWrapper name='<LOCAL_PATH>' mode='r' encoding='utf-8'>
-  diag = json.load(open(diag_path, encoding="utf-8")) if os.path.exists(diag_path) else {}
-ResourceWarning: Enable tracemalloc to get the object allocation traceback
-<PROJECT_ROOT>\tests\test_relation_cli.py:62: ResourceWarning: unclosed file <_io.TextIOWrapper name='<LOCAL_PATH>' mode='r' encoding='utf-8'>
-  rels = [json.loads(line) for line in open(rel_path, encoding="utf-8")] if os.path.exists(rel_path) else []
-ResourceWarning: Enable tracemalloc to get the object allocation traceback
-<PROJECT_ROOT>\tests\test_relation_cli.py:64: ResourceWarning: unclosed file <_io.TextIOWrapper name='<LOCAL_PATH>' mode='r' encoding='utf-8'>
-  diag = json.load(open(diag_path, encoding="utf-8")) if os.path.exists(diag_path) else {}
-ResourceWarning: Enable tracemalloc to get the object allocation traceback
-ok
-<PROJECT_ROOT>\tests\test_relations.py:12: ResourceWarning: unclosed file <_io.TextIOWrapper name='<LOCAL_PATH>' mode='r' encoding='utf-8'>
-  cls.relations = [json.loads(line) for line in open(
-ResourceWarning: Enable tracemalloc to get the object allocation traceback
-test_a1_to_b_is_document_level_only (test_relations.RelationTest.test_a1_to_b_is_document_level_only) ... ok
-test_a30_has_no_explicit_edge_to_b29_b31 (test_relations.RelationTest.test_a30_has_no_explicit_edge_to_b29_b31) ... ok
-test_a66_to_b65_is_article_level_2019 (test_relations.RelationTest.test_a66_to_b65_is_article_level_2019) ... ok
-test_no_ambiguous_target_versions (test_relations.RelationTest.test_no_ambiguous_target_versions) ... ok
-<PROJECT_ROOT>\scripts\task_b_retriever.py:80: ResourceWarning: unclosed file <_io.TextIOWrapper name='<LOCAL_PATH>' mode='r' encoding='utf-8'>
-  all_articles = [json.loads(line) for line in open(
-ResourceWarning: Enable tracemalloc to get the object allocation traceback
-<PROJECT_ROOT>\scripts\task_b_retriever.py:84: ResourceWarning: unclosed file <_io.TextIOWrapper name='<LOCAL_PATH>' mode='r' encoding='utf-8'>
-  self.relations = [json.loads(line) for line in open(
-ResourceWarning: Enable tracemalloc to get the object allocation traceback
-Building prefix dict from the default dictionary ...
-Loading model from cache <USER_HOME>\AppData\Local\Temp\jieba.cache
-Loading model cost 2.279 seconds.
-Prefix dict has been built successfully.
-<PROJECT_ROOT>\scripts\task_b_retriever.py:102: ResourceWarning: unclosed file <_io.BufferedReader name='<LOCAL_PATH>'>
-  model_hash = hashlib.sha256(open(model_path, "rb").read()).hexdigest()
-ResourceWarning: Enable tracemalloc to get the object allocation traceback
-test_answerability_refuses_out_of_scope_but_not_paraphrase (test_task_b.TaskBTest.test_answerability_refuses_out_of_scope_but_not_paraphrase) ... ok
-test_entry_only_accepts_question_and_method (test_task_b.TaskBTest.test_entry_only_accepts_question_and_method) ... <PROJECT_ROOT>\tests\test_task_b.py:28: ResourceWarning: unclosed file <_io.TextIOWrapper name='<LOCAL_PATH>' mode='r' encoding='utf-8'>
-  source = open(os.path.join(ROOT, "scripts", "task_b_system.py"), encoding="utf-8").read()
-ResourceWarning: Enable tracemalloc to get the object allocation traceback
-ok
-test_methods_share_budget (test_task_b.TaskBTest.test_methods_share_budget) ... ok
-test_model_hash_matches_manifest (test_task_b.TaskBTest.test_model_hash_matches_manifest) ... ok
-test_pure_bm25_dense_hybrid_and_supplement_differ_on_d03 (test_task_b.TaskBTest.test_pure_bm25_dense_hybrid_and_supplement_differ_on_d03) ... ok
-test_requirements_allow_alternative_sufficient_sets (test_task_b.TaskBTest.test_requirements_allow_alternative_sufficient_sets) ... ok
-test_rewrite_candidates_are_not_independent_freeze (test_task_b.TaskBTest.test_rewrite_candidates_are_not_independent_freeze) ... <PROJECT_ROOT>\tests\test_task_b.py:91: ResourceWarning: unclosed file <_io.TextIOWrapper name='<LOCAL_PATH>' mode='r' encoding='utf-8'>
-  rows = [json.loads(line) for line in open(
-ResourceWarning: Enable tracemalloc to get the object allocation traceback
-<PROJECT_ROOT>\tests\test_task_b.py:101: ResourceWarning: unclosed file <_io.TextIOWrapper name='<LOCAL_PATH>' mode='r' encoding='utf-8'>
-  config = json.load(open(os.path.join(ROOT, "config", "task_b_config.json"), encoding="utf-8"))
-ResourceWarning: Enable tracemalloc to get the object allocation traceback
-ok
-test_supplement_keeps_base5 (test_task_b.TaskBTest.test_supplement_keeps_base5) ... ok
-test_version_and_citation_are_module_tests_only (test_task_b.TaskBTest.test_version_and_citation_are_module_tests_only) ... <PROJECT_ROOT>\tests\test_task_b.py:87: ResourceWarning: unclosed file <_io.TextIOWrapper name='<LOCAL_PATH>' mode='r' encoding='utf-8'>
-  source = open(os.path.join(ROOT, "scripts", "task_b_system.py"), encoding="utf-8").read()
-ResourceWarning: Enable tracemalloc to get the object allocation traceback
-ok
-test_pinned_missing_version_pends_not_guesses (test_version_selection.VersionSelectionTest.test_pinned_missing_version_pends_not_guesses) ... ok
-test_pinned_version_selects_2019_only (test_version_selection.VersionSelectionTest.test_pinned_version_selects_2019_only) ... ok
-test_unpinned_multi_version_is_ambiguous_and_blocks_edge (test_version_selection.VersionSelectionTest.test_unpinned_multi_version_is_ambiguous_and_blocks_edge) ... ok
-
-----------------------------------------------------------------------
-Ran 28 tests in 40.986s
-
-OK
+<PROJECT_ROOT>\tests\test_corpus_integrity.py:13: ResourceWarning: unclosed file <_io.TextIOWrapper name='<PROJECT_ROOT>\\corpus\\articles.jsonl' mode='r' encoding='utf-8'>
+  cls.articles = [json.loads(line) for line in open(
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+<PROJECT_ROOT>\tests\test_corpus_integrity.py:15: ResourceWarning: unclosed file <_io.TextIOWrapper name='<PROJECT_ROOT>\\corpus\\docs_manifest.json' mode='r' encoding='utf-8'>
+  cls.manifest = json.load(open(os.path.join(CORPUS, "docs_manifest.json"), encoding="utf-8"))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+test_article_numbers_contiguous (test_corpus_integrity.CorpusIntegrityTest.test_article_numbers_contiguous) ... ok
+test_b31_corrected_to_page_7_with_legacy_record (test_corpus_integrity.CorpusIntegrityTest.test_b31_corrected_to_page_7_with_legacy_record) ... ok
+test_span_and_hash (test_corpus_integrity.CorpusIntegrityTest.test_span_and_hash) ... ok
+test_failed_check_returns_nonzero (test_exit_codes.ExitCodeTest.test_failed_check_returns_nonzero) ... <PROJECT_ROOT>\tests\test_exit_codes.py:21: ResourceWarning: unclosed file <_io.TextIOWrapper name='<LOCAL_PATH>' mode='r' encoding='utf-8'>
+  rows = [json.loads(line) for line in open(articles_path, encoding="utf-8")]
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+<PROJECT_ROOT>\tests\test_exit_codes.py:33: ResourceWarning: unclosed file <_io.TextIOWrapper name='<LOCAL_PATH>' mode='r' encoding='utf-8'>
+  result = json.load(open(os.path.join(reports_dir, "task_a_result.json"), encoding="utf-8"))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_healthy_corpus_returns_zero (test_exit_codes.ExitCodeTest.test_healthy_corpus_returns_zero) ... ok
+<PROJECT_ROOT>\tests\test_locators.py:46: ResourceWarning: unclosed file <_io.TextIOWrapper name='<PROJECT_ROOT>\\locators\\index.json' mode='r' encoding='utf-8'>
+  cls.index = json.load(open(os.path.join(LOCATORS, "index.json"), encoding="utf-8"))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+<PROJECT_ROOT>\tests\test_locators.py:48: ResourceWarning: unclosed file <_io.TextIOWrapper name='<PROJECT_ROOT>\\corpus\\articles.jsonl' mode='r' encoding='utf-8'>
+  for a in [json.loads(line) for line in open(
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+test_links_are_relative_not_machine_paths (test_locators.LocatorTest.test_links_are_relative_not_machine_paths) ... ok
+test_locator_bundle_still_resolves_after_copy (test_locators.LocatorTest.test_locator_bundle_still_resolves_after_copy) ... <PROJECT_ROOT>\tests\test_locators.py:79: ResourceWarning: unclosed file <_io.TextIOWrapper name='<LOCAL_PATH>' mode='r' encoding='utf-8'>
+  copied_index = json.load(open(os.path.join(tmp, "locators", "index.json"), encoding="utf-8"))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+<PROJECT_ROOT>\tests\test_locators.py:90: ResourceWarning: unclosed file <_io.TextIOWrapper name='<LOCAL_PATH>' mode='r' encoding='utf-8'>
+  encoding="utf-8").read().splitlines() if line.strip())
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_locator_verification_passes (test_locators.LocatorTest.test_locator_verification_passes) ... <PROJECT_ROOT>\tests\test_locators.py:56: ResourceWarning: unclosed file <_io.TextIOWrapper name='<PROJECT_ROOT>\\reports\\locator_result.json' mode='r' encoding='utf-8'>
+  result = json.load(open(os.path.join(REPORTS, "locator_result.json"), encoding="utf-8"))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_each_run_gets_its_own_nonempty_logs (test_pipeline_logs.PipelineLogTest.test_each_run_gets_its_own_nonempty_logs) ... <PROJECT_ROOT>\tests\test_pipeline_logs.py:35: ResourceWarning: unclosed file <_io.TextIOWrapper name='<LOCAL_PATH>' mode='r' encoding='utf-8'>
+  manifest = json.load(open(os.path.join(logs_dir, "run_manifest.json"), encoding="utf-8"))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_intentional_failure_makes_pipeline_fail (test_pipeline_logs.PipelineLogTest.test_intentional_failure_makes_pipeline_fail) ... <PROJECT_ROOT>\tests\test_pipeline_logs.py:53: ResourceWarning: unclosed file <_io.TextIOWrapper name='<LOCAL_PATH>' mode='r' encoding='utf-8'>
+  manifest = json.load(open(os.path.join(logs_dir, "run_manifest.json"), encoding="utf-8"))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+<PROJECT_ROOT>\tests\test_pipeline_logs.py:58: ResourceWarning: unclosed file <_io.TextIOWrapper name='<LOCAL_PATH>' mode='r' encoding='utf-8'>
+  self.assertIn("intentional failure", open(negative_log, encoding="utf-8").read())
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_explicit_pin_selects_2019_regardless_of_order (test_relation_cli.RelationCliTest.test_explicit_pin_selects_2019_regardless_of_order) ... <PROJECT_ROOT>\tests\test_relation_cli.py:62: ResourceWarning: unclosed file <_io.TextIOWrapper name='<LOCAL_PATH>' mode='r' encoding='utf-8'>
+  rels = [json.loads(line) for line in open(rel_path, encoding="utf-8")] if os.path.exists(rel_path) else []
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+<PROJECT_ROOT>\tests\test_relation_cli.py:64: ResourceWarning: unclosed file <_io.TextIOWrapper name='<LOCAL_PATH>' mode='r' encoding='utf-8'>
+  diag = json.load(open(diag_path, encoding="utf-8")) if os.path.exists(diag_path) else {}
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+<PROJECT_ROOT>\tests\test_relation_cli.py:62: ResourceWarning: unclosed file <_io.TextIOWrapper name='<LOCAL_PATH>' mode='r' encoding='utf-8'>
+  rels = [json.loads(line) for line in open(rel_path, encoding="utf-8")] if os.path.exists(rel_path) else []
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+<PROJECT_ROOT>\tests\test_relation_cli.py:64: ResourceWarning: unclosed file <_io.TextIOWrapper name='<LOCAL_PATH>' mode='r' encoding='utf-8'>
+  diag = json.load(open(diag_path, encoding="utf-8")) if os.path.exists(diag_path) else {}
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_missing_config_with_two_versions_stops_regardless_of_order (test_relation_cli.RelationCliTest.test_missing_config_with_two_versions_stops_regardless_of_order) ... <PROJECT_ROOT>\tests\test_relation_cli.py:62: ResourceWarning: unclosed file <_io.TextIOWrapper name='<LOCAL_PATH>' mode='r' encoding='utf-8'>
+  rels = [json.loads(line) for line in open(rel_path, encoding="utf-8")] if os.path.exists(rel_path) else []
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+<PROJECT_ROOT>\tests\test_relation_cli.py:64: ResourceWarning: unclosed file <_io.TextIOWrapper name='<LOCAL_PATH>' mode='r' encoding='utf-8'>
+  diag = json.load(open(diag_path, encoding="utf-8")) if os.path.exists(diag_path) else {}
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+<PROJECT_ROOT>\tests\test_relation_cli.py:62: ResourceWarning: unclosed file <_io.TextIOWrapper name='<LOCAL_PATH>' mode='r' encoding='utf-8'>
+  rels = [json.loads(line) for line in open(rel_path, encoding="utf-8")] if os.path.exists(rel_path) else []
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+<PROJECT_ROOT>\tests\test_relation_cli.py:64: ResourceWarning: unclosed file <_io.TextIOWrapper name='<LOCAL_PATH>' mode='r' encoding='utf-8'>
+  diag = json.load(open(diag_path, encoding="utf-8")) if os.path.exists(diag_path) else {}
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+<PROJECT_ROOT>\tests\test_relations.py:12: ResourceWarning: unclosed file <_io.TextIOWrapper name='<PROJECT_ROOT>\\corpus\\relations.jsonl' mode='r' encoding='utf-8'>
+  cls.relations = [json.loads(line) for line in open(
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+test_a1_to_b_is_document_level_only (test_relations.RelationTest.test_a1_to_b_is_document_level_only) ... ok
+test_a30_has_no_explicit_edge_to_b29_b31 (test_relations.RelationTest.test_a30_has_no_explicit_edge_to_b29_b31) ... ok
+test_a66_to_b65_is_article_level_2019 (test_relations.RelationTest.test_a66_to_b65_is_article_level_2019) ... ok
+test_no_ambiguous_target_versions (test_relations.RelationTest.test_no_ambiguous_target_versions) ... ok
+<PROJECT_ROOT>\scripts\task_b_retriever.py:80: ResourceWarning: unclosed file <_io.TextIOWrapper name='<PROJECT_ROOT>\\corpus\\articles.jsonl' mode='r' encoding='utf-8'>
+  all_articles = [json.loads(line) for line in open(
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+<PROJECT_ROOT>\scripts\task_b_retriever.py:84: ResourceWarning: unclosed file <_io.TextIOWrapper name='<PROJECT_ROOT>\\corpus\\relations.jsonl' mode='r' encoding='utf-8'>
+  self.relations = [json.loads(line) for line in open(
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+Building prefix dict from the default dictionary ...
+Loading model from cache <LOCAL_PATH>
+Loading model cost 2.279 seconds.
+Prefix dict has been built successfully.
+<PROJECT_ROOT>\scripts\task_b_retriever.py:102: ResourceWarning: unclosed file <_io.BufferedReader name='<PROJECT_ROOT>\\work\\models\\bge-small-zh-v1.5\\onnx\\model.onnx'>
+  model_hash = hashlib.sha256(open(model_path, "rb").read()).hexdigest()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+test_answerability_refuses_out_of_scope_but_not_paraphrase (test_task_b.TaskBTest.test_answerability_refuses_out_of_scope_but_not_paraphrase) ... ok
+test_entry_only_accepts_question_and_method (test_task_b.TaskBTest.test_entry_only_accepts_question_and_method) ... <PROJECT_ROOT>\tests\test_task_b.py:28: ResourceWarning: unclosed file <_io.TextIOWrapper name='<PROJECT_ROOT>\\scripts\\task_b_system.py' mode='r' encoding='utf-8'>
+  source = open(os.path.join(ROOT, "scripts", "task_b_system.py"), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_methods_share_budget (test_task_b.TaskBTest.test_methods_share_budget) ... ok
+test_model_hash_matches_manifest (test_task_b.TaskBTest.test_model_hash_matches_manifest) ... ok
+test_pure_bm25_dense_hybrid_and_supplement_differ_on_d03 (test_task_b.TaskBTest.test_pure_bm25_dense_hybrid_and_supplement_differ_on_d03) ... ok
+test_requirements_allow_alternative_sufficient_sets (test_task_b.TaskBTest.test_requirements_allow_alternative_sufficient_sets) ... ok
+test_rewrite_candidates_are_not_independent_freeze (test_task_b.TaskBTest.test_rewrite_candidates_are_not_independent_freeze) ... <PROJECT_ROOT>\tests\test_task_b.py:91: ResourceWarning: unclosed file <_io.TextIOWrapper name='<PROJECT_ROOT>\\data\\task_b_rewrite_candidates.jsonl' mode='r' encoding='utf-8'>
+  rows = [json.loads(line) for line in open(
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+<PROJECT_ROOT>\tests\test_task_b.py:101: ResourceWarning: unclosed file <_io.TextIOWrapper name='<PROJECT_ROOT>\\config\\task_b_config.json' mode='r' encoding='utf-8'>
+  config = json.load(open(os.path.join(ROOT, "config", "task_b_config.json"), encoding="utf-8"))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_supplement_keeps_base5 (test_task_b.TaskBTest.test_supplement_keeps_base5) ... ok
+test_version_and_citation_are_module_tests_only (test_task_b.TaskBTest.test_version_and_citation_are_module_tests_only) ... <PROJECT_ROOT>\tests\test_task_b.py:87: ResourceWarning: unclosed file <_io.TextIOWrapper name='<PROJECT_ROOT>\\scripts\\task_b_system.py' mode='r' encoding='utf-8'>
+  source = open(os.path.join(ROOT, "scripts", "task_b_system.py"), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_pinned_missing_version_pends_not_guesses (test_version_selection.VersionSelectionTest.test_pinned_missing_version_pends_not_guesses) ... ok
+test_pinned_version_selects_2019_only (test_version_selection.VersionSelectionTest.test_pinned_version_selects_2019_only) ... ok
+test_unpinned_multi_version_is_ambiguous_and_blocks_edge (test_version_selection.VersionSelectionTest.test_unpinned_multi_version_is_ambiguous_and_blocks_edge) ... ok
+
+----------------------------------------------------------------------
+Ran 28 tests in 40.986s
+
+OK

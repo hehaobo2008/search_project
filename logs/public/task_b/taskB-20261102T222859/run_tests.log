@@ -1,21 +1,21 @@
-test_answerability_refuses_out_of_scope_but_not_paraphrase (tests.test_task_b.TaskBTest.test_answerability_refuses_out_of_scope_but_not_paraphrase) ... ok
-test_entry_only_accepts_question_and_method (tests.test_task_b.TaskBTest.test_entry_only_accepts_question_and_method) ... ok
-test_methods_share_budget (tests.test_task_b.TaskBTest.test_methods_share_budget) ... ok
-test_model_hash_matches_manifest (tests.test_task_b.TaskBTest.test_model_hash_matches_manifest) ... ok
-test_pure_bm25_dense_hybrid_and_supplement_differ_on_d03 (tests.test_task_b.TaskBTest.test_pure_bm25_dense_hybrid_and_supplement_differ_on_d03) ... ok
-test_requirements_allow_alternative_sufficient_sets (tests.test_task_b.TaskBTest.test_requirements_allow_alternative_sufficient_sets) ... ok
-test_rewrite_candidates_are_not_independent_freeze (tests.test_task_b.TaskBTest.test_rewrite_candidates_are_not_independent_freeze) ... ok
-test_supplement_keeps_base5 (tests.test_task_b.TaskBTest.test_supplement_keeps_base5) ... ok
-test_version_and_citation_are_module_tests_only (tests.test_task_b.TaskBTest.test_version_and_citation_are_module_tests_only) ... ok
-
-----------------------------------------------------------------------
-Ran 9 tests in 1.687s
-
-OK
-task_b_tests total=9 passed=9 failures=0 errors=0 success=True
-
-[stderr]
-Building prefix dict from the default dictionary ...
-Loading model from cache <USER_HOME>\AppData\Local\Temp\jieba.cache
-Loading model cost 0.485 seconds.
-Prefix dict has been built successfully.
+test_answerability_refuses_out_of_scope_but_not_paraphrase (tests.test_task_b.TaskBTest.test_answerability_refuses_out_of_scope_but_not_paraphrase) ... ok
+test_entry_only_accepts_question_and_method (tests.test_task_b.TaskBTest.test_entry_only_accepts_question_and_method) ... ok
+test_methods_share_budget (tests.test_task_b.TaskBTest.test_methods_share_budget) ... ok
+test_model_hash_matches_manifest (tests.test_task_b.TaskBTest.test_model_hash_matches_manifest) ... ok
+test_pure_bm25_dense_hybrid_and_supplement_differ_on_d03 (tests.test_task_b.TaskBTest.test_pure_bm25_dense_hybrid_and_supplement_differ_on_d03) ... ok
+test_requirements_allow_alternative_sufficient_sets (tests.test_task_b.TaskBTest.test_requirements_allow_alternative_sufficient_sets) ... ok
+test_rewrite_candidates_are_not_independent_freeze (tests.test_task_b.TaskBTest.test_rewrite_candidates_are_not_independent_freeze) ... ok
+test_supplement_keeps_base5 (tests.test_task_b.TaskBTest.test_supplement_keeps_base5) ... ok
+test_version_and_citation_are_module_tests_only (tests.test_task_b.TaskBTest.test_version_and_citation_are_module_tests_only) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 1.687s
+
+OK
+task_b_tests total=9 passed=9 failures=0 errors=0 success=True
+
+[stderr]
+Building prefix dict from the default dictionary ...
+Loading model from cache <LOCAL_PATH>
+Loading model cost 0.485 seconds.
+Prefix dict has been built successfully.

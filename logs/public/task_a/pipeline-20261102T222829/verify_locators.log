@@ -1,8 +1,8 @@
-rail_quality:art-2           PASS | id_count=1 parts=1 text_match=True
-rail_quality:art-30          PASS | id_count=1 parts=2 text_match=True
-rail_quality:art-66          PASS | id_count=1 parts=3 text_match=True
-construction_quality:art-29  PASS | id_count=1 parts=1 text_match=True
-construction_quality:art-31  PASS | id_count=1 parts=1 text_match=True
-construction_quality:art-65  PASS | id_count=1 parts=1 text_match=True
-rail_quality_amendment:decision PASS | id_count=1 parts=6 text_match=True
-locator checks total=158 pass=158 fail=0
+rail_quality:art-2           PASS | id_count=1 parts=1 text_match=True
+rail_quality:art-30          PASS | id_count=1 parts=2 text_match=True
+rail_quality:art-66          PASS | id_count=1 parts=3 text_match=True
+construction_quality:art-29  PASS | id_count=1 parts=1 text_match=True
+construction_quality:art-31  PASS | id_count=1 parts=1 text_match=True
+construction_quality:art-65  PASS | id_count=1 parts=1 text_match=True
+rail_quality_amendment:decision PASS | id_count=1 parts=6 text_match=True
+locator checks total=158 pass=158 fail=0

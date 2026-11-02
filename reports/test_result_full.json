@@ -1,12 +1,12 @@
-{
-  "generated_at": "2026-11-02T22:24:51.033996+08:00",
-  "total": 28,
-  "passed": 28,
-  "failures": [],
-  "errors": [],
-  "skipped_classes": [],
-  "skipped_tests": [],
-  "success": true,
-  "duration_sec": 16.694,
-  "source_log": "logs/tests_full_ab.log"
+{
+  "generated_at": "2026-11-02T22:24:51.033996+08:00",
+  "total": 28,
+  "passed": 28,
+  "failures": [],
+  "errors": [],
+  "skipped_classes": [],
+  "skipped_tests": [],
+  "success": true,
+  "duration_sec": 16.694,
+  "source_log": "logs/tests_full_ab.log"
 }

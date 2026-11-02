@@ -1,86 +1,86 @@
-{
-  "schema_version": 2,
-  "split": "dev",
-  "frozen": false,
-  "frozen_note": "dev_gold_v2 与配置在本次运行前固定；开发集结果不是产品准确率或独立测试成绩。",
-  "corpus": {
-    "documents": [
-      "rail_quality",
-      "construction_quality"
-    ],
-    "evidence_unit": "article",
-    "long_article_policy": "整条作为一个证据单元；展示时按 unit_char_budget 截断并保留原文锚点"
-  },
-  "model": {
-    "model_id": "BAAI/bge-small-zh-v1.5",
-    "distribution": "Xenova/bge-small-zh-v1.5 ONNX via ModelScope",
-    "revision": "master branch; model.onnx sha256 pinned in MODEL_MANIFEST.json",
-    "runtime": "onnxruntime CPUExecutionProvider",
-    "max_length": 512,
-    "pooling": "CLS + L2",
-    "query_instruction": "为这个句子生成表示以用于检索相关文章："
-  },
-  "lexical": {
-    "tokenizer": "jieba 0.42.1 cut_for_search",
-    "protected_patterns": [
-      "第X条",
-      "第X章",
-      "《文件名》",
-      "数字/百分比",
-      "英文"
-    ],
-    "bm25": "rank_bm25 0.2.2 BM25Okapi default"
-  },
-  "fusion": {
-    "method": "RRF",
-    "k": 60,
-    "candidate_limit_per_route": 50,
-    "tie_break": "融合分降序，再按 article_id 升序"
-  },
-  "methods": {
-    "primary": [
-      "bm25_top7",
-      "dense_top7",
-      "hybrid_top7",
-      "hybrid_top5_supplement"
-    ],
-    "auxiliary": [
-      "hybrid_top5"
-    ],
-    "budget": {
-      "units_max": 7,
-      "unit_char_budget": 400,
-      "total_char_budget": 2800
-    }
-  },
-  "supplement": {
-    "seed_top_n": 2,
-    "candidate_pool_top_n": 10,
-    "relation_types": [
-      "explicit_article",
-      "amendment"
-    ],
-    "require_target_version_resolved": true,
-    "exclude_duplicates": true,
-    "topic_related_allowed": false,
-    "no_backfill": true
-  },
-  "answerability": {
-    "unknown_terms_rule": "unknown>=3, or unknown>=1 and max_sem<0.62",
-    "semantic_floor": 0.62,
-    "min_unknown_hard": 3
-  },
-  "shutdown_rules": {
-    "version_conflict": "default pending when requested year/version not in pinned index",
-    "citation_ambiguity": "report relation state; never hard-link topic_related"
-  },
-  "label_version": "dev_gold_v2",
-  "frozen_for_dev_v2": true,
-  "frozen_at": "2026-11-02T22:13:26.649242+08:00",
-  "rewrite_candidates": {
-    "file": "data/task_b_rewrite_candidates.jsonl",
-    "status": "same_corpus_rewrite_unlabeled",
-    "is_independent_test": false,
-    "note": "与开发题存在题目家族重叠；不得称独立冻结测试，不得宣称跨主题泛化"
-  }
+{
+  "schema_version": 2,
+  "split": "dev",
+  "frozen": false,
+  "frozen_note": "dev_gold_v2 与配置在本次运行前固定；开发集结果不是产品准确率或独立测试成绩。",
+  "corpus": {
+    "documents": [
+      "rail_quality",
+      "construction_quality"
+    ],
+    "evidence_unit": "article",
+    "long_article_policy": "整条作为一个证据单元；展示时按 unit_char_budget 截断并保留原文锚点"
+  },
+  "model": {
+    "model_id": "BAAI/bge-small-zh-v1.5",
+    "distribution": "Xenova/bge-small-zh-v1.5 ONNX via ModelScope",
+    "revision": "master branch; model.onnx sha256 pinned in MODEL_MANIFEST.json",
+    "runtime": "onnxruntime CPUExecutionProvider",
+    "max_length": 512,
+    "pooling": "CLS + L2",
+    "query_instruction": "为这个句子生成表示以用于检索相关文章："
+  },
+  "lexical": {
+    "tokenizer": "jieba 0.42.1 cut_for_search",
+    "protected_patterns": [
+      "第X条",
+      "第X章",
+      "《文件名》",
+      "数字/百分比",
+      "英文"
+    ],
+    "bm25": "rank_bm25 0.2.2 BM25Okapi default"
+  },
+  "fusion": {
+    "method": "RRF",
+    "k": 60,
+    "candidate_limit_per_route": 50,
+    "tie_break": "融合分降序，再按 article_id 升序"
+  },
+  "methods": {
+    "primary": [
+      "bm25_top7",
+      "dense_top7",
+      "hybrid_top7",
+      "hybrid_top5_supplement"
+    ],
+    "auxiliary": [
+      "hybrid_top5"
+    ],
+    "budget": {
+      "units_max": 7,
+      "unit_char_budget": 400,
+      "total_char_budget": 2800
+    }
+  },
+  "supplement": {
+    "seed_top_n": 2,
+    "candidate_pool_top_n": 10,
+    "relation_types": [
+      "explicit_article",
+      "amendment"
+    ],
+    "require_target_version_resolved": true,
+    "exclude_duplicates": true,
+    "topic_related_allowed": false,
+    "no_backfill": true
+  },
+  "answerability": {
+    "unknown_terms_rule": "unknown>=3, or unknown>=1 and max_sem<0.62",
+    "semantic_floor": 0.62,
+    "min_unknown_hard": 3
+  },
+  "shutdown_rules": {
+    "version_conflict": "default pending when requested year/version not in pinned index",
+    "citation_ambiguity": "report relation state; never hard-link topic_related"
+  },
+  "label_version": "dev_gold_v2",
+  "frozen_for_dev_v2": true,
+  "frozen_at": "2026-11-02T22:13:26.649242+08:00",
+  "rewrite_candidates": {
+    "file": "data/task_b_rewrite_candidates.jsonl",
+    "status": "same_corpus_rewrite_unlabeled",
+    "is_independent_test": false,
+    "note": "与开发题存在题目家族重叠；不得称独立冻结测试，不得宣称跨主题泛化"
+  }
 }

@@ -1,155 +1,155 @@
-{
-  "run_id": "taskA-20261102T222831",
-  "generated_at": "2026-11-02T22:28:31.809857+08:00",
-  "scope": "任务A：中文条款切分、原文定位、引用四分法与版本/故障校验",
-  "cases": [
-    {
-      "id": "T01",
-      "name": "文档身份与共页分离",
-      "status": "PASS",
-      "detail": "documents=3 distinct_source_files=2 shared_page=True"
-    },
-    {
-      "id": "T02",
-      "name": "A/B 条号连续且边界完整",
-      "status": "PASS",
-      "detail": "A=1..75(75条) B=1..82(82条)"
-    },
-    {
-      "id": "T03",
-      "name": "原文偏移回跳与哈希",
-      "status": "PASS",
-      "detail": "span_fail=0 hash_fail=0 pdf_page_missing=0"
-    },
-    {
-      "id": "T04",
-      "name": "A第2条范围条款",
-      "status": "PASS",
-      "detail": "ok pdf_page=1"
-    },
-    {
-      "id": "T05",
-      "name": "A第30条检测/取样/签认",
-      "status": "PASS",
-      "detail": "status=ok keywords=['试块', '监督', '专人签字', '签认'] paras=2 pdf_page=9"
-    },
-    {
-      "id": "T06",
-      "name": "A66→B65 显式条款引用与正确版本",
-      "status": "PASS",
-      "detail": "status=ok edges=1 target=第六十五条 version=revised_2019_04_23"
-    },
-    {
-      "id": "T07",
-      "name": "B29/B31/B65 原文与页锚点",
-      "status": "PASS",
-      "detail": "B29 p7 B31 p7 B65 p16"
-    },
-    {
-      "id": "T07b",
-      "name": "B31按实际PDF第7页更正并保留旧记录",
-      "status": "PASS",
-      "detail": "page=7 cross=False legacy=superseded correction=corrected"
-    },
-    {
-      "id": "T08",
-      "name": "C修改与重新公布关系",
-      "status": "PASS",
-      "detail": "amendment=3 targets=['None', '第七十条', '第六十九条'] C_articles=0"
-    },
-    {
-      "id": "T09",
-      "name": "负例：A30与B29/B31仅主题相关",
-      "status": "PASS",
-      "detail": "explicit_edges=0 topic_edges=2"
-    },
-    {
-      "id": "T10",
-      "name": "负例：A1→B 仅文件级不生成条款边",
-      "status": "PASS",
-      "detail": "A1文件级B边=1 A1条款级边=0"
-    },
-    {
-      "id": "T11",
-      "name": "显式关系目标无悬空边",
-      "status": "PASS",
-      "detail": "dangling=0 []"
-    },
-    {
-      "id": "T12",
-      "name": "版本守卫：2017副本不得静默替代2019",
-      "status": "PASS",
-      "detail": "status=version_pending available=['revised_2017_10_07']"
-    },
-    {
-      "id": "T13",
-      "name": "故障用例：缺条/重复/缺版本/错位",
-      "status": "PASS",
-      "detail": "missing=article_not_found duplicate=ambiguous_article no_version=version_unknown tampered=locator_mismatch"
-    },
-    {
-      "id": "T14",
-      "name": "主题相关与显式引用隔离",
-      "status": "PASS",
-      "detail": "topic_related=2"
-    },
-    {
-      "id": "T15",
-      "name": "C与A共页去重",
-      "status": "PASS",
-      "detail": "C_indexed_articles=0 C_edges=3"
-    }
-  ],
-  "summary": {
-    "auto_cases": 16,
-    "passed": 16,
-    "failed": 0,
-    "observed_mismatch": 0,
-    "corrected_records": 1,
-    "human_review_pending": 8
-  },
-  "human_review_items": [
-    {
-      "id": "H01",
-      "item": "A第2条与交通运输部规范PDF物理第1页的视觉一致性",
-      "status": "pending"
-    },
-    {
-      "id": "H02",
-      "item": "A第30条与规范PDF物理第9页的视觉一致性（两款完整、签字主体与签认对象不混同）",
-      "status": "pending"
-    },
-    {
-      "id": "H03",
-      "item": "A第66条与规范PDF物理第22页的视觉一致性（显式引用措辞）",
-      "status": "pending"
-    },
-    {
-      "id": "H04",
-      "item": "B第29条与中科院副本PDF物理第7页的视觉一致性",
-      "status": "pending"
-    },
-    {
-      "id": "H05",
-      "item": "B第31条位置：自动文本层仅第7页，清单记录为续至第8页，冲突待视觉确认",
-      "status": "pending"
-    },
-    {
-      "id": "H06",
-      "item": "B第65条与中科院副本PDF物理第16页的视觉一致性",
-      "status": "pending"
-    },
-    {
-      "id": "H07",
-      "item": "C修改决定全文：修改第69条、增设第70条、条文序号调整与重新公布",
-      "status": "pending"
-    },
-    {
-      "id": "H08",
-      "item": "引用四分法语义复核：A1→B文件级、A30与B29/B31主题相关、A66→B65显式、C→A修改",
-      "status": "pending"
-    }
-  ],
-  "gate": "NOT_PASSED_PENDING_HUMAN_REVIEW",
-  "gate_note": "自动用例不等同人工复核；任务A闸门须由人工核对H01-H06后才可判定。"
+{
+  "run_id": "taskA-20261102T222831",
+  "generated_at": "2026-11-02T22:28:31.809857+08:00",
+  "scope": "任务A：中文条款切分、原文定位、引用四分法与版本/故障校验",
+  "cases": [
+    {
+      "id": "T01",
+      "name": "文档身份与共页分离",
+      "status": "PASS",
+      "detail": "documents=3 distinct_source_files=2 shared_page=True"
+    },
+    {
+      "id": "T02",
+      "name": "A/B 条号连续且边界完整",
+      "status": "PASS",
+      "detail": "A=1..75(75条) B=1..82(82条)"
+    },
+    {
+      "id": "T03",
+      "name": "原文偏移回跳与哈希",
+      "status": "PASS",
+      "detail": "span_fail=0 hash_fail=0 pdf_page_missing=0"
+    },
+    {
+      "id": "T04",
+      "name": "A第2条范围条款",
+      "status": "PASS",
+      "detail": "ok pdf_page=1"
+    },
+    {
+      "id": "T05",
+      "name": "A第30条检测/取样/签认",
+      "status": "PASS",
+      "detail": "status=ok keywords=['试块', '监督', '专人签字', '签认'] paras=2 pdf_page=9"
+    },
+    {
+      "id": "T06",
+      "name": "A66→B65 显式条款引用与正确版本",
+      "status": "PASS",
+      "detail": "status=ok edges=1 target=第六十五条 version=revised_2019_04_23"
+    },
+    {
+      "id": "T07",
+      "name": "B29/B31/B65 原文与页锚点",
+      "status": "PASS",
+      "detail": "B29 p7 B31 p7 B65 p16"
+    },
+    {
+      "id": "T07b",
+      "name": "B31按实际PDF第7页更正并保留旧记录",
+      "status": "PASS",
+      "detail": "page=7 cross=False legacy=superseded correction=corrected"
+    },
+    {
+      "id": "T08",
+      "name": "C修改与重新公布关系",
+      "status": "PASS",
+      "detail": "amendment=3 targets=['None', '第七十条', '第六十九条'] C_articles=0"
+    },
+    {
+      "id": "T09",
+      "name": "负例：A30与B29/B31仅主题相关",
+      "status": "PASS",
+      "detail": "explicit_edges=0 topic_edges=2"
+    },
+    {
+      "id": "T10",
+      "name": "负例：A1→B 仅文件级不生成条款边",
+      "status": "PASS",
+      "detail": "A1文件级B边=1 A1条款级边=0"
+    },
+    {
+      "id": "T11",
+      "name": "显式关系目标无悬空边",
+      "status": "PASS",
+      "detail": "dangling=0 []"
+    },
+    {
+      "id": "T12",
+      "name": "版本守卫：2017副本不得静默替代2019",
+      "status": "PASS",
+      "detail": "status=version_pending available=['revised_2017_10_07']"
+    },
+    {
+      "id": "T13",
+      "name": "故障用例：缺条/重复/缺版本/错位",
+      "status": "PASS",
+      "detail": "missing=article_not_found duplicate=ambiguous_article no_version=version_unknown tampered=locator_mismatch"
+    },
+    {
+      "id": "T14",
+      "name": "主题相关与显式引用隔离",
+      "status": "PASS",
+      "detail": "topic_related=2"
+    },
+    {
+      "id": "T15",
+      "name": "C与A共页去重",
+      "status": "PASS",
+      "detail": "C_indexed_articles=0 C_edges=3"
+    }
+  ],
+  "summary": {
+    "auto_cases": 16,
+    "passed": 16,
+    "failed": 0,
+    "observed_mismatch": 0,
+    "corrected_records": 1,
+    "human_review_pending": 8
+  },
+  "human_review_items": [
+    {
+      "id": "H01",
+      "item": "A第2条与交通运输部规范PDF物理第1页的视觉一致性",
+      "status": "pending"
+    },
+    {
+      "id": "H02",
+      "item": "A第30条与规范PDF物理第9页的视觉一致性（两款完整、签字主体与签认对象不混同）",
+      "status": "pending"
+    },
+    {
+      "id": "H03",
+      "item": "A第66条与规范PDF物理第22页的视觉一致性（显式引用措辞）",
+      "status": "pending"
+    },
+    {
+      "id": "H04",
+      "item": "B第29条与中科院副本PDF物理第7页的视觉一致性",
+      "status": "pending"
+    },
+    {
+      "id": "H05",
+      "item": "B第31条位置：自动文本层仅第7页，清单记录为续至第8页，冲突待视觉确认",
+      "status": "pending"
+    },
+    {
+      "id": "H06",
+      "item": "B第65条与中科院副本PDF物理第16页的视觉一致性",
+      "status": "pending"
+    },
+    {
+      "id": "H07",
+      "item": "C修改决定全文：修改第69条、增设第70条、条文序号调整与重新公布",
+      "status": "pending"
+    },
+    {
+      "id": "H08",
+      "item": "引用四分法语义复核：A1→B文件级、A30与B29/B31主题相关、A66→B65显式、C→A修改",
+      "status": "pending"
+    }
+  ],
+  "gate": "NOT_PASSED_PENDING_HUMAN_REVIEW",
+  "gate_note": "自动用例不等同人工复核；任务A闸门须由人工核对H01-H06后才可判定。"
 }
