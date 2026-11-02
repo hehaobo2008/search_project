@@ -1,6 +1,6 @@
 {
-  "batch": "eval30_draft_v1",
-  "status": "pending_independent_review",
+  "batch": "eval30_revised_v2",
+  "status": "revised_after_independent_ai_review_no_human_signoff",
   "question_count": 30,
   "groups": {
     "vague_role": 10,
@@ -10,10 +10,13 @@
   "answerable_count": 20,
   "no_answer_count": 10,
   "annotator": "AI (same session)",
-  "review_status": "ai_self_check_only_no_human_review",
+  "reviewer": "另一AI（依据锁定原文的独立复核步骤）",
+  "review_type": "ai_only_independent_review_step",
+  "human_review": false,
+  "review_status": "independent_ai_review_step_no_human",
   "retrieval_results_consulted": false,
   "retrieval_run": false,
-  "created_at": "2026-11-02T23:44:37.412855+08:00",
+  "created_at": "2026-11-03T00:56:32.697629+08:00",
   "articles_note": "corpus_articles_annotation_session 是标注会话本地生成的语料 hash；仓库不分发 articles.jsonl，复验时用 run_pipeline.py 重新生成。",
   "hashes": {
     "config_task_b": "ae805145fef2a0e822ca1601a02f9a8c80ded0bae6132049c12fe7b6fd1529f3",
@@ -24,20 +27,20 @@
   },
   "files": {
     "data/task_b_eval30_questions.jsonl": {
-      "sha256": "b532ef4d3d2bb8e618652539efe96bfa68130183b7e28e489aeea7fff714f753",
-      "bytes": 83472
+      "sha256": "b6afa2a196de6570652f09f67d1fe46d7edb52f68b0649a58d0a32d70aaa3770",
+      "bytes": 138853
     },
     "reports/task_b_eval30_annotations.md": {
-      "sha256": "8053d43256c0df301d1266ab9c7f5e773db40926e69c53702ba00b0caf55643a",
-      "bytes": 46171
+      "sha256": "fdda1ec4f0d2dda08233d62773603dce3bf297c71acd1c2db0fe8eacdc6e4142",
+      "bytes": 65583
     },
     "reports/task_b_eval30_overlap.md": {
-      "sha256": "492650750b086f06fa880656c8921c14cb5d77c816dc9330e498ee1479f91e70",
-      "bytes": 4469
+      "sha256": "33bf1b1b3aa3cf4cf2142941383ee3a13bbe1c6300a015af3a7ca3d14ee314ce",
+      "bytes": 4965
     },
     "reports/task_b_eval30_review_protocol.md": {
-      "sha256": "c7e4bd596ca570cf10fe9bbac70db5fe2892322a31bd0109058141b3b270993a",
-      "bytes": 1572
+      "sha256": "7c0549b83639e43e151dca37ce877f729e6ba2d63b2e561e272eff0f2cee06d2",
+      "bytes": 1834
     }
   }
 }

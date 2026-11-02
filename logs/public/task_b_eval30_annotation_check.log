@@ -1,3 +1,4 @@
 eval30_questions=30 groups={'vague_role': 10, 'multi_requirement': 10, 'no_answer': 10} answerable=20 no_answer=10
 max_text_similarity=0.4062
+shared_dev_gold=0 shared_rewrite_gold=2（共享条款作为正确答案保留，不作为失败）
 annotation_check failures=0

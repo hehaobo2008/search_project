@@ -87,12 +87,12 @@ python -m unittest discover -s tests -v
 - **不是产品准确率，也不是独立冻结测试。** 20 道同语料改写候选未标注、未运行；F05/F07/F08/F10 与开发题高度重叠，只能作为同语料改写测试。
 - 结果：`reports/task_b_dev_report.md`、`reports/RESULTS_taskB_filled.md`；复现入口见上一节。
 
-## 任务B 新题批次 Eval30（待复核，未运行）
+## 任务B 新题批次 Eval30（已由另一AI复核步骤修订，未运行）
 
 - 30 道新题：10 道模糊岗位描述、10 道多信息需求/跨条款、10 道看似相关但库内无充分答案。
 - 题目与标注：`data/task_b_eval30_questions.jsonl`、`reports/task_b_eval30_annotations.md`。
-- 标注状态：`ai_draft_pending_independent_review`；标注与自检由同一 AI 完成，**不是真人盲测或独立复核**。
+- 标注状态：`revised_after_independent_ai_review`；本次由另一 AI 依据锁定原文进行独立复核步骤，**不是人工签字、专家审核或真人盲测**。
 - 检索：**未运行**；本轮不提供新题检索成绩。
-- 题目家族重叠：`reports/task_b_eval30_overlap.md`，本批与开发题/改写候选无共享 gold 条款，最大问法相似度 0.4062。
+- 题目家族重叠：`reports/task_b_eval30_overlap.md`；与开发题无共享 gold，N04/N05 与改写候选共享部分条款（为保留正确答案而接受），最大问法相似度 0.4062。
 - 复核协议：`reports/task_b_eval30_review_protocol.md`；哈希清单：`reports/task_b_eval30_manifest.json`。
 - 现有 20 道同语料改写候选另存于 `data/task_b_rewrite_candidates.jsonl`，未混入本批。
