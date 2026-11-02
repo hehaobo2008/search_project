@@ -1,0 +1,43 @@
+{
+  "batch": "eval30_draft_v1",
+  "status": "pending_independent_review",
+  "question_count": 30,
+  "groups": {
+    "vague_role": 10,
+    "multi_requirement": 10,
+    "no_answer": 10
+  },
+  "answerable_count": 20,
+  "no_answer_count": 10,
+  "annotator": "AI (same session)",
+  "review_status": "ai_self_check_only_no_human_review",
+  "retrieval_results_consulted": false,
+  "retrieval_run": false,
+  "created_at": "2026-11-02T23:44:37.412855+08:00",
+  "articles_note": "corpus_articles_annotation_session 是标注会话本地生成的语料 hash；仓库不分发 articles.jsonl，复验时用 run_pipeline.py 重新生成。",
+  "hashes": {
+    "config_task_b": "ae805145fef2a0e822ca1601a02f9a8c80ded0bae6132049c12fe7b6fd1529f3",
+    "model_onnx": "69a0b846f4f116b5e6aabf9546ea6754d02264f3211a13a1bd69b31b8040749a",
+    "corpus_articles_annotation_session": "55b600c53a33d2e7b4398d9094ebdc2f40bbc33c628921e6c102a57d55b04a3d",
+    "corpus_relations": "4e5015577c94a58f391b325087e42a873eaf46418c7d6a743022275648d23f2f",
+    "docs_manifest": "1a2739f34f93ca77bdea6a82205090f77ed491b56fadff66f441a85bdcd3a3c1"
+  },
+  "files": {
+    "data/task_b_eval30_questions.jsonl": {
+      "sha256": "b532ef4d3d2bb8e618652539efe96bfa68130183b7e28e489aeea7fff714f753",
+      "bytes": 83472
+    },
+    "reports/task_b_eval30_annotations.md": {
+      "sha256": "8053d43256c0df301d1266ab9c7f5e773db40926e69c53702ba00b0caf55643a",
+      "bytes": 46171
+    },
+    "reports/task_b_eval30_overlap.md": {
+      "sha256": "492650750b086f06fa880656c8921c14cb5d77c816dc9330e498ee1479f91e70",
+      "bytes": 4469
+    },
+    "reports/task_b_eval30_review_protocol.md": {
+      "sha256": "c7e4bd596ca570cf10fe9bbac70db5fe2892322a31bd0109058141b3b270993a",
+      "bytes": 1572
+    }
+  }
+}

@@ -11,21 +11,38 @@
 
 原始文件、来源 URL、取得时间与 SHA-256 见 `corpus/docs_manifest.json`。
 
-## 复现
+## 从全新克隆复现
 
 ```bash
-# 本机实测解释器：<LOCAL_PATH> 3.13.2）
+git clone https://github.com/hehaobo2008/search_project.git
+cd search_project
+python -m venv .venv
+# Windows: .venv/Scripts/activate
+# Linux/macOS: source .venv/bin/activate
+python -m pip install -r requirements.txt
+
+# 1) 获取并校验法规原文与模型权重（逐文件核对 SHA-256）
+python scripts/fetch_sources.py --model
+
+# 2) 任务A：生成语料/定位页，运行切分、定位、引用关系与校验
 python scripts/run_pipeline.py
-python scripts/generate_deliverables.py
+
+# 3) 任务B：模型校验、开发集评测、任务B测试、改写候选校验
+python scripts/task_b_pipeline.py
+
+# 4) 全量测试（任务A+B）
+python -m unittest discover -s tests -v
 ```
 
-`run_pipeline.py` 依次执行环境检查、语料构建、本地定位页生成、关系抽取、任务A校验、版本反例校验、回跳校验、回归测试、人工清单生成，并把每一步的真实退出码、耗时和日志写入 `logs/runs/<run_id>/` 与 `logs/run_manifest.json`。任一步失败时流水线以非零退出码结束。
+`fetch_sources.py` 读取 `corpus/docs_manifest.json` 与 `docs/bge-small-zh-v1.5-MODEL_MANIFEST.json`，下载到 `work/` 并逐文件比对 SHA-256；hash 不一致时停止，不静默替换锁定版本。`run_pipeline.py` 使用 `scripts/env_check.py`，把每一步退出码、耗时和日志写入 `logs/runs/<run_id>/`。`task_b_pipeline.py` 使用 `docs/` 中的模型清单，日志写入 `logs/task_b/runs/`。所有排序方法共用同一无答案拒绝规则；模型/索引加载共享，查询耗时不能当作各算法独立的速度成绩。
 
 单独运行测试：
 
 ```bash
 python -m unittest discover -s tests -v
 ```
+
+**本轮新克隆验证：未做。** 上一轮 `de5ea74` 已做过本地全新克隆验证（fetch → 任务A → 任务B 均退出 0）；本轮新增的是待复核题目与标注，没有重新跑克隆验证，也未运行新题检索。
 
 ## 产物
 
@@ -39,7 +56,7 @@ python -m unittest discover -s tests -v
 - `reports/locator_result.json`：158 个本地锚点回跳校验
 - `reports/version_counterexample_result.json`：真实版本反例结果
 - `reports/test_result.json`：流水线内回归测试汇总
-- `reports/human_review_checklist.md`：H01-H08 人工视觉与语义核对清单（含本地回跳链接）
+- `reports/human_review_checklist_public.md`：H01-H08 公开版核对清单（不含原文全文）
 - `reports/RESULTS_taskA_filled.md`：基于交接包模板填写的实际记录
 - `reports/evidence_index.md`：证据索引与产物 hash
 - `dist/taskA_<run_id>.zip`：复验包（源码、测试、报告、独立运行日志、测试输出；不含法规全文）
@@ -48,7 +65,7 @@ python -m unittest discover -s tests -v
 
 自动链路：16 项自动用例 16 通过、失败 0、已更正记录 1（B31）；真实版本反例 6/6；包内相对链接回跳 158/158；回归测试独立 28/28、流水线内 26/26（1 个测试类按设计跳过）；全部正式步骤退出码 0。
 
-任务A闸门：**未通过（待人工）**。`reports/human_review_checklist.md` 中 H01-H08 尚未由人工核对签字。
+任务A闸门：**未通过（待人工）**。`reports/human_review_checklist_public.md` 中 H01-H08 尚未由人工核对签字。
 
 ## 边界与整改
 
@@ -69,3 +86,13 @@ python -m unittest discover -s tests -v
 - 无答案 2/2 正确拒绝；版本/引用歧义作为模块测试 3/3，单列不计端到端。
 - **不是产品准确率，也不是独立冻结测试。** 20 道同语料改写候选未标注、未运行；F05/F07/F08/F10 与开发题高度重叠，只能作为同语料改写测试。
 - 结果：`reports/task_b_dev_report.md`、`reports/RESULTS_taskB_filled.md`；复现入口见上一节。
+
+## 任务B 新题批次 Eval30（待复核，未运行）
+
+- 30 道新题：10 道模糊岗位描述、10 道多信息需求/跨条款、10 道看似相关但库内无充分答案。
+- 题目与标注：`data/task_b_eval30_questions.jsonl`、`reports/task_b_eval30_annotations.md`。
+- 标注状态：`ai_draft_pending_independent_review`；标注与自检由同一 AI 完成，**不是真人盲测或独立复核**。
+- 检索：**未运行**；本轮不提供新题检索成绩。
+- 题目家族重叠：`reports/task_b_eval30_overlap.md`，本批与开发题/改写候选无共享 gold 条款，最大问法相似度 0.4062。
+- 复核协议：`reports/task_b_eval30_review_protocol.md`；哈希清单：`reports/task_b_eval30_manifest.json`。
+- 现有 20 道同语料改写候选另存于 `data/task_b_rewrite_candidates.jsonl`，未混入本批。
