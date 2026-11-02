@@ -52,9 +52,16 @@ for row in rows:
         for req in reqs:
             if not req.get("acceptable"):
                 problems.append("%s empty acceptable" % qid)
+            terms = req.get("display_terms", [])
+            if not terms:
+                problems.append("%s missing display_terms" % qid)
             for aid in req.get("acceptable", []):
                 if aid not in arts:
                     problems.append("%s unknown article %s" % (qid, aid))
+                    continue
+                for term in terms:
+                    if term not in arts[aid]["text"]:
+                        problems.append("%s display term %r not in %s" % (qid, term, aid))
         sets = row.get("sufficient_sets", [])
         if not sets:
             problems.append("%s missing sufficient_sets" % qid)
@@ -162,6 +169,15 @@ print("eval30_questions=%d groups=%s answerable=%d no_answer=%d" % (
                 for g in ("vague_role", "multi_requirement", "no_answer")},
     sum(1 for r in rows if r["answerable"]), sum(1 for r in rows if not r["answerable"])))
 print("max_text_similarity=%.4f" % max(r["overlap_check"]["max_text_similarity"] for r in rows))
+pairs = 0
+inside400 = 0
+for r in rows:
+    for req in r.get("requirements", []):
+        for aid in req["acceptable"]:
+            pairs += 1
+            if all(term in arts[aid]["text"][:400] for term in req["display_terms"]):
+                inside400 += 1
+print("display_term_pairs=%d all_terms_within_first400=%d" % (pairs, inside400))
 print("shared_dev_gold=%d shared_rewrite_gold=%d（共享条款作为正确答案保留，不作为失败）" % (
     sum(1 for r in rows if r["overlap_check"].get("overlap_with_dev")),
     sum(1 for r in rows if r["overlap_check"].get("overlap_with_rewrite_candidates"))))

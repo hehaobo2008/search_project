@@ -1,0 +1,4 @@
+frozen questions=30 answerable=20 no_answer=10
+questions_only_sha256=fb2b04d71630fc9deffa3d8426053c076aaf6ff054e58f0e4a56be459bdebe60
+gold_sha256=700d6c267ccacba9a582b4ca1beada7687b0ebcbe7245952e157caa77bec9db9
+freeze_manifest=H:\appdata\H\competition\ICT\search_project\reports\task_b_eval30_freeze_manifest.json

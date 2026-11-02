@@ -16,7 +16,7 @@
   "review_status": "independent_ai_review_step_no_human",
   "retrieval_results_consulted": false,
   "retrieval_run": false,
-  "created_at": "2026-11-03T00:56:32.697629+08:00",
+  "created_at": "2026-11-03T01:16:41.352593+08:00",
   "articles_note": "corpus_articles_annotation_session 是标注会话本地生成的语料 hash；仓库不分发 articles.jsonl，复验时用 run_pipeline.py 重新生成。",
   "hashes": {
     "config_task_b": "ae805145fef2a0e822ca1601a02f9a8c80ded0bae6132049c12fe7b6fd1529f3",
@@ -27,12 +27,12 @@
   },
   "files": {
     "data/task_b_eval30_questions.jsonl": {
-      "sha256": "b6afa2a196de6570652f09f67d1fe46d7edb52f68b0649a58d0a32d70aaa3770",
-      "bytes": 138853
+      "sha256": "eb942dcdfc0fd51e3010589daa98a5faf06a97f0eb827f9da34490e532e8d3eb",
+      "bytes": 140871
     },
     "reports/task_b_eval30_annotations.md": {
-      "sha256": "fdda1ec4f0d2dda08233d62773603dce3bf297c71acd1c2db0fe8eacdc6e4142",
-      "bytes": 65583
+      "sha256": "78c41f741534d4ea3c55df851b3e4bd3ed9d9f9b52ce5405d9ae1ff07d5e2943",
+      "bytes": 67799
     },
     "reports/task_b_eval30_overlap.md": {
       "sha256": "33bf1b1b3aa3cf4cf2142941383ee3a13bbe1c6300a015af3a7ca3d14ee314ce",

@@ -1,0 +1,37 @@
+{
+  "batch": "eval30_frozen_v1",
+  "status": "frozen_no_retrieval",
+  "frozen_at": "2026-11-03T01:17:43.190492+08:00",
+  "question_count": 30,
+  "answerable_count": 20,
+  "no_answer_count": 10,
+  "questions_only_sha256": "fb2b04d71630fc9deffa3d8426053c076aaf6ff054e58f0e4a56be459bdebe60",
+  "gold_sha256": "700d6c267ccacba9a582b4ca1beada7687b0ebcbe7245952e157caa77bec9db9",
+  "question_gold_file": {
+    "path": "data/task_b_eval30_questions.jsonl",
+    "sha256": "eb942dcdfc0fd51e3010589daa98a5faf06a97f0eb827f9da34490e532e8d3eb",
+    "bytes": 140871
+  },
+  "annotation_package": {
+    "annotations": "78c41f741534d4ea3c55df851b3e4bd3ed9d9f9b52ce5405d9ae1ff07d5e2943",
+    "overlap": "33bf1b1b3aa3cf4cf2142941383ee3a13bbe1c6300a015af3a7ca3d14ee314ce",
+    "protocol": "7c0549b83639e43e151dca37ce877f729e6ba2d63b2e561e272eff0f2cee06d2"
+  },
+  "config_task_b": "ae805145fef2a0e822ca1601a02f9a8c80ded0bae6132049c12fe7b6fd1529f3",
+  "model_onnx": "69a0b846f4f116b5e6aabf9546ea6754d02264f3211a13a1bd69b31b8040749a",
+  "corpus": {
+    "docs_manifest": "1a2739f34f93ca77bdea6a82205090f77ed491b56fadff66f441a85bdcd3a3c1",
+    "relations": "4e5015577c94a58f391b325087e42a873eaf46418c7d6a743022275648d23f2f",
+    "articles_annotation_session": "55b600c53a33d2e7b4398d9094ebdc2f40bbc33c628921e6c102a57d55b04a3d"
+  },
+  "review": {
+    "reviewer": "另一AI（依据锁定原文的独立复核步骤）",
+    "review_type": "ai_only_independent_review_step",
+    "human_review": false,
+    "review_status": "independent_ai_review_step_no_human",
+    "note": "不是人工签字、专家审核或真人盲测。"
+  },
+  "retrieval_run": false,
+  "retrieval_results_consulted": false,
+  "note": "冻结发生在首次检索之前；后续运行不得用结果调参覆盖首轮。"
+}
