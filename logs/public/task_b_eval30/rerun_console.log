@@ -1,0 +1,11 @@
+Building prefix dict from the default dictionary ...
+Loading model from cache <LOCAL_PATH>
+Loading model cost 0.482 seconds.
+Prefix dict has been built successfully.
+run_id=eval30-first-rerun-20261103
+bm25_top7                full_display=19/20 full_id=19/20 missed=2 refused=1 gaps=0 no_answer_wrong=4
+dense_top7               full_display=17/20 full_id=17/20 missed=4 refused=1 gaps=0 no_answer_wrong=4
+hybrid_top7              full_display=19/20 full_id=19/20 missed=2 refused=1 gaps=0 no_answer_wrong=4
+hybrid_top5_supplement   full_display=19/20 full_id=19/20 missed=2 refused=1 gaps=0 no_answer_wrong=4
+supplement {'supplement_units': 1, 'wrong_supplement_units': 1, 'supplement_gain_vs_top5': 0, 'supplement_loss_vs_top5': 0, 'supplement_gain_vs_top7': 0, 'supplement_loss_vs_top7': 0}
+failures=28

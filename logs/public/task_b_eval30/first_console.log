@@ -1,0 +1,17 @@
+Building prefix dict from the default dictionary ...
+Loading model from cache <LOCAL_PATH>
+Loading model cost 0.472 seconds.
+Prefix dict has been built successfully.
+run_id=eval30-first-20261103
+bm25_top7                full_display=19/20 full_id=19/20 missed=2 refused=1 gaps=0 no_answer_wrong=4
+dense_top7               full_display=17/20 full_id=17/20 missed=4 refused=1 gaps=0 no_answer_wrong=4
+hybrid_top7              full_display=19/20 full_id=19/20 missed=2 refused=1 gaps=0 no_answer_wrong=4
+hybrid_top5_supplement   full_display=19/20 full_id=19/20 missed=2 refused=1 gaps=0 no_answer_wrong=4
+Traceback (most recent call last):
+  File "<PROJECT_ROOT>\scripts\task_b_eval30.py", line 345, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "<PROJECT_ROOT>\scripts\task_b_eval30.py", line 337, in main
+    print("supplement", {k: s["hybrid_top5_supplement"][k] for k in (
+                            ~^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'hybrid_top5_supplement'

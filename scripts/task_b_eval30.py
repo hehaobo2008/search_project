@@ -334,7 +334,7 @@ def main():
             method, s["full_display"], s["answerable_n"], s["full_id"], s["answerable_n"],
             s["missed_requirements"], s["answerable_refused"], s["id_display_gap"],
             s["no_answer_wrong_evidence"]))
-    print("supplement", {k: s["hybrid_top5_supplement"][k] for k in (
+    print("supplement", {k: summary["hybrid_top5_supplement"][k] for k in (
         "supplement_units", "wrong_supplement_units", "supplement_gain_vs_top5",
         "supplement_loss_vs_top5", "supplement_gain_vs_top7", "supplement_loss_vs_top7")})
     print("failures=%d" % len(failures))

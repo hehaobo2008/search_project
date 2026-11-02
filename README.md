@@ -87,12 +87,15 @@ python -m unittest discover -s tests -v
 - **不是产品准确率，也不是独立冻结测试。** 20 道同语料改写候选未标注、未运行；F05/F07/F08/F10 与开发题高度重叠，只能作为同语料改写测试。
 - 结果：`reports/task_b_dev_report.md`、`reports/RESULTS_taskB_filled.md`；复现入口见上一节。
 
-## 任务B 新题批次 Eval30（已冻结，未运行）
+## 任务B 新题批次 Eval30（已运行首轮对照）
 
 - 30 道新题：10 道模糊岗位描述、10 道多信息需求/跨条款、10 道看似相关但库内无充分答案。
 - 题目与标注：`data/task_b_eval30_questions.jsonl`、`reports/task_b_eval30_annotations.md`。
 - 标注状态：`revised_after_independent_ai_review`，已于 `reports/task_b_eval30_freeze_manifest.json` 冻结（`frozen_no_retrieval`）；本次由另一 AI 依据锁定原文进行独立复核步骤，**不是人工签字、专家审核或真人盲测**。
-- 检索：**尚未运行**；冻结发生在首次检索之前，不提供新题检索成绩。
+- 检索：已按冻结版本完成首轮四方法对照；冻结发生在首次检索之前。首轮结果见 `reports/task_b_eval30_report.md` 与 `reports/task_b_eval30_results.json`。
 - 题目家族重叠：`reports/task_b_eval30_overlap.md`；与开发题无共享 gold，N04/N05 与改写候选共享部分条款（为保留正确答案而接受），最大问法相似度 0.4062。
 - 复核协议：`reports/task_b_eval30_review_protocol.md`；哈希清单：`reports/task_b_eval30_manifest.json`。
 - 现有 20 道同语料改写候选另存于 `data/task_b_rewrite_candidates.jsonl`，未混入本批。
+- 首轮结果：展示全证据 BM25 19/20、语义 17/20、混合 19/20、混合+补证 19/20；N11 被统一拒绝规则误拒，N14/N16 在纯语义下漏项。
+- 无答案题：10 道中 4 道（N24/N25/N26/N28）被误出证据；补证仅触发 N14，补入 B56 为错误补证，无增益。
+- 首轮 run `eval30-first-20261103` 在写出结果后因控制台打印 KeyError 退出 1；首轮 raw 保留，修复仅改打印行后以 `eval30-first-rerun-20261103` 重跑，summary/failures 与首轮一致。详见 `reports/task_b_eval30_run_notes.md`。
