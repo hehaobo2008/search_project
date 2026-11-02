@@ -1,0 +1,3348 @@
+{
+  "generated_at": "2026-11-02T19:35:51.472656+08:00",
+  "split": "dev",
+  "disclaimer": "开发集为调试用，不是独立冻结测试，不能作为泛化成绩；gold由本次会话构造，待人工复核。",
+  "config": {
+    "schema_version": 1,
+    "split": "dev",
+    "frozen": false,
+    "frozen_note": "开发集调试配置，尚未冻结；冻结测试题须人工标注后另存，不得用本开发集结果充当独立测试成绩。",
+    "corpus": {
+      "documents": [
+        "rail_quality",
+        "construction_quality"
+      ],
+      "evidence_unit": "article",
+      "long_article_policy": "整条作为一个证据单元；展示时按 unit_char_budget 截断并保留原文锚点"
+    },
+    "model": {
+      "model_id": "BAAI/bge-small-zh-v1.5",
+      "distribution": "Xenova/bge-small-zh-v1.5 ONNX via ModelScope",
+      "revision": "master branch; model.onnx sha256 pinned in MODEL_MANIFEST.json",
+      "runtime": "onnxruntime CPUExecutionProvider",
+      "max_length": 512,
+      "pooling": "CLS + L2",
+      "query_instruction": "为这个句子生成表示以用于检索相关文章："
+    },
+    "lexical": {
+      "tokenizer": "jieba 0.42.1 cut_for_search",
+      "protected_patterns": [
+        "第X条",
+        "第X章",
+        "《文件名》",
+        "数字/百分比",
+        "英文"
+      ],
+      "bm25": "rank_bm25 0.2.2 BM25Okapi default"
+    },
+    "fusion": {
+      "method": "RRF",
+      "k": 60,
+      "candidate_limit_per_route": 50,
+      "tie_break": "融合分降序，再按 article_id 升序"
+    },
+    "methods": {
+      "top5": {
+        "units": 5,
+        "unit_char_budget": 400
+      },
+      "top7": {
+        "units": 7,
+        "unit_char_budget": 400,
+        "total_char_budget": 2800
+      },
+      "top5_supplement": {
+        "base_units": 5,
+        "max_extra": 2,
+        "unit_char_budget": 400,
+        "total_char_budget": 2800
+      }
+    },
+    "supplement": {
+      "seed_top_n": 2,
+      "candidate_pool_top_n": 10,
+      "relation_types": [
+        "explicit_article",
+        "amendment"
+      ],
+      "require_target_version_resolved": true,
+      "exclude_duplicates": true,
+      "topic_related_allowed": false,
+      "no_backfill": true
+    },
+    "answerability": {
+      "unknown_terms_rule": "unknown>=3, or unknown>=1 and max_sem<0.62",
+      "semantic_floor": 0.62,
+      "min_unknown_hard": 3
+    },
+    "shutdown_rules": {
+      "version_conflict": "default pending when requested year/version not in pinned index",
+      "citation_ambiguity": "report relation state; never hard-link topic_related"
+    }
+  },
+  "model_manifest": {
+    "model_id": "BAAI/bge-small-zh-v1.5",
+    "distribution_repo": "Xenova/bge-small-zh-v1.5 (ModelScope ONNX conversion)",
+    "distribution_url": "https://www.modelscope.cn/models/Xenova/bge-small-zh-v1.5",
+    "upstream_model_card": "https://huggingface.co/BAAI/bge-small-zh-v1.5",
+    "revision": "master branch downloaded; file-level SHA-256 pinned below (ModelScope master is mutable)",
+    "license": "MIT per BAAI model card and Xenova README; repository has no separate LICENSE file (needs human confirmation)",
+    "downloaded_at": "2026-11-02T19:25:42.459832+08:00",
+    "runtime": "onnxruntime 1.31.0 CPUExecutionProvider",
+    "tokenizer": "tokenizers 0.23.3",
+    "max_length": 512,
+    "pooling": "CLS token of last_hidden_state + L2 normalization",
+    "query_instruction": "为这个句子生成表示以用于检索相关文章：",
+    "files": [
+      {
+        "file": "README.md",
+        "bytes": 1057,
+        "sha256": "cb22054df1a98f7ee9d5b281d023e67c27cc316e1733baf03fc994d95c3048ab"
+      },
+      {
+        "file": "config.json",
+        "bytes": 716,
+        "sha256": "d4193ead3a810fd694fa8a31d7fc72fbaebc0668b603e398734bf2f6538ff42f"
+      },
+      {
+        "file": "special_tokens_map.json",
+        "bytes": 125,
+        "sha256": "b6d346be366a7d1d48332dbc9fdf3bf8960b5d879522b7799ddba59e76237ee3"
+      },
+      {
+        "file": "tokenizer.json",
+        "bytes": 439125,
+        "sha256": "48cea5d44424912a6fd1ea647bf4fe50b55ab8b1e5879c3275f80e339e8fae26"
+      },
+      {
+        "file": "tokenizer_config.json",
+        "bytes": 367,
+        "sha256": "e6f3b96db926a37d4039995fbf5ad17de158dfb8f6343d607e4dbaad18d75f5a"
+      },
+      {
+        "file": "vocab.txt",
+        "bytes": 109540,
+        "sha256": "45bbac6b341c319adc98a532532882e91a9cefc0329aa57bac9ae761c27b291c"
+      },
+      {
+        "file": "onnx/model.onnx",
+        "bytes": 94851877,
+        "sha256": "69a0b846f4f116b5e6aabf9546ea6754d02264f3211a13a1bd69b31b8040749a"
+      }
+    ]
+  },
+  "vector_cache_hit": true,
+  "embed_docs_ms": 0.0,
+  "summary": {
+    "top5": {
+      "paired_n": 13,
+      "hit": 12,
+      "full_evidence": 12,
+      "groups_hit": 14,
+      "groups_total": 15,
+      "macro_recall": 0.9231,
+      "micro_recall": 0.9333,
+      "units_mean": 5.0,
+      "chars_mean": 698.08,
+      "latency_p50_ms": 8.64,
+      "latency_p95_ms": 12.51
+    },
+    "top7": {
+      "paired_n": 13,
+      "hit": 13,
+      "full_evidence": 13,
+      "groups_hit": 15,
+      "groups_total": 15,
+      "macro_recall": 1.0,
+      "micro_recall": 1.0,
+      "units_mean": 7.0,
+      "chars_mean": 960.31,
+      "latency_p50_ms": 8.64,
+      "latency_p95_ms": 12.51
+    },
+    "top5_supplement": {
+      "paired_n": 13,
+      "hit": 13,
+      "full_evidence": 13,
+      "groups_hit": 15,
+      "groups_total": 15,
+      "macro_recall": 1.0,
+      "micro_recall": 1.0,
+      "units_mean": 5.08,
+      "chars_mean": 708.62,
+      "latency_p50_ms": 8.64,
+      "latency_p95_ms": 12.51
+    }
+  },
+  "pairwise_top7_vs_supplement": {
+    "supplement_only": 0,
+    "top7_only": 0,
+    "both_success": 13,
+    "both_fail": 0
+  },
+  "supplement_triggered_questions": 1,
+  "supplement_total_units": 1,
+  "retrieval_rows": [
+    {
+      "qid": "D01",
+      "question": "铁路工地试块送检要谁在场？检测记录签字的规定在哪？",
+      "required_groups": [
+        "rail_quality:art-30|construction_quality:art-29|construction_quality:art-31"
+      ],
+      "note": "开发演示题1；A30为主，B29/B31同主题可接受",
+      "answerability": {
+        "unknown_terms": [
+          "在场"
+        ],
+        "unknown_count": 1,
+        "min_unknown": 3,
+        "semantic_floor": 0.62,
+        "term_coverage": 0.8571,
+        "max_sem": 0.6713,
+        "decision": "answer"
+      },
+      "normalized_query": "铁路工地试块送检要谁在场？检测记录签字的规定在哪？",
+      "top7_ids": [
+        "rail_quality:art-30",
+        "construction_quality:art-31",
+        "rail_quality:art-36",
+        "rail_quality:art-22",
+        "rail_quality:art-66",
+        "rail_quality:art-55",
+        "rail_quality:art-14"
+      ],
+      "top7_scores": [
+        {
+          "article_id": "rail_quality:art-30",
+          "score": 0.032787,
+          "lex_rank": 1,
+          "sem_rank": 1
+        },
+        {
+          "article_id": "construction_quality:art-31",
+          "score": 0.031514,
+          "lex_rank": 2,
+          "sem_rank": 5
+        },
+        {
+          "article_id": "rail_quality:art-36",
+          "score": 0.030018,
+          "lex_rank": 12,
+          "sem_rank": 2
+        },
+        {
+          "article_id": "rail_quality:art-22",
+          "score": 0.029199,
+          "lex_rank": 9,
+          "sem_rank": 8
+        },
+        {
+          "article_id": "rail_quality:art-66",
+          "score": 0.029083,
+          "lex_rank": 5,
+          "sem_rank": 13
+        },
+        {
+          "article_id": "rail_quality:art-55",
+          "score": 0.028665,
+          "lex_rank": 6,
+          "sem_rank": 14
+        },
+        {
+          "article_id": "rail_quality:art-14",
+          "score": 0.027206,
+          "lex_rank": 8,
+          "sem_rank": 20
+        }
+      ],
+      "elapsed_ms": 351.69,
+      "search_ms": 8.6,
+      "methods": {
+        "top5": {
+          "hit": true,
+          "all_covered": true,
+          "groups_hit": 1,
+          "groups_total": 1,
+          "recall": 1.0,
+          "units": 5,
+          "chars": 721,
+          "ids": [
+            "rail_quality:art-30",
+            "construction_quality:art-31",
+            "rail_quality:art-36",
+            "rail_quality:art-22",
+            "rail_quality:art-66"
+          ],
+          "texts": [
+            {
+              "article_id": "rail_quality:art-30",
+              "chars": 203,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-31",
+              "chars": 75,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-36",
+              "chars": 77,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-22",
+              "chars": 156,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-66",
+              "chars": 210,
+              "truncated": false,
+              "relation": null
+            }
+          ],
+          "supplements": 0
+        },
+        "top7": {
+          "hit": true,
+          "all_covered": true,
+          "groups_hit": 1,
+          "groups_total": 1,
+          "recall": 1.0,
+          "units": 7,
+          "chars": 918,
+          "ids": [
+            "rail_quality:art-30",
+            "construction_quality:art-31",
+            "rail_quality:art-36",
+            "rail_quality:art-22",
+            "rail_quality:art-66",
+            "rail_quality:art-55",
+            "rail_quality:art-14"
+          ],
+          "texts": [
+            {
+              "article_id": "rail_quality:art-30",
+              "chars": 203,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-31",
+              "chars": 75,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-36",
+              "chars": 77,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-22",
+              "chars": 156,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-66",
+              "chars": 210,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-55",
+              "chars": 58,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-14",
+              "chars": 139,
+              "truncated": false,
+              "relation": null
+            }
+          ],
+          "supplements": 2
+        },
+        "top5_supplement": {
+          "hit": true,
+          "all_covered": true,
+          "groups_hit": 1,
+          "groups_total": 1,
+          "recall": 1.0,
+          "units": 5,
+          "chars": 721,
+          "ids": [
+            "rail_quality:art-30",
+            "construction_quality:art-31",
+            "rail_quality:art-36",
+            "rail_quality:art-22",
+            "rail_quality:art-66"
+          ],
+          "texts": [
+            {
+              "article_id": "rail_quality:art-30",
+              "chars": 203,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-31",
+              "chars": 75,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-36",
+              "chars": 77,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-22",
+              "chars": 156,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-66",
+              "chars": 210,
+              "truncated": false,
+              "relation": null
+            }
+          ],
+          "supplements": 0
+        }
+      }
+    },
+    {
+      "qid": "D02",
+      "question": "施工单位设立的工地试验室出具检测结果后，资料如何签认和保存？",
+      "required_groups": [
+        "rail_quality:art-30"
+      ],
+      "note": "A30第二款",
+      "answerability": {
+        "unknown_terms": [],
+        "unknown_count": 0,
+        "min_unknown": 3,
+        "semantic_floor": 0.62,
+        "term_coverage": 1.0,
+        "max_sem": 0.6659,
+        "decision": "answer"
+      },
+      "normalized_query": "施工单位设立的工地试验室出具检测结果后，资料如何签认和保存？",
+      "top7_ids": [
+        "rail_quality:art-30",
+        "rail_quality:art-39",
+        "construction_quality:art-31",
+        "construction_quality:art-16",
+        "rail_quality:art-22",
+        "rail_quality:art-33",
+        "construction_quality:art-42"
+      ],
+      "top7_scores": [
+        {
+          "article_id": "rail_quality:art-30",
+          "score": 0.032787,
+          "lex_rank": 1,
+          "sem_rank": 1
+        },
+        {
+          "article_id": "rail_quality:art-39",
+          "score": 0.031498,
+          "lex_rank": 4,
+          "sem_rank": 3
+        },
+        {
+          "article_id": "construction_quality:art-31",
+          "score": 0.030835,
+          "lex_rank": 8,
+          "sem_rank": 2
+        },
+        {
+          "article_id": "construction_quality:art-16",
+          "score": 0.03055,
+          "lex_rank": 7,
+          "sem_rank": 4
+        },
+        {
+          "article_id": "rail_quality:art-22",
+          "score": 0.029572,
+          "lex_rank": 3,
+          "sem_rank": 13
+        },
+        {
+          "article_id": "rail_quality:art-33",
+          "score": 0.028577,
+          "lex_rank": 11,
+          "sem_rank": 9
+        },
+        {
+          "article_id": "construction_quality:art-42",
+          "score": 0.027402,
+          "lex_rank": 12,
+          "sem_rank": 14
+        }
+      ],
+      "elapsed_ms": 7.99,
+      "search_ms": 6.9,
+      "methods": {
+        "top5": {
+          "hit": true,
+          "all_covered": true,
+          "groups_hit": 1,
+          "groups_total": 1,
+          "recall": 1.0,
+          "units": 5,
+          "chars": 784,
+          "ids": [
+            "rail_quality:art-30",
+            "rail_quality:art-39",
+            "construction_quality:art-31",
+            "construction_quality:art-16",
+            "rail_quality:art-22"
+          ],
+          "texts": [
+            {
+              "article_id": "rail_quality:art-30",
+              "chars": 203,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-39",
+              "chars": 139,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-31",
+              "chars": 75,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-16",
+              "chars": 211,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-22",
+              "chars": 156,
+              "truncated": false,
+              "relation": null
+            }
+          ],
+          "supplements": 0
+        },
+        "top7": {
+          "hit": true,
+          "all_covered": true,
+          "groups_hit": 1,
+          "groups_total": 1,
+          "recall": 1.0,
+          "units": 7,
+          "chars": 995,
+          "ids": [
+            "rail_quality:art-30",
+            "rail_quality:art-39",
+            "construction_quality:art-31",
+            "construction_quality:art-16",
+            "rail_quality:art-22",
+            "rail_quality:art-33",
+            "construction_quality:art-42"
+          ],
+          "texts": [
+            {
+              "article_id": "rail_quality:art-30",
+              "chars": 203,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-39",
+              "chars": 139,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-31",
+              "chars": 75,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-16",
+              "chars": 211,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-22",
+              "chars": 156,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-33",
+              "chars": 129,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-42",
+              "chars": 82,
+              "truncated": false,
+              "relation": null
+            }
+          ],
+          "supplements": 2
+        },
+        "top5_supplement": {
+          "hit": true,
+          "all_covered": true,
+          "groups_hit": 1,
+          "groups_total": 1,
+          "recall": 1.0,
+          "units": 5,
+          "chars": 784,
+          "ids": [
+            "rail_quality:art-30",
+            "rail_quality:art-39",
+            "construction_quality:art-31",
+            "construction_quality:art-16",
+            "rail_quality:art-22"
+          ],
+          "texts": [
+            {
+              "article_id": "rail_quality:art-30",
+              "chars": 203,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-39",
+              "chars": 139,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-31",
+              "chars": 75,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-16",
+              "chars": 211,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-22",
+              "chars": 156,
+              "truncated": false,
+              "relation": null
+            }
+          ],
+          "supplements": 0
+        }
+      }
+    },
+    {
+      "qid": "D03",
+      "question": "铁路规定第66条提到的条例第65条原文在哪？",
+      "required_groups": [
+        "construction_quality:art-65"
+      ],
+      "note": "补证题：A66为入口，gold为B65；A66不计命中",
+      "answerability": {
+        "unknown_terms": [],
+        "unknown_count": 0,
+        "min_unknown": 3,
+        "semantic_floor": 0.62,
+        "term_coverage": 0.5,
+        "max_sem": 0.6132,
+        "decision": "answer"
+      },
+      "normalized_query": "铁路规定第六十六条提到的条例第六十五条原文在哪？",
+      "top7_ids": [
+        "rail_quality:art-66",
+        "construction_quality:art-6",
+        "construction_quality:art-66",
+        "rail_quality:art-6",
+        "rail_quality:art-53",
+        "construction_quality:art-65",
+        "rail_quality:art-54"
+      ],
+      "top7_scores": [
+        {
+          "article_id": "rail_quality:art-66",
+          "score": 0.027118,
+          "lex_rank": 2,
+          "sem_rank": 31
+        },
+        {
+          "article_id": "construction_quality:art-6",
+          "score": 0.022006,
+          "lex_rank": 24,
+          "sem_rank": 39
+        },
+        {
+          "article_id": "construction_quality:art-66",
+          "score": 0.016393,
+          "lex_rank": 1,
+          "sem_rank": null
+        },
+        {
+          "article_id": "rail_quality:art-6",
+          "score": 0.016393,
+          "lex_rank": null,
+          "sem_rank": 1
+        },
+        {
+          "article_id": "rail_quality:art-53",
+          "score": 0.016129,
+          "lex_rank": null,
+          "sem_rank": 2
+        },
+        {
+          "article_id": "construction_quality:art-65",
+          "score": 0.015873,
+          "lex_rank": 3,
+          "sem_rank": null
+        },
+        {
+          "article_id": "rail_quality:art-54",
+          "score": 0.015873,
+          "lex_rank": null,
+          "sem_rank": 3
+        }
+      ],
+      "elapsed_ms": 7.42,
+      "search_ms": 6.5,
+      "methods": {
+        "top5": {
+          "hit": false,
+          "all_covered": false,
+          "groups_hit": 0,
+          "groups_total": 1,
+          "recall": 0.0,
+          "units": 5,
+          "chars": 441,
+          "ids": [
+            "rail_quality:art-66",
+            "construction_quality:art-6",
+            "construction_quality:art-66",
+            "rail_quality:art-6",
+            "rail_quality:art-53"
+          ],
+          "texts": [
+            {
+              "article_id": "rail_quality:art-66",
+              "chars": 210,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-6",
+              "chars": 32,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-66",
+              "chars": 83,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-6",
+              "chars": 67,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-53",
+              "chars": 49,
+              "truncated": false,
+              "relation": null
+            }
+          ],
+          "supplements": 0
+        },
+        "top7": {
+          "hit": true,
+          "all_covered": true,
+          "groups_hit": 1,
+          "groups_total": 1,
+          "recall": 1.0,
+          "units": 7,
+          "chars": 633,
+          "ids": [
+            "rail_quality:art-66",
+            "construction_quality:art-6",
+            "construction_quality:art-66",
+            "rail_quality:art-6",
+            "rail_quality:art-53",
+            "construction_quality:art-65",
+            "rail_quality:art-54"
+          ],
+          "texts": [
+            {
+              "article_id": "rail_quality:art-66",
+              "chars": 210,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-6",
+              "chars": 32,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-66",
+              "chars": 83,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-6",
+              "chars": 67,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-53",
+              "chars": 49,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-65",
+              "chars": 137,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-54",
+              "chars": 55,
+              "truncated": false,
+              "relation": null
+            }
+          ],
+          "supplements": 2
+        },
+        "top5_supplement": {
+          "hit": true,
+          "all_covered": true,
+          "groups_hit": 1,
+          "groups_total": 1,
+          "recall": 1.0,
+          "units": 6,
+          "chars": 578,
+          "ids": [
+            "rail_quality:art-66",
+            "construction_quality:art-6",
+            "construction_quality:art-66",
+            "rail_quality:art-6",
+            "rail_quality:art-53",
+            "construction_quality:art-65"
+          ],
+          "texts": [
+            {
+              "article_id": "rail_quality:art-66",
+              "chars": 210,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-6",
+              "chars": 32,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-66",
+              "chars": 83,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-6",
+              "chars": 67,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-53",
+              "chars": 49,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-65",
+              "chars": 137,
+              "truncated": false,
+              "relation": {
+                "relation_type": "explicit_article",
+                "source_article_id": "rail_quality:art-66",
+                "relation_id": "rel-017",
+                "evidence_text": "《建设工程质量管理条例》第六十五条"
+              }
+            }
+          ],
+          "supplements": 1
+        }
+      }
+    },
+    {
+      "qid": "D04",
+      "question": "监理单位与施工单位串通降低工程质量，铁路规定第67条依照的上位条例怎么处罚？",
+      "required_groups": [
+        "construction_quality:art-67"
+      ],
+      "note": "补证题：A67为入口，gold为B67；查询不提目标条号",
+      "answerability": {
+        "unknown_terms": [],
+        "unknown_count": 0,
+        "min_unknown": 3,
+        "semantic_floor": 0.62,
+        "term_coverage": 0.9231,
+        "max_sem": 0.7426,
+        "decision": "answer"
+      },
+      "normalized_query": "监理单位与施工单位串通降低工程质量，铁路规定第六十七条依照的上位条例怎么处罚？",
+      "top7_ids": [
+        "rail_quality:art-67",
+        "construction_quality:art-67",
+        "rail_quality:art-73",
+        "rail_quality:art-63",
+        "rail_quality:art-68",
+        "rail_quality:art-71",
+        "rail_quality:art-58"
+      ],
+      "top7_scores": [
+        {
+          "article_id": "rail_quality:art-67",
+          "score": 0.032522,
+          "lex_rank": 2,
+          "sem_rank": 1
+        },
+        {
+          "article_id": "construction_quality:art-67",
+          "score": 0.031778,
+          "lex_rank": 1,
+          "sem_rank": 5
+        },
+        {
+          "article_id": "rail_quality:art-73",
+          "score": 0.030303,
+          "lex_rank": 6,
+          "sem_rank": 6
+        },
+        {
+          "article_id": "rail_quality:art-63",
+          "score": 0.029139,
+          "lex_rank": 14,
+          "sem_rank": 4
+        },
+        {
+          "article_id": "rail_quality:art-68",
+          "score": 0.029116,
+          "lex_rank": 17,
+          "sem_rank": 2
+        },
+        {
+          "article_id": "rail_quality:art-71",
+          "score": 0.02901,
+          "lex_rank": 11,
+          "sem_rank": 7
+        },
+        {
+          "article_id": "rail_quality:art-58",
+          "score": 0.027651,
+          "lex_rank": 9,
+          "sem_rank": 16
+        }
+      ],
+      "elapsed_ms": 8.05,
+      "search_ms": 7.3,
+      "methods": {
+        "top5": {
+          "hit": true,
+          "all_covered": true,
+          "groups_hit": 1,
+          "groups_total": 1,
+          "recall": 1.0,
+          "units": 5,
+          "chars": 1109,
+          "ids": [
+            "rail_quality:art-67",
+            "construction_quality:art-67",
+            "rail_quality:art-73",
+            "rail_quality:art-63",
+            "rail_quality:art-68"
+          ],
+          "texts": [
+            {
+              "article_id": "rail_quality:art-67",
+              "chars": 299,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-67",
+              "chars": 152,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-73",
+              "chars": 62,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-63",
+              "chars": 386,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-68",
+              "chars": 210,
+              "truncated": false,
+              "relation": null
+            }
+          ],
+          "supplements": 0
+        },
+        "top7": {
+          "hit": true,
+          "all_covered": true,
+          "groups_hit": 1,
+          "groups_total": 1,
+          "recall": 1.0,
+          "units": 7,
+          "chars": 1539,
+          "ids": [
+            "rail_quality:art-67",
+            "construction_quality:art-67",
+            "rail_quality:art-73",
+            "rail_quality:art-63",
+            "rail_quality:art-68",
+            "rail_quality:art-71",
+            "rail_quality:art-58"
+          ],
+          "texts": [
+            {
+              "article_id": "rail_quality:art-67",
+              "chars": 299,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-67",
+              "chars": 152,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-73",
+              "chars": 62,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-63",
+              "chars": 386,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-68",
+              "chars": 210,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-71",
+              "chars": 79,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-58",
+              "chars": 351,
+              "truncated": false,
+              "relation": null
+            }
+          ],
+          "supplements": 2
+        },
+        "top5_supplement": {
+          "hit": true,
+          "all_covered": true,
+          "groups_hit": 1,
+          "groups_total": 1,
+          "recall": 1.0,
+          "units": 5,
+          "chars": 1109,
+          "ids": [
+            "rail_quality:art-67",
+            "construction_quality:art-67",
+            "rail_quality:art-73",
+            "rail_quality:art-63",
+            "rail_quality:art-68"
+          ],
+          "texts": [
+            {
+              "article_id": "rail_quality:art-67",
+              "chars": 299,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-67",
+              "chars": 152,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-73",
+              "chars": 62,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-63",
+              "chars": 386,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-68",
+              "chars": 210,
+              "truncated": false,
+              "relation": null
+            }
+          ],
+          "supplements": 0
+        }
+      }
+    },
+    {
+      "qid": "D05",
+      "question": "铁路建设项目开工前在哪里办理工程质量监督手续？",
+      "required_groups": [
+        "rail_quality:art-12"
+      ],
+      "note": "A12",
+      "answerability": {
+        "unknown_terms": [],
+        "unknown_count": 0,
+        "min_unknown": 3,
+        "semantic_floor": 0.62,
+        "term_coverage": 1.0,
+        "max_sem": 0.7865,
+        "decision": "answer"
+      },
+      "normalized_query": "铁路建设项目开工前在哪里办理工程质量监督手续？",
+      "top7_ids": [
+        "rail_quality:art-12",
+        "construction_quality:art-13",
+        "rail_quality:art-8",
+        "rail_quality:art-50",
+        "rail_quality:art-18",
+        "rail_quality:art-17",
+        "rail_quality:art-28"
+      ],
+      "top7_scores": [
+        {
+          "article_id": "rail_quality:art-12",
+          "score": 0.032787,
+          "lex_rank": 1,
+          "sem_rank": 1
+        },
+        {
+          "article_id": "construction_quality:art-13",
+          "score": 0.031754,
+          "lex_rank": 2,
+          "sem_rank": 4
+        },
+        {
+          "article_id": "rail_quality:art-8",
+          "score": 0.031754,
+          "lex_rank": 4,
+          "sem_rank": 2
+        },
+        {
+          "article_id": "rail_quality:art-50",
+          "score": 0.029206,
+          "lex_rank": 15,
+          "sem_rank": 3
+        },
+        {
+          "article_id": "rail_quality:art-18",
+          "score": 0.028992,
+          "lex_rank": 10,
+          "sem_rank": 8
+        },
+        {
+          "article_id": "rail_quality:art-17",
+          "score": 0.028382,
+          "lex_rank": 9,
+          "sem_rank": 12
+        },
+        {
+          "article_id": "rail_quality:art-28",
+          "score": 0.027397,
+          "lex_rank": 13,
+          "sem_rank": 13
+        }
+      ],
+      "elapsed_ms": 8.09,
+      "search_ms": 6.8,
+      "methods": {
+        "top5": {
+          "hit": true,
+          "all_covered": true,
+          "groups_hit": 1,
+          "groups_total": 1,
+          "recall": 1.0,
+          "units": 5,
+          "chars": 480,
+          "ids": [
+            "rail_quality:art-12",
+            "construction_quality:art-13",
+            "rail_quality:art-8",
+            "rail_quality:art-50",
+            "rail_quality:art-18"
+          ],
+          "texts": [
+            {
+              "article_id": "rail_quality:art-12",
+              "chars": 98,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-13",
+              "chars": 62,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-8",
+              "chars": 119,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-50",
+              "chars": 116,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-18",
+              "chars": 85,
+              "truncated": false,
+              "relation": null
+            }
+          ],
+          "supplements": 0
+        },
+        "top7": {
+          "hit": true,
+          "all_covered": true,
+          "groups_hit": 1,
+          "groups_total": 1,
+          "recall": 1.0,
+          "units": 7,
+          "chars": 800,
+          "ids": [
+            "rail_quality:art-12",
+            "construction_quality:art-13",
+            "rail_quality:art-8",
+            "rail_quality:art-50",
+            "rail_quality:art-18",
+            "rail_quality:art-17",
+            "rail_quality:art-28"
+          ],
+          "texts": [
+            {
+              "article_id": "rail_quality:art-12",
+              "chars": 98,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-13",
+              "chars": 62,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-8",
+              "chars": 119,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-50",
+              "chars": 116,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-18",
+              "chars": 85,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-17",
+              "chars": 239,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-28",
+              "chars": 81,
+              "truncated": false,
+              "relation": null
+            }
+          ],
+          "supplements": 2
+        },
+        "top5_supplement": {
+          "hit": true,
+          "all_covered": true,
+          "groups_hit": 1,
+          "groups_total": 1,
+          "recall": 1.0,
+          "units": 5,
+          "chars": 480,
+          "ids": [
+            "rail_quality:art-12",
+            "construction_quality:art-13",
+            "rail_quality:art-8",
+            "rail_quality:art-50",
+            "rail_quality:art-18"
+          ],
+          "texts": [
+            {
+              "article_id": "rail_quality:art-12",
+              "chars": 98,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-13",
+              "chars": 62,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-8",
+              "chars": 119,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-50",
+              "chars": 116,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-18",
+              "chars": 85,
+              "truncated": false,
+              "relation": null
+            }
+          ],
+          "supplements": 0
+        }
+      }
+    },
+    {
+      "qid": "D06",
+      "question": "铁路工程竣工验收由谁组织，提前几天通知监管部门，验收后多久备案？",
+      "required_groups": [
+        "rail_quality:art-16"
+      ],
+      "note": "A16两款",
+      "answerability": {
+        "unknown_terms": [],
+        "unknown_count": 0,
+        "min_unknown": 3,
+        "semantic_floor": 0.62,
+        "term_coverage": 0.8462,
+        "max_sem": 0.7844,
+        "decision": "answer"
+      },
+      "normalized_query": "铁路工程竣工验收由谁组织，提前几天通知监管部门，验收后多久备案？",
+      "top7_ids": [
+        "rail_quality:art-16",
+        "rail_quality:art-52",
+        "construction_quality:art-49",
+        "rail_quality:art-61",
+        "rail_quality:art-53",
+        "rail_quality:art-17",
+        "rail_quality:art-12"
+      ],
+      "top7_scores": [
+        {
+          "article_id": "rail_quality:art-16",
+          "score": 0.032787,
+          "lex_rank": 1,
+          "sem_rank": 1
+        },
+        {
+          "article_id": "rail_quality:art-52",
+          "score": 0.031514,
+          "lex_rank": 2,
+          "sem_rank": 5
+        },
+        {
+          "article_id": "construction_quality:art-49",
+          "score": 0.031498,
+          "lex_rank": 3,
+          "sem_rank": 4
+        },
+        {
+          "article_id": "rail_quality:art-61",
+          "score": 0.031054,
+          "lex_rank": 7,
+          "sem_rank": 2
+        },
+        {
+          "article_id": "rail_quality:art-53",
+          "score": 0.029199,
+          "lex_rank": 8,
+          "sem_rank": 9
+        },
+        {
+          "article_id": "rail_quality:art-17",
+          "score": 0.029031,
+          "lex_rank": 16,
+          "sem_rank": 3
+        },
+        {
+          "article_id": "rail_quality:art-12",
+          "score": 0.027885,
+          "lex_rank": 5,
+          "sem_rank": 20
+        }
+      ],
+      "elapsed_ms": 8.64,
+      "search_ms": 7.6,
+      "methods": {
+        "top5": {
+          "hit": true,
+          "all_covered": true,
+          "groups_hit": 1,
+          "groups_total": 1,
+          "recall": 1.0,
+          "units": 5,
+          "chars": 612,
+          "ids": [
+            "rail_quality:art-16",
+            "rail_quality:art-52",
+            "construction_quality:art-49",
+            "rail_quality:art-61",
+            "rail_quality:art-53"
+          ],
+          "texts": [
+            {
+              "article_id": "rail_quality:art-16",
+              "chars": 178,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-52",
+              "chars": 68,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-49",
+              "chars": 159,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-61",
+              "chars": 158,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-53",
+              "chars": 49,
+              "truncated": false,
+              "relation": null
+            }
+          ],
+          "supplements": 0
+        },
+        "top7": {
+          "hit": true,
+          "all_covered": true,
+          "groups_hit": 1,
+          "groups_total": 1,
+          "recall": 1.0,
+          "units": 7,
+          "chars": 949,
+          "ids": [
+            "rail_quality:art-16",
+            "rail_quality:art-52",
+            "construction_quality:art-49",
+            "rail_quality:art-61",
+            "rail_quality:art-53",
+            "rail_quality:art-17",
+            "rail_quality:art-12"
+          ],
+          "texts": [
+            {
+              "article_id": "rail_quality:art-16",
+              "chars": 178,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-52",
+              "chars": 68,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-49",
+              "chars": 159,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-61",
+              "chars": 158,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-53",
+              "chars": 49,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-17",
+              "chars": 239,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-12",
+              "chars": 98,
+              "truncated": false,
+              "relation": null
+            }
+          ],
+          "supplements": 2
+        },
+        "top5_supplement": {
+          "hit": true,
+          "all_covered": true,
+          "groups_hit": 1,
+          "groups_total": 1,
+          "recall": 1.0,
+          "units": 5,
+          "chars": 612,
+          "ids": [
+            "rail_quality:art-16",
+            "rail_quality:art-52",
+            "construction_quality:art-49",
+            "rail_quality:art-61",
+            "rail_quality:art-53"
+          ],
+          "texts": [
+            {
+              "article_id": "rail_quality:art-16",
+              "chars": 178,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-52",
+              "chars": 68,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-49",
+              "chars": 159,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-61",
+              "chars": 158,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-53",
+              "chars": 49,
+              "truncated": false,
+              "relation": null
+            }
+          ],
+          "supplements": 0
+        }
+      }
+    },
+    {
+      "qid": "D07",
+      "question": "隐蔽工程在隐蔽前，施工单位应当通知哪些单位？",
+      "required_groups": [
+        "construction_quality:art-30"
+      ],
+      "note": "B30",
+      "answerability": {
+        "unknown_terms": [],
+        "unknown_count": 0,
+        "min_unknown": 3,
+        "semantic_floor": 0.62,
+        "term_coverage": 1.0,
+        "max_sem": 0.7153,
+        "decision": "answer"
+      },
+      "normalized_query": "隐蔽工程在隐蔽前，施工单位应当通知哪些单位？",
+      "top7_ids": [
+        "construction_quality:art-30",
+        "rail_quality:art-31",
+        "rail_quality:art-38",
+        "rail_quality:art-40",
+        "rail_quality:art-29",
+        "construction_quality:art-28",
+        "construction_quality:art-61"
+      ],
+      "top7_scores": [
+        {
+          "article_id": "construction_quality:art-30",
+          "score": 0.032787,
+          "lex_rank": 1,
+          "sem_rank": 1
+        },
+        {
+          "article_id": "rail_quality:art-31",
+          "score": 0.032258,
+          "lex_rank": 2,
+          "sem_rank": 2
+        },
+        {
+          "article_id": "rail_quality:art-38",
+          "score": 0.031498,
+          "lex_rank": 3,
+          "sem_rank": 4
+        },
+        {
+          "article_id": "rail_quality:art-40",
+          "score": 0.02971,
+          "lex_rank": 4,
+          "sem_rank": 11
+        },
+        {
+          "article_id": "rail_quality:art-29",
+          "score": 0.027027,
+          "lex_rank": 14,
+          "sem_rank": 14
+        },
+        {
+          "article_id": "construction_quality:art-28",
+          "score": 0.026838,
+          "lex_rank": 9,
+          "sem_rank": 21
+        },
+        {
+          "article_id": "construction_quality:art-61",
+          "score": 0.025397,
+          "lex_rank": 30,
+          "sem_rank": 10
+        }
+      ],
+      "elapsed_ms": 5.69,
+      "search_ms": 4.7,
+      "methods": {
+        "top5": {
+          "hit": true,
+          "all_covered": true,
+          "groups_hit": 1,
+          "groups_total": 1,
+          "recall": 1.0,
+          "units": 5,
+          "chars": 482,
+          "ids": [
+            "construction_quality:art-30",
+            "rail_quality:art-31",
+            "rail_quality:art-38",
+            "rail_quality:art-40",
+            "rail_quality:art-29"
+          ],
+          "texts": [
+            {
+              "article_id": "construction_quality:art-30",
+              "chars": 81,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-31",
+              "chars": 123,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-38",
+              "chars": 52,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-40",
+              "chars": 117,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-29",
+              "chars": 109,
+              "truncated": false,
+              "relation": null
+            }
+          ],
+          "supplements": 0
+        },
+        "top7": {
+          "hit": true,
+          "all_covered": true,
+          "groups_hit": 1,
+          "groups_total": 1,
+          "recall": 1.0,
+          "units": 7,
+          "chars": 728,
+          "ids": [
+            "construction_quality:art-30",
+            "rail_quality:art-31",
+            "rail_quality:art-38",
+            "rail_quality:art-40",
+            "rail_quality:art-29",
+            "construction_quality:art-28",
+            "construction_quality:art-61"
+          ],
+          "texts": [
+            {
+              "article_id": "construction_quality:art-30",
+              "chars": 81,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-31",
+              "chars": 123,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-38",
+              "chars": 52,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-40",
+              "chars": 117,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-29",
+              "chars": 109,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-28",
+              "chars": 85,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-61",
+              "chars": 161,
+              "truncated": false,
+              "relation": null
+            }
+          ],
+          "supplements": 2
+        },
+        "top5_supplement": {
+          "hit": true,
+          "all_covered": true,
+          "groups_hit": 1,
+          "groups_total": 1,
+          "recall": 1.0,
+          "units": 5,
+          "chars": 482,
+          "ids": [
+            "construction_quality:art-30",
+            "rail_quality:art-31",
+            "rail_quality:art-38",
+            "rail_quality:art-40",
+            "rail_quality:art-29"
+          ],
+          "texts": [
+            {
+              "article_id": "construction_quality:art-30",
+              "chars": 81,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-31",
+              "chars": 123,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-38",
+              "chars": 52,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-40",
+              "chars": 117,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-29",
+              "chars": 109,
+              "truncated": false,
+              "relation": null
+            }
+          ],
+          "supplements": 0
+        }
+      }
+    },
+    {
+      "qid": "D08",
+      "question": "施工中出现质量问题或者竣工验收不合格，施工单位应当承担什么责任？",
+      "required_groups": [
+        "construction_quality:art-32"
+      ],
+      "note": "B32",
+      "answerability": {
+        "unknown_terms": [],
+        "unknown_count": 0,
+        "min_unknown": 3,
+        "semantic_floor": 0.62,
+        "term_coverage": 1.0,
+        "max_sem": 0.8047,
+        "decision": "answer"
+      },
+      "normalized_query": "施工中出现质量问题或者竣工验收不合格，施工单位应当承担什么责任？",
+      "top7_ids": [
+        "construction_quality:art-32",
+        "construction_quality:art-16",
+        "construction_quality:art-58",
+        "rail_quality:art-15",
+        "rail_quality:art-52",
+        "construction_quality:art-37",
+        "construction_quality:art-29"
+      ],
+      "top7_scores": [
+        {
+          "article_id": "construction_quality:art-32",
+          "score": 0.032787,
+          "lex_rank": 1,
+          "sem_rank": 1
+        },
+        {
+          "article_id": "construction_quality:art-16",
+          "score": 0.030769,
+          "lex_rank": 5,
+          "sem_rank": 5
+        },
+        {
+          "article_id": "construction_quality:art-58",
+          "score": 0.030415,
+          "lex_rank": 2,
+          "sem_rank": 10
+        },
+        {
+          "article_id": "rail_quality:art-15",
+          "score": 0.029139,
+          "lex_rank": 14,
+          "sem_rank": 4
+        },
+        {
+          "article_id": "rail_quality:art-52",
+          "score": 0.028405,
+          "lex_rank": 13,
+          "sem_rank": 8
+        },
+        {
+          "article_id": "construction_quality:art-37",
+          "score": 0.028382,
+          "lex_rank": 12,
+          "sem_rank": 9
+        },
+        {
+          "article_id": "construction_quality:art-29",
+          "score": 0.027623,
+          "lex_rank": 27,
+          "sem_rank": 2
+        }
+      ],
+      "elapsed_ms": 7.79,
+      "search_ms": 6.6,
+      "methods": {
+        "top5": {
+          "hit": true,
+          "all_covered": true,
+          "groups_hit": 1,
+          "groups_total": 1,
+          "recall": 1.0,
+          "units": 5,
+          "chars": 552,
+          "ids": [
+            "construction_quality:art-32",
+            "construction_quality:art-16",
+            "construction_quality:art-58",
+            "rail_quality:art-15",
+            "rail_quality:art-52"
+          ],
+          "texts": [
+            {
+              "article_id": "construction_quality:art-32",
+              "chars": 47,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-16",
+              "chars": 211,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-58",
+              "chars": 127,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-15",
+              "chars": 99,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-52",
+              "chars": 68,
+              "truncated": false,
+              "relation": null
+            }
+          ],
+          "supplements": 0
+        },
+        "top7": {
+          "hit": true,
+          "all_covered": true,
+          "groups_hit": 1,
+          "groups_total": 1,
+          "recall": 1.0,
+          "units": 7,
+          "chars": 769,
+          "ids": [
+            "construction_quality:art-32",
+            "construction_quality:art-16",
+            "construction_quality:art-58",
+            "rail_quality:art-15",
+            "rail_quality:art-52",
+            "construction_quality:art-37",
+            "construction_quality:art-29"
+          ],
+          "texts": [
+            {
+              "article_id": "construction_quality:art-32",
+              "chars": 47,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-16",
+              "chars": 211,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-58",
+              "chars": 127,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-15",
+              "chars": 99,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-52",
+              "chars": 68,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-37",
+              "chars": 126,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-29",
+              "chars": 91,
+              "truncated": false,
+              "relation": null
+            }
+          ],
+          "supplements": 2
+        },
+        "top5_supplement": {
+          "hit": true,
+          "all_covered": true,
+          "groups_hit": 1,
+          "groups_total": 1,
+          "recall": 1.0,
+          "units": 5,
+          "chars": 552,
+          "ids": [
+            "construction_quality:art-32",
+            "construction_quality:art-16",
+            "construction_quality:art-58",
+            "rail_quality:art-15",
+            "rail_quality:art-52"
+          ],
+          "texts": [
+            {
+              "article_id": "construction_quality:art-32",
+              "chars": 47,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-16",
+              "chars": 211,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-58",
+              "chars": 127,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-15",
+              "chars": 99,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-52",
+              "chars": 68,
+              "truncated": false,
+              "relation": null
+            }
+          ],
+          "supplements": 0
+        }
+      }
+    },
+    {
+      "qid": "D09",
+      "question": "施工图设计文件未经审查批准可以使用吗？审查办法由谁制定？",
+      "required_groups": [
+        "construction_quality:art-11"
+      ],
+      "note": "B11",
+      "answerability": {
+        "unknown_terms": [],
+        "unknown_count": 0,
+        "min_unknown": 3,
+        "semantic_floor": 0.62,
+        "term_coverage": 1.0,
+        "max_sem": 0.7776,
+        "decision": "answer"
+      },
+      "normalized_query": "施工图设计文件未经审查批准可以使用吗？审查办法由谁制定？",
+      "top7_ids": [
+        "construction_quality:art-11",
+        "construction_quality:art-23",
+        "rail_quality:art-23",
+        "rail_quality:art-29",
+        "construction_quality:art-56",
+        "rail_quality:art-11",
+        "rail_quality:art-38"
+      ],
+      "top7_scores": [
+        {
+          "article_id": "construction_quality:art-11",
+          "score": 0.032787,
+          "lex_rank": 1,
+          "sem_rank": 1
+        },
+        {
+          "article_id": "construction_quality:art-23",
+          "score": 0.031754,
+          "lex_rank": 4,
+          "sem_rank": 2
+        },
+        {
+          "article_id": "rail_quality:art-23",
+          "score": 0.030769,
+          "lex_rank": 5,
+          "sem_rank": 5
+        },
+        {
+          "article_id": "rail_quality:art-29",
+          "score": 0.030303,
+          "lex_rank": 6,
+          "sem_rank": 6
+        },
+        {
+          "article_id": "construction_quality:art-56",
+          "score": 0.029462,
+          "lex_rank": 2,
+          "sem_rank": 15
+        },
+        {
+          "article_id": "rail_quality:art-11",
+          "score": 0.028814,
+          "lex_rank": 12,
+          "sem_rank": 7
+        },
+        {
+          "article_id": "rail_quality:art-38",
+          "score": 0.02879,
+          "lex_rank": 11,
+          "sem_rank": 8
+        }
+      ],
+      "elapsed_ms": 8.98,
+      "search_ms": 7.4,
+      "methods": {
+        "top5": {
+          "hit": true,
+          "all_covered": true,
+          "groups_hit": 1,
+          "groups_total": 1,
+          "recall": 1.0,
+          "units": 5,
+          "chars": 660,
+          "ids": [
+            "construction_quality:art-11",
+            "construction_quality:art-23",
+            "rail_quality:art-23",
+            "rail_quality:art-29",
+            "construction_quality:art-56"
+          ],
+          "texts": [
+            {
+              "article_id": "construction_quality:art-11",
+              "chars": 66,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-23",
+              "chars": 37,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-23",
+              "chars": 172,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-29",
+              "chars": 109,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-56",
+              "chars": 276,
+              "truncated": false,
+              "relation": null
+            }
+          ],
+          "supplements": 0
+        },
+        "top7": {
+          "hit": true,
+          "all_covered": true,
+          "groups_hit": 1,
+          "groups_total": 1,
+          "recall": 1.0,
+          "units": 7,
+          "chars": 773,
+          "ids": [
+            "construction_quality:art-11",
+            "construction_quality:art-23",
+            "rail_quality:art-23",
+            "rail_quality:art-29",
+            "construction_quality:art-56",
+            "rail_quality:art-11",
+            "rail_quality:art-38"
+          ],
+          "texts": [
+            {
+              "article_id": "construction_quality:art-11",
+              "chars": 66,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-23",
+              "chars": 37,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-23",
+              "chars": 172,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-29",
+              "chars": 109,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-56",
+              "chars": 276,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-11",
+              "chars": 61,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-38",
+              "chars": 52,
+              "truncated": false,
+              "relation": null
+            }
+          ],
+          "supplements": 2
+        },
+        "top5_supplement": {
+          "hit": true,
+          "all_covered": true,
+          "groups_hit": 1,
+          "groups_total": 1,
+          "recall": 1.0,
+          "units": 5,
+          "chars": 660,
+          "ids": [
+            "construction_quality:art-11",
+            "construction_quality:art-23",
+            "rail_quality:art-23",
+            "rail_quality:art-29",
+            "construction_quality:art-56"
+          ],
+          "texts": [
+            {
+              "article_id": "construction_quality:art-11",
+              "chars": 66,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-23",
+              "chars": 37,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-23",
+              "chars": 172,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-29",
+              "chars": 109,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-56",
+              "chars": 276,
+              "truncated": false,
+              "relation": null
+            }
+          ],
+          "supplements": 0
+        }
+      }
+    },
+    {
+      "qid": "D10",
+      "question": "建设单位能否明示或者暗示施工单位使用不合格的建筑材料？进场材料由谁组织检查？",
+      "required_groups": [
+        "rail_quality:art-13"
+      ],
+      "note": "A13两款",
+      "answerability": {
+        "unknown_terms": [],
+        "unknown_count": 0,
+        "min_unknown": 3,
+        "semantic_floor": 0.62,
+        "term_coverage": 1.0,
+        "max_sem": 0.7015,
+        "decision": "answer"
+      },
+      "normalized_query": "建设单位能否明示或者暗示施工单位使用不合格的建筑材料？进场材料由谁组织检查？",
+      "top7_ids": [
+        "construction_quality:art-14",
+        "rail_quality:art-13",
+        "construction_quality:art-29",
+        "construction_quality:art-51",
+        "rail_quality:art-30",
+        "construction_quality:art-37",
+        "construction_quality:art-56"
+      ],
+      "top7_scores": [
+        {
+          "article_id": "construction_quality:art-14",
+          "score": 0.032522,
+          "lex_rank": 2,
+          "sem_rank": 1
+        },
+        {
+          "article_id": "rail_quality:art-13",
+          "score": 0.032522,
+          "lex_rank": 1,
+          "sem_rank": 2
+        },
+        {
+          "article_id": "construction_quality:art-29",
+          "score": 0.030159,
+          "lex_rank": 10,
+          "sem_rank": 3
+        },
+        {
+          "article_id": "construction_quality:art-51",
+          "score": 0.029911,
+          "lex_rank": 4,
+          "sem_rank": 10
+        },
+        {
+          "article_id": "rail_quality:art-30",
+          "score": 0.029631,
+          "lex_rank": 8,
+          "sem_rank": 7
+        },
+        {
+          "article_id": "construction_quality:art-37",
+          "score": 0.02885,
+          "lex_rank": 13,
+          "sem_rank": 6
+        },
+        {
+          "article_id": "construction_quality:art-56",
+          "score": 0.028531,
+          "lex_rank": 3,
+          "sem_rank": 19
+        }
+      ],
+      "elapsed_ms": 9.79,
+      "search_ms": 8.7,
+      "methods": {
+        "top5": {
+          "hit": true,
+          "all_covered": true,
+          "groups_hit": 1,
+          "groups_total": 1,
+          "recall": 1.0,
+          "units": 5,
+          "chars": 626,
+          "ids": [
+            "construction_quality:art-14",
+            "rail_quality:art-13",
+            "construction_quality:art-29",
+            "construction_quality:art-51",
+            "rail_quality:art-30"
+          ],
+          "texts": [
+            {
+              "article_id": "construction_quality:art-14",
+              "chars": 104,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-13",
+              "chars": 158,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-29",
+              "chars": 91,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-51",
+              "chars": 70,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-30",
+              "chars": 203,
+              "truncated": false,
+              "relation": null
+            }
+          ],
+          "supplements": 0
+        },
+        "top7": {
+          "hit": true,
+          "all_covered": true,
+          "groups_hit": 1,
+          "groups_total": 1,
+          "recall": 1.0,
+          "units": 7,
+          "chars": 1028,
+          "ids": [
+            "construction_quality:art-14",
+            "rail_quality:art-13",
+            "construction_quality:art-29",
+            "construction_quality:art-51",
+            "rail_quality:art-30",
+            "construction_quality:art-37",
+            "construction_quality:art-56"
+          ],
+          "texts": [
+            {
+              "article_id": "construction_quality:art-14",
+              "chars": 104,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-13",
+              "chars": 158,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-29",
+              "chars": 91,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-51",
+              "chars": 70,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-30",
+              "chars": 203,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-37",
+              "chars": 126,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-56",
+              "chars": 276,
+              "truncated": false,
+              "relation": null
+            }
+          ],
+          "supplements": 2
+        },
+        "top5_supplement": {
+          "hit": true,
+          "all_covered": true,
+          "groups_hit": 1,
+          "groups_total": 1,
+          "recall": 1.0,
+          "units": 5,
+          "chars": 626,
+          "ids": [
+            "construction_quality:art-14",
+            "rail_quality:art-13",
+            "construction_quality:art-29",
+            "construction_quality:art-51",
+            "rail_quality:art-30"
+          ],
+          "texts": [
+            {
+              "article_id": "construction_quality:art-14",
+              "chars": 104,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-13",
+              "chars": 158,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-29",
+              "chars": 91,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-51",
+              "chars": 70,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-30",
+              "chars": 203,
+              "truncated": false,
+              "relation": null
+            }
+          ],
+          "supplements": 0
+        }
+      }
+    },
+    {
+      "qid": "D16",
+      "question": "试块取样送检由谁监督？检验记录由谁签字？",
+      "required_groups": [
+        "rail_quality:art-30",
+        "construction_quality:art-29|construction_quality:art-31"
+      ],
+      "note": "多证据题：A30与B29/B31两组都必需",
+      "answerability": {
+        "unknown_terms": [],
+        "unknown_count": 0,
+        "min_unknown": 3,
+        "semantic_floor": 0.62,
+        "term_coverage": 1.0,
+        "max_sem": 0.5098,
+        "decision": "answer"
+      },
+      "normalized_query": "试块取样送检由谁监督？检验记录由谁签字？",
+      "top7_ids": [
+        "rail_quality:art-30",
+        "construction_quality:art-31",
+        "construction_quality:art-29",
+        "rail_quality:art-39",
+        "construction_quality:art-37",
+        "rail_quality:art-55",
+        "rail_quality:art-50"
+      ],
+      "top7_scores": [
+        {
+          "article_id": "rail_quality:art-30",
+          "score": 0.032258,
+          "lex_rank": 2,
+          "sem_rank": 2
+        },
+        {
+          "article_id": "construction_quality:art-31",
+          "score": 0.032018,
+          "lex_rank": 4,
+          "sem_rank": 1
+        },
+        {
+          "article_id": "construction_quality:art-29",
+          "score": 0.030679,
+          "lex_rank": 1,
+          "sem_rank": 10
+        },
+        {
+          "article_id": "rail_quality:art-39",
+          "score": 0.029274,
+          "lex_rank": 12,
+          "sem_rank": 5
+        },
+        {
+          "article_id": "construction_quality:art-37",
+          "score": 0.029199,
+          "lex_rank": 8,
+          "sem_rank": 9
+        },
+        {
+          "article_id": "rail_quality:art-55",
+          "score": 0.028259,
+          "lex_rank": 7,
+          "sem_rank": 15
+        },
+        {
+          "article_id": "rail_quality:art-50",
+          "score": 0.027673,
+          "lex_rank": 23,
+          "sem_rank": 4
+        }
+      ],
+      "elapsed_ms": 8.69,
+      "search_ms": 6.7,
+      "methods": {
+        "top5": {
+          "hit": true,
+          "all_covered": true,
+          "groups_hit": 2,
+          "groups_total": 2,
+          "recall": 1.0,
+          "units": 5,
+          "chars": 634,
+          "ids": [
+            "rail_quality:art-30",
+            "construction_quality:art-31",
+            "construction_quality:art-29",
+            "rail_quality:art-39",
+            "construction_quality:art-37"
+          ],
+          "texts": [
+            {
+              "article_id": "rail_quality:art-30",
+              "chars": 203,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-31",
+              "chars": 75,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-29",
+              "chars": 91,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-39",
+              "chars": 139,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-37",
+              "chars": 126,
+              "truncated": false,
+              "relation": null
+            }
+          ],
+          "supplements": 0
+        },
+        "top7": {
+          "hit": true,
+          "all_covered": true,
+          "groups_hit": 2,
+          "groups_total": 2,
+          "recall": 1.0,
+          "units": 7,
+          "chars": 808,
+          "ids": [
+            "rail_quality:art-30",
+            "construction_quality:art-31",
+            "construction_quality:art-29",
+            "rail_quality:art-39",
+            "construction_quality:art-37",
+            "rail_quality:art-55",
+            "rail_quality:art-50"
+          ],
+          "texts": [
+            {
+              "article_id": "rail_quality:art-30",
+              "chars": 203,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-31",
+              "chars": 75,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-29",
+              "chars": 91,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-39",
+              "chars": 139,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-37",
+              "chars": 126,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-55",
+              "chars": 58,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-50",
+              "chars": 116,
+              "truncated": false,
+              "relation": null
+            }
+          ],
+          "supplements": 2
+        },
+        "top5_supplement": {
+          "hit": true,
+          "all_covered": true,
+          "groups_hit": 2,
+          "groups_total": 2,
+          "recall": 1.0,
+          "units": 5,
+          "chars": 634,
+          "ids": [
+            "rail_quality:art-30",
+            "construction_quality:art-31",
+            "construction_quality:art-29",
+            "rail_quality:art-39",
+            "construction_quality:art-37"
+          ],
+          "texts": [
+            {
+              "article_id": "rail_quality:art-30",
+              "chars": 203,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-31",
+              "chars": 75,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-29",
+              "chars": 91,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-39",
+              "chars": 139,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-37",
+              "chars": 126,
+              "truncated": false,
+              "relation": null
+            }
+          ],
+          "supplements": 0
+        }
+      }
+    },
+    {
+      "qid": "D17",
+      "question": "施工单位偷工减料、使用不合格材料怎么处罚？未对涉及结构安全的试块取样检测又怎么处罚？",
+      "required_groups": [
+        "rail_quality:art-65",
+        "rail_quality:art-66"
+      ],
+      "note": "多证据题：A65与A66两条都必需",
+      "answerability": {
+        "unknown_terms": [],
+        "unknown_count": 0,
+        "min_unknown": 3,
+        "semantic_floor": 0.62,
+        "term_coverage": 1.0,
+        "max_sem": 0.747,
+        "decision": "answer"
+      },
+      "normalized_query": "施工单位偷工减料、使用不合格材料怎么处罚？未对涉及结构安全的试块取样检测又怎么处罚？",
+      "top7_ids": [
+        "construction_quality:art-31",
+        "construction_quality:art-65",
+        "construction_quality:art-64",
+        "rail_quality:art-66",
+        "rail_quality:art-65",
+        "rail_quality:art-30",
+        "rail_quality:art-29"
+      ],
+      "top7_scores": [
+        {
+          "article_id": "construction_quality:art-31",
+          "score": 0.032266,
+          "lex_rank": 1,
+          "sem_rank": 3
+        },
+        {
+          "article_id": "construction_quality:art-65",
+          "score": 0.032266,
+          "lex_rank": 3,
+          "sem_rank": 1
+        },
+        {
+          "article_id": "construction_quality:art-64",
+          "score": 0.031281,
+          "lex_rank": 6,
+          "sem_rank": 2
+        },
+        {
+          "article_id": "rail_quality:art-66",
+          "score": 0.03101,
+          "lex_rank": 4,
+          "sem_rank": 5
+        },
+        {
+          "article_id": "rail_quality:art-65",
+          "score": 0.029514,
+          "lex_rank": 12,
+          "sem_rank": 4
+        },
+        {
+          "article_id": "rail_quality:art-30",
+          "score": 0.028629,
+          "lex_rank": 2,
+          "sem_rank": 20
+        },
+        {
+          "article_id": "rail_quality:art-29",
+          "score": 0.027693,
+          "lex_rank": 8,
+          "sem_rank": 17
+        }
+      ],
+      "elapsed_ms": 12.51,
+      "search_ms": 10.1,
+      "methods": {
+        "top5": {
+          "hit": true,
+          "all_covered": true,
+          "groups_hit": 2,
+          "groups_total": 2,
+          "recall": 1.0,
+          "units": 5,
+          "chars": 850,
+          "ids": [
+            "construction_quality:art-31",
+            "construction_quality:art-65",
+            "construction_quality:art-64",
+            "rail_quality:art-66",
+            "rail_quality:art-65"
+          ],
+          "texts": [
+            {
+              "article_id": "construction_quality:art-31",
+              "chars": 75,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-65",
+              "chars": 137,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-64",
+              "chars": 169,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-66",
+              "chars": 210,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-65",
+              "chars": 259,
+              "truncated": false,
+              "relation": null
+            }
+          ],
+          "supplements": 0
+        },
+        "top7": {
+          "hit": true,
+          "all_covered": true,
+          "groups_hit": 2,
+          "groups_total": 2,
+          "recall": 1.0,
+          "units": 7,
+          "chars": 1162,
+          "ids": [
+            "construction_quality:art-31",
+            "construction_quality:art-65",
+            "construction_quality:art-64",
+            "rail_quality:art-66",
+            "rail_quality:art-65",
+            "rail_quality:art-30",
+            "rail_quality:art-29"
+          ],
+          "texts": [
+            {
+              "article_id": "construction_quality:art-31",
+              "chars": 75,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-65",
+              "chars": 137,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-64",
+              "chars": 169,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-66",
+              "chars": 210,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-65",
+              "chars": 259,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-30",
+              "chars": 203,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-29",
+              "chars": 109,
+              "truncated": false,
+              "relation": null
+            }
+          ],
+          "supplements": 2
+        },
+        "top5_supplement": {
+          "hit": true,
+          "all_covered": true,
+          "groups_hit": 2,
+          "groups_total": 2,
+          "recall": 1.0,
+          "units": 5,
+          "chars": 850,
+          "ids": [
+            "construction_quality:art-31",
+            "construction_quality:art-65",
+            "construction_quality:art-64",
+            "rail_quality:art-66",
+            "rail_quality:art-65"
+          ],
+          "texts": [
+            {
+              "article_id": "construction_quality:art-31",
+              "chars": 75,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-65",
+              "chars": 137,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-64",
+              "chars": 169,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-66",
+              "chars": 210,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-65",
+              "chars": 259,
+              "truncated": false,
+              "relation": null
+            }
+          ],
+          "supplements": 0
+        }
+      }
+    },
+    {
+      "qid": "D18",
+      "question": "铁路规定第66条对未取样检测的罚款，依照的上位条例条款原文是什么？",
+      "required_groups": [
+        "construction_quality:art-65"
+      ],
+      "note": "补证题：A66为入口，gold为B65；查询不提目标条号",
+      "answerability": {
+        "unknown_terms": [],
+        "unknown_count": 0,
+        "min_unknown": 3,
+        "semantic_floor": 0.62,
+        "term_coverage": 0.75,
+        "max_sem": 0.6578,
+        "decision": "answer"
+      },
+      "normalized_query": "铁路规定第六十六条对未取样检测的罚款，依照的上位条例条款原文是什么？",
+      "top7_ids": [
+        "rail_quality:art-66",
+        "construction_quality:art-65",
+        "rail_quality:art-62",
+        "rail_quality:art-59",
+        "rail_quality:art-60",
+        "rail_quality:art-69",
+        "rail_quality:art-61"
+      ],
+      "top7_scores": [
+        {
+          "article_id": "rail_quality:art-66",
+          "score": 0.032522,
+          "lex_rank": 1,
+          "sem_rank": 2
+        },
+        {
+          "article_id": "construction_quality:art-65",
+          "score": 0.030118,
+          "lex_rank": 4,
+          "sem_rank": 9
+        },
+        {
+          "article_id": "rail_quality:art-62",
+          "score": 0.030118,
+          "lex_rank": 9,
+          "sem_rank": 4
+        },
+        {
+          "article_id": "rail_quality:art-59",
+          "score": 0.029572,
+          "lex_rank": 13,
+          "sem_rank": 3
+        },
+        {
+          "article_id": "rail_quality:art-60",
+          "score": 0.029551,
+          "lex_rank": 16,
+          "sem_rank": 1
+        },
+        {
+          "article_id": "rail_quality:art-69",
+          "score": 0.029469,
+          "lex_rank": 11,
+          "sem_rank": 5
+        },
+        {
+          "article_id": "rail_quality:art-61",
+          "score": 0.028814,
+          "lex_rank": 12,
+          "sem_rank": 7
+        }
+      ],
+      "elapsed_ms": 10.01,
+      "search_ms": 7.8,
+      "methods": {
+        "top5": {
+          "hit": true,
+          "all_covered": true,
+          "groups_hit": 1,
+          "groups_total": 1,
+          "recall": 1.0,
+          "units": 5,
+          "chars": 1124,
+          "ids": [
+            "rail_quality:art-66",
+            "construction_quality:art-65",
+            "rail_quality:art-62",
+            "rail_quality:art-59",
+            "rail_quality:art-60"
+          ],
+          "texts": [
+            {
+              "article_id": "rail_quality:art-66",
+              "chars": 210,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-65",
+              "chars": 137,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-62",
+              "chars": 400,
+              "truncated": true,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-59",
+              "chars": 169,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-60",
+              "chars": 208,
+              "truncated": false,
+              "relation": null
+            }
+          ],
+          "supplements": 0
+        },
+        "top7": {
+          "hit": true,
+          "all_covered": true,
+          "groups_hit": 1,
+          "groups_total": 1,
+          "recall": 1.0,
+          "units": 7,
+          "chars": 1382,
+          "ids": [
+            "rail_quality:art-66",
+            "construction_quality:art-65",
+            "rail_quality:art-62",
+            "rail_quality:art-59",
+            "rail_quality:art-60",
+            "rail_quality:art-69",
+            "rail_quality:art-61"
+          ],
+          "texts": [
+            {
+              "article_id": "rail_quality:art-66",
+              "chars": 210,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-65",
+              "chars": 137,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-62",
+              "chars": 400,
+              "truncated": true,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-59",
+              "chars": 169,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-60",
+              "chars": 208,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-69",
+              "chars": 100,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-61",
+              "chars": 158,
+              "truncated": false,
+              "relation": null
+            }
+          ],
+          "supplements": 2
+        },
+        "top5_supplement": {
+          "hit": true,
+          "all_covered": true,
+          "groups_hit": 1,
+          "groups_total": 1,
+          "recall": 1.0,
+          "units": 5,
+          "chars": 1124,
+          "ids": [
+            "rail_quality:art-66",
+            "construction_quality:art-65",
+            "rail_quality:art-62",
+            "rail_quality:art-59",
+            "rail_quality:art-60"
+          ],
+          "texts": [
+            {
+              "article_id": "rail_quality:art-66",
+              "chars": 210,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "construction_quality:art-65",
+              "chars": 137,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-62",
+              "chars": 400,
+              "truncated": true,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-59",
+              "chars": 169,
+              "truncated": false,
+              "relation": null
+            },
+            {
+              "article_id": "rail_quality:art-60",
+              "chars": 208,
+              "truncated": false,
+              "relation": null
+            }
+          ],
+          "supplements": 0
+        }
+      }
+    }
+  ],
+  "no_answer": {
+    "n": 2,
+    "correct_refuse": 2,
+    "wrong_evidence": 0,
+    "rows": [
+      {
+        "qid": "D11",
+        "question": "铁路工程混凝土配合比设计的具体计算方法是什么？",
+        "decision": "refuse",
+        "unknown_terms": [
+          "计算方法"
+        ],
+        "max_sem": 0.5819,
+        "top1": "rail_quality:art-23",
+        "correct_refuse": true
+      },
+      {
+        "qid": "D12",
+        "question": "铁路建设工程施工招标评标的评分细则和分值表在哪里？",
+        "decision": "refuse",
+        "unknown_terms": [
+          "分值",
+          "细则",
+          "表在",
+          "评分"
+        ],
+        "max_sem": 0.6722,
+        "top1": "rail_quality:art-15",
+        "correct_refuse": true
+      }
+    ]
+  },
+  "version_conflict": {
+    "n": 1,
+    "correct_pending": 1,
+    "wrong": 0,
+    "rows": [
+      {
+        "qid": "D13",
+        "question": "2015年版铁路建设工程质量监督管理规定第70条规定了什么？",
+        "state": "version_pending",
+        "message": "当前索引锁定2021修正版；2015版第70条与2021版第70条内容不同，须人工核对旧版",
+        "correct": true
+      }
+    ]
+  },
+  "citation_ambiguity": {
+    "n": 2,
+    "correct": 2,
+    "wrong_hardlink": 0,
+    "rows": [
+      {
+        "qid": "D14",
+        "question": "铁路规定第30条和条例第31条是不是直接引用关系？",
+        "pair": [
+          "rail_quality:art-30",
+          "construction_quality:art-31"
+        ],
+        "expected": "topic_related",
+        "state": "topic_related",
+        "message": "主题相关，不是原文明示引用，须人工核对",
+        "correct": true
+      },
+      {
+        "qid": "D15",
+        "question": "铁路规定第1条是不是直接引用了条例第29条？",
+        "pair": [
+          "rail_quality:art-1",
+          "construction_quality:art-29"
+        ],
+        "expected": "explicit_document",
+        "state": "explicit_document",
+        "message": "文件级依据引用，不自动指向目标文件的具体条款",
+        "correct": true
+      }
+    ]
+  }
+}

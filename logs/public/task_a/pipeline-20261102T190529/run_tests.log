@@ -1,0 +1,24 @@
+test_article_numbers_contiguous (tests.test_corpus_integrity.CorpusIntegrityTest.test_article_numbers_contiguous) ... ok
+test_b31_corrected_to_page_7_with_legacy_record (tests.test_corpus_integrity.CorpusIntegrityTest.test_b31_corrected_to_page_7_with_legacy_record) ... ok
+test_span_and_hash (tests.test_corpus_integrity.CorpusIntegrityTest.test_span_and_hash) ... ok
+test_failed_check_returns_nonzero (tests.test_exit_codes.ExitCodeTest.test_failed_check_returns_nonzero) ... ok
+test_healthy_corpus_returns_zero (tests.test_exit_codes.ExitCodeTest.test_healthy_corpus_returns_zero) ... ok
+test_links_are_relative_not_machine_paths (tests.test_locators.LocatorTest.test_links_are_relative_not_machine_paths) ... ok
+test_locator_bundle_still_resolves_after_copy (tests.test_locators.LocatorTest.test_locator_bundle_still_resolves_after_copy) ... ok
+test_locator_verification_passes (tests.test_locators.LocatorTest.test_locator_verification_passes) ... ok
+setUpClass (tests.test_pipeline_logs.PipelineLogTest) ... skipped 'nested pipeline disabled during run_tests step'
+test_explicit_pin_selects_2019_regardless_of_order (tests.test_relation_cli.RelationCliTest.test_explicit_pin_selects_2019_regardless_of_order) ... ok
+test_missing_config_with_two_versions_stops_regardless_of_order (tests.test_relation_cli.RelationCliTest.test_missing_config_with_two_versions_stops_regardless_of_order) ... ok
+test_a1_to_b_is_document_level_only (tests.test_relations.RelationTest.test_a1_to_b_is_document_level_only) ... ok
+test_a30_has_no_explicit_edge_to_b29_b31 (tests.test_relations.RelationTest.test_a30_has_no_explicit_edge_to_b29_b31) ... ok
+test_a66_to_b65_is_article_level_2019 (tests.test_relations.RelationTest.test_a66_to_b65_is_article_level_2019) ... ok
+test_no_ambiguous_target_versions (tests.test_relations.RelationTest.test_no_ambiguous_target_versions) ... ok
+test_pinned_missing_version_pends_not_guesses (tests.test_version_selection.VersionSelectionTest.test_pinned_missing_version_pends_not_guesses) ... ok
+test_pinned_version_selects_2019_only (tests.test_version_selection.VersionSelectionTest.test_pinned_version_selects_2019_only) ... ok
+test_unpinned_multi_version_is_ambiguous_and_blocks_edge (tests.test_version_selection.VersionSelectionTest.test_unpinned_multi_version_is_ambiguous_and_blocks_edge) ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 2.891s
+
+OK (skipped=1)
+tests total=17 passed=17 failures=0 errors=0 skipped_classes=1 skipped_tests=0 success=True

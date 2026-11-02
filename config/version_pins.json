@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "description": "任务A引用目标版本锁定配置。多版本文档必须在此显式选择；未在此配置的目标文档若存在多个版本，关系抽取停止生成补证边并标待确认。",
+  "pins": {
+    "rail_quality": "amended_2021_12_23",
+    "construction_quality": "revised_2019_04_23",
+    "rail_quality_amendment": "2021_order_35"
+  },
+  "basis": {
+    "rail_quality": "2021年12月23日修正并重新公布正文，见A题注与第七十五条",
+    "construction_quality": "2019年4月23日第二次修订，见B题注",
+    "rail_quality_amendment": "交通运输部令2021年第35号，2021-12-23公布施行"
+  }
+}

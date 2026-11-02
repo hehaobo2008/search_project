@@ -1,0 +1,16 @@
+{
+  "generated_at": "2026-11-02T19:05:36.589464+08:00",
+  "total": 17,
+  "passed": 17,
+  "failures": [],
+  "errors": [],
+  "skipped_classes": [
+    {
+      "test": "setUpClass (tests.test_pipeline_logs.PipelineLogTest)",
+      "reason": "nested pipeline disabled during run_tests step"
+    }
+  ],
+  "skipped_tests": [],
+  "success": true,
+  "duration_sec": 2.891
+}

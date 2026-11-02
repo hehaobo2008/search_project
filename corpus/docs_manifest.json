@@ -1,0 +1,99 @@
+{
+  "generated_at": "2026-11-02T19:38:03.612781+08:00",
+  "normalization_rule": "正文块按DOM顺序取p/h2/h3/h4；块内连续Unicode空白折叠为单个半角空格并去首尾；块间以单个换行符连接；不做繁简、大小写或标点转换。偏移单位为Python字符串Unicode码点，区间左闭右开，基于各文档独立full_text。",
+  "documents": [
+    {
+      "doc_id": "rail_quality",
+      "version_id": "amended_2021_12_23",
+      "title": "铁路建设工程质量监督管理规定",
+      "role": "实体法规A（2021修正并重新公布正文）",
+      "publisher": "交通运输部",
+      "published": "2015-03-12",
+      "amended": "2021-12-23",
+      "effective": "2015-05-01",
+      "version_basis": "题注：2015年3月12日交通运输部公布 根据2021年12月23日交通运输部《关于修改〈铁路建设工程质量监督管理规定〉的决定》修正；第七十五条载施行日期",
+      "source_url": "https://xxgk.mot.gov.cn/2020/jigou/fgs/202202/t20220225_3643089.html",
+      "source_type": "official_html_same_page_as_C",
+      "file": "work/raw/A_amend.html",
+      "file_sha256": "77cbec8ef757d87df1086780d38878afdeb2f1e150b7855276401e25b5bbba16",
+      "retrieved_at": "2026-11-02T18:01:48.388812+08:00",
+      "format": "html",
+      "locator_rule": "HTML逻辑锚点art-N + 字符偏移；物理页锚点来自交通运输部规范PDF文本层自动匹配，尚待人工视觉确认",
+      "rendering": {
+        "file": "work/raw/A_spec.pdf",
+        "sha256": "4a815f2cecd083c229e6a53ae145595b7c59583aa09371c14703d47adec09b98",
+        "pages": 25,
+        "note": "PDF共25页，与HTML同为2021修正版；页锚点为自动文本层匹配"
+      },
+      "shared_source_file_with": "rail_quality_amendment",
+      "review_status": "pending_human"
+    },
+    {
+      "doc_id": "construction_quality",
+      "version_id": "revised_2019_04_23",
+      "title": "建设工程质量管理条例",
+      "role": "实体法规B（2019第二次修订）",
+      "publisher": "国务院",
+      "published": "2000-01-30",
+      "amended": "2019-04-23",
+      "effective": "2000-01-30",
+      "version_basis": "题注：2000年1月30日国务院令第279号发布；2017年10月7日第一次修订；2019年4月23日第二次修订；第八十二条载自发布之日起施行",
+      "source_url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2023/art_e42ecef60e9146af83cf9846821fac6c.html",
+      "source_type": "official_html",
+      "file": "work/raw/B_official.html",
+      "file_sha256": "96ba6df3b56e1c213035ea94ae9a172af1a23b3b4bed37c9d4a1fd2720e14f9e",
+      "retrieved_at": "2026-11-02T18:01:53.897068+08:00",
+      "format": "html",
+      "locator_rule": "HTML逻辑锚点art-N + 字符偏移；HTML无固有页码，不编造PDF页码",
+      "rendering": {
+        "file": "work/raw/B_copy_cas.pdf",
+        "sha256": "651fa2536cc3c86f476324629a4ce4b5ded9479728468622c1831eec8ccb6cb7",
+        "pages": 20,
+        "note": "中国科学院集成电路创新研究院公开副本，非原发布机关版本，仅作PDF回跳测试；页锚点为自动文本层匹配"
+      },
+      "review_status": "pending_human",
+      "legacy_records": [
+        {
+          "record_id": "B31-page",
+          "record": "B29及B31在物理第7页、B31续至第8页",
+          "source": "HCS_CODEARTS_HANDOFF_20261102/MATERIALS_MANIFEST.md（2026-11-02整理）",
+          "status": "superseded",
+          "observed": "CAS副本PDF文本层第7页完整包含B31句尾‘进行检测。’；第8页首条为B32",
+          "evidence": "work/raw/B_copy_cas.pdf 第7/8页；logs/pdf_page_detail.log",
+          "corrected_at": "2026-11-02T19:38:03.614943+08:00",
+          "correction_reason": "按实际PDF文本层逐页核对，B31未跨页；保留旧记录与修正原因供复验追溯，旧记录不再作为事实使用"
+        }
+      ]
+    },
+    {
+      "doc_id": "rail_quality_amendment",
+      "version_id": "2021_order_35",
+      "title": "交通运输部关于修改《铁路建设工程质量监督管理规定》的决定",
+      "role": "版本关系材料C（修改决定，非第三套实体规则）",
+      "publisher": "交通运输部",
+      "published": "2021-12-23",
+      "amended": null,
+      "effective": "2021-12-23",
+      "version_basis": "交通运输部令2021年第35号；正文载2021年12月17日第32次部务会议通过，2021年12月23日公布并施行，修改第69条并增设第70条后重新公布",
+      "source_url": "https://xxgk.mot.gov.cn/2020/jigou/fgs/202202/t20220225_3643089.html",
+      "source_type": "official_html_shared_page_with_A",
+      "file": "work/raw/A_amend.html",
+      "file_sha256": "77cbec8ef757d87df1086780d38878afdeb2f1e150b7855276401e25b5bbba16",
+      "retrieved_at": "2026-11-02T18:01:48.388812+08:00",
+      "format": "html",
+      "locator_rule": "HTML逻辑锚点dec-N + 字符偏移；与A共页，导入时分离决定正文与重新公布正文，不重复计数",
+      "shared_source_file_with": "rail_quality",
+      "review_status": "pending_human"
+    }
+  ],
+  "artifact_hashes": {
+    "work/raw/A_amend.html": "77cbec8ef757d87df1086780d38878afdeb2f1e150b7855276401e25b5bbba16",
+    "work/raw/A_spec.pdf": "4a815f2cecd083c229e6a53ae145595b7c59583aa09371c14703d47adec09b98",
+    "work/raw/B_official.html": "96ba6df3b56e1c213035ea94ae9a172af1a23b3b4bed37c9d4a1fd2720e14f9e",
+    "work/raw/B_copy_cas.pdf": "651fa2536cc3c86f476324629a4ce4b5ded9479728468622c1831eec8ccb6cb7"
+  },
+  "counts": {
+    "documents": 3,
+    "distinct_source_files": 4
+  }
+}

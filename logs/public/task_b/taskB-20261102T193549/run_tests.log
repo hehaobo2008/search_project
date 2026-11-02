@@ -1,0 +1,20 @@
+test_answerability_refuses_out_of_scope_but_not_paraphrase (tests.test_task_b.TaskBTest.test_answerability_refuses_out_of_scope_but_not_paraphrase) ... ok
+test_freeze_candidates_are_unlabeled (tests.test_task_b.TaskBTest.test_freeze_candidates_are_unlabeled) ... ok
+test_method_budgets_and_base5_invariant (tests.test_task_b.TaskBTest.test_method_budgets_and_base5_invariant) ... ok
+test_metric_functions (tests.test_task_b.TaskBTest.test_metric_functions) ... ok
+test_model_hash_matches_manifest (tests.test_task_b.TaskBTest.test_model_hash_matches_manifest) ... ok
+test_search_is_deterministic (tests.test_task_b.TaskBTest.test_search_is_deterministic) ... ok
+test_supplement_reaches_b65_for_d03 (tests.test_task_b.TaskBTest.test_supplement_reaches_b65_for_d03) ... ok
+test_version_and_citation_shutdowns (tests.test_task_b.TaskBTest.test_version_and_citation_shutdowns) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 1.310s
+
+OK
+task_b_tests total=8 passed=8 failures=0 errors=0 success=True
+
+[stderr]
+Building prefix dict from the default dictionary ...
+Loading model from cache <USER_HOME>\AppData\Local\Temp\jieba.cache
+Loading model cost 0.399 seconds.
+Prefix dict has been built successfully.

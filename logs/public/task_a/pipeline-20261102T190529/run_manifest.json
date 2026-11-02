@@ -1,0 +1,137 @@
+{
+  "run_id": "pipeline-20261102T190529",
+  "generated_at": "2026-11-02T19:05:36.774341+08:00",
+  "python": "3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]",
+  "executable": "<LOCAL_PATH>",
+  "platform": "win32",
+  "steps": [
+    {
+      "step": "env_check",
+      "script": "work/env_check.py",
+      "command": "<LOCAL_PATH> work/env_check.py",
+      "exit_code": 0,
+      "started_at": "2026-11-02T19:05:29.570649+08:00",
+      "ended_at": "2026-11-02T19:05:30.137004+08:00",
+      "duration_sec": 0.566,
+      "log": "logs/runs/pipeline-20261102T190529/env_check.log",
+      "log_abs": "<LOCAL_PATH>",
+      "latest_log": "<LOCAL_PATH>",
+      "log_bytes": 616,
+      "stdout_tail": "}"
+    },
+    {
+      "step": "build_corpus",
+      "script": "scripts/build_corpus.py",
+      "command": "<LOCAL_PATH> scripts/build_corpus.py",
+      "exit_code": 0,
+      "started_at": "2026-11-02T19:05:30.138330+08:00",
+      "ended_at": "2026-11-02T19:05:31.093349+08:00",
+      "duration_sec": 0.955,
+      "log": "logs/runs/pipeline-20261102T190529/build_corpus.log",
+      "log_abs": "<LOCAL_PATH>",
+      "latest_log": "<LOCAL_PATH>",
+      "log_bytes": 287,
+      "stdout_tail": "C: first=None last=None continuous=True"
+    },
+    {
+      "step": "build_locators",
+      "script": "scripts/build_locators.py",
+      "command": "<LOCAL_PATH> scripts/build_locators.py",
+      "exit_code": 0,
+      "started_at": "2026-11-02T19:05:31.093906+08:00",
+      "ended_at": "2026-11-02T19:05:31.580954+08:00",
+      "duration_sec": 0.487,
+      "log": "logs/runs/pipeline-20261102T190529/build_locators.log",
+      "log_abs": "<LOCAL_PATH>",
+      "latest_log": "<LOCAL_PATH>",
+      "log_bytes": 42,
+      "stdout_tail": "locator documents=3 anchors=158 errors=0"
+    },
+    {
+      "step": "build_relations",
+      "script": "scripts/build_relations.py",
+      "command": "<LOCAL_PATH> scripts/build_relations.py",
+      "exit_code": 0,
+      "started_at": "2026-11-02T19:05:31.581641+08:00",
+      "ended_at": "2026-11-02T19:05:32.046921+08:00",
+      "duration_sec": 0.465,
+      "log": "logs/runs/pipeline-20261102T190529/build_relations.log",
+      "log_abs": "<LOCAL_PATH>",
+      "latest_log": "<LOCAL_PATH>",
+      "log_bytes": 2148,
+      "stdout_tail": "  resolved=18"
+    },
+    {
+      "step": "verify_task_a",
+      "script": "scripts/verify_task_a.py",
+      "command": "<LOCAL_PATH> scripts/verify_task_a.py",
+      "exit_code": 0,
+      "started_at": "2026-11-02T19:05:32.047720+08:00",
+      "ended_at": "2026-11-02T19:05:32.224481+08:00",
+      "duration_sec": 0.177,
+      "log": "logs/runs/pipeline-20261102T190529/verify_task_a.log",
+      "log_abs": "<LOCAL_PATH>",
+      "latest_log": "<LOCAL_PATH>",
+      "log_bytes": 1725,
+      "stdout_tail": "GATE: NOT_PASSED_PENDING_HUMAN_REVIEW"
+    },
+    {
+      "step": "verify_counterexamples",
+      "script": "scripts/verify_counterexamples.py",
+      "command": "<LOCAL_PATH> scripts/verify_counterexamples.py",
+      "exit_code": 0,
+      "started_at": "2026-11-02T19:05:32.225559+08:00",
+      "ended_at": "2026-11-02T19:05:33.005445+08:00",
+      "duration_sec": 0.78,
+      "log": "logs/runs/pipeline-20261102T190529/verify_counterexamples.log",
+      "log_abs": "<LOCAL_PATH>",
+      "latest_log": "<LOCAL_PATH>",
+      "log_bytes": 1532,
+      "stdout_tail": "A2021#71: 第七十一条 依照《建设工程质量管理条例》第七十三条规定，给予单位罚款处罚的，对单位直接负责的主管人员和其他直接责任人员处单位罚款数额5%以上10%以下的罚款。"
+    },
+    {
+      "step": "verify_locators",
+      "script": "scripts/verify_locators.py",
+      "command": "<LOCAL_PATH> scripts/verify_locators.py",
+      "exit_code": 0,
+      "started_at": "2026-11-02T19:05:33.006345+08:00",
+      "ended_at": "2026-11-02T19:05:33.214706+08:00",
+      "duration_sec": 0.208,
+      "log": "logs/runs/pipeline-20261102T190529/verify_locators.log",
+      "log_abs": "<LOCAL_PATH>",
+      "latest_log": "<LOCAL_PATH>",
+      "log_bytes": 549,
+      "stdout_tail": "locator checks total=158 pass=158 fail=0"
+    },
+    {
+      "step": "run_tests",
+      "script": "scripts/run_tests.py",
+      "command": "<LOCAL_PATH> scripts/run_tests.py",
+      "exit_code": 0,
+      "started_at": "2026-11-02T19:05:33.215428+08:00",
+      "ended_at": "2026-11-02T19:05:36.632769+08:00",
+      "duration_sec": 3.417,
+      "log": "logs/runs/pipeline-20261102T190529/run_tests.log",
+      "log_abs": "<LOCAL_PATH>",
+      "latest_log": "<LOCAL_PATH>",
+      "log_bytes": 2555,
+      "stdout_tail": "tests total=17 passed=17 failures=0 errors=0 skipped_classes=1 skipped_tests=0 success=True"
+    },
+    {
+      "step": "generate_review_checklist",
+      "script": "scripts/generate_review_checklist.py",
+      "command": "<LOCAL_PATH> scripts/generate_review_checklist.py",
+      "exit_code": 0,
+      "started_at": "2026-11-02T19:05:36.633749+08:00",
+      "ended_at": "2026-11-02T19:05:36.773244+08:00",
+      "duration_sec": 0.139,
+      "log": "logs/runs/pipeline-20261102T190529/generate_review_checklist.log",
+      "log_abs": "<LOCAL_PATH>",
+      "latest_log": "<LOCAL_PATH>",
+      "log_bytes": 43,
+      "stdout_tail": "written reports/human_review_checklist.md"
+    }
+  ],
+  "failed_steps": [],
+  "all_passed": true
+}

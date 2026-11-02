@@ -1,0 +1,28 @@
+# Local data, extracted text, model weights and caches
+work/
+locators/
+dist/
+logs/*
+!logs/public/
+!logs/public/**
+
+# IDE / agent private directories
+.codeartsdoer/
+.arts/
+.upload_repo/
+
+# Competition and personal materials
+HCS_CODEARTS_HANDOFF_20261102/
+*.docx
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Secrets
+.env
+.env.*
+*.pem
+*.key

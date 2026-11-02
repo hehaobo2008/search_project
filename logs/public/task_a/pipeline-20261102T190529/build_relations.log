@@ -1,0 +1,25 @@
+version_pins=loaded source=<PROJECT_ROOT>\config\version_pins.json
+relations=27 diagnostics=0
+  amendment=3
+  explicit_article=14
+  explicit_document=8
+  topic_related=2
+explicit_article_edges:
+  rail_quality:art-56 第五十六条 -> construction_quality 第五十四条 [《建设工程质量管理条例》第五十四条]
+  rail_quality:art-57 第五十七条 -> construction_quality 第五十五条 [《建设工程质量管理条例》第五十五条]
+  rail_quality:art-58 第五十八条 -> construction_quality 第五十六条 [《建设工程质量管理条例》第五十六条]
+  rail_quality:art-59 第五十九条 -> construction_quality 第五十七条 [《建设工程质量管理条例》第五十七条]
+  rail_quality:art-60 第六十条 -> construction_quality 第五十八条 [《建设工程质量管理条例》第五十八条]
+  rail_quality:art-61 第六十一条 -> construction_quality 第五十六条 [《建设工程质量管理条例》第五十六条]
+  rail_quality:art-62 第六十二条 -> construction_quality 第六十条 [《建设工程质量管理条例》第六十条]
+  rail_quality:art-63 第六十三条 -> construction_quality 第六十二条 [《建设工程质量管理条例》第六十二条]
+  rail_quality:art-64 第六十四条 -> construction_quality 第六十三条 [《建设工程质量管理条例》第六十三条]
+  rail_quality:art-65 第六十五条 -> construction_quality 第六十四条 [《建设工程质量管理条例》第六十四条]
+  rail_quality:art-66 第六十六条 -> construction_quality 第六十五条 [《建设工程质量管理条例》第六十五条]
+  rail_quality:art-67 第六十七条 -> construction_quality 第六十七条 [《建设工程质量管理条例》第六十七条]
+  rail_quality:art-68 第六十八条 -> construction_quality 第六十八条 [《建设工程质量管理条例》第六十八条]
+  rail_quality:art-71 第七十一条 -> construction_quality 第七十三条 [《建设工程质量管理条例》第七十三条]
+version_status_counts:
+  external=7
+  pinned=2
+  resolved=18

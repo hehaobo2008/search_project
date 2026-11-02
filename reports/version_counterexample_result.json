@@ -1,0 +1,70 @@
+{
+  "generated_at": "2026-11-02T19:05:32.955894+08:00",
+  "counterexamples": [
+    {
+      "doc_id": "rail_quality",
+      "version_id": "published_2015_03_12",
+      "file": "work/raw/A_2015_old.html",
+      "sha256": "a06c8dde9008517bb8ab509405cb2724a1f8e2e621a68a0ba830b44a19a40e83",
+      "source_url": "https://xxgk.mot.gov.cn/jigou/fgs/202006/t20200623_3307691.html",
+      "observed_title": "铁路建设工程质量监督管理规定（中华人民共和国交通运输部令2015年第2号）（已被修订）-政府信息公开-交通运输部",
+      "status_evidence": "页面标题含‘已被修订’",
+      "role": "版本反例，仅作对照，不进入主索引",
+      "observed_a70_snippet": "第七十条依照《建设工程质量管理条例》第七十三条规定，给予单位罚款处罚的，对单位直接负责的主管人员和其他直接责任人员处单位罚款数额5%以上10%以下的罚款。"
+    },
+    {
+      "doc_id": "construction_quality",
+      "version_id": "revised_2017_10_07",
+      "file": "work/raw/B_2017_moj.pdf",
+      "sha256": "93526bed6aadee4609c463080d1c7daf87f455df6ea4cc058a1abbe617f51cc2",
+      "source_url": "https://xzfg.moj.gov.cn/law/download?LawID=1598&type=pdf",
+      "observed_first_page": "-1-建设工程质量管理条例(2000年1月30日中华人民共和国国务院令第279号发布根据2017年10月7日《国务院关于修改部分行政法规的决定》修订)第一章总则第一条为了加强对建设工程质量的管理，保证建设工程质量，保护人民生命和财产安全，根据《中华人民共和国建筑法》，制定本条例。第二条凡在中华人民共和国境内从事建设工程的新建、扩建、改建等有关活动及实施对建设工程质量监督管理的，必须遵守本条例。本条",
+      "role": "版本反例，仅作对照，不进入主索引",
+      "text_layer_note": "第65条文本层乱码，无法用于内容对比；首页题注可读，版本标签可用"
+    }
+  ],
+  "cases": [
+    {
+      "id": "V01",
+      "name": "A2015旧页明确标注已被修订",
+      "status": "PASS",
+      "detail": "title=铁路建设工程质量监督管理规定（中华人民共和国交通运输部令2015年第2号）（已被修订）-政府信息公开-交通运输部"
+    },
+    {
+      "id": "V02",
+      "name": "A条号在2015与2021版间发生位移",
+      "status": "PASS",
+      "detail": "A2015#70==A2021#70? False; A2015#70==A2021#71? True; a2015_70_len=77"
+    },
+    {
+      "id": "V03",
+      "name": "B2017副本首页仅载2017修订",
+      "status": "PASS",
+      "detail": "first_page_head=-1-建设工程质量管理条例(2000年1月30日中华人民共和国国务院令第279号发布根据2017年10月7日《国务院关于修改部分行政法规的决定》修订)第一章总则"
+    },
+    {
+      "id": "V04",
+      "name": "B2017第65条文本层可读且去页码后对比",
+      "status": "PASS",
+      "detail": "B2017_len=147 B2019_len=137 去页码后相同=True"
+    },
+    {
+      "id": "V05",
+      "name": "真实2017语料下请求2019版第65条必须待核验",
+      "status": "PASS",
+      "detail": "status=version_pending available=['revised_2017_10_07']"
+    },
+    {
+      "id": "V06",
+      "name": "真实2015语料存在第70条且与2021版内容不同",
+      "status": "PASS",
+      "detail": "2015_len=77 2021_len=146"
+    }
+  ],
+  "summary": {
+    "total": 6,
+    "passed": 6,
+    "failed": 0,
+    "observed_issue": 0
+  }
+}

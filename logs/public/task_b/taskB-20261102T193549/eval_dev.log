@@ -1,0 +1,14 @@
+retrieval N=13
+top5               hit=12/13 full=12/13 groups=14/15 macro=0.9231 units=5.00 chars=698.08
+top7               hit=13/13 full=13/13 groups=15/15 macro=1.0000 units=7.00 chars=960.31
+top5_supplement    hit=13/13 full=13/13 groups=15/15 macro=1.0000 units=5.08 chars=708.62
+pairwise {'supplement_only': 0, 'top7_only': 0, 'both_success': 13, 'both_fail': 0} supplements 1 triggered 1
+no_answer 2 / 2
+version 1 / 1
+ambiguity 2 / 2
+
+[stderr]
+Building prefix dict from the default dictionary ...
+Loading model from cache <USER_HOME>\AppData\Local\Temp\jieba.cache
+Loading model cost 0.408 seconds.
+Prefix dict has been built successfully.

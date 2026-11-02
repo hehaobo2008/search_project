@@ -1,0 +1,18 @@
+{"qid": "D01", "split": "dev", "group": "retrieval", "question": "铁路工地试块送检要谁在场？检测记录签字的规定在哪？", "required_groups": ["rail_quality:art-30|construction_quality:art-29|construction_quality:art-31"], "note": "开发演示题1；A30为主，B29/B31同主题可接受"}
+{"qid": "D02", "split": "dev", "group": "retrieval", "question": "施工单位设立的工地试验室出具检测结果后，资料如何签认和保存？", "required_groups": ["rail_quality:art-30"], "note": "A30第二款"}
+{"qid": "D03", "split": "dev", "group": "retrieval", "question": "铁路规定第66条提到的条例第65条原文在哪？", "required_groups": ["construction_quality:art-65"], "note": "补证题：A66为入口，gold为B65；A66不计命中"}
+{"qid": "D04", "split": "dev", "group": "retrieval", "question": "监理单位与施工单位串通降低工程质量，铁路规定第67条依照的上位条例怎么处罚？", "required_groups": ["construction_quality:art-67"], "note": "补证题：A67为入口，gold为B67；查询不提目标条号"}
+{"qid": "D05", "split": "dev", "group": "retrieval", "question": "铁路建设项目开工前在哪里办理工程质量监督手续？", "required_groups": ["rail_quality:art-12"], "note": "A12"}
+{"qid": "D06", "split": "dev", "group": "retrieval", "question": "铁路工程竣工验收由谁组织，提前几天通知监管部门，验收后多久备案？", "required_groups": ["rail_quality:art-16"], "note": "A16两款"}
+{"qid": "D07", "split": "dev", "group": "retrieval", "question": "隐蔽工程在隐蔽前，施工单位应当通知哪些单位？", "required_groups": ["construction_quality:art-30"], "note": "B30"}
+{"qid": "D08", "split": "dev", "group": "retrieval", "question": "施工中出现质量问题或者竣工验收不合格，施工单位应当承担什么责任？", "required_groups": ["construction_quality:art-32"], "note": "B32"}
+{"qid": "D09", "split": "dev", "group": "retrieval", "question": "施工图设计文件未经审查批准可以使用吗？审查办法由谁制定？", "required_groups": ["construction_quality:art-11"], "note": "B11"}
+{"qid": "D10", "split": "dev", "group": "retrieval", "question": "建设单位能否明示或者暗示施工单位使用不合格的建筑材料？进场材料由谁组织检查？", "required_groups": ["rail_quality:art-13"], "note": "A13两款"}
+{"qid": "D11", "split": "dev", "group": "no_answer", "question": "铁路工程混凝土配合比设计的具体计算方法是什么？", "answerable": false, "note": "库内无配合比设计方法；A30仅要求试验检测"}
+{"qid": "D12", "split": "dev", "group": "no_answer", "question": "铁路建设工程施工招标评标的评分细则和分值表在哪里？", "answerable": false, "note": "库内无评标评分细则"}
+{"qid": "D13", "split": "dev", "group": "version_conflict", "question": "2015年版铁路建设工程质量监督管理规定第70条规定了什么？", "answerable": false, "expected_version_state": "version_pending", "note": "库内锁定2021修正版；2015版第70条与2021版第70条不同，必须提示版本待核验"}
+{"qid": "D14", "split": "dev", "group": "citation_ambiguity", "question": "铁路规定第30条和条例第31条是不是直接引用关系？", "pair": ["rail_quality:art-30", "construction_quality:art-31"], "expected_relation": "topic_related", "note": "应提示主题相关、非显式引用，不得硬连"}
+{"qid": "D15", "split": "dev", "group": "citation_ambiguity", "question": "铁路规定第1条是不是直接引用了条例第29条？", "pair": ["rail_quality:art-1", "construction_quality:art-29"], "expected_relation": "explicit_document", "note": "A1对B是文件级依据引用，不能升级为对B29的条款级引用"}
+{"qid": "D16", "split": "dev", "group": "retrieval", "question": "试块取样送检由谁监督？检验记录由谁签字？", "required_groups": ["rail_quality:art-30", "construction_quality:art-29|construction_quality:art-31"], "note": "多证据题：A30与B29/B31两组都必需"}
+{"qid": "D17", "split": "dev", "group": "retrieval", "question": "施工单位偷工减料、使用不合格材料怎么处罚？未对涉及结构安全的试块取样检测又怎么处罚？", "required_groups": ["rail_quality:art-65", "rail_quality:art-66"], "note": "多证据题：A65与A66两条都必需"}
+{"qid": "D18", "split": "dev", "group": "retrieval", "question": "铁路规定第66条对未取样检测的罚款，依照的上位条例条款原文是什么？", "required_groups": ["construction_quality:art-65"], "note": "补证题：A66为入口，gold为B65；查询不提目标条号"}
