@@ -1,0 +1,220 @@
+{
+  "session": "DocFetcher 1.1.27 四题重测（新执行会话）",
+  "statement": "四题题面在同一条指令中同时给出；未查看旧会话答案/评分/操作日志/旧结果。",
+  "files": {
+    "A_spec.pdf": {
+      "sha256": "4a815f2cecd083c229e6a53ae145595b7c59583aa09371c14703d47adec09b98",
+      "pages": 25,
+      "matches_docs_manifest": true
+    },
+    "B_copy_cas.pdf": {
+      "sha256": "651fa2536cc3c86f476324629a4ce4b5ded9479728468622c1831eec8ccb6cb7",
+      "pages": 20,
+      "matches_docs_manifest": true
+    },
+    "test_corpus": "work/tools/docfetcher/test_corpus"
+  },
+  "docfetcher": {
+    "version": "1.1.27 portable",
+    "pid": 40964,
+    "started_at": "2026-11-03T20:14:09+08:00",
+    "index": "hcstest",
+    "index_created": "2026-11-03T09:06",
+    "restarted_for_test": true,
+    "restart_note": "仅重启应用清空界面残留结果，未清 OS 缓存；索引仍为同一 hcstest"
+  },
+  "queries": [
+    {
+      "tag": "q1_full",
+      "query": "国家验收的铁路建设项目，申请验收之前，对初期运营和专项验收有哪些条件？",
+      "type_begin_ms": 1793708308853,
+      "type_end_ms": 1793708309055,
+      "enter_begin_ms": 1793708309406,
+      "enter_end_ms": 1793708309509,
+      "press_span_ms": 103,
+      "first_frame_seq": 54,
+      "first_frame": "000054.jpg",
+      "first_dt_begin_ms": 1720.9,
+      "prev_frame_seq": 53,
+      "prev_dt_begin_ms": 1523.7,
+      "measured_interval_ms": [
+        1523.7,
+        1720.9
+      ],
+      "error_ms": 197.2,
+      "max_frame_interval_ms": 178.6,
+      "first_frame_capture_span_ms": 175.1,
+      "fps_target": 20,
+      "evidence": [
+        "q1_full_first_result_frame.png",
+        "q1_full_first_result_v3.json"
+      ],
+      "avg_frame_interval_ms": 50.8,
+      "frame_count": 183
+    },
+    {
+      "tag": "q2_full",
+      "query": "铁路工程由联合体承包时，联合体各方对承包工程质量承担什么责任，依据什么安排？",
+      "type_begin_ms": 1793708758457,
+      "type_end_ms": 1793708758659,
+      "enter_begin_ms": 1793708759010,
+      "enter_end_ms": 1793708759116,
+      "press_span_ms": 106,
+      "first_frame_seq": 24,
+      "first_frame": "000024.jpg",
+      "first_dt_begin_ms": 79.7,
+      "prev_frame_seq": 23,
+      "prev_dt_begin_ms": 21.4,
+      "measured_interval_ms": [
+        21.4,
+        79.7
+      ],
+      "error_ms": 58.3,
+      "max_frame_interval_ms": 61.3,
+      "first_frame_capture_span_ms": 32.8,
+      "fps_target": 20,
+      "evidence": [
+        "q2_full_first_result_frame.png",
+        "q2_full_first_result_v3.json"
+      ],
+      "avg_frame_interval_ms": 50.1,
+      "frame_count": 185
+    },
+    {
+      "tag": "q3_full",
+      "query": "《建设工程质量管理条例》列出的必须实行监理的工程有哪些？请完整列出。",
+      "type_begin_ms": 1793708805860,
+      "type_end_ms": 1793708806057,
+      "enter_begin_ms": 1793708806408,
+      "enter_end_ms": 1793708806511,
+      "press_span_ms": 103,
+      "first_frame_seq": 24,
+      "first_frame": "000024.jpg",
+      "first_dt_begin_ms": 84.8,
+      "prev_frame_seq": 23,
+      "prev_dt_begin_ms": 58.3,
+      "measured_interval_ms": [
+        58.3,
+        84.8
+      ],
+      "error_ms": 26.5,
+      "max_frame_interval_ms": 61.9,
+      "first_frame_capture_span_ms": 22.7,
+      "fps_target": 20,
+      "evidence": [
+        "q3_full_first_result_frame.png",
+        "q3_full_first_result_v3.json"
+      ],
+      "avg_frame_interval_ms": 50.3,
+      "frame_count": 185
+    },
+    {
+      "tag": "q4_full",
+      "query": "仅依据本次两份指定法规原文，铁路桥梁抗震设计的地震动峰值加速度具体取值是多少？",
+      "type_begin_ms": 1793708853254,
+      "type_end_ms": 1793708853456,
+      "enter_begin_ms": 1793708853807,
+      "enter_end_ms": 1793708853910,
+      "press_span_ms": 103,
+      "first_frame_seq": 24,
+      "first_frame": "000024.jpg",
+      "first_dt_begin_ms": 77.4,
+      "prev_frame_seq": 23,
+      "prev_dt_begin_ms": 21.1,
+      "measured_interval_ms": [
+        21.1,
+        77.4
+      ],
+      "error_ms": 56.3,
+      "max_frame_interval_ms": 61.9,
+      "first_frame_capture_span_ms": 30.6,
+      "fps_target": 20,
+      "evidence": [
+        "q4_full_first_result_frame.png",
+        "q4_full_first_result_v3.json"
+      ],
+      "avg_frame_interval_ms": 50.2,
+      "frame_count": 185
+    },
+    {
+      "tag": "q4_kw",
+      "query": "地震动峰值加速度",
+      "type_begin_ms": 1793708899678,
+      "type_end_ms": 1793708899875,
+      "enter_begin_ms": 1793708900226,
+      "enter_end_ms": 1793708900332,
+      "press_span_ms": 106,
+      "first_frame_seq": 24,
+      "first_frame": "000024.jpg",
+      "first_dt_begin_ms": 87.0,
+      "prev_frame_seq": 23,
+      "prev_dt_begin_ms": 28.9,
+      "measured_interval_ms": [
+        28.9,
+        87.0
+      ],
+      "error_ms": 58.1,
+      "max_frame_interval_ms": 59.9,
+      "first_frame_capture_span_ms": 34.8,
+      "fps_target": 20,
+      "evidence": [
+        "q4_kw_first_result_frame.png",
+        "q4_kw_first_result_v3.json"
+      ],
+      "avg_frame_interval_ms": 50.1,
+      "frame_count": 145
+    }
+  ],
+  "tasks": [
+    {
+      "tag": "q1_full",
+      "task_start_epoch_ms": 1793708307064,
+      "task_end_epoch_ms": 1793708745801,
+      "duration_ms": 438737,
+      "duration_s": 438.74,
+      "outcome": "found",
+      "answer": "A《铁路建设工程质量监督管理规定》第十七条（PDF第5页）：初期运营条件为“初步验收合格且初期运营一年以上，状态良好，发现问题整改完毕”；专项验收条件为“环境保护、水土保持、消防等专项验收经相应行政主管部门验收合格”。同条另列7项申请国家验收条件。",
+      "note": "完整问题1次命中，无需补充关键词",
+      "within_300s": false
+    },
+    {
+      "tag": "q2_full",
+      "task_start_epoch_ms": 1793708756680,
+      "task_end_epoch_ms": 1793708797776,
+      "duration_ms": 41096,
+      "duration_s": 41.1,
+      "outcome": "found",
+      "answer": "A《铁路建设工程质量监督管理规定》第二十七条（PDF第8页）：“以联合体形式承包的，联合体各方应按合同约定及共同投标协议，就承包工程质量承担连带责任。”即承担连带责任，依据合同约定及共同投标协议。",
+      "note": "完整问题1次命中，无需补充关键词",
+      "within_300s": true
+    },
+    {
+      "tag": "q3_full",
+      "task_start_epoch_ms": 1793708804080,
+      "task_end_epoch_ms": 1793708845710,
+      "duration_ms": 41630,
+      "duration_s": 41.63,
+      "outcome": "found",
+      "answer": "B《建设工程质量管理条例》第十二条（PDF第3页）完整列出五项：（一）国家重点建设工程；（二）大中型公用事业工程；（三）成片开发建设的住宅小区工程；（四）利用外国政府或者国际组织贷款、援助资金的工程；（五）国家规定必须实行监理的其他工程。",
+      "note": "完整问题1次命中（B文件排第2行，打开后核对第十二条）；无需补充关键词",
+      "within_300s": true
+    },
+    {
+      "tag": "q4_full",
+      "task_start_epoch_ms": 1793708851475,
+      "task_end_epoch_ms": 1793708929008,
+      "duration_ms": 77533,
+      "duration_s": 77.53,
+      "outcome": "not_found",
+      "answer": "两份指定法规原文均无法给出该取值：对 A_spec.pdf（25页）检索“抗震/地震/峰值加速度/加速度/桥梁”均为0命中；对 B_copy_cas.pdf（20页）检索“抗震/地震/峰值加速度/加速度”均为0命中。DocFetcher完整问题仅返回B(503)/A(414)的文件级弱匹配，补充关键词“地震动峰值加速度”仅B得90分。故仅依据这两份法规，无法确定该具体取值。",
+      "note": "完整问题1次+补充关键词1次（原因：完整问题仅文件级弱匹配，需确认原文是否含该术语）；两文件原文均无相关术语",
+      "within_300s": true
+    }
+  ],
+  "measurement": {
+    "method": "窗口像素连续帧采集（pywinauto capture_as_image + JPEG 序列）",
+    "clock": "同一进程 time.time()，系统墙钟",
+    "confidence_basis": "首帧与其前一帧的 t_end 区间",
+    "not_done": "无 GPU 合成事件级时间戳；不是系统级录屏编码文件"
+  }
+}

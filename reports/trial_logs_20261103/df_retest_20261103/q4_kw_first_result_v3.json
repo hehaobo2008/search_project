@@ -1,0 +1,65 @@
+{
+  "tag": "q4_kw",
+  "targets": [
+    "90"
+  ],
+  "enter_begin_ms": 1793708900226,
+  "enter_end_ms": 1793708900332,
+  "press_span_ms": 106,
+  "base_idx": 22,
+  "base_dt_begin_ms": -26.7,
+  "base_tokens": [
+    "B_copy.cas",
+    "858 KB",
+    "503",
+    "B_copy_cas.pdf",
+    "pdf",
+    "[LOCAL_PATH_REDACTED]",
+    "A_spec",
+    "298 KB",
+    "pdf",
+    "414",
+    "A_spec.pdf",
+    "[LOCAL_PATH_REDACTED]"
+  ],
+  "checked_frames": 2,
+  "found": {
+    "seq": 24,
+    "dt_begin_ms": 87.0,
+    "t_start_ms": 1793708900278.2,
+    "t_end_ms": 1793708900313.0,
+    "hit": [
+      "90"
+    ],
+    "tokens": [
+      "B_copy_cas",
+      "90",
+      "858 KB",
+      "Jpd",
+      "B_copy_cas.pdf",
+      "[LOCAL_PATH_REDACTED]"
+    ],
+    "frame": "000024.jpg"
+  },
+  "prev_frame": {
+    "seq": 23,
+    "dt_begin_ms": 28.9,
+    "tokens": [
+      "B_copy_cas",
+      "858 KB",
+      "503",
+      "B_copy_cas.pdf",
+      "pdf",
+      "[LOCAL_PATH_REDACTED]",
+      "A_spec",
+      "298 KB",
+      "pdf",
+      "414",
+      "A_spec.pdf",
+      "[LOCAL_PATH_REDACTED]"
+    ]
+  },
+  "frame_count": 145,
+  "fps": 20,
+  "max_interval_ms": 59.9
+}

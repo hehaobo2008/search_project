@@ -1,0 +1,47 @@
+{
+  "tag": "q1_full",
+  "targets": [
+    "504",
+    "915"
+  ],
+  "enter_begin_ms": 1793708309406,
+  "enter_end_ms": 1793708309509,
+  "press_span_ms": 103,
+  "base_idx": 22,
+  "base_dt_begin_ms": -34.7,
+  "base_tokens": [],
+  "checked_frames": 32,
+  "found": {
+    "seq": 54,
+    "dt_begin_ms": 1720.9,
+    "t_start_ms": 1793708310951.8,
+    "t_end_ms": 1793708311126.9,
+    "hit": [
+      "504",
+      "915"
+    ],
+    "tokens": [
+      "A_spec",
+      "915",
+      "298 KB",
+      "A_spec.pdf",
+      "pdf",
+      "[LOCAL_PATH_REDACTED]",
+      "B_copy_cas",
+      "858KB",
+      "B_copy_cas.pdf",
+      "pdf",
+      "504",
+      "[LOCAL_PATH_REDACTED]"
+    ],
+    "frame": "000054.jpg"
+  },
+  "prev_frame": {
+    "seq": 53,
+    "dt_begin_ms": 1523.7,
+    "tokens": []
+  },
+  "frame_count": 183,
+  "fps": 20,
+  "max_interval_ms": 178.6
+}

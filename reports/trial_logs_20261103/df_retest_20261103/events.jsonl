@@ -1,0 +1,57 @@
+{"event": "task_start", "at": "2026-11-03T20:18:27.064+08:00", "epoch_ms": 1793708307064, "tag": "q1_full", "query": "国家验收的铁路建设项目，申请验收之前，对初期运营和专项验收有哪些条件？", "note": "操作者开始处理该题（四题题面已在同一条指令中同时给出）"}
+{"event": "task_wait_begin", "at": "2026-11-03T20:18:27.474+08:00", "epoch_ms": 1793708307474, "tag": "q1_full", "query": "国家验收的铁路建设项目，申请验收之前，对初期运营和专项验收有哪些条件？", "window_rect": [768, 336, 1792, 1104]}
+{"event": "box_cleared", "at": "2026-11-03T20:18:28.249+08:00", "epoch_ms": 1793708308249, "tag": "q1_full"}
+{"event": "baseline_end", "at": "2026-11-03T20:18:28.851+08:00", "epoch_ms": 1793708308851, "tag": "q1_full", "recorder_frames_path": "frames/q1_full/frames.jsonl"}
+{"event": "type_begin", "at": "2026-11-03T20:18:28.853+08:00", "epoch_ms": 1793708308853, "tag": "q1_full", "query": "国家验收的铁路建设项目，申请验收之前，对初期运营和专项验收有哪些条件？"}
+{"event": "type_end", "at": "2026-11-03T20:18:29.055+08:00", "epoch_ms": 1793708309055, "tag": "q1_full"}
+{"event": "enter_begin", "at": "2026-11-03T20:18:29.406+08:00", "epoch_ms": 1793708309406, "tag": "q1_full"}
+{"event": "enter_end", "at": "2026-11-03T20:18:29.509+08:00", "epoch_ms": 1793708309509, "tag": "q1_full", "enter_duration_ms": 103.0}
+{"event": "recording_stopped", "at": "2026-11-03T20:18:37.552+08:00", "epoch_ms": 1793708317552, "tag": "q1_full", "recorder_error": null, "frames_path": "frames/q1_full/frames.jsonl"}
+{"event": "results_screenshot", "at": "2026-11-03T20:18:37.889+08:00", "epoch_ms": 1793708317889, "tag": "q1_full", "screenshot": "q1_full_results.png"}
+{"event": "task_end", "at": "2026-11-03T20:25:45.801+08:00", "epoch_ms": 1793708745801, "tag": "q1_full", "outcome": "found", "answer": "A《铁路建设工程质量监督管理规定》第十七条（PDF第5页）：初期运营条件为“初步验收合格且初期运营一年以上，状态良好，发现问题整改完毕”；专项验收条件为“环境保护、水土保持、消防等专项验收经相应行政主管部门验收合格”。同条另列7项申请国家验收条件。", "note": "完整问题1次命中，无需补充关键词"}
+{"event": "task_start", "at": "2026-11-03T20:25:56.680+08:00", "epoch_ms": 1793708756680, "tag": "q2_full", "query": "铁路工程由联合体承包时，联合体各方对承包工程质量承担什么责任，依据什么安排？", "note": "操作者开始处理该题（四题题面已在同一条指令中同时给出）"}
+{"event": "task_wait_begin", "at": "2026-11-03T20:25:57.088+08:00", "epoch_ms": 1793708757088, "tag": "q2_full", "query": "铁路工程由联合体承包时，联合体各方对承包工程质量承担什么责任，依据什么安排？", "window_rect": [768, 336, 1792, 1104]}
+{"event": "box_cleared", "at": "2026-11-03T20:25:57.854+08:00", "epoch_ms": 1793708757854, "tag": "q2_full"}
+{"event": "baseline_end", "at": "2026-11-03T20:25:58.456+08:00", "epoch_ms": 1793708758456, "tag": "q2_full", "recorder_frames_path": "frames/q2_full/frames.jsonl"}
+{"event": "type_begin", "at": "2026-11-03T20:25:58.457+08:00", "epoch_ms": 1793708758457, "tag": "q2_full", "query": "铁路工程由联合体承包时，联合体各方对承包工程质量承担什么责任，依据什么安排？"}
+{"event": "type_end", "at": "2026-11-03T20:25:58.659+08:00", "epoch_ms": 1793708758659, "tag": "q2_full"}
+{"event": "enter_begin", "at": "2026-11-03T20:25:59.010+08:00", "epoch_ms": 1793708759010, "tag": "q2_full"}
+{"event": "enter_end", "at": "2026-11-03T20:25:59.116+08:00", "epoch_ms": 1793708759116, "tag": "q2_full", "enter_duration_ms": 105.3}
+{"event": "recording_stopped", "at": "2026-11-03T20:26:07.131+08:00", "epoch_ms": 1793708767131, "tag": "q2_full", "recorder_error": null, "frames_path": "frames/q2_full/frames.jsonl"}
+{"event": "results_screenshot", "at": "2026-11-03T20:26:07.471+08:00", "epoch_ms": 1793708767471, "tag": "q2_full", "screenshot": "q2_full_results.png"}
+{"event": "task_end", "at": "2026-11-03T20:26:37.776+08:00", "epoch_ms": 1793708797776, "tag": "q2_full", "outcome": "found", "answer": "A《铁路建设工程质量监督管理规定》第二十七条（PDF第8页）：“以联合体形式承包的，联合体各方应按合同约定及共同投标协议，就承包工程质量承担连带责任。”即承担连带责任，依据合同约定及共同投标协议。", "note": "完整问题1次命中，无需补充关键词"}
+{"event": "task_start", "at": "2026-11-03T20:26:44.080+08:00", "epoch_ms": 1793708804080, "tag": "q3_full", "query": "《建设工程质量管理条例》列出的必须实行监理的工程有哪些？请完整列出。", "note": "操作者开始处理该题（四题题面已在同一条指令中同时给出）"}
+{"event": "task_wait_begin", "at": "2026-11-03T20:26:44.489+08:00", "epoch_ms": 1793708804489, "tag": "q3_full", "query": "《建设工程质量管理条例》列出的必须实行监理的工程有哪些？请完整列出。", "window_rect": [768, 336, 1792, 1104]}
+{"event": "box_cleared", "at": "2026-11-03T20:26:45.258+08:00", "epoch_ms": 1793708805258, "tag": "q3_full"}
+{"event": "baseline_end", "at": "2026-11-03T20:26:45.859+08:00", "epoch_ms": 1793708805859, "tag": "q3_full", "recorder_frames_path": "frames/q3_full/frames.jsonl"}
+{"event": "type_begin", "at": "2026-11-03T20:26:45.860+08:00", "epoch_ms": 1793708805860, "tag": "q3_full", "query": "《建设工程质量管理条例》列出的必须实行监理的工程有哪些？请完整列出。"}
+{"event": "type_end", "at": "2026-11-03T20:26:46.057+08:00", "epoch_ms": 1793708806057, "tag": "q3_full"}
+{"event": "enter_begin", "at": "2026-11-03T20:26:46.408+08:00", "epoch_ms": 1793708806408, "tag": "q3_full"}
+{"event": "enter_end", "at": "2026-11-03T20:26:46.511+08:00", "epoch_ms": 1793708806511, "tag": "q3_full", "enter_duration_ms": 102.8}
+{"event": "recording_stopped", "at": "2026-11-03T20:26:54.562+08:00", "epoch_ms": 1793708814562, "tag": "q3_full", "recorder_error": null, "frames_path": "frames/q3_full/frames.jsonl"}
+{"event": "results_screenshot", "at": "2026-11-03T20:26:54.899+08:00", "epoch_ms": 1793708814899, "tag": "q3_full", "screenshot": "q3_full_results.png"}
+{"event": "task_end", "at": "2026-11-03T20:27:25.710+08:00", "epoch_ms": 1793708845710, "tag": "q3_full", "outcome": "found", "answer": "B《建设工程质量管理条例》第十二条（PDF第3页）完整列出五项：（一）国家重点建设工程；（二）大中型公用事业工程；（三）成片开发建设的住宅小区工程；（四）利用外国政府或者国际组织贷款、援助资金的工程；（五）国家规定必须实行监理的其他工程。", "note": "完整问题1次命中（B文件排第2行，打开后核对第十二条）；无需补充关键词"}
+{"event": "task_start", "at": "2026-11-03T20:27:31.475+08:00", "epoch_ms": 1793708851475, "tag": "q4_full", "query": "仅依据本次两份指定法规原文，铁路桥梁抗震设计的地震动峰值加速度具体取值是多少？", "note": "操作者开始处理该题（四题题面已在同一条指令中同时给出）"}
+{"event": "task_wait_begin", "at": "2026-11-03T20:27:31.883+08:00", "epoch_ms": 1793708851883, "tag": "q4_full", "query": "仅依据本次两份指定法规原文，铁路桥梁抗震设计的地震动峰值加速度具体取值是多少？", "window_rect": [768, 336, 1792, 1104]}
+{"event": "box_cleared", "at": "2026-11-03T20:27:32.652+08:00", "epoch_ms": 1793708852652, "tag": "q4_full"}
+{"event": "baseline_end", "at": "2026-11-03T20:27:33.254+08:00", "epoch_ms": 1793708853254, "tag": "q4_full", "recorder_frames_path": "frames/q4_full/frames.jsonl"}
+{"event": "type_begin", "at": "2026-11-03T20:27:33.254+08:00", "epoch_ms": 1793708853254, "tag": "q4_full", "query": "仅依据本次两份指定法规原文，铁路桥梁抗震设计的地震动峰值加速度具体取值是多少？"}
+{"event": "type_end", "at": "2026-11-03T20:27:33.456+08:00", "epoch_ms": 1793708853456, "tag": "q4_full"}
+{"event": "enter_begin", "at": "2026-11-03T20:27:33.807+08:00", "epoch_ms": 1793708853807, "tag": "q4_full"}
+{"event": "enter_end", "at": "2026-11-03T20:27:33.910+08:00", "epoch_ms": 1793708853910, "tag": "q4_full", "enter_duration_ms": 103.0}
+{"event": "recording_stopped", "at": "2026-11-03T20:27:41.934+08:00", "epoch_ms": 1793708861934, "tag": "q4_full", "recorder_error": null, "frames_path": "frames/q4_full/frames.jsonl"}
+{"event": "results_screenshot", "at": "2026-11-03T20:27:42.268+08:00", "epoch_ms": 1793708862268, "tag": "q4_full", "screenshot": "q4_full_results.png"}
+{"event": "task_start", "at": "2026-11-03T20:28:17.900+08:00", "epoch_ms": 1793708897900, "tag": "q4_kw", "query": "地震动峰值加速度", "note": "操作者开始处理该题（四题题面已在同一条指令中同时给出）"}
+{"event": "task_wait_begin", "at": "2026-11-03T20:28:18.308+08:00", "epoch_ms": 1793708898308, "tag": "q4_kw", "query": "地震动峰值加速度", "window_rect": [768, 336, 1792, 1104]}
+{"event": "box_cleared", "at": "2026-11-03T20:28:19.075+08:00", "epoch_ms": 1793708899075, "tag": "q4_kw"}
+{"event": "baseline_end", "at": "2026-11-03T20:28:19.677+08:00", "epoch_ms": 1793708899678, "tag": "q4_kw", "recorder_frames_path": "frames/q4_kw/frames.jsonl"}
+{"event": "type_begin", "at": "2026-11-03T20:28:19.678+08:00", "epoch_ms": 1793708899678, "tag": "q4_kw", "query": "地震动峰值加速度"}
+{"event": "type_end", "at": "2026-11-03T20:28:19.875+08:00", "epoch_ms": 1793708899875, "tag": "q4_kw"}
+{"event": "enter_begin", "at": "2026-11-03T20:28:20.226+08:00", "epoch_ms": 1793708900226, "tag": "q4_kw"}
+{"event": "enter_end", "at": "2026-11-03T20:28:20.332+08:00", "epoch_ms": 1793708900332, "tag": "q4_kw", "enter_duration_ms": 105.9}
+{"event": "recording_stopped", "at": "2026-11-03T20:28:26.345+08:00", "epoch_ms": 1793708906345, "tag": "q4_kw", "recorder_error": null, "frames_path": "frames/q4_kw/frames.jsonl"}
+{"event": "results_screenshot", "at": "2026-11-03T20:28:26.678+08:00", "epoch_ms": 1793708906678, "tag": "q4_kw", "screenshot": "q4_kw_results.png"}
+{"event": "task_end", "at": "2026-11-03T20:28:49.008+08:00", "epoch_ms": 1793708929008, "tag": "q4_full", "outcome": "not_found", "answer": "两份指定法规原文均无法给出该取值：对 A_spec.pdf（25页）检索“抗震/地震/峰值加速度/加速度/桥梁”均为0命中；对 B_copy_cas.pdf（20页）检索“抗震/地震/峰值加速度/加速度”均为0命中。DocFetcher完整问题仅返回B(503)/A(414)的文件级弱匹配，补充关键词“地震动峰值加速度”仅B得90分。故仅依据这两份法规，无法确定该具体取值。", "note": "完整问题1次+补充关键词1次（原因：完整问题仅文件级弱匹配，需确认原文是否含该术语）；两文件原文均无相关术语"}
+{"event": "trigger_check_start", "at": "2026-11-03T20:31:59.098+08:00", "epoch_ms": 1793709119099, "note": "非四题查询：验证不按回车是否自动搜索"}
+{"event": "trigger_check_paste_end", "at": "2026-11-03T20:31:59.833+08:00", "epoch_ms": 1793709119833, "query": "质量", "note": "未按回车"}
+{"event": "trigger_check_end", "at": "2026-11-03T20:32:03.874+08:00", "epoch_ms": 1793709123874}

@@ -1,0 +1,73 @@
+{
+  "tag": "q2_full",
+  "targets": [
+    "466",
+    "911"
+  ],
+  "enter_begin_ms": 1793708759010,
+  "enter_end_ms": 1793708759116,
+  "press_span_ms": 106,
+  "base_idx": 22,
+  "base_dt_begin_ms": -33.9,
+  "base_tokens": [
+    "A_spec",
+    "915",
+    "298 KB",
+    "A_spec.pdf",
+    "pdf",
+    "[LOCAL_PATH_REDACTED]",
+    "B_copy_cas",
+    "858 KB",
+    "B_copy_cas.pdf",
+    "pdf",
+    "504",
+    "[LOCAL_PATH_REDACTED]"
+  ],
+  "checked_frames": 2,
+  "found": {
+    "seq": 24,
+    "dt_begin_ms": 79.7,
+    "t_start_ms": 1793708759056.9,
+    "t_end_ms": 1793708759089.7,
+    "hit": [
+      "911",
+      "466"
+    ],
+    "tokens": [
+      "A_spec",
+      "911",
+      "298KB",
+      "A_spec.pdf",
+      "pdf",
+      "[LOCAL_PATH_REDACTED]",
+      "B_copy_cas",
+      "858 KB",
+      "B_copy_cas.pdf",
+      "pdf",
+      "466",
+      "[LOCAL_PATH_REDACTED]"
+    ],
+    "frame": "000024.jpg"
+  },
+  "prev_frame": {
+    "seq": 23,
+    "dt_begin_ms": 21.4,
+    "tokens": [
+      "A_spec",
+      "915",
+      "298 KB",
+      "A_spec.pdf",
+      "pdf",
+      "[LOCAL_PATH_REDACTED]",
+      "B_copy_cas",
+      "858 KB",
+      "B_copy_cas.pdf",
+      "pdf",
+      "504",
+      "[LOCAL_PATH_REDACTED]"
+    ]
+  },
+  "frame_count": 185,
+  "fps": 20,
+  "max_interval_ms": 61.3
+}
