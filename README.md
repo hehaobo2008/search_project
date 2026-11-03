@@ -153,3 +153,9 @@ python -m unittest discover -s tests -v
 - 结果：4 题全部在限时内完成，2 充分、2 正确拒绝；用时 HCS 254.9 秒 / DocFetcher 358.9 秒。**同一 AI 代理、非盲、题目不同，不能用于效率结论。**
 - 主要问题：DocFetcher 预览无法从第 1 页导航到命中位置，长文档需外部 PDF 核对；HCS 结束时证据勾选仍未可靠记录（`selected_evidence` 为空）。
 - 核查：`reports/timing_trial_g2t1_timeout_check.md`（G2-T1 的 note 写超时、字段写 224.2 秒的矛盾）与证据 `reports/timing_trial_g2t1_timeout_evidence.json`。
+
+## 双会话隔离能力核查
+
+- 报告：`reports/isolation_capability_check.md`。
+- 结论：进程/日志/索引可隔离（HCS 双端口双 `session_id` 已实测，DocFetcher 可复制便携版）；**执行者不能隔离**——只有同一 OS 账户与同一 AI 实例，且本会话已见答案，不能称为独立操作者或盲测。
+- 暴露点：题面文件 `reports/timing_trial_questions.json` 同时含 `reference[].text`，HCS `--tasks-file` 与 `work/tt_df.py` 都读它；HCS 日志根固定，尚不支持 `--log-root`。
