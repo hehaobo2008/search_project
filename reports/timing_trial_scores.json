@@ -1,0 +1,167 @@
+{
+  "trial_id": "timing-trial-20261103",
+  "scored_at": "2026-11-03T15:44:47.616532+08:00",
+  "blind": false,
+  "operator": "同一 AI 代理（非盲，非真人）",
+  "time_limit_seconds": 300,
+  "rows": [
+    {
+      "task_id": "G1-T1",
+      "group_id": "G1",
+      "tool": "HCS",
+      "order_index": 1,
+      "question": "建设单位应当在什么时候办理铁路建设项目工程质量监督手续？项目相关事项发生变化后要怎么处理？",
+      "type": "answerable",
+      "outcome": "found",
+      "status": "ended",
+      "duration_ms": 162209,
+      "duration_server_ms": 162205,
+      "timeout": false,
+      "selected_evidence": [],
+      "displayed_evidence": [
+        "rail_quality:art-12",
+        "rail_quality:art-8",
+        "construction_quality:art-13",
+        "rail_quality:art-18",
+        "rail_quality:art-9"
+      ],
+      "decision": "answer",
+      "search_ms": 429.3,
+      "log_ref": "logs/ux_trial/runs/ux-20261103T152834-459c/",
+      "reference_articles": [
+        "rail_quality:art-12"
+      ],
+      "grade": "充分（正确）",
+      "reason": "第1位 rail_quality:art-12，98 字符未截断，覆盖“开工手续前办理监督手续”与“事项变化及时书面报送”两项；已打开原文并确认。",
+      "source_ok": true
+    },
+    {
+      "task_id": "G1-T2",
+      "group_id": "G1",
+      "tool": "HCS",
+      "order_index": 2,
+      "question": "铁路建设项目的竣工财务决算，应当在多长时间内编制完成并报送主管部门？",
+      "type": "no_sufficient_basis",
+      "outcome": "not_found",
+      "status": "ended",
+      "duration_ms": 92676,
+      "duration_server_ms": 92672,
+      "timeout": false,
+      "selected_evidence": [],
+      "displayed_evidence": [
+        "rail_quality:art-17",
+        "rail_quality:art-12",
+        "rail_quality:art-18",
+        "rail_quality:art-61",
+        "rail_quality:art-16"
+      ],
+      "decision": "answer",
+      "search_ms": 12.6,
+      "log_ref": "logs/ux_trial/runs/ux-20261103T153207-9415/",
+      "reference_articles": [
+        "rail_quality:art-17"
+      ],
+      "grade": "正确拒绝",
+      "reason": "返回 A17（只含“竣工决算已经主管部门审查通过”）等 5 条，均无编制/报送时限；以未找到结束。",
+      "source_ok": true
+    },
+    {
+      "task_id": "G2-T1",
+      "group_id": "G2",
+      "tool": "DocFetcher",
+      "order_index": 2,
+      "question": "建设单位采购的建筑材料、建筑构配件和设备，属于依法实行许可或者认证的，需要满足什么条件才能采购、供应和使用？",
+      "type": "answerable",
+      "outcome": "found",
+      "status": "ended",
+      "duration_ms": 224228,
+      "duration_server_ms": null,
+      "timeout": false,
+      "selected_evidence": [
+        "rail_quality:art-13"
+      ],
+      "displayed_evidence": [],
+      "decision": null,
+      "search_ms": null,
+      "log_ref": "logs/timing_trial/df-20261103T153954-5418/",
+      "reference_articles": [
+        "rail_quality:art-13"
+      ],
+      "grade": "充分（正确）",
+      "reason": "文件级命中 A_spec(1219)/B(901)；DocFetcher 预览停第1页，改用外部打开 A_spec.pdf 查找“许可或者认证”并定位到第十三条全文；以找到结束。",
+      "source_ok": true
+    },
+    {
+      "task_id": "G2-T2",
+      "group_id": "G2",
+      "tool": "DocFetcher",
+      "order_index": 1,
+      "question": "铁路建设项目的水土保持设施通过验收后，按规定应当向社会公示多少天？",
+      "type": "no_sufficient_basis",
+      "outcome": "not_found",
+      "status": "ended",
+      "duration_ms": 134700,
+      "duration_server_ms": null,
+      "timeout": false,
+      "selected_evidence": [],
+      "displayed_evidence": [],
+      "decision": null,
+      "search_ms": null,
+      "log_ref": "logs/timing_trial/df-20261103T153728-2422/",
+      "reference_articles": [
+        "rail_quality:art-17"
+      ],
+      "grade": "正确拒绝（工具未能定位）",
+      "reason": "完整问题命中 A_spec(867)/B(380)，关键词“水土保持 公示”仅 A_spec(128)；预览停第1页无法导航，未读到公示期限；以未找到结束。",
+      "source_ok": true
+    }
+  ],
+  "summary": {
+    "by_tool": {
+      "HCS": {
+        "count": 2,
+        "total_ms": 254885,
+        "durations": [
+          {
+            "task_id": "G1-T1",
+            "duration_ms": 162209
+          },
+          {
+            "task_id": "G1-T2",
+            "duration_ms": 92676
+          }
+        ],
+        "grades": [
+          "充分（正确）",
+          "正确拒绝"
+        ]
+      },
+      "DocFetcher": {
+        "count": 2,
+        "total_ms": 358928,
+        "durations": [
+          {
+            "task_id": "G2-T1",
+            "duration_ms": 224228
+          },
+          {
+            "task_id": "G2-T2",
+            "duration_ms": 134700
+          }
+        ],
+        "grades": [
+          "充分（正确）",
+          "正确拒绝（工具未能定位）"
+        ]
+      }
+    },
+    "counts": {
+      "total": 4,
+      "correct": 4,
+      "partial": 0,
+      "incorrect": 0,
+      "timeout": 0
+    }
+  },
+  "caveat": "样本 4 题、单一 AI 操作者、非盲、题目不同；耗时不能用于效率结论，也不代表真人水平。"
+}

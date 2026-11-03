@@ -144,3 +144,11 @@ python -m unittest discover -s tests -v
 - 计时来源：客户端 `Date.now()`（点击开始/结束）、`performance.now()`（页面计时器）；服务端 `time.time()`（收到开始/结束）。`duration_ms` 含往返、`duration_server_ms` 仅服务端区间；两端都是系统时钟，无法拆出网络耗时。
 - 检索返回的证据只是候选，`results_ready` 标注 `displayed_is_not_reviewed`，页面固定提示“返回证据不代表已核对原文”。
 - 测试：`python scripts/ux_trial_race_check.py`（含 `--search-delay-ms` 注入延时复现窗口；有 FAIL 退出码 1）。报告：`reports/ux_trial_end_race.md`。
+
+## HCS 与 DocFetcher 小规模计时试跑
+
+- 协议：`reports/timing_trial_protocol.md`；冻结题面与参考依据：`reports/timing_trial_questions.json`；结果：`reports/timing_trial_results.md`；评分：`reports/timing_trial_scores.json`；原始记录：`reports/timing_trial_runs/`；截图：`reports/timing_trial_screens/`。
+- 资料：A `4a815f2c…`、B `651fa253…`，HCS 与 DocFetcher 用同一组 PDF；HCS `hybrid_top5` 关闭补证，DocFetcher 用既有中文索引。
+- 两组各 2 题（1 可答 + 1 无充分依据），组内顺序相反；单题上限 300 秒。
+- 结果：4 题全部在限时内完成，2 充分、2 正确拒绝；用时 HCS 254.9 秒 / DocFetcher 358.9 秒。**同一 AI 代理、非盲、题目不同，不能用于效率结论。**
+- 主要问题：DocFetcher 预览无法从第 1 页导航到命中位置，长文档需外部 PDF 核对；HCS 结束时证据勾选仍未可靠记录（`selected_evidence` 为空）。

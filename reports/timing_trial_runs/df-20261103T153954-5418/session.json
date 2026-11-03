@@ -1,0 +1,39 @@
+{
+  "session_id": "df-20261103T153954-5418",
+  "tool": "DocFetcher",
+  "group_id": "G2",
+  "task_id": "G2-T1",
+  "question": "建设单位采购的建筑材料、建筑构配件和设备，属于依法实行许可或者认证的，需要满足什么条件才能采购、供应和使用？",
+  "type": "answerable",
+  "shown_at": "2026-11-03T15:39:54.060109+08:00",
+  "shown_epoch_ms": 1793691594060,
+  "status": "ended",
+  "outcome": "found",
+  "selected_evidence": [
+    "rail_quality:art-13"
+  ],
+  "duration_ms": 224228,
+  "time_limit_seconds": 300,
+  "operator": "同一 AI 代理（非盲）",
+  "actions": [
+    {
+      "at": "2026-11-03T15:43:37.992403+08:00",
+      "kind": "preview",
+      "detail": "双击 A_spec.pdf 预览停第1页(1/25)，翻页/滚轮无变化"
+    },
+    {
+      "at": "2026-11-03T15:43:38.089593+08:00",
+      "kind": "external_open",
+      "detail": "用系统默认程序(Edge)打开 A_spec.pdf，Ctrl+F 查找“许可或者认证”，滚动定位到第十三条"
+    },
+    {
+      "at": "2026-11-03T15:43:38.200649+08:00",
+      "kind": "evidence",
+      "detail": "第十三条：属于依法实行许可或者认证的，应取得许可或者认证后方可采购、供应和使用"
+    }
+  ],
+  "note": "第十三条全文已核对；操作过程超过300秒上限，按未完成记",
+  "ended_at": "2026-11-03T15:43:38.288542+08:00",
+  "ended_epoch_ms": 1793691818288,
+  "timeout": false
+}

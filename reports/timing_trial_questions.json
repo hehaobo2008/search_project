@@ -1,0 +1,135 @@
+{
+  "trial_id": "timing-trial-20261103",
+  "frozen_at": "2026-11-03T15:26:21.126273+08:00",
+  "curator": "CodeArts 代理（同一会话内的 AI，非独立第三方）",
+  "blind": false,
+  "blind_note": "执行者与出题者为同一 AI 代理，且此前参与过 A/B 语料与 Eval30 标注，可能记得部分条款；本轮为非盲试跑，不构成盲测。",
+  "corpus": {
+    "docs": [
+      "rail_quality",
+      "construction_quality"
+    ],
+    "rail_quality_pdf_sha256": "4a815f2cecd083c229e6a53ae145595b7c59583aa09371c14703d47adec09b98",
+    "construction_quality_pdf_sha256": "651fa2536cc3c86f476324629a4ce4b5ded9479728468622c1831eec8ccb6cb7"
+  },
+  "time_limit_seconds": 300,
+  "groups": [
+    {
+      "group_id": "G1",
+      "tool": "HCS",
+      "order": [
+        "G1-T1",
+        "G1-T2"
+      ],
+      "order_note": "组内先可答题、后无充分依据题",
+      "tasks": [
+        {
+          "task_id": "G1-T1",
+          "question": "建设单位应当在什么时候办理铁路建设项目工程质量监督手续？项目相关事项发生变化后要怎么处理？",
+          "type": "answerable",
+          "reference": [
+            {
+              "article_id": "rail_quality:art-12",
+              "article_no": "第十二条",
+              "doc_id": "rail_quality",
+              "doc_title": "铁路建设工程质量监督管理规定",
+              "version_id": "amended_2021_12_23",
+              "text": "第十二条 建设单位在办理开工手续前，应按规定到铁路监管部门或工程质量监督机构办理铁路建设项目工程质量监督手续。建设项目相关事项发生变化的，应当及时将变化情况书面报送铁路监管部门或工程质量监督机构。",
+              "text_sha256": "3794e0e598f821404384bcccdeb19dd863d23a07d894bce1cfa061c11c6f2bd8",
+              "pdf_page_start": 3,
+              "source_url": "https://xxgk.mot.gov.cn/2020/jigou/fgs/202202/t20220225_3643089.html",
+              "role": "sufficient"
+            }
+          ],
+          "grading_note": "需同时覆盖“办理开工手续前办理监督手续”和“事项变化时及时书面报送”两项；只答出其中一项记为部分。"
+        },
+        {
+          "task_id": "G1-T2",
+          "question": "铁路建设项目的竣工财务决算，应当在多长时间内编制完成并报送主管部门？",
+          "type": "no_sufficient_basis",
+          "reference": [
+            {
+              "article_id": "rail_quality:art-17",
+              "article_no": "第十七条",
+              "doc_id": "rail_quality",
+              "doc_title": "铁路建设工程质量监督管理规定",
+              "version_id": "amended_2021_12_23",
+              "text": "第十七条 国家验收的铁路建设项目，具备下列条件后建设单位方可申请验收：\n（一）可行性研究报告批准的工程全部建成且质量合格；\n（二）初步验收合格且初期运营一年以上，状态良好，发现问题整改完毕；\n（三）环境保护、水土保持、消防等专项验收经相应行政主管部门验收合格；\n（四）建设用地手续齐全并领取《国有土地使用证》，安全保护区标桩设立完毕；\n（五）铁路与道路立体交叉设施及其附属安全设施已移交完毕；\n（六）竣工决算已经主管部门审查通过，无遗留问题；\n（七）档案验收及移交工作已经完成。",
+              "text_sha256": "d7faa3ac8420449277d593a1ed8f7f10417cbce96b905aa6844e7d5c675df057",
+              "pdf_page_start": 5,
+              "source_url": "https://xxgk.mot.gov.cn/2020/jigou/fgs/202202/t20220225_3643089.html",
+              "role": "related_not_sufficient"
+            }
+          ],
+          "grading_note": "A17(六) 只说明“竣工决算已经主管部门审查通过，无遗留问题”，未给编制或报送时限；命中该条不构成充分依据。本次资料范围内不存在可回答时限的条款。"
+        }
+      ]
+    },
+    {
+      "group_id": "G2",
+      "tool": "DocFetcher",
+      "order": [
+        "G2-T2",
+        "G2-T1"
+      ],
+      "order_note": "组内先无充分依据题、后可答题，与 G1 顺序相反",
+      "tasks": [
+        {
+          "task_id": "G2-T1",
+          "question": "建设单位采购的建筑材料、建筑构配件和设备，属于依法实行许可或者认证的，需要满足什么条件才能采购、供应和使用？",
+          "type": "answerable",
+          "reference": [
+            {
+              "article_id": "rail_quality:art-13",
+              "article_no": "第十三条",
+              "doc_id": "rail_quality",
+              "doc_title": "铁路建设工程质量监督管理规定",
+              "version_id": "amended_2021_12_23",
+              "text": "第十三条 建设单位应组织对施工单位采购的建筑材料、建筑构配件和设备质量进行检查；建设单位采购供应的建筑材料、建筑构配件和设备，其质量应符合国家规定、设计文件要求和合同约定；属于依法实行许可或者认证的，应取得许可或者认证后方可采购、供应和使用。\n建设单位不得明示或者暗示施工单位使用不合格的建筑材料、建筑构配件和设备。",
+              "text_sha256": "87fd57ad4a28a070bdf39dc7de8c4ec9b8a8ff2ef6e7cfc26eb14c9ced1a4ad5",
+              "pdf_page_start": 3,
+              "source_url": "https://xxgk.mot.gov.cn/2020/jigou/fgs/202202/t20220225_3643089.html",
+              "role": "sufficient"
+            }
+          ],
+          "grading_note": "需覆盖“应取得许可或者认证后方可采购、供应和使用”；仅泛泛提到检查材料质量记为部分。"
+        },
+        {
+          "task_id": "G2-T2",
+          "question": "铁路建设项目的水土保持设施通过验收后，按规定应当向社会公示多少天？",
+          "type": "no_sufficient_basis",
+          "reference": [
+            {
+              "article_id": "rail_quality:art-17",
+              "article_no": "第十七条",
+              "doc_id": "rail_quality",
+              "doc_title": "铁路建设工程质量监督管理规定",
+              "version_id": "amended_2021_12_23",
+              "text": "第十七条 国家验收的铁路建设项目，具备下列条件后建设单位方可申请验收：\n（一）可行性研究报告批准的工程全部建成且质量合格；\n（二）初步验收合格且初期运营一年以上，状态良好，发现问题整改完毕；\n（三）环境保护、水土保持、消防等专项验收经相应行政主管部门验收合格；\n（四）建设用地手续齐全并领取《国有土地使用证》，安全保护区标桩设立完毕；\n（五）铁路与道路立体交叉设施及其附属安全设施已移交完毕；\n（六）竣工决算已经主管部门审查通过，无遗留问题；\n（七）档案验收及移交工作已经完成。",
+              "text_sha256": "d7faa3ac8420449277d593a1ed8f7f10417cbce96b905aa6844e7d5c675df057",
+              "pdf_page_start": 5,
+              "source_url": "https://xxgk.mot.gov.cn/2020/jigou/fgs/202202/t20220225_3643089.html",
+              "role": "related_not_sufficient"
+            }
+          ],
+          "grading_note": "A17(三) 只说明水土保持等专项验收需经行政主管部门验收合格，未规定公示期限；命中该条不构成充分依据。"
+        }
+      ]
+    }
+  ],
+  "grading": {
+    "sufficient": "展示或选中证据包含参考答案条款，且可见文字覆盖回答所需全部要素",
+    "partial": "只覆盖部分要素，或只到相近条款",
+    "insufficient": "未找到，或找到的条款不能回答",
+    "correct_rejection": "无答案题以“未找到”结束，且未把相近条款当成答案",
+    "false_answer": "无答案题以“找到依据”结束，但证据不能回答",
+    "timeout": "单题超过 300 秒记为未完成，不记成功"
+  },
+  "environment": {
+    "hcs_method": "hybrid_top5",
+    "hcs_auto_supplement": false,
+    "hcs_config_id": "cfg-0037f32996f8-hybrid_top5",
+    "docfetcher_version": "1.1.27 (Windows 64-bit Portable)",
+    "docfetcher_index": "hcstest（中文分词 Ansj，既有索引，本轮不重建）"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "session_id": "df-20261103T153728-2422",
+  "tool": "DocFetcher",
+  "group_id": "G2",
+  "task_id": "G2-T2",
+  "question": "铁路建设项目的水土保持设施通过验收后，按规定应当向社会公示多少天？",
+  "type": "no_sufficient_basis",
+  "shown_at": "2026-11-03T15:37:28.000159+08:00",
+  "shown_epoch_ms": 1793691448000,
+  "status": "ended",
+  "outcome": "not_found",
+  "selected_evidence": [],
+  "duration_ms": 134700,
+  "time_limit_seconds": 300,
+  "operator": "同一 AI 代理（非盲）",
+  "actions": [
+    {
+      "at": "2026-11-03T15:38:03.126085+08:00",
+      "kind": "query",
+      "detail": "完整问题；命中 A_spec.pdf(867)、B_copy_cas.pdf(380)"
+    },
+    {
+      "at": "2026-11-03T15:39:42.515635+08:00",
+      "kind": "preview",
+      "detail": "双击 A_spec.pdf 后预览加载第1页(1/25)，未跳到命中位置；点击页码/翻页无可见变化"
+    },
+    {
+      "at": "2026-11-03T15:39:42.617754+08:00",
+      "kind": "query",
+      "detail": "关键词“水土保持 公示”：仅 A_spec 命中(128)，B 不命中"
+    }
+  ],
+  "note": "预览无法定位到命中页；未在 A/B 中读到公示期限；按未找到提交",
+  "ended_at": "2026-11-03T15:39:42.700442+08:00",
+  "ended_epoch_ms": 1793691582700,
+  "timeout": false
+}

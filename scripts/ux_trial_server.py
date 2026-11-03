@@ -292,6 +292,9 @@ class Handler(BaseHTTPRequestHandler):
         if path == "/api/session":
             self.send_json(200, APP.session_payload())
             return
+        if path == "/api/tasks":
+            self.send_json(200, {"tasks": [{"task_id": k, "label": "任务 " + k} for k in TASKS]})
+            return
         if path.startswith("/locator/"):
             doc_id = path.split("/", 2)[2]
             name = "rail_quality.locator.html" if doc_id == "rail_quality" else (
@@ -534,6 +537,8 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=8765)
+    parser.add_argument("--tasks-file", default=None,
+                        help="可选：从冻结题面 JSON 读取任务，默认用内置三道已见任务")
     parser.add_argument("--search-delay-ms", type=int, default=0,
                         help="仅用于竞态测试：在检索前注入延时，不改变检索方法")
     args = parser.parse_args()
@@ -541,6 +546,16 @@ def main():
         print("REFUSE: this page is loopback-only; host must be 127.0.0.1", file=sys.stderr)
         return 2
     global APP
+    if args.tasks_file:
+        data = json.load(open(args.tasks_file, encoding="utf-8"))
+        loaded = {}
+        for g in data.get("groups", []):
+            for t in g.get("tasks", []):
+                loaded[t["task_id"]] = t["question"]
+        if loaded:
+            TASKS.clear()
+            TASKS.update(loaded)
+        print("tasks=%d from %s" % (len(TASKS), os.path.basename(args.tasks_file)), flush=True)
     APP = App()
     APP.search_delay_ms = max(0, args.search_delay_ms)
     print("ready=%s init_ms=%.1f config_id=%s session_id=%s"
