@@ -18,11 +18,11 @@
 {"id": "A18", "category": "multi_chapter_keyword", "question": "《实名制办法》对办理购票、补票、取票、改签、退票业务时既不能提供有效身份证件也不能提供证件信息，以及实名查验信息不一致，分别如何处理？"}
 {"id": "A19", "category": "multi_chapter_keyword", "question": "《安检办法》对安检区域视频监控覆盖及无法经设备检查的行李人工检查场所有何要求？"}
 {"id": "A20", "category": "multi_chapter_keyword", "question": "《旅客运输规程》对有效车票所载席位的乘车义务与因铁路企业原因无法按原席位乘车时的重新安排差价分别如何规定？"}
-{"id": "A21", "category": "multi_chapter_semantic", "question": "一名旅客不愿配合安检，车站应如何处理？如果其随身物品体积过大无法通过安检设备，检查应如何进行？"}
+{"id": "A21", "category": "multi_chapter_semantic", "question": "一名旅客不接受或者拒绝配合安检，车站应如何处理？如果其随身物品体积过大无法通过安检设备，检查应如何进行？"}
 {"id": "A22", "category": "multi_chapter_semantic", "question": "在车站安全检查中，一位旅客的随身物品因尺寸无法通过安检设备，人工检查应在哪里进行？如果发现该物品可以托运但不能随身携带，旅客有哪些处理选择？"}
 {"id": "A23", "category": "multi_chapter_semantic", "question": "某非长途客运城际列车拟暂不实行实名制。企业需要事先做什么？如果该列车实行实名制，实名购买和实名查验各核对或记录什么？"}
 {"id": "A24", "category": "multi_chapter_semantic", "question": "一名旅客在实名制车票丢失后办理挂失补办，随后到车站检票，他需要配合什么核验？补办能否收费？"}
-{"id": "A25", "category": "multi_chapter_semantic", "question": "一位旅客准备托运行李，同时携带物品进站。企业就随身物品应明确什么赔偿内容？而旅客托运行李夹带证件时企业发现后应如何处理？"}
+{"id": "A25", "category": "multi_chapter_semantic", "question": "一位旅客准备托运行李，同时携带物品进站。企业就随身物品应明确什么赔偿内容？铁路运输企业在承运行李时或者运输过程中发现行李中夹带证书证件的，对夹带有何规定、发现后应如何处理？"}
 {"id": "B01", "category": "keyword_single", "question": "铁路设备生产企业在设计寿命周期内应提供什么服务？"}
 {"id": "B02", "category": "keyword_single", "question": "铁路设备生产企业应多久报告一次质量保证期内许可产品质量安全相关事故？"}
 {"id": "B03", "category": "keyword_single", "question": "铁路运输服务质量监督检查人员不得少于几人？"}
