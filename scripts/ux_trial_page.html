@@ -55,7 +55,7 @@
   <div class="panel">
     <div>已开始任务 <strong id="runLabel"></strong>　<span class="timer" id="timer">00:00.0</span></div>
     <div class="small" id="initDetail"></div>
-    <div class="small" id="timingNote">计时起点＝点击「开始任务」的浏览器时刻，因此请求与响应往返时间计入任务用时；服务端另记收到开始/结束请求的时刻，差值见日志 duration_ms 与 duration_server_ms。</div>
+    <div class="small" id="timingNote">计时来源：客户端用 Date.now() 记录点击开始/结束的毫秒时间戳，用 performance.now() 驱动页面计时器；服务端用 time.time() 记录收到请求的时刻。局限：两端口径都是系统时钟，机器时钟被调整会让差值失真；两个时间戳只能给出"点击到服务端收到结束"的总时长（含请求与响应往返），不能拆出网络耗时；页面刷新后 performance.now() 归零，恢复时以服务端 elapsed 为准。duration_client_reported_ms 只作对照，不与服务端值合并。</div>
     <div class="status">题面（开始后才显示）</div>
     <div id="questionText" style="font-size:18px;font-weight:600;margin:8px 0;"></div>
     <label for="questionInput" class="small">问题输入（本页只验证已见任务；若修改，搜索会被拒绝并记录）</label>
@@ -66,6 +66,7 @@
       <button id="abortBtn" class="danger">中止任务</button>
     </div>
     <div id="status" class="status hidden"></div>
+    <div id="endHint" class="status error hidden"></div>
   </div>
 
   <div id="results"></div>
@@ -89,7 +90,7 @@
 </div>
 
 <script>
-const state = { runId: null, question: '', startPerf: 0, timer: null, lastResults: [], phase: 'idle', ending: false };
+const state = { runId: null, question: '', startPerf: 0, timer: null, lastResults: [], phase: 'idle', ending: false, searching: false, searchSeq: 0 };
 const el = id => document.getElementById(id);
 const api = async (path, body) => {
   const r = await fetch(path, {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(body || {})});
@@ -125,15 +126,16 @@ function setPhase(p) {
   el('startBtn').disabled = (p === 'active' || p === 'starting');
   el('searchBtn').disabled = !started;
   el('againBtn').disabled = !started || state.lastResults.length === 0;
-  el('endBtn').disabled = !started || state.ending;
-  el('abortBtn').disabled = !started || state.ending;
+  el('endBtn').disabled = !started || state.ending || state.searching;
+  el('abortBtn').disabled = !started || state.ending || state.searching;
   el('taskSel').disabled = (p === 'active' || p === 'starting');
 }
 
 function resetTaskView() {
   if (state.timer) { clearInterval(state.timer); state.timer = null; }
   state.runId = null; state.question = ''; state.startPerf = 0;
-  state.lastResults = []; state.ending = false;
+  state.lastResults = []; state.ending = false; state.searching = false; state.searchSeq += 1;
+  el('endHint').classList.add('hidden'); el('endHint').textContent = '';
   el('results').innerHTML = '';
   el('endSummary').classList.add('hidden'); el('endSummary').innerHTML = '';
   el('endPanel').classList.add('hidden');
@@ -200,27 +202,52 @@ el('startBtn').onclick = async () => {
 
 async function doSearch(isAgain) {
   if (!state.runId || state.phase !== 'active') { showStatus('尚未开始任务。', 'error'); return; }
+  if (state.searching) { showStatus('上一次搜索仍在进行，请等待结果。', 'error'); return; }
   const q = el('questionInput').value.trim();
   if (!q) { showStatus('问题不能为空。', 'error'); return; }
-  el('searchBtn').disabled = true; el('againBtn').disabled = true;
+  const runIdAtStart = state.runId;
+  const seq = ++state.searchSeq;
+  state.searching = true;
   if (isAgain) logEvent('query_again_click_client');
-  showStatus('正在搜索……');
+  showStatus('正在搜索……完成按钮在搜索结束前不可用。');
+  setPhase('active');
+  el('endHint').classList.remove('hidden');
+  el('endHint').textContent = '搜索进行中：结束与中止暂不可用，等待结果或等待超时。';
   try {
-    const data = await api('/api/search', {run_id: state.runId, question: q});
+    const data = await api('/api/search', {run_id: runIdAtStart, question: q});
+    if (seq !== state.searchSeq || state.runId !== runIdAtStart || state.phase !== 'active') {
+      return;
+    }
     state.lastResults = data.evidence || [];
     renderResults(data);
     if (data.decision === 'refuse') {
       showStatus('本次未提供充分依据', 'reject');
     } else {
-      showStatus('结果已就绪：' + data.evidence.length + ' 条；展示文字按 400 字符截断。', '');
+      showStatus('结果已就绪：' + data.evidence.length + ' 条；展示文字按 400 字符截断。返回证据不代表已核对原文。', '');
     }
-    el('againBtn').disabled = state.lastResults.length === 0;
   } catch (e) {
+    if (seq !== state.searchSeq) return;
+    if (e.payload && (e.payload.error === 'search_discarded' || e.payload.error === 'run_not_active')) {
+      state.lastResults = [];
+      showStatus('任务已结束或搜索已取消：本次结果未写入，也不会展示。', 'error');
+      await syncSession();
+      return;
+    }
     state.lastResults = [];
-    el('againBtn').disabled = true;
     showStatus('搜索失败：' + e.message, 'error');
-    if (e.status === 409) await syncSession();
-  } finally { el('searchBtn').disabled = state.phase !== 'active'; }
+    if (e.status === 409 && e.payload && e.payload.error === 'search_in_progress') {
+      showStatus('上一次搜索仍在进行，请等待结果。', 'error');
+    }
+  } finally {
+    if (seq === state.searchSeq) {
+      state.searching = false;
+      el('endHint').classList.add('hidden');
+      el('endHint').textContent = '';
+      setPhase(state.phase === 'active' ? 'active' : state.phase);
+      el('searchBtn').disabled = state.phase !== 'active';
+      el('againBtn').disabled = state.phase !== 'active' || state.lastResults.length === 0;
+    }
+  }
 }
 el('searchBtn').onclick = () => doSearch(false);
 el('againBtn').onclick = () => doSearch(true);
@@ -231,6 +258,10 @@ function renderResults(data) {
     box.innerHTML = '<div class="card reject">本次未提供充分依据。页面不推断资料中一定不存在答案。</div>';
     return;
   }
+  const reviewNote = document.createElement('div');
+  reviewNote.className = 'status';
+  reviewNote.textContent = '以下为服务端返回的候选证据，只表示系统给出了这些条款；不代表你已看到或核对。只有点击“确认原文已核对”才记为操作者核对。';
+  box.appendChild(reviewNote);
   data.evidence.forEach(item => {
     const card = document.createElement('div'); card.className = 'card'; card.dataset.id = item.article_id;
     const trunc = item.truncated ? '已截断：显示前 400 字符，全文 ' + item.full_chars + ' 字符' : '未截断';
@@ -264,6 +295,7 @@ function settleEnded(data) {
   el('endSummary').innerHTML = '<strong>任务已结束。</strong> 运行编号：' + data.run_id +
     '<br>结束状态：' + data.outcome + '；已选证据：' + ((data.selected_evidence || []).join('、') || '无') +
     '<br>用时（含请求往返，服务端口径）：' + (data.duration_ms != null ? (data.duration_ms/1000).toFixed(1) + ' 秒' : '未记录') +
+    (data.cancelled_search_token ? '<br>已取消一次进行中的搜索：其结果不会写入查询记录，也不会展示。' : '') +
     '<br>本页不判定是否答对或证据是否充分；等待独立评分。';
   el('taskPanel').classList.remove('hidden');
   el('endPanel').classList.add('hidden');
@@ -276,6 +308,10 @@ async function endTask(outcome) {
   if (!state.runId) { showStatus('尚未开始任务。', 'error'); return; }
   if (state.ending) return;
   if (state.phase !== 'active') { showStatus('当前任务已结束。', 'error'); return; }
+  if (state.searching) {
+    showStatus('搜索仍在进行，结束后不能提交；请等结果返回再结束。', 'error');
+    return;
+  }
   const selected = Array.from(document.querySelectorAll('.evidence:checked')).map(x => x.value);
   const note = el('endNote').value.trim();
   if (!outcome) { showStatus('请选择结束状态。', 'error'); return; }
@@ -291,10 +327,12 @@ async function endTask(outcome) {
     settleEnded(data);
   } catch (e) {
     state.ending = false;
-    showStatus('结束失败：' + e.message, 'error');
+    const inProgress = e.payload && e.payload.error === 'search_in_progress';
+    showStatus(inProgress ? '搜索仍在进行，暂不能结束；请等结果返回。' : ('结束失败：' + e.message), 'error');
     setPhase('active');
-    el('endBtn').disabled = false; el('abortBtn').disabled = false;
-    if (e.status === 409) await syncSession();
+    el('endBtn').disabled = state.searching;
+    el('abortBtn').disabled = state.searching;
+    if (e.status === 409 && !inProgress) await syncSession();
   }
 }
 el('endBtn').onclick = () => {

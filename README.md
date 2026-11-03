@@ -135,3 +135,12 @@ python -m unittest discover -s tests -v
 - 计时起点为页面点击“开始任务”的时刻，含请求/响应往返；`duration_server_ms`（服务端收发起止）与 `duration_client_reported_ms`（页面计时器）分列，口径写在 `run.json` 的 `clock_note`。
 - 刷新不结束任务，可用 `/api/session` 恢复并续接计时；恢复时重新拉取实时 `elapsed_ms`。
 - 报告：`reports/ux_trial_session_management.md`；自检脚本：`python scripts/ux_trial_session_check.py`（有 FAIL 时退出码 1）。
+
+## 计时入口的结束竞态
+
+- 搜索在锁内占位（一次性 `search_token`），检索在锁外执行；返回后重新取锁，若任务已结束或 token 已作废，结果**不写入查询记录也不返回页面**，只记 `search_result_discarded`。
+- 搜索进行中提交结束返回 409 `search_in_progress`（等待），任务保持 active；接口可带 `cancel_search=true` 显式取消后结束，记 `search_cancelled`。页面在搜索期间禁用“结束任务并记录”与“中止任务”。
+- 开始、搜索占位、结束判定与写入都在同一把 `RLock` 内完成；并发或重复结束只有一个成功，其余 409 `run_already_ended`，已结束 run 的 `outcome/duration_ms/ended_at` 不被改写。`run.json` 用临时文件 + `os.replace` 原子替换。
+- 计时来源：客户端 `Date.now()`（点击开始/结束）、`performance.now()`（页面计时器）；服务端 `time.time()`（收到开始/结束）。`duration_ms` 含往返、`duration_server_ms` 仅服务端区间；两端都是系统时钟，无法拆出网络耗时。
+- 检索返回的证据只是候选，`results_ready` 标注 `displayed_is_not_reviewed`，页面固定提示“返回证据不代表已核对原文”。
+- 测试：`python scripts/ux_trial_race_check.py`（含 `--search-delay-ms` 注入延时复现窗口；有 FAIL 退出码 1）。报告：`reports/ux_trial_end_race.md`。

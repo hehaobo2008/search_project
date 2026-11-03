@@ -1,0 +1,113 @@
+{
+  "results": [
+    {
+      "scenario": "S1 慢搜索中结束被拒",
+      "pass": true,
+      "detail": "code=409 error=search_in_progress"
+    },
+    {
+      "scenario": "S1 拒绝后任务仍 active",
+      "pass": true,
+      "detail": "status=active"
+    },
+    {
+      "scenario": "S1 搜索本身正常返回",
+      "pass": true,
+      "detail": "code=200 decision=answer"
+    },
+    {
+      "scenario": "S1 结果已写入",
+      "pass": true,
+      "detail": "queries=1"
+    },
+    {
+      "scenario": "S1 搜索结束后可正常结束",
+      "pass": true,
+      "detail": "duration_ms=1865"
+    },
+    {
+      "scenario": "S1 拒绝事件已落盘",
+      "pass": true,
+      "detail": "end_rejected"
+    },
+    {
+      "scenario": "S2 取消搜索并结束成功",
+      "pass": true,
+      "detail": "code=200 cancelled_token=0a32cdbb85434ec195f88c7663e7b463"
+    },
+    {
+      "scenario": "S2 迟到响应被丢弃",
+      "pass": true,
+      "detail": "code=409 error=search_discarded"
+    },
+    {
+      "scenario": "S2 结束后的结果未写入",
+      "pass": true,
+      "detail": "queries=0 displayed=0"
+    },
+    {
+      "scenario": "S2 取消与丢弃均有留痕",
+      "pass": true,
+      "detail": "events=test_search_delay_applied,search_cancelled,search_result_discarded"
+    },
+    {
+      "scenario": "S3 并发结束只有一个成功",
+      "pass": true,
+      "detail": "200=1 409=3"
+    },
+    {
+      "scenario": "S3 只写入一次结束状态",
+      "pass": true,
+      "detail": "task_ended=1 end_rejected=3"
+    },
+    {
+      "scenario": "S3 并发后可继续开始新任务",
+      "pass": true,
+      "detail": "run=ux-20261103T150551-86ec"
+    },
+    {
+      "scenario": "S4 结束后的搜索被拒",
+      "pass": true,
+      "detail": "code=409"
+    },
+    {
+      "scenario": "S4 结束后未新增查询记录",
+      "pass": true,
+      "detail": "before=1 after=1"
+    },
+    {
+      "scenario": "S5 并发搜索只接受一个",
+      "pass": true,
+      "detail": "200=1 409=2"
+    },
+    {
+      "scenario": "S5 只写入一条查询",
+      "pass": true,
+      "detail": "queries=1"
+    },
+    {
+      "scenario": "S6 duration 含往返且不小于服务端值",
+      "pass": true,
+      "detail": "duration=1865 server=1796"
+    },
+    {
+      "scenario": "S6 注入延时已标注",
+      "pass": true,
+      "detail": "delay_ms=1200"
+    },
+    {
+      "scenario": "S6 结果事件标注未经核对",
+      "pass": true,
+      "detail": "displayed_is_not_reviewed=True"
+    }
+  ],
+  "runs": [
+    "ux-20261103T150546-720c",
+    "ux-20261103T150548-18cf",
+    "ux-20261103T150550-7e17",
+    "ux-20261103T150551-86ec",
+    "ux-20261103T150551-a075",
+    "ux-20261103T150552-a3d8"
+  ],
+  "search_delay_ms": 1200
+}
