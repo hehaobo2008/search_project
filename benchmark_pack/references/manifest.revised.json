@@ -1,0 +1,549 @@
+{
+  "snapshot_date": "2026-11-03",
+  "revision": "rev1",
+  "description": "根据 2026-11-03 资料核查结果修订的法规正文清单。记录实际使用的正文来源、发布单位、版本、可确认的施行日期，以及镜像、PDF 文本提取和附件缺失情况。日期无法由快照确认的写“待核”，不作推测。原始清单仍保留在 manifest.json，未修改。",
+  "items": [
+    {
+      "id": 1,
+      "title": "铁路旅客运输规程",
+      "publisher": "交通运输部",
+      "version": "交通运输部令2022年第37号",
+      "effective_date": "2023-01-01",
+      "effective_note": "正文第52条明确自2023-01-01起施行",
+      "effective_raw": "2023-01-01",
+      "source_url": "https://source.nra.gov.cn/xxgk/gkml/ztjg/gfzd/bmgz/202211/t20221117_338894.shtml",
+      "source_channel": "official_webpage",
+      "source_note": null,
+      "url": "https://source.nra.gov.cn/xxgk/gkml/ztjg/gfzd/bmgz/202211/t20221117_338894.shtml",
+      "category": "客运",
+      "articles": "第48条：投诉受理与处理期限、记录保存",
+      "snapshot": {
+        "file": "snapshots/01.txt",
+        "line_range": "46-244",
+        "article_range": "第1-52条",
+        "sha256": "4a79c40805fd313637f314fd417728e642b3490976a9af264df6d959afaf95d9"
+      },
+      "attachments": {
+        "status": "not_referenced",
+        "missing": [],
+        "note": "正文未引用附件；快照未见附件下载区"
+      }
+    },
+    {
+      "id": 2,
+      "title": "铁路货物运输规则",
+      "publisher": "交通运输部",
+      "version": "交通运输部令2026年第2号",
+      "effective_date": "2026-05-01",
+      "effective_note": "正文第57条明确自2026-05-01起施行",
+      "effective_raw": "2026-05-01",
+      "source_url": "https://source.nra.gov.cn/xxgk/gkml/ztjg/gfzd/bmgz/202602/t20260226_350797.shtml",
+      "source_channel": "mirror_webpage",
+      "source_note": "manifest 原域名为 www.nra.gov.cn，实际快照使用 source.nra.gov.cn 同路径镜像页",
+      "url": "https://www.nra.gov.cn/xxgk/gkml/ztjg/gfzd/bmgz/202602/t20260226_350797.shtml",
+      "category": "货运",
+      "articles": "第7、9、12、23、25、53条：运输种类、鲜活货物、运单、运到期限、保价保险、投诉",
+      "snapshot": {
+        "file": "snapshots/02_alternate.txt",
+        "line_range": "55-334",
+        "article_range": "第1-57条",
+        "sha256": "c3f710a525b682cdea02da41e32161266cfe0fda31340058ac93384c166011a3"
+      },
+      "attachments": {
+        "status": "not_referenced",
+        "missing": [],
+        "note": "正文未引用附件；快照未见附件下载区"
+      }
+    },
+    {
+      "id": 3,
+      "title": "铁路旅客运输安全检查管理办法",
+      "publisher": "交通运输部",
+      "version": "交通运输部令2023年第21号",
+      "effective_date": "2024-02-01",
+      "effective_note": "正文第52条明确自2024-02-01起施行；manifest 原写“见原文”",
+      "effective_raw": "见原文",
+      "source_url": "https://source.nra.gov.cn/xxgk/gkml/ztjg/gfzd/bmgz/202401/t20240102_344299.shtml",
+      "source_channel": "official_webpage",
+      "source_note": null,
+      "url": "https://source.nra.gov.cn/xxgk/gkml/ztjg/gfzd/bmgz/202401/t20240102_344299.shtml",
+      "category": "客运安检",
+      "articles": "第17、18、29条：旅客配合、检查与禁限物品处置",
+      "snapshot": {
+        "file": "snapshots/03.txt",
+        "line_range": "62-221",
+        "article_range": "第1-52条",
+        "sha256": "0cb607a26015c34976cd0e18882d8abb43f9578e1bf39941334ec844df786ddf"
+      },
+      "attachments": {
+        "status": "not_referenced",
+        "missing": [],
+        "note": "正文未引用附件；快照未见附件下载区"
+      }
+    },
+    {
+      "id": 4,
+      "title": "铁路设备质量安全监督管理办法",
+      "publisher": "交通运输部",
+      "version": "交通运输部令2023年第7号",
+      "effective_date": "2023-09-01",
+      "effective_note": "正文第37条明确自2023-09-01起施行",
+      "effective_raw": "2023-09-01",
+      "source_url": "https://source.nra.gov.cn/xxgk/gkml/ztjg/gfzd/bmgz/202308/t20230828_342877.shtml",
+      "source_channel": "official_webpage",
+      "source_note": null,
+      "url": "https://source.nra.gov.cn/xxgk/gkml/ztjg/gfzd/bmgz/202308/t20230828_342877.shtml",
+      "category": "设备",
+      "articles": "第4、8、9条：管理责任、试验与追溯",
+      "snapshot": {
+        "file": "snapshots/04.txt",
+        "line_range": "58-208",
+        "article_range": "第1-37条",
+        "sha256": "aad702421434ab8e0eef9d7c88dae4dce483fecd0a8e940e9a3182408e3563bc"
+      },
+      "attachments": {
+        "status": "not_referenced",
+        "missing": [],
+        "note": "正文未引用附件；快照未见附件下载区"
+      }
+    },
+    {
+      "id": 5,
+      "title": "铁路运输服务质量监督管理办法",
+      "publisher": "交通运输部",
+      "version": "交通运输部令2023年第5号",
+      "effective_date": "2023-07-01",
+      "effective_note": "正文第37条明确自2023-07-01起施行",
+      "effective_raw": "2023-07-01",
+      "source_url": "https://source.nra.gov.cn/xxgk/gkml/ztjg/gfzd/bmgz/202305/t20230519_341667.shtml",
+      "source_channel": "official_webpage",
+      "source_note": null,
+      "url": "https://source.nra.gov.cn/xxgk/gkml/ztjg/gfzd/bmgz/202305/t20230519_341667.shtml",
+      "category": "客货服务",
+      "articles": "第7、33至35条：服务要求、自查、投诉",
+      "snapshot": {
+        "file": "snapshots/05.txt",
+        "line_range": "44-142",
+        "article_range": "第1-37条",
+        "sha256": "2d730e2d869cc7f6c52bcb9ba7573eb4fff4936262ab9c919d835809314b327d"
+      },
+      "attachments": {
+        "status": "not_referenced",
+        "missing": [],
+        "note": "正文未引用附件；快照未见附件下载区"
+      }
+    },
+    {
+      "id": 6,
+      "title": "铁路机车车辆驾驶人员资格许可办法",
+      "publisher": "交通运输部",
+      "version": "交通运输部令2024年第9号",
+      "effective_date": "2024-12-01",
+      "effective_note": "正文第43条明确自2024-12-01起施行",
+      "effective_raw": "2024-12-01",
+      "source_url": "https://xxgk.mot.gov.cn/gz/202408/W020240821404702044371.pdf",
+      "source_channel": "official_pdf_text_extracted",
+      "source_note": "官方 PDF 18 页，367/367 行文本提取；非原始 PDF 字节，存在跨页断行",
+      "url": "https://source.nra.gov.cn/xxgk/gkml/ztjg/gfzd/bmgz/202408/t20240822_346665.shtml",
+      "category": "机车车辆",
+      "articles": "第2、30条：许可范围、企业禁止行为",
+      "snapshot": {
+        "file": "snapshots/06_pdf_extracted.txt",
+        "line_range": "13-369",
+        "article_range": "第1-43条",
+        "sha256": "36592339771ae0dd8047ef6770bdfa75de0dc72549123d29fc260004c4184e09"
+      },
+      "attachments": {
+        "status": "not_referenced",
+        "missing": [],
+        "note": "正文未引用附件；快照未见附件下载区"
+      }
+    },
+    {
+      "id": 7,
+      "title": "高速铁路安全防护管理办法",
+      "publisher": "交通运输部",
+      "publisher_note": "经公安部、自然资源部、生态环境部、住房和城乡建设部、水利部、应急管理部同意",
+      "version": "交通运输部令2020年第8号",
+      "effective_date": "2020-07-01",
+      "effective_note": "正文第48条明确自2020-07-01起施行",
+      "effective_raw": "2020-07-01",
+      "source_url": "https://source.nra.gov.cn/xxgk/gkml/ztjg/gfzd/bmgz/202207/t20220719_328628.shtml",
+      "source_channel": "mirror_webpage",
+      "source_note": "manifest 原域名为 www.nra.gov.cn，实际快照使用 source.nra.gov.cn 同路径镜像页",
+      "url": "https://www.nra.gov.cn/xxgk/gkml/ztjg/gfzd/bmgz/202207/t20220719_328628.shtml",
+      "category": "安全",
+      "articles": "第2条：本办法高速铁路适用范围",
+      "snapshot": {
+        "file": "snapshots/07_alternate.txt",
+        "line_range": "65-251",
+        "article_range": "第1-48条",
+        "sha256": "a2cd0217d53328b51d1360c6e70d54bcabe1e61f1b9909888dad5a7049e857f1"
+      },
+      "attachments": {
+        "status": "not_referenced",
+        "missing": [],
+        "note": "正文未引用附件；快照未见附件下载区"
+      }
+    },
+    {
+      "id": 8,
+      "title": "铁路安全管理条例",
+      "publisher": "国务院",
+      "version": "国务院令第639号",
+      "effective_date": "2014-01-01",
+      "effective_note": "正文第108条明确自2014-01-01起施行",
+      "effective_raw": "2014-01-01",
+      "source_url": "https://xzfg.moj.gov.cn/front/law/detail?LawID=364",
+      "source_channel": "official_webpage",
+      "source_note": null,
+      "url": "https://xzfg.moj.gov.cn/front/law/detail?LawID=364",
+      "category": "安全",
+      "articles": "第1至4条：目的、方针、监管、地方责任",
+      "snapshot": {
+        "file": "snapshots/08_merged.txt",
+        "line_range": "42-441",
+        "article_range": "第1-108条",
+        "sha256": "ca3a9c1eabc4ac1f3ce0f50e3cd6f864e0df0993b536818ca10f18558118ecb3"
+      },
+      "attachments": {
+        "status": "not_referenced",
+        "missing": [],
+        "note": "正文未引用附件；快照未见附件下载区"
+      }
+    },
+    {
+      "id": 9,
+      "title": "铁路交通事故应急救援和调查处理条例",
+      "publisher": "国务院",
+      "version": "国务院令第501号（2012年修订）",
+      "effective_date": "待核",
+      "effective_note": "正文仅载明 2007-09-01 施行、2012-11-09 修订；修订版施行日期未单列，无法由快照确认",
+      "effective_raw": "修订版日期见原文",
+      "source_url": "https://source.nra.gov.cn/jglz/sbjg/fgsb/202204/t20220405_292240.shtml",
+      "source_channel": "official_webpage",
+      "source_note": null,
+      "url": "https://source.nra.gov.cn/jglz/sbjg/fgsb/202204/t20220405_292240.shtml",
+      "category": "事故应急",
+      "articles": "第2条：事故类型与适用范围",
+      "snapshot": {
+        "file": "snapshots/09.txt",
+        "line_range": "97-259",
+        "article_range": "第1-41条",
+        "sha256": "8b88b254ad9ef8fc0408902ec5f075d3a37e714d65563ff4bb89d2e60c450f99"
+      },
+      "attachments": {
+        "status": "not_referenced",
+        "missing": [],
+        "note": "正文未引用附件；快照未见附件下载区"
+      }
+    },
+    {
+      "id": 10,
+      "title": "铁路建设工程安全生产监督管理办法",
+      "publisher": "交通运输部",
+      "version": "交通运输部令2026年第11号",
+      "effective_date": "2026-09-01",
+      "effective_note": "正文第76条明确自2026-09-01起施行",
+      "effective_raw": "2026-09-01",
+      "source_url": "https://xxgk.mot.gov.cn/gz/202607/t20260713_4209493.html",
+      "source_channel": "replaced_webpage",
+      "source_note": "manifest 原 URL 为 source.nra.gov.cn/.../t20260714_351659.shtml；实际使用 xxgk.mot.gov.cn/.../t20260713_4209493.html",
+      "url": "https://source.nra.gov.cn/xxgk/gkml/ztjg/gfzd/bmgz/202607/t20260714_351659.shtml",
+      "category": "建设安全",
+      "articles": "按正式全文核对条款",
+      "snapshot": {
+        "file": "snapshots/10_merged.txt",
+        "line_range": "55-419",
+        "article_range": "第1-76条",
+        "sha256": "41081642d3ebb0716620c759fb2da584ecc566625e0115367ad6ee585316fbf7"
+      },
+      "attachments": {
+        "status": "download_area_not_captured",
+        "missing": [],
+        "note": "网页存在“附件下载”区域，内容未抓取；是否属于正文待核"
+      }
+    },
+    {
+      "id": 11,
+      "title": "铁路危险货物运输安全监督管理规定",
+      "publisher": "交通运输部",
+      "version": "交通运输部令2022年第24号",
+      "effective_date": "2022-12-01",
+      "effective_note": "正文第52条明确自2022-12-01起施行",
+      "effective_raw": "2022-12-01",
+      "source_url": "https://xxgk.mot.gov.cn/2020/jigou/fgs/202210/t20221019_3696995.html",
+      "source_channel": "official_webpage",
+      "source_note": null,
+      "url": "https://xxgk.mot.gov.cn/2020/jigou/fgs/202210/t20221019_3696995.html",
+      "category": "危险货物",
+      "articles": "第2、19、30条：定义、登记和安全制度",
+      "snapshot": {
+        "file": "snapshots/11_merged.txt",
+        "line_range": "109-375",
+        "article_range": "第1-52条",
+        "sha256": "71664e744e589e870eaf85ff6b9952c8ff0e1058289dde842caefba9fbc89ee2"
+      },
+      "attachments": {
+        "status": "not_referenced",
+        "missing": [],
+        "note": "正文未引用附件；快照未见附件下载区"
+      }
+    },
+    {
+      "id": 12,
+      "title": "铁路旅客车票实名制管理办法",
+      "publisher": "交通运输部",
+      "version": "交通运输部令2022年第39号",
+      "effective_date": "2023-01-01",
+      "effective_note": "正文第32条明确自2023-01-01起施行",
+      "effective_raw": "2023-01-01",
+      "source_url": "https://xxgk.mot.gov.cn/jigou/fgs/202211/t20221125_3714804.html",
+      "source_channel": "official_webpage",
+      "source_note": null,
+      "url": "https://xxgk.mot.gov.cn/jigou/fgs/202211/t20221125_3714804.html",
+      "category": "客运",
+      "articles": "实名制范围及例外：逐条核对原文",
+      "snapshot": {
+        "file": "snapshots/12.txt",
+        "line_range": "110-200",
+        "article_range": "第1-32条",
+        "sha256": "1de50118f09a092ee205abd0d3a6a5acff8369e79ede7613b189c32938364988"
+      },
+      "attachments": {
+        "status": "not_referenced",
+        "missing": [],
+        "note": "正文未引用附件；快照未见附件下载区"
+      }
+    },
+    {
+      "id": 13,
+      "title": "铁路建设工程勘察设计管理办法",
+      "publisher": "交通运输部",
+      "version": "交通运输部令2025年第3号",
+      "effective_date": "2025-09-01",
+      "effective_note": "正文第56条明确自2025-09-01起施行",
+      "effective_raw": "2025-09-01",
+      "source_url": "https://source.nra.gov.cn/xxgk/gkml/ztjg/gfzd/bmgz/202506/t20250620_349041.shtml",
+      "source_channel": "official_webpage",
+      "source_note": null,
+      "url": "https://source.nra.gov.cn/xxgk/gkml/ztjg/gfzd/bmgz/202506/t20250620_349041.shtml",
+      "category": "工程设计",
+      "articles": "第3条：勘察与设计阶段",
+      "snapshot": {
+        "file": "snapshots/13.txt",
+        "line_range": "58-272",
+        "article_range": "第1-56条",
+        "sha256": "05d968b4307f02385764a897cf93fc1800ca0b6429aba38c5bd32bb2c065a616"
+      },
+      "attachments": {
+        "status": "not_referenced",
+        "missing": [],
+        "note": "正文未引用附件；快照未见附件下载区"
+      }
+    },
+    {
+      "id": 14,
+      "title": "铁路建设工程竣工验收管理办法",
+      "publisher": "交通运输部",
+      "version": "交通运输部令2026年第12号",
+      "effective_date": "2026-09-01",
+      "effective_note": "正文第34条明确自2026-09-01起施行",
+      "effective_raw": "2026-09-01",
+      "source_url": "https://xxgk.mot.gov.cn/jigou/fgs/202607/t20260710_4209314.html",
+      "source_channel": "official_webpage",
+      "source_note": null,
+      "url": "https://xxgk.mot.gov.cn/jigou/fgs/202607/t20260710_4209314.html",
+      "category": "工程验收",
+      "articles": "第2、7条：适用范围、验收方式",
+      "snapshot": {
+        "file": "snapshots/14.txt",
+        "line_range": "110-339",
+        "article_range": "第1-34条",
+        "sha256": "f0b712aeb3489f39f8a60208a5eee6d05d0490182be9553f7f6cc869334d3895"
+      },
+      "attachments": {
+        "status": "missing",
+        "missing": [
+          "附件1 竣工验收申请",
+          "附件2 初步验收报告"
+        ],
+        "note": "正文引用附件1/附件2，快照未包含附件正文"
+      }
+    },
+    {
+      "id": 15,
+      "title": "铁路建设工程质量监督管理规定",
+      "publisher": "交通运输部",
+      "version": "2015年公布，2021年交通运输部令第35号修正",
+      "effective_date": "2021-12-23",
+      "effective_note": "修正决定自公布之日起施行，公布日期为2021-12-23",
+      "effective_raw": "2021-12-23修正施行",
+      "source_url": "https://xxgk.mot.gov.cn/2020/jigou/fgs/202202/t20220225_3643089.html",
+      "source_channel": "official_webpage",
+      "source_note": null,
+      "url": "https://xxgk.mot.gov.cn/2020/jigou/fgs/202202/t20220225_3643089.html",
+      "category": "工程质量",
+      "articles": "第2至4条：适用范围、质量责任、建设程序",
+      "snapshot": {
+        "file": "snapshots/15_merged.txt",
+        "line_range": "122-407",
+        "article_range": "第1-75条",
+        "sha256": "ddc3524481df2cae3cb003554cef8d03b608f8115ec96deeecfb8c19238fc6e9"
+      },
+      "attachments": {
+        "status": "not_referenced",
+        "missing": [],
+        "note": "正文未引用附件；快照含2021年修正决定"
+      }
+    },
+    {
+      "id": 16,
+      "title": "铁路机车车辆驾驶人员资格许可实施细则",
+      "publisher": "国家铁路局",
+      "version": "国铁设备监规〔2025〕7号",
+      "effective_date": "2025-07-01",
+      "effective_note": "正文第53条明确自2025-07-01起施行",
+      "effective_raw": "2025-07-01",
+      "source_url": "https://source.nra.gov.cn/webbs/xzxk/gzzdu/gfxwj/202507/t20250714_349265.shtml",
+      "source_channel": "mirror_webpage",
+      "source_note": "manifest 原域名为 www.nra.gov.cn，实际快照使用 source.nra.gov.cn 同路径镜像页",
+      "url": "https://www.nra.gov.cn/webbs/xzxk/gzzdu/gfxwj/202507/t20250714_349265.shtml",
+      "category": "驾驶资格",
+      "articles": "第2、3、52、53条：范围、分类、存档、实施",
+      "snapshot": {
+        "file": "snapshots/16_merged.txt",
+        "line_range": "97-416",
+        "article_range": "第1-53条",
+        "sha256": "f12ec3de6459c1cc95a7dd6ea03b662cad275190a9c023061354dd18985a26b7"
+      },
+      "attachments": {
+        "status": "missing",
+        "missing": [
+          "附件1 铁路机车车辆驾驶证式样（仅图片占位）",
+          "附件2 铁路机车车辆驾驶人员资格考试申请表",
+          "附件3 铁路机车车辆驾驶证补证申请表"
+        ],
+        "note": "附件1仅图片占位，附件2/附件3未抓取"
+      }
+    },
+    {
+      "id": 17,
+      "title": "铁路机车车辆设计制造维修进口许可办法",
+      "publisher": "交通运输部",
+      "version": "2013年公布，2019年交通运输部令第3号修正",
+      "effective_date": "待核",
+      "effective_note": "正文仅载明 2014-01-01 施行、2019-02-03 修正；修正版施行日期未单列，无法由快照确认",
+      "effective_raw": "2019修正，具体见原文",
+      "source_url": "https://xxgk.mot.gov.cn/2020/gz/202112/t20211223_3632653.html",
+      "source_channel": "official_webpage",
+      "source_note": null,
+      "url": "https://xxgk.mot.gov.cn/2020/gz/202112/t20211223_3632653.html",
+      "category": "机车车辆",
+      "articles": "许可类型、条件：引用前核对2019修正版",
+      "snapshot": {
+        "file": "snapshots/17.txt",
+        "line_range": "57-276",
+        "article_range": "第1-28条",
+        "sha256": "a1983870d69736464433e929ed634ba6bc2831e2d58d5a19a80c7348a8bec3e5"
+      },
+      "attachments": {
+        "status": "download_area_not_captured",
+        "missing": [],
+        "note": "网页存在“附件下载”区域，内容未抓取；是否属于正文待核"
+      }
+    },
+    {
+      "id": 18,
+      "title": "内地与香港过境铁路机车车辆驾驶人员资格管理办法",
+      "publisher": "国家铁路局",
+      "version": "国铁设备监规〔2025〕8号",
+      "effective_date": "2025-07-01",
+      "effective_note": "正文第22条明确自2025-07-01起施行",
+      "effective_raw": "2025-07-01",
+      "source_url": "https://www.nra.gov.cn/xxgk/gkml/ztjg/gfzd/gfxw/zuti/xzxk/202503/t20250326_348316.shtml",
+      "source_channel": "official_webpage",
+      "source_note": null,
+      "url": "https://www.nra.gov.cn/xxgk/gkml/ztjg/gfzd/gfxw/zuti/xzxk/202503/t20250326_348316.shtml",
+      "category": "跨境驾驶",
+      "articles": "第16、22条：注销撤销情形报告与生效",
+      "snapshot": {
+        "file": "snapshots/18.txt",
+        "line_range": "46-139",
+        "article_range": "第1-22条",
+        "sha256": "f441d47ae7bbfbe89d11f3e104b77f22871c77e069956daa04e564bb51bf3398"
+      },
+      "attachments": {
+        "status": "missing",
+        "missing": [
+          "附件1 铁路机车车辆驾驶人员资格考试申请表",
+          "附件2 铁路机车车辆驾驶证补证申请表",
+          "附件3 港方企业过境内地执业铁路机车车辆驾驶人员聘用情况汇总表",
+          "附件4 内地企业过境香港执业铁路机车车辆驾驶人员聘用情况汇总表"
+        ],
+        "note": "快照仅有附件标题和图片占位，表格内容缺失"
+      }
+    },
+    {
+      "id": 19,
+      "title": "铁路运输企业准入许可办法",
+      "publisher": "交通运输部",
+      "version": "2014年公布，2017年交通运输部令第31号修正",
+      "effective_date": "待核",
+      "effective_note": "正文仅载明 2015-01-01 施行、2017-09-29 修正；修正决定施行日期未单列，无法由快照确认",
+      "effective_raw": "2017-09-29修正施行",
+      "source_url": "https://xxgk.mot.gov.cn/gz/202112/t20211227_3633464.html",
+      "source_channel": "official_webpage",
+      "source_note": null,
+      "url": "https://xxgk.mot.gov.cn/gz/202112/t20211227_3633464.html",
+      "category": "运输经营",
+      "articles": "第2条：公共铁路运输经营准入",
+      "snapshot": {
+        "file": "snapshots/19.txt",
+        "line_range": "57-206",
+        "article_range": "第1-31条",
+        "sha256": "976588abe9a10ce1a4072e80e51a7729737995325592d0950abd2dcbdf494d7b"
+      },
+      "attachments": {
+        "status": "download_area_not_captured",
+        "missing": [],
+        "note": "网页存在“附件下载”区域，内容未抓取；是否属于正文待核"
+      }
+    },
+    {
+      "id": 20,
+      "title": "中华人民共和国铁路法",
+      "publisher": "全国人民代表大会常务委员会",
+      "version": "2015年第二次修正",
+      "effective_date": "待核",
+      "effective_note": "正文仅载明 1991-05-01 施行、2015-04-24 第二次修正；2015修正的施行日期未单列，无法由快照确认",
+      "effective_raw": "2015修正，具体见原文",
+      "source_url": "https://policy.mofcom.gov.cn/claw/clawContent.shtml?id=6948",
+      "source_channel": "reposted_webpage",
+      "source_note": "manifest 原 URL 为 source.nra.gov.cn/.../t20211111_261214.shtml；实际使用商务部全球法规网 2015 修正版转载页",
+      "url": "https://source.nra.gov.cn/xxgk/gkml/ztjg/gfzd/fl/202111/t20211111_261214.shtml",
+      "category": "法律基础",
+      "articles": "第38条：标准轨距；以现行原文为准",
+      "snapshot": {
+        "file": "snapshots/20_merged.txt",
+        "line_range": "51-281",
+        "article_range": "第1-74条",
+        "sha256": "a2b78470f4d5297b28a34b7f7e96233c21a3178711f30a33556bc9a8cc12c50a"
+      },
+      "attachments": {
+        "status": "not_referenced",
+        "missing": [],
+        "note": "正文未引用附件；快照未见附件下载区"
+      }
+    }
+  ],
+  "warnings": [
+    "本修订版只记录资料清单，不修改 questions.jsonl 或 gold 文件。",
+    "第 02、07、16 份的实际快照来源为 source.nra.gov.cn，manifest 原域名为 www.nra.gov.cn，属于同路径镜像页。",
+    "第 06 份为官方 PDF 的文本提取，不是原始 PDF 字节，存在跨页断行。",
+    "第 10、20 份为实际替换来源，manifest 原 URL 未同步。",
+    "第 09、17、19、20 份的修订/修正版施行日期无法由快照确认，统一写“待核”。",
+    "第 10、14、16、17、18、19 份存在附件未取得或附件下载区未抓取的情况，详见各条 attachments 字段。",
+    "所有快照均为网页或 PDF 文本抽取，含行号、导航、页脚等噪声，不能未经清理直接作为冻结检索语料。"
+  ]
+}
