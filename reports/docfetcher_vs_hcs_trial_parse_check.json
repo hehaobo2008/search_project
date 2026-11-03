@@ -1,0 +1,186 @@
+{
+  "note": "HCS正文来自HTML；DocFetcher索引来自PDF。此处按分句片段核对PDF页文本覆盖，跨页条款允许多页命中；不宣称解析条件完全相同。",
+  "comparisons": [
+    {
+      "article_id": "rail_quality:art-8",
+      "article_no": "第八条",
+      "html_sha256": "c5301ee800e41d263a11b985b4a7aa226aa44e47d827258290cef630d0c94741",
+      "segments": 2,
+      "matched_segments": 1,
+      "coverage": 0.5,
+      "pdf_pages_hit": [
+        2
+      ],
+      "cross_page": false,
+      "html_prefix": "第八条 建设单位应设立质量管理机构，制定质量管理制度，配备专职质量管理人员，落实质量责任，建立健全项目质量管理体系。\n建设单位应在建设项目指导性施工组织设计中载明项目质量目标和工程质量管理措施，对工程",
+      "full_match_on_single_page": false
+    },
+    {
+      "article_id": "construction_quality:art-50",
+      "article_no": "第五十条",
+      "html_sha256": "b99ba02820806b3a0ffd4b78573b1dfc8a5745ffd77d3e84c80d12abe6533ee3",
+      "segments": 1,
+      "matched_segments": 1,
+      "coverage": 1.0,
+      "pdf_pages_hit": [
+        12
+      ],
+      "cross_page": false,
+      "html_prefix": "第五十条 有关单位和个人对县级以上人民政府建设行政主管部门和其他有关部门进行的监督检查应当支持与配合，不得拒绝或者阻碍建设工程质量监督检查人员依法执行职务。",
+      "full_match_on_single_page": true
+    },
+    {
+      "article_id": "construction_quality:art-48",
+      "article_no": "第四十八条",
+      "html_sha256": "d7706f601cdabe0cb8b7ca5cebcf650e347ad5e6d79e9a2312683e598eabc54a",
+      "segments": 3,
+      "matched_segments": 0,
+      "coverage": 0.0,
+      "pdf_pages_hit": [],
+      "cross_page": false,
+      "html_prefix": "第四十八条 县级以上人民政府建设行政主管部门和其他有关部门履行监督检查职责时，有权采取下列措施：\n(一)要求被检查的单位提供有关工程质量的文件和资料；\n(二)进入被检查单位的施工现场进行检查；\n(三)",
+      "full_match_on_single_page": false
+    },
+    {
+      "article_id": "construction_quality:art-29",
+      "article_no": "第二十九条",
+      "html_sha256": "f8a1492b14b374e30a15f61a75250ba01b99c09e16ca86795fc635d229b87d79",
+      "segments": 2,
+      "matched_segments": 2,
+      "coverage": 1.0,
+      "pdf_pages_hit": [
+        7
+      ],
+      "cross_page": false,
+      "html_prefix": "第二十九条 施工单位必须按照工程设计要求、施工技术标准和合同约定，对建筑材料、建筑构配件、设备和商品混凝土进行检验，检验应当有书面记录和专人签字；未经检验或者检验不合格的，不得使用。",
+      "full_match_on_single_page": true
+    },
+    {
+      "article_id": "construction_quality:art-30",
+      "article_no": "第三十条",
+      "html_sha256": "7c03acb6c9e96e15f5e65e9fa0eac2b5c7b2173948c970e684c1fb802b147d12",
+      "segments": 2,
+      "matched_segments": 2,
+      "coverage": 1.0,
+      "pdf_pages_hit": [
+        7
+      ],
+      "cross_page": false,
+      "html_prefix": "第三十条 施工单位必须建立、健全施工质量的检验制度，严格工序管理，作好隐蔽工程的质量检查和记录。隐蔽工程在隐蔽前，施工单位应当通知建设单位和建设工程质量监督机构。",
+      "full_match_on_single_page": true
+    },
+    {
+      "article_id": "rail_quality:art-55",
+      "article_no": "第五十五条",
+      "html_sha256": "61ab0423f4189a36b6963ba077547ba090bfde58f8c7a37ce144ad91657aefb1",
+      "segments": 1,
+      "matched_segments": 1,
+      "coverage": 1.0,
+      "pdf_pages_hit": [
+        15
+      ],
+      "cross_page": false,
+      "html_prefix": "第五十五条 铁路监管部门应建立违法行为记录和公告制度，对查实并依法追究法律责任的工程质量违法违规行为予以记录和公告。",
+      "full_match_on_single_page": true
+    },
+    {
+      "article_id": "rail_quality:art-50",
+      "article_no": "第五十条",
+      "html_sha256": "dc620ae6d6057cec1dc7f2e2c5f24145ffd131248f644285b2d49681d450dcf5",
+      "segments": 3,
+      "matched_segments": 3,
+      "coverage": 1.0,
+      "pdf_pages_hit": [
+        15
+      ],
+      "cross_page": false,
+      "html_prefix": "第五十条 监督人员履行铁路建设工程质量监督职责时，应当出示有效执法证件，有权采取下列措施：\n（一）要求被检查的单位提供有关工程质量的文件和资料；\n（二）进入被检查单位的施工现场进行检查；\n（三）发现有",
+      "full_match_on_single_page": true
+    },
+    {
+      "article_id": "rail_quality:art-61",
+      "article_no": "第六十一条",
+      "html_sha256": "07929f44a6f433b88f3aeacc0b8bcd2f510c75b1e4bce806638bf62e052f6b31",
+      "segments": 2,
+      "matched_segments": 2,
+      "coverage": 1.0,
+      "pdf_pages_hit": [
+        18,
+        19
+      ],
+      "cross_page": true,
+      "html_prefix": "第六十一条 建设单位未按规定将竣工验收报告、有关认可文件或者准许使用文件报送备案的，由地区铁路监督管理局依照《建设工程质量管理条例》第五十六条规定，责令改正，按以下标准予以罚款：\n（一）报送备案逾期3",
+      "full_match_on_single_page": false
+    },
+    {
+      "article_id": "construction_quality:art-49",
+      "article_no": "第四十九条",
+      "html_sha256": "cb48e222bef8f3c89fa5cf948821425b7caabe09238fff72a128940d699e43e1",
+      "segments": 2,
+      "matched_segments": 1,
+      "coverage": 0.5,
+      "pdf_pages_hit": [
+        11
+      ],
+      "cross_page": false,
+      "html_prefix": "第四十九条 建设单位应当自建设工程竣工验收合格之日起15日内，将建设工程竣工验收报告和规划、公安消防、环保等部门出具的认可文件或者准许使用文件报建设行政主管部门或者其他有关部门备案。\n建设行政主管部门",
+      "full_match_on_single_page": false
+    },
+    {
+      "article_id": "rail_quality:art-16",
+      "article_no": "第十六条",
+      "html_sha256": "27f3a50cd37a49132ff75d826c80c3497fe2488899af0b107b7ee82a7eb0caa8",
+      "segments": 4,
+      "matched_segments": 3,
+      "coverage": 0.75,
+      "pdf_pages_hit": [
+        4
+      ],
+      "cross_page": false,
+      "html_prefix": "第十六条 建设单位接到竣工验收申请后，应按规定组织竣工验收，并在竣工验收5日前通知铁路监管部门；竣工验收合格之日起15日内，应将铁路建设工程竣工验收报告、公安消防、环保等部门出具的认可文件或者准许使用",
+      "full_match_on_single_page": false
+    },
+    {
+      "article_id": "construction_quality:art-59",
+      "article_no": "第五十九条",
+      "html_sha256": "3f3a52071e00526348923c9a0f485cbd22a456e64158c30a68cf9381cb8b813f",
+      "segments": 1,
+      "matched_segments": 1,
+      "coverage": 1.0,
+      "pdf_pages_hit": [
+        14
+      ],
+      "cross_page": false,
+      "html_prefix": "第五十九条 违反本条例规定，建设工程竣工验收后，建设单位未向建设行政主管部门或者其他有关部门移交建设项目档案的，责令改正，处1万元以上10万元以下的罚款。",
+      "full_match_on_single_page": true
+    },
+    {
+      "article_id": "construction_quality:art-58",
+      "article_no": "第五十八条",
+      "html_sha256": "434f765b85554f2d62823eb717ef3677b9b6c96409af4088d8ee4c4dc48b2446",
+      "segments": 4,
+      "matched_segments": 1,
+      "coverage": 0.25,
+      "pdf_pages_hit": [
+        13
+      ],
+      "cross_page": false,
+      "html_prefix": "第五十八条 违反本条例规定，建设单位有下列行为之一的，责令改正，处工程合同价款2%以上4%以下的罚款；造成损失的，依法承担赔偿责任：\n(一)未组织竣工验收，擅自交付使用的；\n(二)验收不合格，擅自交付",
+      "full_match_on_single_page": false
+    },
+    {
+      "article_id": "construction_quality:art-16",
+      "article_no": "第十六条",
+      "html_sha256": "c44bd14ae1ea70384e237049fe850d937d065a667e3cff37f097fcee0cb2f866",
+      "segments": 7,
+      "matched_segments": 2,
+      "coverage": 0.286,
+      "pdf_pages_hit": [
+        4
+      ],
+      "cross_page": false,
+      "html_prefix": "第十六条 建设单位收到建设工程竣工报告后，应当组织设计、施工、工程监理等有关单位进行竣工验收。\n建设工程竣工验收应当具备下列条件：\n(一)完成建设工程设计和合同约定的各项内容；\n(二)有完整的技术档案",
+      "full_match_on_single_page": false
+    }
+  ]
+}

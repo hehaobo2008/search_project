@@ -108,3 +108,11 @@ python -m unittest discover -s tests -v
 - 三个试跑任务均先查完整问题、再查预定关键词；Q1 定位到 A8（第2页），Q2 定位到 A16/A61（第4/18页），Q3 在 A/B 中查找“监测因子”“频次”均 0/0，记为未找到充分依据。
 - 中文索引与搜索完成；预览加载第1页并显示高亮，但没有自动跳到目标条款；原文件通过 DocFetcher 双击结果在 Edge 打开并定位。
 - 这是流程试跑，不是效果测试；AI 代理操作，不把操作耗时写成人类耗时。
+
+## DocFetcher 与 HCS 三题双流程对照
+
+- 报告：`reports/docfetcher_vs_hcs_trial.md`；HCS 真实前5条：`reports/docfetcher_vs_hcs_trial_hcs.json`；解析差异核对：`reports/docfetcher_vs_hcs_trial_parse_check.json`。
+- DocFetcher 使用 PDF；HCS A/B 正文来自官方 HTML，PDF 仅作页锚点；不宣称解析条件完全相同。
+- Q1/Q2 HCS 的前5条直接给出 A8、A61/A16 且已实际打开本地回跳；DocFetcher 预览停在第1页，工具栏上一/下一命中禁用、翻页按钮点击无可见变化，最终打开原 PDF 定位。
+- Q3 两边均无充分依据：DocFetcher 返回 A/B 相关文件但不是答案；HCS 两轮拒绝。Q3 记为持平/无法判断，不当作 HCS 效果胜出。
+- 不计算真人耗时，不宣称独立测试或产品胜出。
