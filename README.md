@@ -152,3 +152,4 @@ python -m unittest discover -s tests -v
 - 两组各 2 题（1 可答 + 1 无充分依据），组内顺序相反；单题上限 300 秒。
 - 结果：4 题全部在限时内完成，2 充分、2 正确拒绝；用时 HCS 254.9 秒 / DocFetcher 358.9 秒。**同一 AI 代理、非盲、题目不同，不能用于效率结论。**
 - 主要问题：DocFetcher 预览无法从第 1 页导航到命中位置，长文档需外部 PDF 核对；HCS 结束时证据勾选仍未可靠记录（`selected_evidence` 为空）。
+- 核查：`reports/timing_trial_g2t1_timeout_check.md`（G2-T1 的 note 写超时、字段写 224.2 秒的矛盾）与证据 `reports/timing_trial_g2t1_timeout_evidence.json`。
