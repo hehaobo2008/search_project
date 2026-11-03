@@ -159,3 +159,9 @@ python -m unittest discover -s tests -v
 - 报告：`reports/isolation_capability_check.md`。
 - 结论：进程/日志/索引可隔离（HCS 双端口双 `session_id` 已实测，DocFetcher 可复制便携版）；**执行者不能隔离**——只有同一 OS 账户与同一 AI 实例，且本会话已见答案，不能称为独立操作者或盲测。
 - 暴露点：题面文件 `reports/timing_trial_questions.json` 同时含 `reference[].text`，HCS `--tasks-file` 与 `work/tt_df.py` 都读它；HCS 日志根固定，尚不支持 `--log-root`。
+
+## AI 子会话隔离实测
+
+- 报告：`reports/ai_session_isolation_test.md`；测试资料与原始回答：`reports/isolation_test/`。
+- 用 `Task` 起两个 `general` 子代理（SESSION-A / SESSION-B）：上下文**不继承**本对话、互不知道对方行为；但两者都能读到对方日志与 `grader_only/answer_key.json`，B 第一轮"未读"只是自律，明确要求后立刻读到。
+- 结论：只能做到上下文隔离，做不到信息隔离；不能把子代理当独立/盲测执行者。真正的 IDE 新会话需用户手动新建，且仍能读同一工作目录。
