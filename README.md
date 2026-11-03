@@ -165,3 +165,10 @@ python -m unittest discover -s tests -v
 - 报告：`reports/ai_session_isolation_test.md`；测试资料与原始回答：`reports/isolation_test/`。
 - 用 `Task` 起两个 `general` 子代理（SESSION-A / SESSION-B）：上下文**不继承**本对话、互不知道对方行为；但两者都能读到对方日志与 `grader_only/answer_key.json`，B 第一轮"未读"只是自律，明确要求后立刻读到。
 - 结论：只能做到上下文隔离，做不到信息隔离；不能把子代理当独立/盲测执行者。真正的 IDE 新会话需用户手动新建，且仍能读同一工作目录。
+
+## 同题试验的双会话隔离边界
+
+- 报告：`reports/same_question_isolation_plan.md`；测试资料：`reports/isolation_test2/`。
+- 实测：两个 `Task` 子会话（SESSION-C/D）上下文干净、不继承本对话，但都能读到答案探针（工作区内与 `%TEMP%` 外）、也都能读到对方 `actions.log`；工具层无路径限制，"不应读取"只是文字约束。
+- 仓库历史自 `5d60f0b` 起已含答案文件 `reports/timing_trial_questions.json`，任何能访问本仓库的会话都可 `git show` 取回。
+- 结论：**当前共享工作区做不到信息隔离**；答案须由真人评分者在另一台机器 / 另一非管理员账户 / 加密文件中保管，执行会话只拿 `questions_only.json` 与必要工具、A/B 原文的干净副本。
