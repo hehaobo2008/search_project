@@ -99,3 +99,12 @@ python -m unittest discover -s tests -v
 - 首轮结果：展示全证据 BM25 19/20、语义 17/20、混合 19/20、混合+补证 19/20；N11 被统一拒绝规则误拒，N14/N16 在纯语义下漏项。
 - 无答案题：10 道中 4 道（N24/N25/N26/N28）被误出证据；补证仅触发 N14，补入 B56 为错误补证，无增益。
 - 首轮 run `eval30-first-20261103` 在写出结果后因控制台打印 KeyError 退出 1；首轮 raw 保留，修复仅改打印行后以 `eval30-first-rerun-20261103` 重跑，summary/failures 与首轮一致。详见 `reports/task_b_eval30_run_notes.md`。
+
+
+## DocFetcher 1.1.27 流程试跑
+
+- 报告：`reports/docfetcher_baseline_trial.md`；机器可读记录：`reports/docfetcher_baseline_trial_queries.json`；截图：`reports/docfetcher_baseline_screens/`。
+- 使用官方 Windows 64-bit 便携版，测试目录只放 A、B 两份锁定 PDF，中文索引名 `hcstest`。
+- 三个试跑任务均先查完整问题、再查预定关键词；Q1 定位到 A8（第2页），Q2 定位到 A16/A61（第4/18页），Q3 在 A/B 中查找“监测因子”“频次”均 0/0，记为未找到充分依据。
+- 中文索引与搜索完成；预览加载第1页并显示高亮，但没有自动跳到目标条款；原文件通过 DocFetcher 双击结果在 Edge 打开并定位。
+- 这是流程试跑，不是效果测试；AI 代理操作，不把操作耗时写成人类耗时。

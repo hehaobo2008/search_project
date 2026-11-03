@@ -1,0 +1,185 @@
+{
+  "tool": "DocFetcher 1.1.27 Windows 64-bit Portable",
+  "official_download_page": "https://docfetcher.sourceforge.io/zh/download/",
+  "download_url_used": "https://master.dl.sourceforge.net/project/docfetcher/docfetcher/1.1.27/DocFetcher-1.1.27-Windows-64bit-Portable.zip",
+  "zip_sha256": "ae76d2070f15f34838ca4dcd60b48506e503cc58e7310dcd4cbed07f27f2dc96",
+  "zip_bytes": 122316950,
+  "extracted_entries": 588,
+  "application_version": "1.1.27 build 20260119-235832",
+  "java": "OpenJDK 21.0.8",
+  "test_dir": "<TEST_DIR>",
+  "notes": [
+    "测试目录只复制了 A、B 两份锁定 PDF，没有复制 HTML，也没有把同一文档的 HTML/PDF 重复计入。",
+    "未使用第三方改版，未关闭 Windows 安全防护。",
+    "界面操作由 AI 代理通过 Windows UI Automation/鼠标键盘执行，不把操作耗时写成人类耗时。"
+  ],
+  "pdfs": [
+    {
+      "file": "A_spec.pdf",
+      "sha256": "4a815f2cecd083c229e6a53ae145595b7c59583aa09371c14703d47adec09b98",
+      "bytes": 304501
+    },
+    {
+      "file": "B_copy_cas.pdf",
+      "sha256": "651fa2536cc3c86f476324629a4ce4b5ded9479728468622c1831eec8ccb6cb7",
+      "bytes": 877965
+    }
+  ],
+  "analyzer": {
+    "settings_conf": "conf/settings-conf.txt",
+    "LuceneAnalyzer": 2,
+    "user_language": "zh",
+    "ansj_jars": [
+      "lib/ansj_seg-5.1.2.jar",
+      "lib/ansj_lucene6_plug-5.1.2.0.jar"
+    ],
+    "index_name": "hcstest",
+    "index_dir": "indexes/hcstest_1793667951268",
+    "note": "DocFetcher 1.1.27 的偏好设置界面没有独立的中文分词开关；启动配置已是 LuceneAnalyzer=2，并由 ansj 中文分析器库随包提供。索引在该配置下创建。"
+  },
+  "queries": [
+    {
+      "id": "Q1_full",
+      "task": "建设单位需要配备什么质量管理人员、谁留存检查记录？",
+      "mode": "完整问题",
+      "query": "建设单位需要配备什么质量管理人员、谁留存检查记录？",
+      "result_count": 2,
+      "hit_files": [
+        "A_spec.pdf",
+        "B_copy_cas.pdf"
+      ],
+      "preview_screenshot": "04_q1_kw_preview.png",
+      "full_result_screenshot": "03_q1_full.png",
+      "yellow_highlight_pixels": 80,
+      "original_opened": "A_spec.pdf",
+      "locate_term": "检查记录",
+      "located_page": 2,
+      "located_clause": "A8",
+      "finding": "有充分依据：A8 要求配备专职质量管理人员，并对工程质量进行监督检查、制作并留存检查记录。",
+      "original_screenshot": "05_q1_A8_page2.png"
+    },
+    {
+      "id": "Q1_keywords",
+      "task": "建设单位需要配备什么质量管理人员、谁留存检查记录？",
+      "mode": "预定关键词",
+      "query": "质量管理 检查记录",
+      "result_count": 2,
+      "hit_files": [
+        "A_spec.pdf",
+        "B_copy_cas.pdf"
+      ],
+      "preview_screenshot": "04_q1_kw_preview.png",
+      "yellow_highlight_pixels": 5120,
+      "original_opened": "A_spec.pdf",
+      "locate_term": "检查记录",
+      "located_page": 2,
+      "located_clause": "A8",
+      "finding": "有充分依据：A8；关键词方式命中同一文件，未单独改变定位结论。",
+      "original_screenshot": "05_q1_A8_page2.png"
+    },
+    {
+      "id": "Q2_full",
+      "task": "竣工验收后多久备案，逾期备案罚则在哪？",
+      "mode": "完整问题",
+      "query": "竣工验收后多久备案，逾期备案罚则在哪？",
+      "result_count": 2,
+      "hit_files": [
+        "A_spec.pdf",
+        "B_copy_cas.pdf"
+      ],
+      "preview_screenshot": "06_q2_full.png",
+      "full_result_screenshot": "06_q2_full.png",
+      "yellow_highlight_pixels": 1355,
+      "original_opened": "A_spec.pdf",
+      "locate_term": "15日内；逾期30天",
+      "located_page": "4, 18",
+      "located_clause": "A16, A61",
+      "finding": "有充分依据：A16第4页规定竣工验收合格之日起15日内备案；A61第18页规定逾期30天以内/超过30天的罚款。",
+      "original_screenshot": [
+        "07b_q2_A16_page4.png",
+        "07_q2_A61_page18.png"
+      ]
+    },
+    {
+      "id": "Q2_keywords",
+      "task": "竣工验收后多久备案，逾期备案罚则在哪？",
+      "mode": "预定关键词",
+      "query": "竣工验收 备案 逾期",
+      "result_count": 2,
+      "hit_files": [
+        "A_spec.pdf",
+        "B_copy_cas.pdf"
+      ],
+      "preview_screenshot": "06_q2_full.png",
+      "yellow_highlight_pixels": 0,
+      "original_opened": "A_spec.pdf",
+      "locate_term": "15日内；逾期30天",
+      "located_page": "4, 18",
+      "located_clause": "A16, A61",
+      "finding": "有充分依据：A16第4页备案时限，A61第18页逾期罚则；关键词方式命中同一文件。",
+      "original_screenshot": [
+        "07b_q2_A16_page4.png",
+        "07_q2_A61_page18.png"
+      ]
+    },
+    {
+      "id": "Q3_full",
+      "task": "环保验收需要监测哪些因子、频次多少？",
+      "mode": "完整问题",
+      "query": "环保验收需要监测哪些因子、频次多少？",
+      "result_count": 2,
+      "hit_files": [
+        "A_spec.pdf",
+        "B_copy_cas.pdf"
+      ],
+      "preview_screenshot": "08_q3_full.png",
+      "yellow_highlight_pixels": 0,
+      "original_opened": "A_spec.pdf / B_copy_cas.pdf",
+      "locate_term": "监测因子；频次",
+      "located_page": null,
+      "located_clause": null,
+      "finding": "未找到充分依据：两份 PDF 均只出现环保/验收/备案等相邻概念，没有监测因子或监测频次规定；Edge 查找“监测因子”“频次”均为 0/0。",
+      "original_screenshot": [
+        "09_q3_A_no_match.png",
+        "10_q3_B_no_match.png"
+      ]
+    },
+    {
+      "id": "Q3_keywords",
+      "task": "环保验收需要监测哪些因子、频次多少？",
+      "mode": "预定关键词",
+      "query": "环境保护 监测 频次",
+      "result_count": 2,
+      "hit_files": [
+        "A_spec.pdf",
+        "B_copy_cas.pdf"
+      ],
+      "preview_screenshot": "11_q3_kw_preview.png",
+      "yellow_highlight_pixels": 485,
+      "original_opened": "A_spec.pdf / B_copy_cas.pdf",
+      "locate_term": "监测因子；频次",
+      "located_page": null,
+      "located_clause": null,
+      "finding": "未找到充分依据：仅命中相邻词语，未形成监测因子/频次答案。",
+      "original_screenshot": [
+        "09_q3_A_no_match.png",
+        "10_q3_B_no_match.png"
+      ]
+    }
+  ],
+  "preview_note": "DocFetcher 预览窗格每次加载 PDF 第1页并显示黄色匹配高亮；本轮预览没有自动滚动到 A8/A61 所在页。因此另在 Edge 打开原 PDF，用查找词定位到 A8 第2页、A61 第18页。q2_keywords 与 q3_full 的第1页黄色像素为0，说明预览页本身没有可见高亮，不能把“结果命中”当成“预览已定位”。",
+  "screenshots": [
+    "01_index_config.png",
+    "02_index_created.png",
+    "03_q1_full.png",
+    "04_q1_kw_preview.png",
+    "05_q1_A8_page2.png",
+    "06_q2_full.png",
+    "07b_q2_A16_page4.png",
+    "07_q2_A61_page18.png",
+    "08_q3_full.png",
+    "09_q3_A_no_match.png",
+    "10_q3_B_no_match.png",
+    "11_q3_kw_preview.png"
+  ]
+}
