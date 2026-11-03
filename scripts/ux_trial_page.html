@@ -27,11 +27,16 @@
   .timer { font-variant-numeric: tabular-nums; font-weight: 600; }
   .after-end { background: #ecfdf5; border-left: 4px solid #059669; }
   .refresh { background: #fff7ed; border-left: 4px solid #ea580c; }
+  .phase { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 13px; background: #e2e8f0; }
+  .phase.active { background: #dcfce7; color: #166534; }
+  .phase.ended { background: #e5e7eb; color: #374151; }
 </style>
 </head>
 <body>
 <h1>HCS 任务计时验证页</h1>
 <div class="sub">固定 hybrid_top5，自动补证关闭；页面只接收题面和操作，不读取 gold。模型/索引初始化时间不计入单题计时。</div>
+<div class="status" id="phaseBar">当前状态：<span id="phaseLabel" class="phase">未开始</span></div>
+<div id="resumeBanner" class="status refresh hidden"></div>
 <div id="refreshBanner" class="status refresh hidden"></div>
 
 <div class="panel">
@@ -50,6 +55,7 @@
   <div class="panel">
     <div>已开始任务 <strong id="runLabel"></strong>　<span class="timer" id="timer">00:00.0</span></div>
     <div class="small" id="initDetail"></div>
+    <div class="small" id="timingNote">计时起点＝点击「开始任务」的浏览器时刻，因此请求与响应往返时间计入任务用时；服务端另记收到开始/结束请求的时刻，差值见日志 duration_ms 与 duration_server_ms。</div>
     <div class="status">题面（开始后才显示）</div>
     <div id="questionText" style="font-size:18px;font-weight:600;margin:8px 0;"></div>
     <label for="questionInput" class="small">问题输入（本页只验证已见任务；若修改，搜索会被拒绝并记录）</label>
@@ -83,54 +89,121 @@
 </div>
 
 <script>
-const state = { runId: null, question: '', startMs: 0, timer: null, lastResults: [] };
+const state = { runId: null, question: '', startPerf: 0, timer: null, lastResults: [], phase: 'idle', ending: false };
 const el = id => document.getElementById(id);
 const api = async (path, body) => {
   const r = await fetch(path, {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(body || {})});
   const data = await r.json().catch(() => ({}));
-  if (!r.ok) throw new Error(data.error || ('HTTP ' + r.status));
+  if (!r.ok) { const e = new Error(data.message || data.error || ('HTTP ' + r.status)); e.payload = data; e.status = r.status; throw e; }
   return data;
+};
+const getJson = async (path) => {
+  const r = await fetch(path, {cache: 'no-store'});
+  return await r.json();
 };
 const logEvent = (type, extra) => {
   if (!state.runId) return;
-  const payload = Object.assign({run_id: state.runId, type: type, client_ms: state.startMs ? (performance.now() - state.startMs) : null}, extra || {});
+  const payload = Object.assign({run_id: state.runId, type: type, client_ms: state.startPerf ? (performance.now() - state.startPerf) : null}, extra || {});
   fetch('/api/event', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload)}).catch(()=>{});
 };
 const fmtTimer = ms => {
   const s = Math.floor(ms/1000), m = Math.floor(s/60);
   return String(m).padStart(2,'0') + ':' + String(s%60).padStart(2,'0') + '.' + String(Math.floor(ms%1000/100)).padStart(1,'0');
 };
-const tick = () => { if (state.startMs) el('timer').textContent = fmtTimer(performance.now() - state.startMs); };
+const tick = () => { if (state.startPerf) el('timer').textContent = fmtTimer(performance.now() - state.startPerf); };
 const showStatus = (text, cls) => { const s = el('status'); s.className = 'status ' + (cls || ''); s.textContent = text; s.classList.remove('hidden'); };
+const hideStatus = () => { el('status').classList.add('hidden'); el('status').textContent = ''; };
+
+const PHASE_TEXT = { idle: '未开始', starting: '开始中', active: '进行中', ended: '已结束' };
+
+function setPhase(p) {
+  state.phase = p;
+  const label = el('phaseLabel');
+  label.textContent = PHASE_TEXT[p] || p;
+  label.className = 'phase' + (p === 'active' ? ' active' : (p === 'ended' ? ' ended' : ''));
+  const started = (p === 'active');
+  el('startBtn').disabled = (p === 'active' || p === 'starting');
+  el('searchBtn').disabled = !started;
+  el('againBtn').disabled = !started || state.lastResults.length === 0;
+  el('endBtn').disabled = !started || state.ending;
+  el('abortBtn').disabled = !started || state.ending;
+  el('taskSel').disabled = (p === 'active' || p === 'starting');
+}
+
+function resetTaskView() {
+  if (state.timer) { clearInterval(state.timer); state.timer = null; }
+  state.runId = null; state.question = ''; state.startPerf = 0;
+  state.lastResults = []; state.ending = false;
+  el('results').innerHTML = '';
+  el('endSummary').classList.add('hidden'); el('endSummary').innerHTML = '';
+  el('endPanel').classList.add('hidden');
+  el('taskPanel').classList.add('hidden');
+  hideStatus();
+  el('endNote').value = '';
+  document.querySelectorAll('input[name=outcome]').forEach(r => { r.checked = false; });
+  el('questionText').textContent = '';
+  el('questionInput').value = '';
+  el('runLabel').textContent = '';
+  el('timer').textContent = '00:00.0';
+  el('initInfo').textContent = '';
+  el('initDetail').textContent = '';
+  localStorage.removeItem('hcs_ux_run');
+  setPhase('idle');
+}
+
+function showTask(runId, question, initMs, initDetail, configId) {
+  state.runId = runId; state.question = question;
+  localStorage.setItem('hcs_ux_run', runId);
+  el('runLabel').textContent = runId;
+  el('questionText').textContent = question;
+  el('questionInput').value = question;
+  el('initInfo').textContent = '模型/索引初始化：' + initMs + ' ms（不计入任务计时）';
+  el('initDetail').textContent = '模型/索引初始化：' + initMs + ' ms（单独记录；任务计时从点击开始起算）' +
+    (configId ? '　配置 ' + configId : '');
+  el('taskPanel').classList.remove('hidden');
+  el('endPanel').classList.remove('hidden');
+  hideStatus();
+  setPhase('active');
+  if (state.timer) clearInterval(state.timer);
+  state.timer = setInterval(tick, 100);
+  tick();
+}
 
 el('startBtn').onclick = async () => {
   const taskId = el('taskSel').value;
   if (!taskId) { showStatus('请先选择任务。', 'error'); return; }
+  if (state.phase === 'active') { showStatus('已有进行中的任务，请先结束或中止。', 'error'); return; }
+  resetTaskView();
+  const clickEpoch = Date.now();
+  const clickPerf = performance.now();
+  setPhase('starting');
   el('startBtn').disabled = true;
   try {
-    const data = await api('/api/start', {task_id: taskId});
-    state.runId = data.run_id; state.question = data.question; state.startMs = performance.now();
-    localStorage.setItem('hcs_ux_run', state.runId);
-    el('runLabel').textContent = data.run_id;
-    el('questionText').textContent = data.question;
-    el('questionInput').value = data.question;
-    el('initInfo').textContent = '模型/索引初始化：' + data.init_ms + ' ms（不计入任务计时）';
-    el('initDetail').textContent = '模型/索引初始化：' + data.init_ms + ' ms（单独记录；任务计时从点击开始起算）';
-    el('taskPanel').classList.remove('hidden');
-    el('endPanel').classList.remove('hidden');
-    el('status').classList.add('hidden');
-    state.timer = setInterval(tick, 100);
-    logEvent('task_started_client');
-  } catch (e) { showStatus('开始失败：' + e.message, 'error'); }
-  finally { el('startBtn').disabled = false; }
+    const data = await api('/api/start', {task_id: taskId, client_click_epoch_ms: clickEpoch});
+    const roundtrip = Date.now() - clickEpoch;
+    state.startPerf = clickPerf;
+    showTask(data.run_id, data.question, data.init_ms, '', data.config_id);
+    logEvent('task_view_ready_client', {
+      roundtrip_ms: roundtrip,
+      server_received_epoch_ms: data.server_received_epoch_ms,
+      click_epoch_ms: clickEpoch,
+    });
+  } catch (e) {
+    resetTaskView();
+    const msg = (e.payload && e.payload.error === 'session_active')
+      ? '已有进行中的任务 ' + (e.payload.active_run_id || '') + '；请先结束或中止，再开始新任务。'
+      : '开始失败：' + e.message;
+    showStatus(msg, 'error');
+    await syncSession();
+  }
 };
 
 async function doSearch(isAgain) {
-  if (!state.runId) return;
+  if (!state.runId || state.phase !== 'active') { showStatus('尚未开始任务。', 'error'); return; }
   const q = el('questionInput').value.trim();
   if (!q) { showStatus('问题不能为空。', 'error'); return; }
   el('searchBtn').disabled = true; el('againBtn').disabled = true;
-  if (isAgain) logEvent('query_again_client');
+  if (isAgain) logEvent('query_again_click_client');
   showStatus('正在搜索……');
   try {
     const data = await api('/api/search', {run_id: state.runId, question: q});
@@ -141,10 +214,13 @@ async function doSearch(isAgain) {
     } else {
       showStatus('结果已就绪：' + data.evidence.length + ' 条；展示文字按 400 字符截断。', '');
     }
-    el('againBtn').disabled = false;
+    el('againBtn').disabled = state.lastResults.length === 0;
   } catch (e) {
+    state.lastResults = [];
+    el('againBtn').disabled = true;
     showStatus('搜索失败：' + e.message, 'error');
-  } finally { el('searchBtn').disabled = false; }
+    if (e.status === 409) await syncSession();
+  } finally { el('searchBtn').disabled = state.phase !== 'active'; }
 }
 el('searchBtn').onclick = () => doSearch(false);
 el('againBtn').onclick = () => doSearch(true);
@@ -181,21 +257,45 @@ function renderResults(data) {
   });
 }
 
+function settleEnded(data) {
+  if (state.timer) { clearInterval(state.timer); state.timer = null; }
+  state.ending = false;
+  el('endSummary').classList.remove('hidden');
+  el('endSummary').innerHTML = '<strong>任务已结束。</strong> 运行编号：' + data.run_id +
+    '<br>结束状态：' + data.outcome + '；已选证据：' + ((data.selected_evidence || []).join('、') || '无') +
+    '<br>用时（含请求往返，服务端口径）：' + (data.duration_ms != null ? (data.duration_ms/1000).toFixed(1) + ' 秒' : '未记录') +
+    '<br>本页不判定是否答对或证据是否充分；等待独立评分。';
+  el('taskPanel').classList.remove('hidden');
+  el('endPanel').classList.add('hidden');
+  localStorage.removeItem('hcs_ux_run');
+  state.runId = null;
+  setPhase('ended');
+}
+
 async function endTask(outcome) {
-  if (!state.runId) return;
+  if (!state.runId) { showStatus('尚未开始任务。', 'error'); return; }
+  if (state.ending) return;
+  if (state.phase !== 'active') { showStatus('当前任务已结束。', 'error'); return; }
   const selected = Array.from(document.querySelectorAll('.evidence:checked')).map(x => x.value);
   const note = el('endNote').value.trim();
   if (!outcome) { showStatus('请选择结束状态。', 'error'); return; }
+  state.ending = true;
+  el('endBtn').disabled = true; el('abortBtn').disabled = true;
+  const endEpoch = Date.now();
+  const clientElapsed = state.startPerf ? (performance.now() - state.startPerf) : null;
   try {
-    const data = await api('/api/end', {run_id: state.runId, outcome: outcome, selected_evidence: selected, note: note});
-    clearInterval(state.timer);
-    el('endSummary').classList.remove('hidden');
-    el('endSummary').innerHTML = '<strong>任务已结束。</strong> 运行编号：' + data.run_id +
-      '<br>结束状态：' + data.outcome + '；已选证据：' + (selected.join('、') || '无') +
-      '<br>本页不判定是否答对或证据是否充分；等待独立评分。';
-    el('searchBtn').disabled = true; el('againBtn').disabled = true; el('endBtn').disabled = true; el('abortBtn').disabled = true;
-    localStorage.removeItem('hcs_ux_run');
-  } catch (e) { showStatus('结束失败：' + e.message, 'error'); }
+    const data = await api('/api/end', {
+      run_id: state.runId, outcome: outcome, selected_evidence: selected, note: note,
+      end_click_epoch_ms: endEpoch, client_elapsed_ms: clientElapsed,
+    });
+    settleEnded(data);
+  } catch (e) {
+    state.ending = false;
+    showStatus('结束失败：' + e.message, 'error');
+    setPhase('active');
+    el('endBtn').disabled = false; el('abortBtn').disabled = false;
+    if (e.status === 409) await syncSession();
+  }
 }
 el('endBtn').onclick = () => {
   const o = document.querySelector('input[name=outcome]:checked');
@@ -203,16 +303,82 @@ el('endBtn').onclick = () => {
 };
 el('abortBtn').onclick = () => endTask('aborted');
 
+async function syncSession() {
+  try {
+    const s = await getJson('/api/session');
+    if (!s.active) {
+      if (state.phase === 'active') {
+        showStatus('服务端显示该运行已结束，请刷新页面查看。', 'error');
+      }
+      return s;
+    }
+    el('resumeBanner').classList.remove('hidden');
+    el('resumeBanner').innerHTML = '检测到进行中的任务 <strong>' + s.run.run_id + '</strong>（' +
+      (s.run.task_id === 'task1' ? '任务 1' : s.run.task_id === 'task2' ? '任务 2' : '任务 3') +
+      '，已进行 ' + ((s.run.elapsed_ms || 0) / 1000).toFixed(1) + ' 秒）。刷新不会结束任务，可恢复继续计时。' +
+      ' <button id="resumeBtn" class="secondary">恢复该任务</button>' +
+      ' <button id="resumeAbortBtn" class="danger">中止该任务</button>';
+    el('resumeBtn').onclick = async () => {
+      const fresh = await getJson('/api/session');
+      if (fresh.active) { resumeRun(fresh.run); }
+      else { el('resumeBanner').classList.add('hidden'); await syncSession(); }
+    };
+    el('resumeAbortBtn').onclick = () => {
+      state.runId = s.run.run_id; state.phase = 'active';
+      el('resumeBanner').classList.add('hidden');
+      endTask('aborted');
+    };
+    return s;
+  } catch (e) { return null; }
+}
+
+function resumeRun(run) {
+  resetTaskView();
+  state.runId = run.run_id; state.question = run.question;
+  state.startPerf = performance.now() - (run.elapsed_ms || 0);
+  localStorage.setItem('hcs_ux_run', run.run_id);
+  el('runLabel').textContent = run.run_id;
+  el('questionText').textContent = run.question;
+  el('questionInput').value = run.question;
+  el('initInfo').textContent = '模型/索引初始化：' + run.init_ms + ' ms（不计入任务计时）';
+  el('initDetail').textContent = '模型/索引初始化：' + run.init_ms + ' ms（单独记录；任务计时从点击开始起算）　配置 ' + run.config_id;
+  el('taskPanel').classList.remove('hidden');
+  el('endPanel').classList.remove('hidden');
+  setPhase('active');
+  state.timer = setInterval(tick, 100);
+  tick();
+  if (run.last_result) {
+    state.lastResults = run.last_result.evidence || [];
+    renderResults(run.last_result);
+    if (run.last_result.decision === 'refuse') showStatus('本次未提供充分依据', 'reject');
+  }
+  el('resumeBanner').classList.add('hidden');
+  logEvent('session_resumed_client', {elapsed_ms: run.elapsed_ms});
+}
+
 window.addEventListener('beforeunload', () => {
   if (!state.runId) return;
-  const payload = JSON.stringify({run_id: state.runId, type: 'page_unload_client', client_ms: state.startMs ? (performance.now() - state.startMs) : null});
+  const payload = JSON.stringify({run_id: state.runId, type: 'page_unload_client', client_ms: state.startPerf ? (performance.now() - state.startPerf) : null});
   navigator.sendBeacon('/api/event', new Blob([payload], {type:'application/json'}));
 });
+
 (async () => {
+  setPhase('idle');
   const old = localStorage.getItem('hcs_ux_run');
-  try { await api('/api/event', {run_id: old || null, type: old ? 'page_reloaded' : 'page_loaded'}); } catch (e) {}
+  try {
+    await api('/api/event', {run_id: old || null, type: old ? 'page_reloaded' : 'page_loaded'});
+  } catch (e) {}
   if (old) {
-    const b = el('refreshBanner'); b.textContent = '检测到页面刷新/重新加载：旧运行 ' + old + ' 的记录保留，但当前页面需要重新开始任务。'; b.classList.remove('hidden');
+    const b = el('refreshBanner');
+    b.textContent = '检测到页面刷新/重新加载：旧运行 ' + old + ' 的记录保留；本页不会自动清空该运行。';
+    b.classList.remove('hidden');
+  }
+  const s = await syncSession();
+  if (!s || !s.active) {
+    if (old) localStorage.removeItem('hcs_ux_run');
+    setPhase('idle');
+  } else if (old && s.run.run_id !== old) {
+    el('refreshBanner').textContent = '页面记录的旧运行 ' + old + ' 与服务端进行中的 ' + s.run.run_id + ' 不一致；以服务端为准。';
   }
 })();
 </script>

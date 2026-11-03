@@ -126,3 +126,12 @@ python -m unittest discover -s tests -v
 - 结束任务只表示操作者停止，由操作者选“已找到依据 / 未找到 / 中止”，本页不判定答对或证据是否充分。
 - 仅用 3 个已见任务验证，不产生效率或准确率结论；日志中的 `duration_ms` 是自动化代理操作耗时，不是真人耗时。
 - 已知缺陷：页面滚动后坐标点击会误选证据或点不中结束按钮（任务1 的 `selected_evidence` 因此记错，见更正说明）；任务2 的结束改走 `/api/end` 同一接口。
+
+## 计时入口的会话管理
+
+- 三态：未开始 / 进行中 / 已结束。进行中不能再开始新任务（前端禁用，服务端返回 409 `session_active`）；中止记 `outcome=aborted`，不覆盖原记录。
+- 每次开始生成独立 `run_id` 与独立目录；开始前清空上一轮结果、证据勾选、结束摘要和旧计时器。
+- 服务端拒绝重复结束、未开始就操作、以及不属于实际展示结果的证据 ID，写入 `logs/ux_trial/rejected_events.jsonl` 与对应 run 事件，不改写既有结论字段。
+- 计时起点为页面点击“开始任务”的时刻，含请求/响应往返；`duration_server_ms`（服务端收发起止）与 `duration_client_reported_ms`（页面计时器）分列，口径写在 `run.json` 的 `clock_note`。
+- 刷新不结束任务，可用 `/api/session` 恢复并续接计时；恢复时重新拉取实时 `elapsed_ms`。
+- 报告：`reports/ux_trial_session_management.md`；自检脚本：`python scripts/ux_trial_session_check.py`（有 FAIL 时退出码 1）。

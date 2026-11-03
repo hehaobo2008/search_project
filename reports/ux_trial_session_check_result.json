@@ -1,0 +1,157 @@
+{
+  "results": [
+    {
+      "scenario": "S1 第一轮开始",
+      "pass": true,
+      "detail": "run_id=ux-20261103T135901-4d36"
+    },
+    {
+      "scenario": "S1 第一轮检索",
+      "pass": true,
+      "detail": "decision=answer n=5"
+    },
+    {
+      "scenario": "S1 第一轮结束",
+      "pass": true,
+      "detail": "duration_ms=544"
+    },
+    {
+      "scenario": "S1 第二轮开始（新 run）",
+      "pass": true,
+      "detail": "ux-20261103T135901-4d36 -> ux-20261103T135902-90f2"
+    },
+    {
+      "scenario": "S1 第二轮检索",
+      "pass": true,
+      "detail": "first=rail_quality:art-61"
+    },
+    {
+      "scenario": "S1 第二轮结束",
+      "pass": true,
+      "detail": "duration_ms=27"
+    },
+    {
+      "scenario": "S1 两轮日志不串",
+      "pass": true,
+      "detail": "run1 事件数=5, run2 事件数=5"
+    },
+    {
+      "scenario": "S2 第三轮开始",
+      "pass": true,
+      "detail": "run_id=ux-20261103T135902-6ba7"
+    },
+    {
+      "scenario": "S2 进行中重复开始被拒",
+      "pass": true,
+      "detail": "code=409 error=session_active"
+    },
+    {
+      "scenario": "S2 拒绝事件已落盘",
+      "pass": true,
+      "detail": "start_rejected"
+    },
+    {
+      "scenario": "S3 第三轮检索",
+      "pass": true,
+      "detail": "decision=refuse"
+    },
+    {
+      "scenario": "S3 第三轮结束",
+      "pass": true,
+      "detail": "duration_ms=66"
+    },
+    {
+      "scenario": "S3 重复结束被拒",
+      "pass": true,
+      "detail": "code=409 error=run_already_ended"
+    },
+    {
+      "scenario": "S3 原结束状态未被改写",
+      "pass": true,
+      "detail": "outcome=not_found duration=66"
+    },
+    {
+      "scenario": "S3 重复结束留痕",
+      "pass": true,
+      "detail": "end_rejected"
+    },
+    {
+      "scenario": "S4 未开始检索被拒",
+      "pass": true,
+      "detail": "code=404"
+    },
+    {
+      "scenario": "S4 未开始结束被拒",
+      "pass": true,
+      "detail": "code=404"
+    },
+    {
+      "scenario": "S4 拒绝记录保留",
+      "pass": true,
+      "detail": "rejected_events 共 4 条"
+    },
+    {
+      "scenario": "S5 非法证据 ID 被拒",
+      "pass": true,
+      "detail": "code=400 ids=['rail_quality:art-999']"
+    },
+    {
+      "scenario": "S5 拒绝后任务仍为 active",
+      "pass": true,
+      "detail": "status=active"
+    },
+    {
+      "scenario": "S5 合法证据可结束",
+      "pass": true,
+      "detail": "outcome=found"
+    },
+    {
+      "scenario": "S6 中止被记录",
+      "pass": true,
+      "detail": "outcome=aborted"
+    },
+    {
+      "scenario": "S6 中止后状态",
+      "pass": true,
+      "detail": "status=ended outcome=aborted"
+    },
+    {
+      "scenario": "S7 刷新后会话可发现",
+      "pass": true,
+      "detail": "active=True run=ux-20261103T135902-950c"
+    },
+    {
+      "scenario": "S7 会话带已进行时长",
+      "pass": true,
+      "detail": "elapsed_ms=28.6"
+    },
+    {
+      "scenario": "S7 刷新事件写入原 run",
+      "pass": true,
+      "detail": "page_reloaded"
+    },
+    {
+      "scenario": "S8 记录点击与服务端收到时刻",
+      "pass": true,
+      "detail": "click=1793685541794 recv=1793685541865 delta=71 ms"
+    },
+    {
+      "scenario": "S8 duration 起点为点击时刻",
+      "pass": true,
+      "detail": "duration=544 server=473"
+    },
+    {
+      "scenario": "S8 计时基础与说明已写入",
+      "pass": true,
+      "detail": "timer_basis=client_click"
+    }
+  ],
+  "runs": [
+    "ux-20261103T135901-4d36",
+    "ux-20261103T135902-90f2",
+    "ux-20261103T135902-6ba7",
+    "ux-20261103T135902-86e5",
+    "ux-20261103T135902-7908",
+    "ux-20261103T135902-950c"
+  ]
+}
