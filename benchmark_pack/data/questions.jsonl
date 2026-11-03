@@ -7,13 +7,13 @@
 {"id": "A07", "category": "semantic_single", "question": "安检仪尚未经检测合格，车站能否先用它检查旅客？"}
 {"id": "A08", "category": "semantic_single", "question": "一位旅客实名核验后临时走出核验活动区域，回来时是否需要再次核验？"}
 {"id": "A09", "category": "semantic_single", "question": "一名旅客丢失非实名制火车票，还想继续旅行，规程如何处理？"}
-{"id": "A10", "category": "semantic_single", "question": "一名旅客不愿公开展示可疑随身物品，安检人员能否换个合适的地方检查？"}
+{"id": "A10", "category": "semantic_single", "question": "一名旅客向安全检查人员申明不宜公开检查其可疑随身物品，安检人员能否根据实际将其移至适当场合检查？"}
 {"id": "A11", "category": "semantic_single", "question": "小孩本可免费乘车，但家长希望孩子独占一个座位，应如何购票？"}
 {"id": "A12", "category": "semantic_single", "question": "车站实名查验设备无法自动识读一名老年旅客的证件，车站应提供什么渠道？"}
 {"id": "A13", "category": "multi_chapter_keyword", "question": "《旅客运输规程》要求公布哪些随身携带物品目录信息，并要求企业就携带物品明确哪些赔偿内容？"}
 {"id": "A14", "category": "multi_chapter_keyword", "question": "《旅客运输规程》对购票人提供联系方式以及企业为旅客托运行李进行安全检查分别有何要求？"}
 {"id": "A15", "category": "multi_chapter_keyword", "question": "《安检办法》对禁限物品目录的公告场所与安检发现禁止携带物品时的告知义务分别如何规定？"}
-{"id": "A16", "category": "multi_chapter_keyword", "question": "《实名制办法》对车票实名制管理的定义，以及人工实名查验通道的设置分别如何规定？"}
+{"id": "A16", "category": "multi_chapter_keyword", "question": "《实名制办法》对车票实名购买和车票实名查验两项分别如何定义？二者统称为什么？人工实名查验通道的设置、服务对象和必要服务分别如何规定？"}
 {"id": "A17", "category": "multi_chapter_keyword", "question": "《安检办法》对安检人员培训合格与非安检人员操作设备分别有何要求？发生冲闯安检通道时企业应如何处理？"}
 {"id": "A18", "category": "multi_chapter_keyword", "question": "《实名制办法》对办理购票、补票、取票、改签、退票业务时既不能提供有效身份证件也不能提供证件信息，以及实名查验信息不一致，分别如何处理？"}
 {"id": "A19", "category": "multi_chapter_keyword", "question": "《安检办法》对安检区域视频监控覆盖及无法经设备检查的行李人工检查场所有何要求？"}
