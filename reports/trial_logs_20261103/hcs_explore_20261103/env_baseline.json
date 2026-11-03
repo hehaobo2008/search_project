@@ -1,0 +1,13 @@
+{
+  "collected_at": "2026-11-03T18:17:37.090824+08:00",
+  "epoch_ms": 1793701057090,
+  "os": "Microsoft Windows 11 ��ͥ�� ���İ� 10.0.26200",
+  "cpu": "13th Gen Intel(R) Core(TM) i9-13900HX",
+  "cores": "24",
+  "logical": "32",
+  "total_mem_kb": "16490772",
+  "free_mem_kb": "2208652",
+  "process_count": "421",
+  "cpu_percent_total": "17",
+  "port_8765_listening": "1"
+}

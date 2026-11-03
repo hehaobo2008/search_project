@@ -1,0 +1,358 @@
+{
+  "generated_at": "2026-11-03T18:20:44.563534+08:00",
+  "config_id": "cfg-0037f32996f8-hybrid_top5",
+  "method": "hybrid_top5",
+  "auto_supplement": false,
+  "init_ms": 1082.7,
+  "tasks": {
+    "q1": {
+      "run_id": "ux-20261103T181837-608b",
+      "question": "国家验收的铁路建设项目，申请验收之前，对初期运营和专项验收有哪些条件？",
+      "started_at": "2026-11-03T18:18:37.214419+08:00",
+      "ended_at": "2026-11-03T18:18:57.524809+08:00",
+      "client_click_epoch_ms": 1793701117185,
+      "end_request_received_epoch_ms": 1793701137524,
+      "duration_ms": 20339,
+      "duration_server_ms": 20310,
+      "decision": "answer",
+      "search_ms": 419.3,
+      "query": "国家验收的铁路建设项目，申请验收之前，对初期运营和专项验收有哪些条件？",
+      "query_count": 1,
+      "displayed_evidence": [
+        "rail_quality:art-16",
+        "rail_quality:art-17",
+        "rail_quality:art-52",
+        "rail_quality:art-15",
+        "rail_quality:art-33"
+      ],
+      "selected_evidence": [
+        "rail_quality:art-17"
+      ],
+      "outcome": "found",
+      "evidence": [
+        {
+          "rank": 1,
+          "article_id": "rail_quality:art-16",
+          "article_no": "第十六条",
+          "doc_id": "rail_quality",
+          "doc_title": "铁路建设工程质量监督管理规定",
+          "chars": 178,
+          "full_chars": 178,
+          "truncated": false,
+          "locator_route": "/locator/rail_quality#art-16",
+          "pdf_route": "/pdf/rail_quality#page=4"
+        },
+        {
+          "rank": 2,
+          "article_id": "rail_quality:art-17",
+          "article_no": "第十七条",
+          "doc_id": "rail_quality",
+          "doc_title": "铁路建设工程质量监督管理规定",
+          "chars": 239,
+          "full_chars": 239,
+          "truncated": false,
+          "locator_route": "/locator/rail_quality#art-17",
+          "pdf_route": "/pdf/rail_quality#page=5"
+        },
+        {
+          "rank": 3,
+          "article_id": "rail_quality:art-52",
+          "article_no": "第五十二条",
+          "doc_id": "rail_quality",
+          "doc_title": "铁路建设工程质量监督管理规定",
+          "chars": 68,
+          "full_chars": 68,
+          "truncated": false,
+          "locator_route": "/locator/rail_quality#art-52",
+          "pdf_route": "/pdf/rail_quality#page=15"
+        },
+        {
+          "rank": 4,
+          "article_id": "rail_quality:art-15",
+          "article_no": "第十五条",
+          "doc_id": "rail_quality",
+          "doc_title": "铁路建设工程质量监督管理规定",
+          "chars": 99,
+          "full_chars": 99,
+          "truncated": false,
+          "locator_route": "/locator/rail_quality#art-15",
+          "pdf_route": "/pdf/rail_quality#page=4"
+        },
+        {
+          "rank": 5,
+          "article_id": "rail_quality:art-33",
+          "article_no": "第三十三条",
+          "doc_id": "rail_quality",
+          "doc_title": "铁路建设工程质量监督管理规定",
+          "chars": 129,
+          "full_chars": 129,
+          "truncated": false,
+          "locator_route": "/locator/rail_quality#art-33",
+          "pdf_route": "/pdf/rail_quality#page=10"
+        }
+      ],
+      "original_check": {
+        "checked_at": "2026-11-03T18:18:49.762977+08:00",
+        "locator_file": "locators/rail_quality.locator.html",
+        "locator_sha256": "d5b3bc031a6e3b3a8059f336ec14fbb0cfab497e8bd2de03331d68f39bf781c9",
+        "anchor": "art-17",
+        "segment_excerpt": "id=\"art-17\" data-article-id=\"rail_quality:art-17\">第十七条　国家验收的铁路建设项目，具备下列条件后建设单位方可申请验收：</p><p style=\"text-align: justify; text-indent: 2em;\" data-article-part=\"art-17\">（一）可行性研究报告批准的工程全部建成且质量合格；</p><p style=\"text-align: justify; text-indent: 2em;\" data-article-part=\"art-17\">（二）初步验收合格且初期运营一年以上，状态良好，发现问题整改完毕；</p><p style=\"text-align: justify; text-indent: 2em;\" data-article-part=\"art-17\">（三）环境保护、水土保持、消防等专项验收经相应行政主管部门验收合格；</p><p style=\"text-align: justify; text-indent: 2em;\" data-article-part=\"art-17\">（四）建设用地手续齐全并领取《国有土地使用证》，安全保护区标桩设立完毕；</p><p style=\"text-align: justify; text-indent: 2em;\" data-article-part=\"art-17\">（五）铁路与道路立体交叉设施及其附属安全设施已移交完毕；</p><p style=\"text-align: justify; text-indent: 2em;\" data-article-part=\"art-17\">（六）竣工决算已经主管部门审查通过，无遗留问题；</p><p style=\"text-align: justify; text-indent: 2em;\" data-article-part=\"art-17\">（七）档案验收及移交工作已经完成。</p><p style=\"text-align: justify; text-indent: 2em",
+        "checks": {
+          "anchor_present": true,
+          "contains_title_sentence": true,
+          "contains_initial_operation": true,
+          "contains_special_acceptance": true
+        },
+        "pdf_http": [
+          200,
+          "application/pdf",
+          2048
+        ]
+      },
+      "run_dir": "<PROJECT_ROOT>\\logs\\ux_trial\\runs\\ux-20261103T181837-608b"
+    },
+    "q2": {
+      "run_id": "ux-20261103T181910-9029",
+      "question": "铁路工程由联合体承包时，联合体各方对承包工程质量承担什么责任，依据什么安排？",
+      "started_at": "2026-11-03T18:19:10.271181+08:00",
+      "ended_at": "2026-11-03T18:19:20.206868+08:00",
+      "client_click_epoch_ms": 1793701150228,
+      "end_request_received_epoch_ms": 1793701160206,
+      "duration_ms": 9978,
+      "duration_server_ms": 9936,
+      "decision": "answer",
+      "search_ms": 13.0,
+      "query": "铁路工程由联合体承包时，联合体各方对承包工程质量承担什么责任，依据什么安排？",
+      "query_count": 1,
+      "displayed_evidence": [
+        "rail_quality:art-27",
+        "rail_quality:art-34",
+        "construction_quality:art-27",
+        "rail_quality:art-25",
+        "rail_quality:art-7"
+      ],
+      "selected_evidence": [
+        "rail_quality:art-27"
+      ],
+      "outcome": "found",
+      "evidence": [
+        {
+          "rank": 1,
+          "article_id": "rail_quality:art-27",
+          "article_no": "第二十七条",
+          "doc_id": "rail_quality",
+          "doc_title": "铁路建设工程质量监督管理规定",
+          "chars": 151,
+          "full_chars": 151,
+          "truncated": false,
+          "locator_route": "/locator/rail_quality#art-27",
+          "pdf_route": "/pdf/rail_quality#page=8"
+        },
+        {
+          "rank": 2,
+          "article_id": "rail_quality:art-34",
+          "article_no": "第三十四条",
+          "doc_id": "rail_quality",
+          "doc_title": "铁路建设工程质量监督管理规定",
+          "chars": 166,
+          "full_chars": 166,
+          "truncated": false,
+          "locator_route": "/locator/rail_quality#art-34",
+          "pdf_route": "/pdf/rail_quality#page=10"
+        },
+        {
+          "rank": 3,
+          "article_id": "construction_quality:art-27",
+          "article_no": "第二十七条",
+          "doc_id": "construction_quality",
+          "doc_title": "建设工程质量管理条例",
+          "chars": 85,
+          "full_chars": 85,
+          "truncated": false,
+          "locator_route": "/locator/construction_quality#art-27",
+          "pdf_route": "/pdf/construction_quality#page=7"
+        },
+        {
+          "rank": 4,
+          "article_id": "rail_quality:art-25",
+          "article_no": "第二十五条",
+          "doc_id": "rail_quality",
+          "doc_title": "铁路建设工程质量监督管理规定",
+          "chars": 65,
+          "full_chars": 65,
+          "truncated": false,
+          "locator_route": "/locator/rail_quality#art-25",
+          "pdf_route": "/pdf/rail_quality#page=7"
+        },
+        {
+          "rank": 5,
+          "article_id": "rail_quality:art-7",
+          "article_no": "第七条",
+          "doc_id": "rail_quality",
+          "doc_title": "铁路建设工程质量监督管理规定",
+          "chars": 55,
+          "full_chars": 55,
+          "truncated": false,
+          "locator_route": "/locator/rail_quality#art-7",
+          "pdf_route": "/pdf/rail_quality#page=2"
+        }
+      ],
+      "original_check": {
+        "checked_at": "2026-11-03T18:19:20.209507+08:00",
+        "anchor": "art-27",
+        "locator_sha256": "d5b3bc031a6e3b3a8059f336ec14fbb0cfab497e8bd2de03331d68f39bf781c9",
+        "checks": {
+          "anchor_present": true,
+          "contains_joint_liability": true,
+          "contains_contract_and_bid": true
+        },
+        "excerpt": "id=\"art-27\" data-article-id=\"rail_quality:art-27\">第二十七条　实行总承包的，总承包单位应当对全部建设工程质量负责。总承包单位依法将工程分包给其他单位的，分包单位应当按照分包合同的约定对其分包工程质量向总承包单位负责，总承包单位与分包单位对分包工程质量承担连带责任。</p><p style=\"text-align: justify; text-indent: 2em;\" data-article-part=\"art-27\">以联合体形式承包的，联合体各方应按合同约定及共同投标协议，就承包工程质量承担连带责任。</p><p style=\"text-align: justify; text-indent: 2em;\" id=\"art-28\" data-article-id=\"rail_quality:art-28\">第二十八条　施工单位应当建立质量责任制，建立健全质量管理体系和管理制度，明确项目经理、技术负责人的质量责任，配备与项目相适应的专职工程质量管理人员，落实质量责任。</p><p style=\"text-align: justify; text-indent: 2em;\" id=\"art-29\" data-article-id=\"rail_quality:art-29\">第二十九条　施工单位必须严格按照审查合格的施工图设计文件和有关规程、规范、标准施工，不得擅自修改工程设计，不得偷工减料。</p><p style=\"text-align: justify; text-indent: 2em;\" data-article-part=\"art-29\">施工单位在施工过程中发现设计差错或者与现场实际情况不符的，应及时向监理、设计和建设单位书面提出。</p><p style=\"text-align: justify; text-indent: 2em;\" id=\"art-30\" data-article-id=\"rail_quality:art-30\">第三十条　施工单位应按规定对进场的建筑材料、建筑构配件、设备和混凝土进行试"
+      },
+      "run_dir": "<PROJECT_ROOT>\\logs\\ux_trial\\runs\\ux-20261103T181910-9029"
+    },
+    "q3": {
+      "run_id": "ux-20261103T181927-ca43",
+      "question": "《建设工程质量管理条例》列出的必须实行监理的工程有哪些？请完整列出。",
+      "started_at": "2026-11-03T18:19:27.555419+08:00",
+      "ended_at": "2026-11-03T18:19:42.429159+08:00",
+      "client_click_epoch_ms": 1793701167530,
+      "end_request_received_epoch_ms": 1793701182429,
+      "duration_ms": 14899,
+      "duration_server_ms": 14875,
+      "decision": "answer",
+      "search_ms": 8.2,
+      "query": "《建设工程质量管理条例》列出的必须实行监理的工程有哪些？请完整列出。",
+      "query_count": 1,
+      "displayed_evidence": [
+        "construction_quality:art-12",
+        "construction_quality:art-38",
+        "construction_quality:art-34",
+        "construction_quality:art-36",
+        "construction_quality:art-37"
+      ],
+      "selected_evidence": [
+        "construction_quality:art-12"
+      ],
+      "outcome": "found",
+      "evidence": [
+        {
+          "rank": 1,
+          "article_id": "construction_quality:art-12",
+          "article_no": "第十二条",
+          "doc_id": "construction_quality",
+          "doc_title": "建设工程质量管理条例",
+          "chars": 208,
+          "full_chars": 208,
+          "truncated": false,
+          "locator_route": "/locator/construction_quality#art-12",
+          "pdf_route": "/pdf/construction_quality#page=3"
+        },
+        {
+          "rank": 2,
+          "article_id": "construction_quality:art-38",
+          "article_no": "第三十八条",
+          "doc_id": "construction_quality",
+          "doc_title": "建设工程质量管理条例",
+          "chars": 51,
+          "full_chars": 51,
+          "truncated": false,
+          "locator_route": "/locator/construction_quality#art-38",
+          "pdf_route": "/pdf/construction_quality#page=9"
+        },
+        {
+          "rank": 3,
+          "article_id": "construction_quality:art-34",
+          "article_no": "第三十四条",
+          "doc_id": "construction_quality",
+          "doc_title": "建设工程质量管理条例",
+          "chars": 148,
+          "full_chars": 148,
+          "truncated": false,
+          "locator_route": "/locator/construction_quality#art-34",
+          "pdf_route": "/pdf/construction_quality#page=8"
+        },
+        {
+          "rank": 4,
+          "article_id": "construction_quality:art-36",
+          "article_no": "第三十六条",
+          "doc_id": "construction_quality",
+          "doc_title": "建设工程质量管理条例",
+          "chars": 73,
+          "full_chars": 73,
+          "truncated": false,
+          "locator_route": "/locator/construction_quality#art-36",
+          "pdf_route": "/pdf/construction_quality#page=8"
+        },
+        {
+          "rank": 5,
+          "article_id": "construction_quality:art-37",
+          "article_no": "第三十七条",
+          "doc_id": "construction_quality",
+          "doc_title": "建设工程质量管理条例",
+          "chars": 126,
+          "full_chars": 126,
+          "truncated": false,
+          "locator_route": "/locator/construction_quality#art-37",
+          "pdf_route": "/pdf/construction_quality#page=8"
+        }
+      ],
+      "original_check": {
+        "checked_at": "2026-11-03T18:19:42.433438+08:00",
+        "anchor": "art-12",
+        "locator_sha256": "c3ca3706ee3ebe87d6510c851fda75697144e17885a0f5db3b6d6b0093e38cdd",
+        "checks": {
+          "anchor_present": true,
+          "下列建设工程必须实行监理": true,
+          "国家重点建设工程": true,
+          "大中型公用事业工程": true,
+          "成片开发建设的住宅小区工程": true,
+          "利用外国政府或者国际组织贷款、援助资金的工程": true,
+          "国家规定必须实行监理的其他工程": true
+        },
+        "excerpt": "id=\"art-12\" data-article-id=\"construction_quality:art-12\">　　第十二条　实行监理的建设工程，建设单位应当委托具有相应资质等级的工程监理单位进行监理，也可以委托具有工程监理相应资质等级并与被监理工程的施工承包单位没有隶属关系或者其他利害关系的该工程的设计单位进行监理。 \n </p><p></p>  \n<p class=\"MsoPlainText\" style=\"line-height: 200%; font-size: 12pt;\" data-article-part=\"art-12\">　　下列建设工程必须实行监理： \n </p><p></p>  \n<p class=\"MsoPlainText\" style=\"line-height: 200%; font-size: 12pt;\" data-article-part=\"art-12\">　　(一)国家重点建设工程； \n </p><p></p>  \n<p class=\"MsoPlainText\" style=\"line-height: 200%; font-size: 12pt;\" data-article-part=\"art-12\">　　(二)大中型公用事业工程； \n </p><p></p>  \n<p class=\"MsoPlainText\" style=\"line-height: 200%; font-size: 12pt;\" data-article-part=\"art-12\">　　(三)成片开发建设的住宅小区工程； \n </p><p></p>  \n<p class=\"MsoPlainText\" style=\"line-height: 200%; font-size: 12pt;\" data-article-part=\"art-12\">　　(四)利用外国政府或者国际组织贷款、援助资金的工程； \n </p><p></p>  \n<p class=\"MsoPlainText\" style=\"line-height: 200%; font-size: 12pt;\" data-article-part=\"art-12\">　　(五)国家规定必须实行监理的其他工程。 \n </p><p></p>  \n<p class=\"MsoPlainText\" style=\"line-height: 200%; font-size: 12pt;\" id=\"art-13\" data-article-id=\"construction_quality:art-13\">　　第十三条　建设单位在开工前，应当按照国家有关规定办理工程质量监督手续，工程质量监督手续可以与施工许可证或者开工报告合并办理。 \n </p><p></p>  \n<p class=\"MsoPlainText\" style="
+      },
+      "run_dir": "<PROJECT_ROOT>\\logs\\ux_trial\\runs\\ux-20261103T181927-ca43"
+    },
+    "q4": {
+      "run_id": "ux-20261103T181957-a65d",
+      "question": "仅依据本次两份指定法规原文，铁路桥梁抗震设计的地震动峰值加速度具体取值是多少？",
+      "started_at": "2026-11-03T18:19:57.018779+08:00",
+      "ended_at": "2026-11-03T18:20:10.549915+08:00",
+      "client_click_epoch_ms": 1793701196972,
+      "end_request_received_epoch_ms": 1793701210549,
+      "duration_ms": 13577,
+      "duration_server_ms": 13531,
+      "decision": "refuse",
+      "search_ms": 11.8,
+      "query": "仅依据本次两份指定法规原文，铁路桥梁抗震设计的地震动峰值加速度具体取值是多少？",
+      "query_count": 1,
+      "displayed_evidence": [],
+      "selected_evidence": [],
+      "outcome": "not_found",
+      "evidence": [],
+      "original_check": {
+        "checked_at": "2026-11-03T18:20:10.552861+08:00",
+        "method": "全文关键词检索两份锁定语料（rail_quality, construction_quality）",
+        "terms": [
+          "地震动峰值加速度",
+          "峰值加速度",
+          "抗震设防",
+          "抗震设计",
+          "地震加速度",
+          "加速度"
+        ],
+        "hits": {},
+        "numeric_acceleration_hits": [],
+        "conclusion": "两份语料未出现铁路桥梁地震动峰值加速度的具体取值；HCS 返回 refuse。"
+      },
+      "run_dir": "<PROJECT_ROOT>\\logs\\ux_trial\\runs\\ux-20261103T181957-a65d"
+    }
+  },
+  "end_load": {
+    "collected_at": "2026-11-03T18:20:40.906459+08:00",
+    "free_mem_kb": "1991880",
+    "process_count": "419",
+    "cpu_percent_total": "38",
+    "hcs_8771_proc": "{\"Id\":32056,\"CPU\":60.484375,\"WorkingSet64\":287186944}"
+  }
+}

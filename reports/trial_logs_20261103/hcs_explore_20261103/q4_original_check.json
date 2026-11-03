@@ -1,0 +1,15 @@
+{
+  "checked_at": "2026-11-03T18:20:10.552861+08:00",
+  "method": "全文关键词检索两份锁定语料（rail_quality, construction_quality）",
+  "terms": [
+    "地震动峰值加速度",
+    "峰值加速度",
+    "抗震设防",
+    "抗震设计",
+    "地震加速度",
+    "加速度"
+  ],
+  "hits": {},
+  "numeric_acceleration_hits": [],
+  "conclusion": "两份语料未出现铁路桥梁地震动峰值加速度的具体取值；HCS 返回 refuse。"
+}

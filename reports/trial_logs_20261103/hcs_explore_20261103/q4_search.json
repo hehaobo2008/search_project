@@ -1,0 +1,25 @@
+{
+  "start": {
+    "run_id": "ux-20261103T181957-a65d",
+    "question": "仅依据本次两份指定法规原文，铁路桥梁抗震设计的地震动峰值加速度具体取值是多少？",
+    "init_ms": 1082.7,
+    "ready_at": "2026-11-03T18:18:16.455788+08:00",
+    "method": "hybrid_top5",
+    "auto_supplement": false,
+    "config_id": "cfg-0037f32996f8-hybrid_top5",
+    "server_received_epoch_ms": 1793701197018,
+    "clock_note": "duration_ms 起点取页面点击「开始任务」时的客户端毫秒时间戳，终点取服务端收到结束请求的时刻，包含请求/响应的网络与页面延迟；duration_server_ms 只算服务端收到开始/结束请求之间；duration_client_reported_ms 是页面 performance.now() 差值，仅作对照。"
+  },
+  "search": {
+    "run_id": "ux-20261103T181957-a65d",
+    "decision": "refuse",
+    "message": "本次未提供充分依据",
+    "search_ms": 11.8,
+    "evidence": [],
+    "truncation_note": "每个证据最多展示 400 字符；truncated=true 表示有截断。",
+    "display_note": "返回证据只表示服务端已给出候选；不代表操作员已看到或核对。"
+  },
+  "click_epoch_ms": 1793701196972,
+  "first_visible_epoch_ms": 1793701197022,
+  "search_done_epoch_ms": 1793701197042
+}

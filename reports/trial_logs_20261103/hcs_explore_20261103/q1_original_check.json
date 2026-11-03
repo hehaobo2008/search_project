@@ -1,0 +1,18 @@
+{
+  "checked_at": "2026-11-03T18:18:49.762977+08:00",
+  "locator_file": "locators/rail_quality.locator.html",
+  "locator_sha256": "d5b3bc031a6e3b3a8059f336ec14fbb0cfab497e8bd2de03331d68f39bf781c9",
+  "anchor": "art-17",
+  "segment_excerpt": "id=\"art-17\" data-article-id=\"rail_quality:art-17\">第十七条　国家验收的铁路建设项目，具备下列条件后建设单位方可申请验收：</p><p style=\"text-align: justify; text-indent: 2em;\" data-article-part=\"art-17\">（一）可行性研究报告批准的工程全部建成且质量合格；</p><p style=\"text-align: justify; text-indent: 2em;\" data-article-part=\"art-17\">（二）初步验收合格且初期运营一年以上，状态良好，发现问题整改完毕；</p><p style=\"text-align: justify; text-indent: 2em;\" data-article-part=\"art-17\">（三）环境保护、水土保持、消防等专项验收经相应行政主管部门验收合格；</p><p style=\"text-align: justify; text-indent: 2em;\" data-article-part=\"art-17\">（四）建设用地手续齐全并领取《国有土地使用证》，安全保护区标桩设立完毕；</p><p style=\"text-align: justify; text-indent: 2em;\" data-article-part=\"art-17\">（五）铁路与道路立体交叉设施及其附属安全设施已移交完毕；</p><p style=\"text-align: justify; text-indent: 2em;\" data-article-part=\"art-17\">（六）竣工决算已经主管部门审查通过，无遗留问题；</p><p style=\"text-align: justify; text-indent: 2em;\" data-article-part=\"art-17\">（七）档案验收及移交工作已经完成。</p><p style=\"text-align: justify; text-indent: 2em",
+  "checks": {
+    "anchor_present": true,
+    "contains_title_sentence": true,
+    "contains_initial_operation": true,
+    "contains_special_acceptance": true
+  },
+  "pdf_http": [
+    200,
+    "application/pdf",
+    2048
+  ]
+}

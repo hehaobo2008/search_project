@@ -1,0 +1,16 @@
+{
+  "started_at": "2026-11-03T18:18:14.649884+08:00",
+  "started_epoch_ms": 1793701094649,
+  "ready_at": "2026-11-03T18:18:17.050382+08:00",
+  "ready_epoch_ms": 1793701097050,
+  "startup_wall_ms": 2400.5,
+  "pid": 32056,
+  "port": 8771,
+  "http_ok": true,
+  "session": {
+    "session_id": "s-20261103T181816-328c55",
+    "phase": "idle",
+    "active": false,
+    "run": null
+  }
+}
