@@ -1,0 +1,9 @@
+{"ts": "2026-11-03T11:46:51.534544+08:00", "event": "task_started", "run_id": "ux-20261103T114651-d3e5", "task_id": "task2", "question": "竣工验收后多久备案，逾期备案罚则在哪？", "init_ms": 821.9, "method": "hybrid_top5", "config_id": "cfg-0037f32996f8-hybrid_top5"}
+{"ts": "2026-11-03T11:46:51.545089+08:00", "event": "task_started_client", "run_id": "ux-20261103T114651-d3e5", "client_ms": 0.29999999701976776}
+{"ts": "2026-11-03T11:48:16.658908+08:00", "event": "query_submitted", "run_id": "ux-20261103T114651-d3e5", "question": "竣工验收后多久备案，逾期备案罚则在哪？"}
+{"ts": "2026-11-03T11:48:16.835671+08:00", "event": "results_ready", "run_id": "ux-20261103T114651-d3e5", "decision": "answer", "evidence_ids": ["rail_quality:art-61", "construction_quality:art-49", "rail_quality:art-16", "construction_quality:art-59", "construction_quality:art-58"], "result_count": 5, "search_ms": 175.2, "message": ""}
+{"ts": "2026-11-03T11:52:19.876944+08:00", "event": "original_open_requested", "run_id": "ux-20261103T114651-d3e5", "client_ms": 328238.5, "article_id": "rail_quality:art-61", "link": "http://127.0.0.1:8765/locator/rail_quality#art-61"}
+{"ts": "2026-11-03T11:55:48.312634+08:00", "event": "original_confirmed", "run_id": "ux-20261103T114651-d3e5", "client_ms": 536766.8999999985, "article_id": "rail_quality:art-61"}
+{"ts": "2026-11-03T11:57:49.877517+08:00", "event": "task_ended", "run_id": "ux-20261103T114651-d3e5", "outcome": "found", "selected_evidence": ["rail_quality:art-61"], "note": "操作者结束；A61 第1位展示未截断，已打开 locator 并核对罚款档次；是否答对留独立评分。结束经页面同一接口提交（页面滚动后坐标点击不稳，未用鼠标命中按钮），如实记录。", "duration_ms": 658343.0}
+{"ts": "2026-11-03T11:57:58.270058+08:00", "event": "page_unload_client", "run_id": "ux-20261103T114651-d3e5", "client_ms": 666716.6000000015}
+{"ts": "2026-11-03T11:57:58.341953+08:00", "event": "page_reloaded", "run_id": "ux-20261103T114651-d3e5"}

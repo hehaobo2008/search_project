@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>HCS 任务计时验证页</title>
+<style>
+  body { font-family: "Segoe UI", "Microsoft YaHei", sans-serif; margin: 24px auto; max-width: 1180px; color: #1f2937; }
+  h1 { font-size: 24px; margin-bottom: 4px; }
+  .sub { color: #4b5563; margin-bottom: 18px; }
+  .panel { border: 1px solid #cbd5e1; border-radius: 8px; padding: 14px; margin: 12px 0; background: #f8fafc; }
+  button { padding: 10px 16px; margin: 4px 6px 4px 0; border: 1px solid #1d4ed8; background: #1d4ed8; color: white; border-radius: 6px; cursor: pointer; }
+  button.secondary { background: white; color: #1d4ed8; }
+  button.danger { border-color: #b91c1c; background: white; color: #b91c1c; }
+  button:disabled { opacity: .5; cursor: not-allowed; }
+  select, textarea, input[type=text] { font: inherit; padding: 8px; border: 1px solid #94a3b8; border-radius: 5px; }
+  textarea { width: 100%; min-height: 74px; box-sizing: border-box; }
+  .hidden { display: none; }
+  .status { margin: 8px 0; padding: 8px 10px; background: #e0f2fe; border-left: 4px solid #0284c7; }
+  .error { background: #fee2e2; border-left-color: #dc2626; }
+  .reject { background: #fef3c7; border-left-color: #d97706; font-weight: 600; }
+  .card { border: 1px solid #cbd5e1; border-radius: 8px; padding: 12px; margin: 12px 0; background: white; }
+  .card h3 { margin: 0 0 4px 0; font-size: 17px; }
+  .meta { color: #475569; font-size: 13px; margin-bottom: 8px; }
+  pre { white-space: pre-wrap; font-family: inherit; background: #f1f5f9; padding: 10px; border-radius: 5px; margin: 8px 0; }
+  .links a { margin-right: 14px; }
+  .small { color: #475569; font-size: 13px; }
+  .timer { font-variant-numeric: tabular-nums; font-weight: 600; }
+  .after-end { background: #ecfdf5; border-left: 4px solid #059669; }
+  .refresh { background: #fff7ed; border-left: 4px solid #ea580c; }
+</style>
+</head>
+<body>
+<h1>HCS 任务计时验证页</h1>
+<div class="sub">固定 hybrid_top5，自动补证关闭；页面只接收题面和操作，不读取 gold。模型/索引初始化时间不计入单题计时。</div>
+<div id="refreshBanner" class="status refresh hidden"></div>
+
+<div class="panel">
+  <label for="taskSel">选择已见任务（题面在点击开始后才显示）：</label>
+  <select id="taskSel">
+    <option value="">-- 请选择 --</option>
+    <option value="task1">任务 1</option>
+    <option value="task2">任务 2</option>
+    <option value="task3">任务 3</option>
+  </select>
+  <button id="startBtn">开始任务</button>
+  <span id="initInfo" class="small"></span>
+</div>
+
+<div id="taskPanel" class="hidden">
+  <div class="panel">
+    <div>已开始任务 <strong id="runLabel"></strong>　<span class="timer" id="timer">00:00.0</span></div>
+    <div class="small" id="initDetail"></div>
+    <div class="status">题面（开始后才显示）</div>
+    <div id="questionText" style="font-size:18px;font-weight:600;margin:8px 0;"></div>
+    <label for="questionInput" class="small">问题输入（本页只验证已见任务；若修改，搜索会被拒绝并记录）</label>
+    <textarea id="questionInput"></textarea>
+    <div>
+      <button id="searchBtn">搜索</button>
+      <button id="againBtn" class="secondary" disabled>再次查询</button>
+      <button id="abortBtn" class="danger">中止任务</button>
+    </div>
+    <div id="status" class="status hidden"></div>
+  </div>
+
+  <div id="results"></div>
+
+  <div id="endPanel" class="panel hidden">
+    <h3>结束任务</h3>
+    <div class="small">结束只表示操作者停止；本页不判断是否答对或证据是否充分，交由独立评分。</div>
+    <div style="margin-top:8px;">
+      <label><input type="radio" name="outcome" value="found"> 已找到依据</label>
+      <label style="margin-left:18px;"><input type="radio" name="outcome" value="not_found"> 未找到</label>
+      <label style="margin-left:18px;"><input type="radio" name="outcome" value="aborted"> 中止</label>
+    </div>
+    <div style="margin-top:8px;">
+      <label for="endNote">操作者备注（可选）</label>
+      <input type="text" id="endNote" style="width:100%;box-sizing:border-box;">
+    </div>
+    <button id="endBtn">结束任务并记录</button>
+  </div>
+
+  <div id="endSummary" class="panel after-end hidden"></div>
+</div>
+
+<script>
+const state = { runId: null, question: '', startMs: 0, timer: null, lastResults: [] };
+const el = id => document.getElementById(id);
+const api = async (path, body) => {
+  const r = await fetch(path, {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(body || {})});
+  const data = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(data.error || ('HTTP ' + r.status));
+  return data;
+};
+const logEvent = (type, extra) => {
+  if (!state.runId) return;
+  const payload = Object.assign({run_id: state.runId, type: type, client_ms: state.startMs ? (performance.now() - state.startMs) : null}, extra || {});
+  fetch('/api/event', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload)}).catch(()=>{});
+};
+const fmtTimer = ms => {
+  const s = Math.floor(ms/1000), m = Math.floor(s/60);
+  return String(m).padStart(2,'0') + ':' + String(s%60).padStart(2,'0') + '.' + String(Math.floor(ms%1000/100)).padStart(1,'0');
+};
+const tick = () => { if (state.startMs) el('timer').textContent = fmtTimer(performance.now() - state.startMs); };
+const showStatus = (text, cls) => { const s = el('status'); s.className = 'status ' + (cls || ''); s.textContent = text; s.classList.remove('hidden'); };
+
+el('startBtn').onclick = async () => {
+  const taskId = el('taskSel').value;
+  if (!taskId) { showStatus('请先选择任务。', 'error'); return; }
+  el('startBtn').disabled = true;
+  try {
+    const data = await api('/api/start', {task_id: taskId});
+    state.runId = data.run_id; state.question = data.question; state.startMs = performance.now();
+    localStorage.setItem('hcs_ux_run', state.runId);
+    el('runLabel').textContent = data.run_id;
+    el('questionText').textContent = data.question;
+    el('questionInput').value = data.question;
+    el('initInfo').textContent = '模型/索引初始化：' + data.init_ms + ' ms（不计入任务计时）';
+    el('initDetail').textContent = '模型/索引初始化：' + data.init_ms + ' ms（单独记录；任务计时从点击开始起算）';
+    el('taskPanel').classList.remove('hidden');
+    el('endPanel').classList.remove('hidden');
+    el('status').classList.add('hidden');
+    state.timer = setInterval(tick, 100);
+    logEvent('task_started_client');
+  } catch (e) { showStatus('开始失败：' + e.message, 'error'); }
+  finally { el('startBtn').disabled = false; }
+};
+
+async function doSearch(isAgain) {
+  if (!state.runId) return;
+  const q = el('questionInput').value.trim();
+  if (!q) { showStatus('问题不能为空。', 'error'); return; }
+  el('searchBtn').disabled = true; el('againBtn').disabled = true;
+  if (isAgain) logEvent('query_again_client');
+  showStatus('正在搜索……');
+  try {
+    const data = await api('/api/search', {run_id: state.runId, question: q});
+    state.lastResults = data.evidence || [];
+    renderResults(data);
+    if (data.decision === 'refuse') {
+      showStatus('本次未提供充分依据', 'reject');
+    } else {
+      showStatus('结果已就绪：' + data.evidence.length + ' 条；展示文字按 400 字符截断。', '');
+    }
+    el('againBtn').disabled = false;
+  } catch (e) {
+    showStatus('搜索失败：' + e.message, 'error');
+  } finally { el('searchBtn').disabled = false; }
+}
+el('searchBtn').onclick = () => doSearch(false);
+el('againBtn').onclick = () => doSearch(true);
+
+function renderResults(data) {
+  const box = el('results'); box.innerHTML = '';
+  if (data.decision === 'refuse') {
+    box.innerHTML = '<div class="card reject">本次未提供充分依据。页面不推断资料中一定不存在答案。</div>';
+    return;
+  }
+  data.evidence.forEach(item => {
+    const card = document.createElement('div'); card.className = 'card'; card.dataset.id = item.article_id;
+    const trunc = item.truncated ? '已截断：显示前 400 字符，全文 ' + item.full_chars + ' 字符' : '未截断';
+    card.innerHTML = `
+      <h3>#${item.rank} ${item.article_no} · ${item.doc_title}</h3>
+      <div class="meta">${item.article_id} · 版本 ${item.version_id} · ${item.chars}/${item.full_chars} 字符 · ${trunc}</div>
+      <pre></pre>
+      <div class="links">
+        <a href="${item.locator_route}" target="_blank" rel="noopener">查看原文（HTML定位）</a>
+        <a href="${item.pdf_route}" target="_blank" rel="noopener">打开 PDF 页</a>
+      </div>
+      <div style="margin-top:8px;">
+        <label><input type="checkbox" class="evidence" value="${item.article_id}"> 选中为操作者找到的依据</label>
+        <button class="secondary confirm">确认原文已核对</button>
+        <button class="secondary fail">原文未打开/无法核对</button>
+      </div>`;
+    card.querySelector('pre').textContent = item.text;
+    card.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      logEvent('original_open_requested', {article_id: item.article_id, link: a.href});
+    }));
+    card.querySelector('.confirm').onclick = () => logEvent('original_confirmed', {article_id: item.article_id});
+    card.querySelector('.fail').onclick = () => logEvent('original_open_failed', {article_id: item.article_id});
+    box.appendChild(card);
+  });
+}
+
+async function endTask(outcome) {
+  if (!state.runId) return;
+  const selected = Array.from(document.querySelectorAll('.evidence:checked')).map(x => x.value);
+  const note = el('endNote').value.trim();
+  if (!outcome) { showStatus('请选择结束状态。', 'error'); return; }
+  try {
+    const data = await api('/api/end', {run_id: state.runId, outcome: outcome, selected_evidence: selected, note: note});
+    clearInterval(state.timer);
+    el('endSummary').classList.remove('hidden');
+    el('endSummary').innerHTML = '<strong>任务已结束。</strong> 运行编号：' + data.run_id +
+      '<br>结束状态：' + data.outcome + '；已选证据：' + (selected.join('、') || '无') +
+      '<br>本页不判定是否答对或证据是否充分；等待独立评分。';
+    el('searchBtn').disabled = true; el('againBtn').disabled = true; el('endBtn').disabled = true; el('abortBtn').disabled = true;
+    localStorage.removeItem('hcs_ux_run');
+  } catch (e) { showStatus('结束失败：' + e.message, 'error'); }
+}
+el('endBtn').onclick = () => {
+  const o = document.querySelector('input[name=outcome]:checked');
+  endTask(o ? o.value : null);
+};
+el('abortBtn').onclick = () => endTask('aborted');
+
+window.addEventListener('beforeunload', () => {
+  if (!state.runId) return;
+  const payload = JSON.stringify({run_id: state.runId, type: 'page_unload_client', client_ms: state.startMs ? (performance.now() - state.startMs) : null});
+  navigator.sendBeacon('/api/event', new Blob([payload], {type:'application/json'}));
+});
+(async () => {
+  const old = localStorage.getItem('hcs_ux_run');
+  try { await api('/api/event', {run_id: old || null, type: old ? 'page_reloaded' : 'page_loaded'}); } catch (e) {}
+  if (old) {
+    const b = el('refreshBanner'); b.textContent = '检测到页面刷新/重新加载：旧运行 ' + old + ' 的记录保留，但当前页面需要重新开始任务。'; b.classList.remove('hidden');
+  }
+})();
+</script>
+</body>
+</html>

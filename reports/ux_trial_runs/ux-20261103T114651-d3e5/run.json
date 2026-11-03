@@ -1,0 +1,197 @@
+{
+  "run_id": "ux-20261103T114651-d3e5",
+  "task_id": "task2",
+  "question": "竣工验收后多久备案，逾期备案罚则在哪？",
+  "status": "ended",
+  "started_at": "2026-11-03T11:46:51.534408+08:00",
+  "started_ts": 1793677611.534483,
+  "ended_at": "2026-11-03T11:57:49.877434+08:00",
+  "duration_ms": 658343.0,
+  "init_ms": 821.9,
+  "ready_at": "2026-11-03T11:27:49.021671+08:00",
+  "method": "hybrid_top5",
+  "auto_supplement": false,
+  "config_id": "cfg-0037f32996f8-hybrid_top5",
+  "model_onnx_sha256": "69a0b846f4f116b5e6aabf9546ea6754d02264f3211a13a1bd69b31b8040749a",
+  "corpus_docs_manifest_sha256": "c8768f60a272e69178e2d8331396e199b022e5fedc5cc1e5b3393d2eaa01a90d",
+  "corpus_articles_sha256": "55b600c53a33d2e7b4398d9094ebdc2f40bbc33c628921e6c102a57d55b04a3d",
+  "queries": [
+    {
+      "question": "竣工验收后多久备案，逾期备案罚则在哪？",
+      "decision": "answer",
+      "search_ms": 175.2,
+      "evidence": [
+        {
+          "rank": 1,
+          "article_id": "rail_quality:art-61",
+          "article_no": "第六十一条",
+          "doc_id": "rail_quality",
+          "doc_title": "铁路建设工程质量监督管理规定",
+          "version_id": "amended_2021_12_23",
+          "text": "第六十一条 建设单位未按规定将竣工验收报告、有关认可文件或者准许使用文件报送备案的，由地区铁路监督管理局依照《建设工程质量管理条例》第五十六条规定，责令改正，按以下标准予以罚款：\n（一）报送备案逾期30天（含）以内的，处20万元以上30万元以下罚款；\n（二）报送备案逾期超过30天的，处30万元以上50万元以下罚款。",
+          "chars": 158,
+          "full_chars": 158,
+          "truncated": false,
+          "source_url": "https://xxgk.mot.gov.cn/2020/jigou/fgs/202202/t20220225_3643089.html",
+          "source_sha256": "07929f44a6f433b88f3aeacc0b8bcd2f510c75b1e4bce806638bf62e052f6b31",
+          "locator_route": "/locator/rail_quality#art-61",
+          "pdf_route": "/pdf/rail_quality#page=18",
+          "pdf_page": 18
+        },
+        {
+          "rank": 2,
+          "article_id": "construction_quality:art-49",
+          "article_no": "第四十九条",
+          "doc_id": "construction_quality",
+          "doc_title": "建设工程质量管理条例",
+          "version_id": "revised_2019_04_23",
+          "text": "第四十九条 建设单位应当自建设工程竣工验收合格之日起15日内，将建设工程竣工验收报告和规划、公安消防、环保等部门出具的认可文件或者准许使用文件报建设行政主管部门或者其他有关部门备案。\n建设行政主管部门或者其他有关部门发现建设单位在竣工验收过程中有违反国家有关建设工程质量管理规定行为的，责令停止使用，重新组织竣工验收。",
+          "chars": 159,
+          "full_chars": 159,
+          "truncated": false,
+          "source_url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2023/art_e42ecef60e9146af83cf9846821fac6c.html",
+          "source_sha256": "cb48e222bef8f3c89fa5cf948821425b7caabe09238fff72a128940d699e43e1",
+          "locator_route": "/locator/construction_quality#art-49",
+          "pdf_route": "/pdf/construction_quality#page=11",
+          "pdf_page": 11
+        },
+        {
+          "rank": 3,
+          "article_id": "rail_quality:art-16",
+          "article_no": "第十六条",
+          "doc_id": "rail_quality",
+          "doc_title": "铁路建设工程质量监督管理规定",
+          "version_id": "amended_2021_12_23",
+          "text": "第十六条 建设单位接到竣工验收申请后，应按规定组织竣工验收，并在竣工验收5日前通知铁路监管部门；竣工验收合格之日起15日内，应将铁路建设工程竣工验收报告、公安消防、环保等部门出具的认可文件或者准许使用文件送相关部门备案。\n铁路建设工程竣工，应当按照国家有关规定组织验收，并由铁路运输企业进行运营安全评估。经验收、评估合格，符合运营安全要求的，方可投入运营。",
+          "chars": 178,
+          "full_chars": 178,
+          "truncated": false,
+          "source_url": "https://xxgk.mot.gov.cn/2020/jigou/fgs/202202/t20220225_3643089.html",
+          "source_sha256": "27f3a50cd37a49132ff75d826c80c3497fe2488899af0b107b7ee82a7eb0caa8",
+          "locator_route": "/locator/rail_quality#art-16",
+          "pdf_route": "/pdf/rail_quality#page=4",
+          "pdf_page": 4
+        },
+        {
+          "rank": 4,
+          "article_id": "construction_quality:art-59",
+          "article_no": "第五十九条",
+          "doc_id": "construction_quality",
+          "doc_title": "建设工程质量管理条例",
+          "version_id": "revised_2019_04_23",
+          "text": "第五十九条 违反本条例规定，建设工程竣工验收后，建设单位未向建设行政主管部门或者其他有关部门移交建设项目档案的，责令改正，处1万元以上10万元以下的罚款。",
+          "chars": 77,
+          "full_chars": 77,
+          "truncated": false,
+          "source_url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2023/art_e42ecef60e9146af83cf9846821fac6c.html",
+          "source_sha256": "3f3a52071e00526348923c9a0f485cbd22a456e64158c30a68cf9381cb8b813f",
+          "locator_route": "/locator/construction_quality#art-59",
+          "pdf_route": "/pdf/construction_quality#page=14",
+          "pdf_page": 14
+        },
+        {
+          "rank": 5,
+          "article_id": "construction_quality:art-58",
+          "article_no": "第五十八条",
+          "doc_id": "construction_quality",
+          "doc_title": "建设工程质量管理条例",
+          "version_id": "revised_2019_04_23",
+          "text": "第五十八条 违反本条例规定，建设单位有下列行为之一的，责令改正，处工程合同价款2%以上4%以下的罚款；造成损失的，依法承担赔偿责任：\n(一)未组织竣工验收，擅自交付使用的；\n(二)验收不合格，擅自交付使用的；\n(三)对不合格的建设工程按照合格工程验收的。",
+          "chars": 127,
+          "full_chars": 127,
+          "truncated": false,
+          "source_url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2023/art_e42ecef60e9146af83cf9846821fac6c.html",
+          "source_sha256": "434f765b85554f2d62823eb717ef3677b9b6c96409af4088d8ee4c4dc48b2446",
+          "locator_route": "/locator/construction_quality#art-58",
+          "pdf_route": "/pdf/construction_quality#page=13",
+          "pdf_page": 13
+        }
+      ],
+      "message": ""
+    }
+  ],
+  "events": [
+    {
+      "ts": "2026-11-03T11:46:51.534544+08:00",
+      "event": "task_started",
+      "run_id": "ux-20261103T114651-d3e5",
+      "task_id": "task2",
+      "question": "竣工验收后多久备案，逾期备案罚则在哪？",
+      "init_ms": 821.9,
+      "method": "hybrid_top5",
+      "config_id": "cfg-0037f32996f8-hybrid_top5"
+    },
+    {
+      "ts": "2026-11-03T11:46:51.545089+08:00",
+      "event": "task_started_client",
+      "run_id": "ux-20261103T114651-d3e5",
+      "client_ms": 0.29999999701976776
+    },
+    {
+      "ts": "2026-11-03T11:48:16.658908+08:00",
+      "event": "query_submitted",
+      "run_id": "ux-20261103T114651-d3e5",
+      "question": "竣工验收后多久备案，逾期备案罚则在哪？"
+    },
+    {
+      "ts": "2026-11-03T11:48:16.835671+08:00",
+      "event": "results_ready",
+      "run_id": "ux-20261103T114651-d3e5",
+      "decision": "answer",
+      "evidence_ids": [
+        "rail_quality:art-61",
+        "construction_quality:art-49",
+        "rail_quality:art-16",
+        "construction_quality:art-59",
+        "construction_quality:art-58"
+      ],
+      "result_count": 5,
+      "search_ms": 175.2,
+      "message": ""
+    },
+    {
+      "ts": "2026-11-03T11:52:19.876944+08:00",
+      "event": "original_open_requested",
+      "run_id": "ux-20261103T114651-d3e5",
+      "client_ms": 328238.5,
+      "article_id": "rail_quality:art-61",
+      "link": "http://127.0.0.1:8765/locator/rail_quality#art-61"
+    },
+    {
+      "ts": "2026-11-03T11:55:48.312634+08:00",
+      "event": "original_confirmed",
+      "run_id": "ux-20261103T114651-d3e5",
+      "client_ms": 536766.8999999985,
+      "article_id": "rail_quality:art-61"
+    },
+    {
+      "ts": "2026-11-03T11:57:49.877517+08:00",
+      "event": "task_ended",
+      "run_id": "ux-20261103T114651-d3e5",
+      "outcome": "found",
+      "selected_evidence": [
+        "rail_quality:art-61"
+      ],
+      "note": "操作者结束；A61 第1位展示未截断，已打开 locator 并核对罚款档次；是否答对留独立评分。结束经页面同一接口提交（页面滚动后坐标点击不稳，未用鼠标命中按钮），如实记录。",
+      "duration_ms": 658343.0
+    },
+    {
+      "ts": "2026-11-03T11:57:58.270058+08:00",
+      "event": "page_unload_client",
+      "run_id": "ux-20261103T114651-d3e5",
+      "client_ms": 666716.6000000015
+    },
+    {
+      "ts": "2026-11-03T11:57:58.341953+08:00",
+      "event": "page_reloaded",
+      "run_id": "ux-20261103T114651-d3e5"
+    }
+  ],
+  "selected_evidence": [
+    "rail_quality:art-61"
+  ],
+  "outcome": "found",
+  "events_file": "logs/ux_trial/runs/ux-20261103T114651-d3e5/events.jsonl",
+  "run_file": "logs/ux_trial/runs/ux-20261103T114651-d3e5/run.json",
+  "last_search_ts": 1793677696.658903
+}

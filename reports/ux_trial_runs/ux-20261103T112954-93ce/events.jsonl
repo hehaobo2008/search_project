@@ -1,0 +1,13 @@
+{"ts": "2026-11-03T11:29:54.457332+08:00", "event": "task_started", "run_id": "ux-20261103T112954-93ce", "task_id": "task1", "question": "建设单位需要配备什么质量管理人员、谁留存检查记录？", "init_ms": 821.9, "method": "hybrid_top5", "config_id": "cfg-0037f32996f8-hybrid_top5"}
+{"ts": "2026-11-03T11:29:54.468580+08:00", "event": "task_started_client", "run_id": "ux-20261103T112954-93ce", "client_ms": 0.19999999552965164}
+{"ts": "2026-11-03T11:31:16.628193+08:00", "event": "query_submitted", "run_id": "ux-20261103T112954-93ce", "question": "建设单位需要配备什么质量管理人员、谁留存检查记录？"}
+{"ts": "2026-11-03T11:31:18.469687+08:00", "event": "results_ready", "run_id": "ux-20261103T112954-93ce", "decision": "answer", "evidence_ids": ["rail_quality:art-8", "construction_quality:art-50", "construction_quality:art-48", "construction_quality:art-29", "construction_quality:art-30"], "result_count": 5, "search_ms": 1839.2, "message": ""}
+{"ts": "2026-11-03T11:33:14.797820+08:00", "event": "query_again_client", "run_id": "ux-20261103T112954-93ce", "client_ms": 200324.29999999702}
+{"ts": "2026-11-03T11:33:14.799576+08:00", "event": "query_submitted", "run_id": "ux-20261103T112954-93ce", "question": "建设单位需要配备什么质量管理人员、谁留存检查记录？"}
+{"ts": "2026-11-03T11:33:15.012937+08:00", "event": "results_ready", "run_id": "ux-20261103T112954-93ce", "decision": "answer", "evidence_ids": ["rail_quality:art-8", "construction_quality:art-50", "construction_quality:art-48", "construction_quality:art-29", "construction_quality:art-30"], "result_count": 5, "search_ms": 202.4, "message": ""}
+{"ts": "2026-11-03T11:33:15.108630+08:00", "event": "query_again_client", "run_id": "ux-20261103T112954-93ce", "client_ms": 200624.3999999985}
+{"ts": "2026-11-03T11:33:15.127019+08:00", "event": "duplicate_query", "run_id": "ux-20261103T112954-93ce", "question": "建设单位需要配备什么质量管理人员、谁留存检查记录？"}
+{"ts": "2026-11-03T11:33:18.006666+08:00", "event": "original_open_requested", "run_id": "ux-20261103T112954-93ce", "client_ms": 203463.19999999553, "article_id": "rail_quality:art-8", "link": "http://127.0.0.1:8765/locator/rail_quality#art-8"}
+{"ts": "2026-11-03T11:35:07.639118+08:00", "event": "original_confirmed", "run_id": "ux-20261103T112954-93ce", "client_ms": 313170, "article_id": "rail_quality:art-8"}
+{"ts": "2026-11-03T11:45:42.218293+08:00", "event": "task_ended", "run_id": "ux-20261103T112954-93ce", "outcome": "found", "selected_evidence": ["construction_quality:art-50"], "note": "", "duration_ms": 947761.0}
+{"ts": "2026-11-03T11:46:48.405946+08:00", "event": "page_unload_client", "run_id": "ux-20261103T112954-93ce", "client_ms": 1013930}

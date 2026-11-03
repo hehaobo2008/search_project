@@ -1,0 +1,5 @@
+{"ts": "2026-11-03T11:59:58.272635+08:00", "event": "task_started", "run_id": "ux-20261103T115958-2974", "task_id": "task3", "question": "环保验收需要监测哪些因子、频次多少？", "init_ms": 821.9, "method": "hybrid_top5", "config_id": "cfg-0037f32996f8-hybrid_top5"}
+{"ts": "2026-11-03T11:59:58.283204+08:00", "event": "task_started_client", "run_id": "ux-20261103T115958-2974", "client_ms": 0.20000000298023224}
+{"ts": "2026-11-03T12:00:25.802698+08:00", "event": "query_submitted", "run_id": "ux-20261103T115958-2974", "question": "环保验收需要监测哪些因子、频次多少？"}
+{"ts": "2026-11-03T12:00:25.963943+08:00", "event": "results_ready", "run_id": "ux-20261103T115958-2974", "decision": "refuse", "evidence_ids": [], "result_count": 0, "search_ms": 158.4, "message": "本次未提供充分依据"}
+{"ts": "2026-11-03T12:01:31.681363+08:00", "event": "task_ended", "run_id": "ux-20261103T115958-2974", "outcome": "not_found", "selected_evidence": [], "note": "", "duration_ms": 93408.7}

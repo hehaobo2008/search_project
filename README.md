@@ -116,3 +116,13 @@ python -m unittest discover -s tests -v
 - Q1/Q2 HCS 的前5条直接给出 A8、A61/A16 且已实际打开本地回跳；DocFetcher 预览停在第1页，工具栏上一/下一命中禁用、翻页按钮点击无可见变化，最终打开原 PDF 定位。
 - Q3 两边均无充分依据：DocFetcher 返回 A/B 相关文件但不是答案；HCS 两轮拒绝。Q3 记为持平/无法判断，不当作 HCS 效果胜出。
 - 不计算真人耗时，不宣称独立测试或产品胜出。
+
+## 本机回环页面验证（计时记录）
+
+- 报告：`reports/ux_trial_page_trial.md`；截图：`reports/ux_trial_screens/`；任务1误选更正：`reports/ux_trial_task1_correction.md`。
+- 启动：`python scripts/ux_trial_server.py --port 8765`，然后本机打开 `http://127.0.0.1:8765/`。服务强制只监听 `127.0.0.1`，传其它 `--host` 以退出码 2 拒绝。
+- 只复用一个检索入口 `TaskBSystem.answer(question, "hybrid_top5")`，自动补证关闭，配置 `cfg-0037f32996f8-hybrid_top5`；页面只接收题面与操作，不读取 gold。
+- 模型/索引初始化 `init_ms` 单列，不计入单题计时；单题计时从点击“开始任务”到点击“结束任务并记录”，含读题、输入、搜索、原文核查。
+- 结束任务只表示操作者停止，由操作者选“已找到依据 / 未找到 / 中止”，本页不判定答对或证据是否充分。
+- 仅用 3 个已见任务验证，不产生效率或准确率结论；日志中的 `duration_ms` 是自动化代理操作耗时，不是真人耗时。
+- 已知缺陷：页面滚动后坐标点击会误选证据或点不中结束按钮（任务1 的 `selected_evidence` 因此记错，见更正说明）；任务2 的结束改走 `/api/end` 同一接口。
